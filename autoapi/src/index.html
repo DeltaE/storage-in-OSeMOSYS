@@ -1,0 +1,725 @@
+
+<!DOCTYPE html>
+
+
+<html lang="Python" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>src &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=e9b82cb4"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'autoapi/src/index';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="src.Kotzur_intraday" href="Kotzur_intraday/index.html" />
+    <link rel="prev" title="API Reference" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="Python"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Storage in OSEMoSYS 2025.07 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/model_specifications.html">Model Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/results_analysis.html">Results Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">API Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="current reference internal" href="#">src</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cluster/index.html">src.cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulation/index.html">src.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_list/index.html">src.update_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilities/index.html">src.utilities</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/DeltaE/RESource" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/autoapi/src/index.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>src</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-contents">Package Contents</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.cluster_data"><code class="docutils literal notranslate"><span class="pre">cluster_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.new_list"><code class="docutils literal notranslate"><span class="pre">new_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.CFandSDP"><code class="docutils literal notranslate"><span class="pre">CFandSDP()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.conversionlts"><code class="docutils literal notranslate"><span class="pre">conversionlts()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.conversionld"><code class="docutils literal notranslate"><span class="pre">conversionld()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.conversionlh"><code class="docutils literal notranslate"><span class="pre">conversionlh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.conversionldc"><code class="docutils literal notranslate"><span class="pre">conversionldc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.yearsplit"><code class="docutils literal notranslate"><span class="pre">yearsplit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.daysindaytype"><code class="docutils literal notranslate"><span class="pre">daysindaytype()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.new_yaml_param"><code class="docutils literal notranslate"><span class="pre">new_yaml_param()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.run_simulation"><code class="docutils literal notranslate"><span class="pre">run_simulation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.copy_and_rename"><code class="docutils literal notranslate"><span class="pre">copy_and_rename()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.intraday_kotzur"><code class="docutils literal notranslate"><span class="pre">intraday_kotzur()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.intraday_welsch"><code class="docutils literal notranslate"><span class="pre">intraday_welsch()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.intraday_welsch2"><code class="docutils literal notranslate"><span class="pre">intraday_welsch2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.read_csvfile"><code class="docutils literal notranslate"><span class="pre">read_csvfile()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.graph"><code class="docutils literal notranslate"><span class="pre">graph()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.table"><code class="docutils literal notranslate"><span class="pre">table()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-src">
+<span id="src"></span><h1>src<a class="headerlink" href="#module-src" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster/index.html">src.cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation/index.html">src.simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_list/index.html">src.update_list</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities/index.html">src.utilities</a></li>
+</ul>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.cluster_data" title="src.cluster_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cluster_data</span></code></a>(capacity_factor_path, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.new_list" title="src.new_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">new_list</span></code></a>(length, output_file)</p></td>
+<td><p>Generates a list of integers from 1 to the specified length, saves it as a CSV file, and returns the output file path. Used to update timeslice and daytype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.CFandSDP" title="src.CFandSDP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CFandSDP</span></code></a>(input_file, representative_days, ...[, operation])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.conversionlts" title="src.conversionlts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conversionlts</span></code></a>(blocks_per_day, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.conversionld" title="src.conversionld"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conversionld</span></code></a>(timeslices, representative_days, output_file)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.conversionlh" title="src.conversionlh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conversionlh</span></code></a>(timeslices, blocksperday, output_file)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.conversionldc" title="src.conversionldc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conversionldc</span></code></a>(chronological_sequence, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.yearsplit" title="src.yearsplit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yearsplit</span></code></a>(timeslices, representative_days, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.daysindaytype" title="src.daysindaytype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">daysindaytype</span></code></a>(representative_days, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.new_yaml_param" title="src.new_yaml_param"><code class="xref py py-obj docutils literal notranslate"><span class="pre">new_yaml_param</span></code></a>(yaml_file, param_name, new_value)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.run_simulation" title="src.run_simulation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_simulation</span></code></a>(case_info)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.copy_and_rename" title="src.copy_and_rename"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_and_rename</span></code></a>(results_case, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.intraday_kotzur" title="src.intraday_kotzur"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intraday_kotzur</span></code></a>(conversion_path, storage_path, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.intraday_welsch" title="src.intraday_welsch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intraday_welsch</span></code></a>(storage_path, blocksperday, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.intraday_welsch2" title="src.intraday_welsch2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intraday_welsch2</span></code></a>(storage_path, blocksperday, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.read_csvfile" title="src.read_csvfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_csvfile</span></code></a>(path)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.graph" title="src.graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">graph</span></code></a>(file_base, file_kotzur, file_kotzur_intraday, ...)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.table" title="src.table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">table</span></code></a>(→ None)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.cluster_data">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">cluster_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capacity_factor_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">demand_profile_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/cluster.html#cluster_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.cluster_data" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.new_list">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">new_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/update_list.html#new_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.new_list" title="Link to this definition">#</a></dt>
+<dd><p>Generates a list of integers from 1 to the specified length, saves it as a CSV file, and returns the output file path. Used to update timeslice and daytype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<em>int</em>) -- The number of integers to include in the list.</p></li>
+<li><p><strong>output_file</strong> (<em>str</em>) -- The file path where the CSV will be saved.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The path to the output CSV file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+<p>The generated CSV will contain a single column named 'VALUE' with integers from 1 to 'length' (inclusive).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.CFandSDP">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">CFandSDP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hour_grouping</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/update_CFandSDP.html#CFandSDP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.CFandSDP" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.conversionlts">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">conversionlts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks_per_day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chronological_timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chronological_sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/update_conversionlts.html#conversionlts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.conversionlts" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.conversionld">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">conversionld</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'DAYTYPE'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/update_conversionld.html#conversionld"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.conversionld" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.conversionlh">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">conversionlh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocksperday</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/update_conversionlh.html#conversionlh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.conversionlh" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.conversionldc">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">conversionldc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chronological_sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">days_in_year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/update_conversionldc.html#conversionldc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.conversionldc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.yearsplit">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">yearsplit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chronological_sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">days_in_year</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/update_yearsplit.html#yearsplit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.yearsplit" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.daysindaytype">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">daysindaytype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chronological_sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/update_daysindaytype.html#daysindaytype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.daysindaytype" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.new_yaml_param">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">new_yaml_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">yaml_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/update_params_yaml_otoole.html#new_yaml_param"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.new_yaml_param" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.run_simulation">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">run_simulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">case_info</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/simulation.html#run_simulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.run_simulation" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.copy_and_rename">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">copy_and_rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results_case</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_destination_folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_results_filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/copy_rename_csv.html#copy_and_rename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.copy_and_rename" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.intraday_kotzur">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">intraday_kotzur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conversion_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_level_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/Kotzur_intraday.html#intraday_kotzur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.intraday_kotzur" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.intraday_welsch">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">intraday_welsch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocksperday</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/Welsch_intraday.html#intraday_welsch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.intraday_welsch" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.intraday_welsch2">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">intraday_welsch2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocksperday</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chronological_sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_level_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/Welsch_intraday2.html#intraday_welsch2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.intraday_welsch2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.read_csvfile">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">read_csvfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/read_csv.html#read_csvfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.read_csvfile" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.graph">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_kotzur</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_kotzur_intraday</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_cluster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_niet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_welsch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_welsch_intraday</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocks_per_day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_yearsplit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/graph_generator.html#graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.graph" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.table">
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sim_results_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sol_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_capacity_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_storage_capacity_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_val1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_val2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excel_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/src/table_generator.html#table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.table" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Kotzur_intraday/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">src.Kotzur_intraday</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-contents">Package Contents</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.cluster_data"><code class="docutils literal notranslate"><span class="pre">cluster_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.new_list"><code class="docutils literal notranslate"><span class="pre">new_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.CFandSDP"><code class="docutils literal notranslate"><span class="pre">CFandSDP()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.conversionlts"><code class="docutils literal notranslate"><span class="pre">conversionlts()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.conversionld"><code class="docutils literal notranslate"><span class="pre">conversionld()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.conversionlh"><code class="docutils literal notranslate"><span class="pre">conversionlh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.conversionldc"><code class="docutils literal notranslate"><span class="pre">conversionldc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.yearsplit"><code class="docutils literal notranslate"><span class="pre">yearsplit()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.daysindaytype"><code class="docutils literal notranslate"><span class="pre">daysindaytype()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.new_yaml_param"><code class="docutils literal notranslate"><span class="pre">new_yaml_param()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.run_simulation"><code class="docutils literal notranslate"><span class="pre">run_simulation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.copy_and_rename"><code class="docutils literal notranslate"><span class="pre">copy_and_rename()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.intraday_kotzur"><code class="docutils literal notranslate"><span class="pre">intraday_kotzur()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.intraday_welsch"><code class="docutils literal notranslate"><span class="pre">intraday_welsch()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.intraday_welsch2"><code class="docutils literal notranslate"><span class="pre">intraday_welsch2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.read_csvfile"><code class="docutils literal notranslate"><span class="pre">read_csvfile()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.graph"><code class="docutils literal notranslate"><span class="pre">graph()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.table"><code class="docutils literal notranslate"><span class="pre">table()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bruno Borba, Md Eliasinul Islam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Bruno Borba, Md Eliasinul Islam.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Overview: module code &#8212; RESource 2025.07 documentation</title>
+    <title>Overview: module code &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
   
   
   
@@ -27,8 +27,9 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -131,14 +132,8 @@
   
   
   
-    
-    
-      
-    
-    
-    <img src="../_static/RESource_logo_2025.07.jpg" class="logo__image only-light" alt="RESource 2025.07 documentation - Home"/>
-    <script>document.write(`<img src="../_static/RESource_logo_2025.07.jpg" class="logo__image only-dark" alt="RESource 2025.07 documentation - Home"/>`);</script>
   
+    <p class="title logo__title">Storage in OSEMoSYS 2025.07 documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -154,21 +149,57 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../notes/resource_builder.html">RESource Builder Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notes/getting_started.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notes/api.html">RES APIs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notes/case.html">Canadian Case Study</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notes/developers.html">Contributing Developers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/configuration_guide.html">Configuration Guide</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks:</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/Store_explorer.html">Explore data store</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/Visuals_BC.html">Example Visuals for BC</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/model_specifications.html">Model Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/results_analysis.html">Results Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/cluster/index.html">src.cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/simulation/index.html">src.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_list/index.html">src.update_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/utilities/index.html">src.utilities</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -287,18 +318,26 @@ document.write(`
                 <article class="bd-article">
                   
   <h1>All modules for which code is available</h1>
-<ul><li><a href="RES/CellCapacityProcessor.html">RES.CellCapacityProcessor</a></li>
-<li><a href="RES/atb.html">RES.atb</a></li>
-<li><a href="RES/boundaries.html">RES.boundaries</a></li>
-<li><a href="RES/cell.html">RES.cell</a></li>
-<li><a href="RES/cluster.html">RES.cluster</a></li>
-<li><a href="RES/gaez.html">RES.gaez</a></li>
-<li><a href="RES/gwa.html">RES.gwa</a></li>
-<li><a href="RES/hdf5_handler.html">RES.hdf5_handler</a></li>
-<li><a href="RES/score.html">RES.score</a></li>
-<li><a href="RES/tech.html">RES.tech</a></li>
-<li><a href="RES/units.html">RES.units</a></li>
-<li><a href="RES/visuals.html">RES.visuals</a></li>
+<ul><li><a href="src/Kotzur_intraday.html">src.Kotzur_intraday</a></li>
+<li><a href="src/Welsch_intraday.html">src.Welsch_intraday</a></li>
+<li><a href="src/Welsch_intraday2.html">src.Welsch_intraday2</a></li>
+<li><a href="src/cluster.html">src.cluster</a></li>
+<li><a href="src/copy_rename_csv.html">src.copy_rename_csv</a></li>
+<li><a href="src/graph_generator.html">src.graph_generator</a></li>
+<li><a href="src/graph_generator_3graphs.html">src.graph_generator_3graphs</a></li>
+<li><a href="src/read_csv.html">src.read_csv</a></li>
+<li><a href="src/simulation.html">src.simulation</a></li>
+<li><a href="src/table_generator.html">src.table_generator</a></li>
+<li><a href="src/update_CFandSDP.html">src.update_CFandSDP</a></li>
+<li><a href="src/update_conversionld.html">src.update_conversionld</a></li>
+<li><a href="src/update_conversionldc.html">src.update_conversionldc</a></li>
+<li><a href="src/update_conversionlh.html">src.update_conversionlh</a></li>
+<li><a href="src/update_conversionlts.html">src.update_conversionlts</a></li>
+<li><a href="src/update_daysindaytype.html">src.update_daysindaytype</a></li>
+<li><a href="src/update_list.html">src.update_list</a></li>
+<li><a href="src/update_params_yaml_otoole.html">src.update_params_yaml_otoole</a></li>
+<li><a href="src/update_yearsplit.html">src.update_yearsplit</a></li>
+<li><a href="src/utilities.html">src.utilities</a></li>
 </ul>
 
                 </article>
@@ -327,7 +366,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By Md Eliasinul Islam
+By Bruno Borba, Md Eliasinul Islam
 </p>
 
   </div>
@@ -337,7 +376,7 @@ By Md Eliasinul Islam
 
   <p class="copyright">
     
-      © Copyright 2025, Md Eliasinul Islam.
+      © Copyright 2025, Bruno Borba, Md Eliasinul Islam.
       <br/>
     
   </p>

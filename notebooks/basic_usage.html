@@ -1,0 +1,828 @@
+
+<!DOCTYPE html>
+
+
+<html lang="Python" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Basic Usage Tutorial &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=e9b82cb4"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/basic_usage';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Comparative Analysis Tutorial" href="comparative_analysis.html" />
+    <link rel="prev" title="Results Analysis" href="../notes/results_analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="Python"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Storage in OSEMoSYS 2025.07 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/model_specifications.html">Model Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/results_analysis.html">Results Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic Usage Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comparative_analysis.html">Comparative Analysis Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_configuration.html">Advanced Configuration Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/cluster/index.html">src.cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/simulation/index.html">src.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_list/index.html">src.update_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/utilities/index.html">src.utilities</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/DeltaE/RESource" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/basic_usage.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basic Usage Tutorial</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-storage-in-osemosys">Getting Started with Storage-in-OSeMOSYS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start-example">Quick Start Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-activation">1. Environment Activation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-model-run">2. Basic Model Run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examining-results">3. Examining Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-preparation">Step 1: Data Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-configuration">Step 2: Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-execution">Step 3: Model Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-results-analysis">Step 4: Results Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-use-cases">Common Use Cases</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-1-renewable-integration-study">Case 1: Renewable Integration Study</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-2-storage-technology-comparison">Case 2: Storage Technology Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-3-temporal-resolution-study">Case 3: Temporal Resolution Study</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality">Data Quality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-configuration">Model Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization">Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="basic-usage-tutorial">
+<h1>Basic Usage Tutorial<a class="headerlink" href="#basic-usage-tutorial" title="Link to this heading">#</a></h1>
+<section id="getting-started-with-storage-in-osemosys">
+<h2>Getting Started with Storage-in-OSeMOSYS<a class="headerlink" href="#getting-started-with-storage-in-osemosys" title="Link to this heading">#</a></h2>
+<p>This tutorial provides a step-by-step guide to using the Storage-in-OSeMOSYS framework for energy system modeling with storage technologies.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<p>Before starting, ensure you have:</p>
+<ul class="simple">
+<li><p><strong>Environment Setup</strong>: Conda environment with all dependencies installed</p></li>
+<li><p><strong>Data Preparation</strong>: Input data files in the correct format</p></li>
+<li><p><strong>GLPK Solver</strong>: Linear programming solver for optimization</p></li>
+</ul>
+</section>
+<section id="quick-start-example">
+<h2>Quick Start Example<a class="headerlink" href="#quick-start-example" title="Link to this heading">#</a></h2>
+<section id="environment-activation">
+<h3>1. Environment Activation<a class="headerlink" href="#environment-activation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Activate the conda environment</span>
+conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
+
+<span class="c1"># Verify installation</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import otoole; print(&#39;OtoOle version:&#39;, otoole.__version__)&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="basic-model-run">
+<h3>2. Basic Model Run<a class="headerlink" href="#basic-model-run" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import required modules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">src.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Set up paths</span>
+<span class="n">project_root</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="n">config_path</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;config&quot;</span> <span class="o">/</span> <span class="s2">&quot;config.yaml&quot;</span>
+<span class="n">input_path</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;inputs_csv&quot;</span>
+<span class="n">output_path</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">&quot;Results&quot;</span>
+
+<span class="c1"># Load configuration</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
+
+<span class="c1"># Run basic model</span>
+<span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Kotzur&quot;</span>  <span class="c1"># Choose clustering method</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">run_storage_model</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="examining-results">
+<h3>3. Examining Results<a class="headerlink" href="#examining-results" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load and examine storage results</span>
+<span class="n">storage_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">output_path</span> <span class="o">/</span> <span class="s2">&quot;StorageLevelStart.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Storage level results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">storage_results</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Plot storage operation</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">storage_results</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Storage Level Over Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time Period&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Storage Level&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-by-step-workflow">
+<h2>Step-by-Step Workflow<a class="headerlink" href="#step-by-step-workflow" title="Link to this heading">#</a></h2>
+<section id="step-1-data-preparation">
+<h3>Step 1: Data Preparation<a class="headerlink" href="#step-1-data-preparation" title="Link to this heading">#</a></h3>
+<p>Prepare your input data in CSV format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inputs_csv/
+├── TECHNOLOGY.csv          # Technology definitions
+├── FUEL.csv                # Fuel types
+├── STORAGE.csv             # Storage technologies
+├── CapitalCost.csv         # Investment costs
+├── VariableCost.csv        # Operational costs
+└── ... (other parameter files)
+</pre></div>
+</div>
+</section>
+<section id="step-2-configuration">
+<h3>Step 2: Configuration<a class="headerlink" href="#step-2-configuration" title="Link to this heading">#</a></h3>
+<p>Edit the configuration file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config/config.yaml</span>
+<span class="nt">model</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Kotzur&quot;</span><span class="w">           </span><span class="c1"># Clustering method</span>
+<span class="w">  </span><span class="nt">years</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">2020</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2030</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2040</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># Model years</span>
+<span class="w">  </span><span class="nt">regions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;REGION1&quot;</span><span class="p p-Indicator">]</span><span class="w">       </span><span class="c1"># Regions to model</span>
+
+<span class="nt">storage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">technologies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;BATT&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;PHES&quot;</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># Storage technologies</span>
+<span class="w">  </span><span class="nt">initial_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w">              </span><span class="c1"># Initial storage level (50%)</span>
+<span class="w">  </span>
+<span class="nt">solver</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;glpk&quot;</span><span class="w">              </span><span class="c1"># Solver to use</span>
+<span class="w">  </span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;--tmlim</span><span class="nv"> </span><span class="s">3600&quot;</span><span class="w">   </span><span class="c1"># Solver options</span>
+</pre></div>
+</div>
+</section>
+<section id="step-3-model-execution">
+<h3>Step 3: Model Execution<a class="headerlink" href="#step-3-model-execution" title="Link to this heading">#</a></h3>
+<p>Run the complete workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+
+<span class="c1"># Set method and paths</span>
+<span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Kotzur&quot;</span>
+<span class="n">input_excel</span> <span class="o">=</span> <span class="s2">&quot;path/to/input.xlsx&quot;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="s2">&quot;Results&quot;</span>
+
+<span class="c1"># Convert Excel to CSV</span>
+<span class="n">convert_excel_to_csv</span><span class="p">(</span><span class="n">input_excel</span><span class="p">,</span> <span class="s2">&quot;inputs_csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Run clustering (if needed)</span>
+<span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">&quot;8760&quot;</span><span class="p">:</span>
+    <span class="n">run_temporal_clustering</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="s2">&quot;inputs_csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Generate data file</span>
+<span class="n">generate_datafile</span><span class="p">(</span><span class="s2">&quot;inputs_csv&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;model_</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">.dat&quot;</span><span class="p">)</span>
+
+<span class="c1"># Solve model</span>
+<span class="n">solve_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;model_</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">.dat&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;solution_</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">.sol&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extract results</span>
+<span class="n">extract_results</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;solution_</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">.sol&quot;</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="step-4-results-analysis">
+<h3>Step 4: Results Analysis<a class="headerlink" href="#step-4-results-analysis" title="Link to this heading">#</a></h3>
+<p>Analyze the results:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Load results</span>
+<span class="n">capacity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Results/TotalCapacityAnnual.csv&quot;</span><span class="p">)</span>
+<span class="n">storage_level</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Results/StorageLevelStart.csv&quot;</span><span class="p">)</span>
+<span class="n">production</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Results/ProductionByTechnology.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot capacity expansion</span>
+<span class="n">storage_capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="p">[</span><span class="n">capacity</span><span class="p">[</span><span class="s1">&#39;TECHNOLOGY&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;STORAGE&#39;</span><span class="p">)]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">tech</span> <span class="ow">in</span> <span class="n">storage_capacity</span><span class="p">[</span><span class="s1">&#39;TECHNOLOGY&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">tech_data</span> <span class="o">=</span> <span class="n">storage_capacity</span><span class="p">[</span><span class="n">storage_capacity</span><span class="p">[</span><span class="s1">&#39;TECHNOLOGY&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">tech</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tech_data</span><span class="p">[</span><span class="s1">&#39;YEAR&#39;</span><span class="p">],</span> <span class="n">tech_data</span><span class="p">[</span><span class="s1">&#39;VALUE&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">tech</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Storage Capacity Expansion&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Capacity (GW)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-use-cases">
+<h2>Common Use Cases<a class="headerlink" href="#common-use-cases" title="Link to this heading">#</a></h2>
+<section id="case-1-renewable-integration-study">
+<h3>Case 1: Renewable Integration Study<a class="headerlink" href="#case-1-renewable-integration-study" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure for high renewable scenario</span>
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;renewable_target&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>  <span class="c1"># 80% renewable target</span>
+    <span class="s1">&#39;storage_cost_reduction&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># 50% cost reduction by 2030</span>
+    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;Kotzur&#39;</span>  <span class="c1"># Use Kotzur clustering</span>
+<span class="p">}</span>
+
+<span class="c1"># Run scenario</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">run_scenario</span><span class="p">(</span><span class="s1">&#39;high_renewable&#39;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="case-2-storage-technology-comparison">
+<h3>Case 2: Storage Technology Comparison<a class="headerlink" href="#case-2-storage-technology-comparison" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare different storage technologies</span>
+<span class="n">storage_techs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;BATT&#39;</span><span class="p">,</span> <span class="s1">&#39;PHES&#39;</span><span class="p">,</span> <span class="s1">&#39;CAES&#39;</span><span class="p">]</span>  <span class="c1"># Battery, Pumped Hydro, Compressed Air</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">tech</span> <span class="ow">in</span> <span class="n">storage_techs</span><span class="p">:</span>
+    <span class="n">config</span><span class="p">[</span><span class="s1">&#39;storage_technologies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">tech</span><span class="p">]</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">tech</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_storage_model</span><span class="p">(</span><span class="s1">&#39;Kotzur&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Compare results</span>
+<span class="n">compare_storage_technologies</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="case-3-temporal-resolution-study">
+<h3>Case 3: Temporal Resolution Study<a class="headerlink" href="#case-3-temporal-resolution-study" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare different temporal clustering methods</span>
+<span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Kotzur&#39;</span><span class="p">,</span> <span class="s1">&#39;Niet&#39;</span><span class="p">,</span> <span class="s1">&#39;Welsch&#39;</span><span class="p">,</span> <span class="s1">&#39;8760&#39;</span><span class="p">]</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">method</span><span class="p">]</span> <span class="o">=</span> <span class="n">run_storage_model</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+<span class="c1"># Analyze computational efficiency vs. accuracy</span>
+<span class="n">analyze_temporal_methods</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<section id="data-quality">
+<h3>Data Quality<a class="headerlink" href="#data-quality" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Validate Input Data</strong>: Check for missing values, unrealistic parameters</p></li>
+<li><p><strong>Consistent Units</strong>: Ensure all data uses consistent units (GW, GWh, etc.)</p></li>
+<li><p><strong>Time Series Alignment</strong>: Verify time series data alignment</p></li>
+</ul>
+</section>
+<section id="model-configuration">
+<h3>Model Configuration<a class="headerlink" href="#model-configuration" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Appropriate Method Selection</strong>: Choose clustering method based on study needs</p></li>
+<li><p><strong>Solver Settings</strong>: Configure solver for optimal performance</p></li>
+<li><p><strong>Storage Parameters</strong>: Set realistic storage characteristics</p></li>
+</ul>
+</section>
+<section id="performance-optimization">
+<h3>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Memory Management</strong>: Monitor memory usage for large models</p></li>
+<li><p><strong>Parallel Processing</strong>: Use multiple cores when available</p></li>
+<li><p><strong>Result Storage</strong>: Efficiently store and organize results</p></li>
+</ul>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Empty Result Files</strong></p>
+<ul class="simple">
+<li><p>Check model constraints</p></li>
+<li><p>Verify data file generation</p></li>
+<li><p>Review solver log</p></li>
+</ul>
+</li>
+<li><p><strong>Long Computation Times</strong></p>
+<ul class="simple">
+<li><p>Consider temporal clustering</p></li>
+<li><p>Optimize solver settings</p></li>
+<li><p>Reduce model complexity</p></li>
+</ul>
+</li>
+<li><p><strong>Infeasible Solutions</strong></p>
+<ul class="simple">
+<li><p>Review storage constraints</p></li>
+<li><p>Check demand-supply balance</p></li>
+<li><p>Validate technology parameters</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="getting-help">
+<h3>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Documentation</strong>: Refer to the complete documentation</p></li>
+<li><p><strong>Examples</strong>: Check additional example notebooks</p></li>
+<li><p><strong>Community</strong>: Join the OSeMOSYS community forums</p></li>
+<li><p><strong>Issues</strong>: Report bugs on the GitHub repository</p></li>
+</ul>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<p>After completing this basic tutorial:</p>
+<ol class="arabic simple">
+<li><p><strong>Explore Advanced Features</strong>: Learn about advanced configuration options</p></li>
+<li><p><strong>Comparative Analysis</strong>: Compare different modeling approaches</p></li>
+<li><p><strong>Custom Analysis</strong>: Develop custom analysis scripts</p></li>
+<li><p><strong>Contribute</strong>: Contribute to the project development</p></li>
+</ol>
+<p>Continue with the <a class="reference internal" href="comparative_analysis.html"><span class="std std-doc">Comparative Analysis</span></a> tutorial for more advanced usage.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../notes/results_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Results Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="comparative_analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Comparative Analysis Tutorial</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-storage-in-osemosys">Getting Started with Storage-in-OSeMOSYS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start-example">Quick Start Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-activation">1. Environment Activation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-model-run">2. Basic Model Run</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examining-results">3. Examining Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-data-preparation">Step 1: Data Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-configuration">Step 2: Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-model-execution">Step 3: Model Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-results-analysis">Step 4: Results Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-use-cases">Common Use Cases</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-1-renewable-integration-study">Case 1: Renewable Integration Study</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-2-storage-technology-comparison">Case 2: Storage Technology Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#case-3-temporal-resolution-study">Case 3: Temporal Resolution Study</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality">Data Quality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-configuration">Model Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization">Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bruno Borba, Md Eliasinul Islam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Bruno Borba, Md Eliasinul Islam.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

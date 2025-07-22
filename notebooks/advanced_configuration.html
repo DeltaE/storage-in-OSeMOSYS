@@ -1,0 +1,1439 @@
+
+<!DOCTYPE html>
+
+
+<html lang="Python" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Advanced Configuration Tutorial &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=e9b82cb4"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/advanced_configuration';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="../autoapi/index.html" />
+    <link rel="prev" title="Comparative Analysis Tutorial" href="comparative_analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="Python"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Storage in OSEMoSYS 2025.07 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/model_specifications.html">Model Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/results_analysis.html">Results Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">Basic Usage Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comparative_analysis.html">Comparative Analysis Tutorial</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Advanced Configuration Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/cluster/index.html">src.cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/simulation/index.html">src.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_list/index.html">src.update_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/utilities/index.html">src.utilities</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/DeltaE/RESource" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/advanced_configuration.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Advanced Configuration Tutorial</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-configuration-options">Advanced Configuration Options</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-level-configuration-system">Multi-Level Configuration System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-technology-definitions">Custom Technology Definitions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-optimization">Multi-Objective Optimization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-optimal-solutions">Pareto-Optimal Solutions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-and-risk-analysis">Uncertainty and Risk Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-simulation">Monte Carlo Simulation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-temporal-modeling">Advanced Temporal Modeling</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-clustering-algorithms">Custom Clustering Algorithms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-results-analysis">Advanced Results Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-enhanced-analysis">Machine Learning-Enhanced Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-external-tools">Integration with External Tools</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-development">API Development</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloud-integration">Cloud Integration</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="advanced-configuration-tutorial">
+<h1>Advanced Configuration Tutorial<a class="headerlink" href="#advanced-configuration-tutorial" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This tutorial covers advanced configuration options and expert-level usage of the Storage-in-OSeMOSYS framework for complex energy system modeling scenarios.</p>
+</section>
+<section id="advanced-configuration-options">
+<h2>Advanced Configuration Options<a class="headerlink" href="#advanced-configuration-options" title="Link to this heading">#</a></h2>
+<section id="multi-level-configuration-system">
+<h3>Multi-Level Configuration System<a class="headerlink" href="#multi-level-configuration-system" title="Link to this heading">#</a></h3>
+<p>The framework supports hierarchical configuration management:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config/advanced_config.yaml</span>
+<span class="nt">global</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">project_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Advanced</span><span class="nv"> </span><span class="s">Storage</span><span class="nv"> </span><span class="s">Study&quot;</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2025.07&quot;</span>
+<span class="w">  </span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Your</span><span class="nv"> </span><span class="s">Name&quot;</span>
+<span class="w">  </span>
+<span class="nt">model</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">temporal</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">resolution</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;hourly&quot;</span>
+<span class="w">    </span><span class="nt">clustering_method</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Kotzur&quot;</span>
+<span class="w">    </span><span class="nt">representative_periods</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12</span>
+<span class="w">    </span><span class="nt">extreme_periods</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">    </span>
+<span class="w">  </span><span class="nt">spatial</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">regions</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;NORTH&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;SOUTH&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;EAST&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;WEST&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">transmission_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span>
+<span class="w">  </span><span class="nt">technologies</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">renewable</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WIND_ONSHORE</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WIND_OFFSHORE</span><span class="w">  </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SOLAR_PV</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SOLAR_CSP</span>
+<span class="w">    </span><span class="nt">storage</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BATTERY_LI</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">BATTERY_FLOW</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PHES</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CAES</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HYDROGEN</span>
+<span class="w">    </span><span class="nt">conventional</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CCGT</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">COAL</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NUCLEAR</span>
+
+<span class="nt">storage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">advanced_constraints</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">degradation_modeling</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">cycling_constraints</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">ancillary_services</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span>
+<span class="w">  </span><span class="nt">battery</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">technologies</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">BATTERY_LI</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">energy_density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">250</span><span class="w">  </span><span class="c1"># Wh/kg</span>
+<span class="w">        </span><span class="nt">power_density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1500</span><span class="w">  </span><span class="c1"># W/kg</span>
+<span class="w">        </span><span class="nt">cycle_life</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000</span>
+<span class="w">        </span><span class="nt">calendar_life</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span><span class="w">  </span><span class="c1"># years</span>
+<span class="w">        </span><span class="nt">round_trip_efficiency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.85</span>
+<span class="w">        </span><span class="nt">degradation_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.02</span><span class="w">  </span><span class="c1"># per year</span>
+<span class="w">        </span>
+<span class="w">      </span><span class="nt">BATTERY_FLOW</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">energy_density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">40</span><span class="w">   </span><span class="c1"># Wh/kg</span>
+<span class="w">        </span><span class="nt">power_density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span><span class="w">   </span><span class="c1"># W/kg</span>
+<span class="w">        </span><span class="nt">cycle_life</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12000</span>
+<span class="w">        </span><span class="nt">calendar_life</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span>
+<span class="w">        </span><span class="nt">round_trip_efficiency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span>
+<span class="w">        </span><span class="nt">degradation_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.005</span>
+<span class="w">        </span>
+<span class="w">  </span><span class="nt">pumped_hydro</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">PHES</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">efficiency_pump</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.85</span>
+<span class="w">      </span><span class="nt">efficiency_turbine</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9</span>
+<span class="w">      </span><span class="nt">minimum_power</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span><span class="w">  </span><span class="c1"># fraction of rated power</span>
+<span class="w">      </span><span class="nt">startup_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">    </span><span class="c1"># minutes</span>
+<span class="w">      </span><span class="nt">shutdown_time</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span><span class="w">    </span><span class="c1"># minutes</span>
+<span class="w">      </span><span class="nt">head_dependent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span>
+<span class="w">  </span><span class="nt">hydrogen</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">HYDROGEN</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">electrolyzer_efficiency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.65</span>
+<span class="w">      </span><span class="nt">fuel_cell_efficiency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.55</span>
+<span class="w">      </span><span class="nt">storage_pressure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">350</span><span class="w">  </span><span class="c1"># bar</span>
+<span class="w">      </span><span class="nt">compression_energy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.5</span><span class="w">  </span><span class="c1"># kWh/kg</span>
+<span class="w">      </span><span class="nt">leakage_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.001</span><span class="w">  </span><span class="c1"># per day</span>
+
+<span class="nt">optimization</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">solver</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gurobi&quot;</span><span class="w">  </span><span class="c1"># or &quot;cplex&quot;, &quot;glpk&quot;</span>
+<span class="w">    </span><span class="nt">threads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">    </span><span class="nt">mip_gap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="w">    </span><span class="nt">time_limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7200</span><span class="w">  </span><span class="c1"># seconds</span>
+<span class="w">    </span>
+<span class="w">  </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">presolve</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">cuts</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;aggressive&quot;</span>
+<span class="w">    </span><span class="nt">heuristics</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;intensive&quot;</span>
+<span class="w">    </span>
+<span class="w">  </span><span class="nt">advanced</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">decomposition</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;benders&quot;</span>
+<span class="w">    </span><span class="nt">parallel_scenarios</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">warm_start</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+</section>
+<section id="custom-technology-definitions">
+<h3>Custom Technology Definitions<a class="headerlink" href="#custom-technology-definitions" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># advanced_tech_config.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_advanced_battery_config</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create advanced battery technology configuration&quot;&quot;&quot;</span>
+    
+    <span class="n">battery_config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;BATTERY_LI_GRID&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;storage&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;storage_type&#39;</span><span class="p">:</span> <span class="s1">&#39;electrochemical&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;CapitalCost&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="mi">2020</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>  <span class="c1"># $/kWh</span>
+                    <span class="mi">2025</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+                    <span class="mi">2030</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                    <span class="mi">2035</span><span class="p">:</span> <span class="mi">150</span><span class="p">,</span>
+                    <span class="mi">2040</span><span class="p">:</span> <span class="mi">120</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;VariableCost&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># $/MWh</span>
+                <span class="s1">&#39;FixedCost&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>      <span class="c1"># $/kW-year</span>
+                <span class="s1">&#39;Efficiency&#39;</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
+                <span class="s1">&#39;StorageLevelStart&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+                <span class="s1">&#39;MinStorageCharge&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                <span class="s1">&#39;MaxStorageCharge&#39;</span><span class="p">:</span> <span class="mf">0.95</span><span class="p">,</span>
+                <span class="s1">&#39;StorageDuration&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>  <span class="c1"># hours</span>
+                <span class="s1">&#39;CyclingConstraints&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;max_cycles_per_day&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="s1">&#39;depth_of_discharge&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+                    <span class="s1">&#39;degradation_factor&#39;</span><span class="p">:</span> <span class="mf">0.99995</span>  <span class="c1"># per cycle</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        
+        <span class="s1">&#39;HYDROGEN_SYSTEM&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;storage&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;storage_type&#39;</span><span class="p">:</span> <span class="s1">&#39;chemical&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;components&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;electrolyzer&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;efficiency&#39;</span><span class="p">:</span> <span class="mf">0.65</span><span class="p">,</span>
+                    <span class="s1">&#39;min_load&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+                    <span class="s1">&#39;ramp_rate&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>  <span class="c1"># per minute</span>
+                    <span class="s1">&#39;capital_cost&#39;</span><span class="p">:</span> <span class="mi">800</span><span class="p">,</span>  <span class="c1"># $/kW</span>
+                    <span class="s1">&#39;operational_life&#39;</span><span class="p">:</span> <span class="mi">15</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;fuel_cell&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;efficiency&#39;</span><span class="p">:</span> <span class="mf">0.55</span><span class="p">,</span>
+                    <span class="s1">&#39;min_load&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+                    <span class="s1">&#39;ramp_rate&#39;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+                    <span class="s1">&#39;capital_cost&#39;</span><span class="p">:</span> <span class="mi">1200</span><span class="p">,</span>  <span class="c1"># $/kW</span>
+                    <span class="s1">&#39;operational_life&#39;</span><span class="p">:</span> <span class="mi">10</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;storage_tank&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;pressure&#39;</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span>  <span class="c1"># bar</span>
+                    <span class="s1">&#39;capital_cost&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>  <span class="c1"># $/kWh</span>
+                    <span class="s1">&#39;leakage_rate&#39;</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span>  <span class="c1"># per day</span>
+                    <span class="s1">&#39;operational_life&#39;</span><span class="p">:</span> <span class="mi">30</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">battery_config</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">implement_advanced_constraints</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement advanced storage constraints&quot;&quot;&quot;</span>
+    
+    <span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;cycling_degradation&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Battery degradation based on cycling&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formula&#39;</span><span class="p">:</span> <span class="s1">&#39;capacity_remaining = initial_capacity * (degradation_factor ^ cycles)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;implementation&#39;</span><span class="p">:</span> <span class="s1">&#39;post_processing&#39;</span>
+        <span class="p">},</span>
+        
+        <span class="s1">&#39;state_of_charge_dependent_efficiency&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Efficiency varies with state of charge&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formula&#39;</span><span class="p">:</span> <span class="s1">&#39;efficiency = base_efficiency * soc_efficiency_curve(soc)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;implementation&#39;</span><span class="p">:</span> <span class="s1">&#39;model_constraints&#39;</span>
+        <span class="p">},</span>
+        
+        <span class="s1">&#39;temperature_effects&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Temperature-dependent performance&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formula&#39;</span><span class="p">:</span> <span class="s1">&#39;performance = base_performance * temperature_factor(ambient_temp)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;implementation&#39;</span><span class="p">:</span> <span class="s1">&#39;external_data&#39;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">constraints</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="multi-objective-optimization">
+<h2>Multi-Objective Optimization<a class="headerlink" href="#multi-objective-optimization" title="Link to this heading">#</a></h2>
+<section id="pareto-optimal-solutions">
+<h3>Pareto-Optimal Solutions<a class="headerlink" href="#pareto-optimal-solutions" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># multi_objective_optimization.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">multi_objective_storage_optimization</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform multi-objective optimization for storage planning&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Define objectives</span>
+    <span class="n">objectives</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;minimize_cost&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">calculate_total_cost</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+        <span class="s1">&#39;minimize_emissions&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">calculate_total_emissions</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+        <span class="s1">&#39;maximize_reliability&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">calculate_reliability_score</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+        <span class="s1">&#39;minimize_curtailment&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">calculate_renewable_curtailment</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># Pareto frontier calculation</span>
+    <span class="n">pareto_solutions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">weights_combinations</span> <span class="o">=</span> <span class="n">generate_weight_combinations</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">),</span> <span class="mi">20</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">weights</span> <span class="ow">in</span> <span class="n">weights_combinations</span><span class="p">:</span>
+        <span class="c1"># Combined objective function</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">combined_objective</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">obj_func</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">objectives</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">obj_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">total</span>
+        
+        <span class="c1"># Optimize</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">combined_objective</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">get_initial_guess</span><span class="p">(),</span> 
+                         <span class="n">bounds</span><span class="o">=</span><span class="n">get_decision_variable_bounds</span><span class="p">(),</span>
+                         <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+            <span class="c1"># Evaluate all objectives for this solution</span>
+            <span class="n">solution_objectives</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">obj_name</span><span class="p">,</span> <span class="n">obj_func</span> <span class="ow">in</span> <span class="n">objectives</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">solution_objectives</span><span class="p">[</span><span class="n">obj_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj_func</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+            
+            <span class="n">pareto_solutions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;variables&#39;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+                <span class="s1">&#39;objectives&#39;</span><span class="p">:</span> <span class="n">solution_objectives</span><span class="p">,</span>
+                <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">weights</span>
+            <span class="p">})</span>
+    
+    <span class="k">return</span> <span class="n">pareto_solutions</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pareto_frontier</span><span class="p">(</span><span class="n">pareto_solutions</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot 2D projections of Pareto frontier&quot;&quot;&quot;</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Multi-Objective Optimization: Pareto Frontiers&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    
+    <span class="c1"># Extract objective values</span>
+    <span class="n">costs</span> <span class="o">=</span> <span class="p">[</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;objectives&#39;</span><span class="p">][</span><span class="s1">&#39;minimize_cost&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">pareto_solutions</span><span class="p">]</span>
+    <span class="n">emissions</span> <span class="o">=</span> <span class="p">[</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;objectives&#39;</span><span class="p">][</span><span class="s1">&#39;minimize_emissions&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">pareto_solutions</span><span class="p">]</span>
+    <span class="n">reliability</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;objectives&#39;</span><span class="p">][</span><span class="s1">&#39;maximize_reliability&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">pareto_solutions</span><span class="p">]</span>
+    <span class="n">curtailment</span> <span class="o">=</span> <span class="p">[</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;objectives&#39;</span><span class="p">][</span><span class="s1">&#39;minimize_curtailment&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">sol</span> <span class="ow">in</span> <span class="n">pareto_solutions</span><span class="p">]</span>
+    
+    <span class="c1"># Plot 2D projections</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">costs</span><span class="p">,</span> <span class="n">emissions</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Total Cost (M$)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;CO2 Emissions (Mt)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cost vs. Emissions&#39;</span><span class="p">)</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">costs</span><span class="p">,</span> <span class="n">reliability</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Total Cost (M$)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Reliability Score&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cost vs. Reliability&#39;</span><span class="p">)</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">emissions</span><span class="p">,</span> <span class="n">reliability</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;CO2 Emissions (Mt)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Reliability Score&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Emissions vs. Reliability&#39;</span><span class="p">)</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">costs</span><span class="p">,</span> <span class="n">curtailment</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Total Cost (M$)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Renewable Curtailment (%)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cost vs. Curtailment&#39;</span><span class="p">)</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">emissions</span><span class="p">,</span> <span class="n">curtailment</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;CO2 Emissions (Mt)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Renewable Curtailment (%)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Emissions vs. Curtailment&#39;</span><span class="p">)</span>
+    
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">reliability</span><span class="p">,</span> <span class="n">curtailment</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;brown&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Reliability Score&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Renewable Curtailment (%)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Reliability vs. Curtailment&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">fig</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="uncertainty-and-risk-analysis">
+<h2>Uncertainty and Risk Analysis<a class="headerlink" href="#uncertainty-and-risk-analysis" title="Link to this heading">#</a></h2>
+<section id="monte-carlo-simulation">
+<h3>Monte Carlo Simulation<a class="headerlink" href="#monte-carlo-simulation" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncertainty_analysis.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">monte_carlo_uncertainty_analysis</span><span class="p">(</span><span class="n">n_simulations</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform Monte Carlo analysis for storage planning under uncertainty&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Define uncertain parameters with probability distributions</span>
+    <span class="n">uncertain_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;renewable_capacity_factor&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;distribution&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="mf">0.35</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">},</span>
+            <span class="s1">&#39;bounds&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;demand_growth&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;distribution&#39;</span><span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
+            <span class="s1">&#39;bounds&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;storage_cost_reduction&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;distribution&#39;</span><span class="p">:</span> <span class="s1">&#39;beta&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
+            <span class="s1">&#39;bounds&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;carbon_price&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;distribution&#39;</span><span class="p">:</span> <span class="s1">&#39;lognormal&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span>
+            <span class="s1">&#39;bounds&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;gas_price&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;distribution&#39;</span><span class="p">:</span> <span class="s1">&#39;gamma&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">},</span>
+            <span class="s1">&#39;bounds&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># Generate random samples</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">uncertain_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;distribution&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span>
+            <span class="n">raw_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
+                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">],</span> 
+                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;std&#39;</span><span class="p">],</span> 
+                <span class="n">n_simulations</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;distribution&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;beta&#39;</span><span class="p">:</span>
+            <span class="n">raw_samples</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">beta</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span>
+                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;b&#39;</span><span class="p">],</span>
+                <span class="n">loc</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;loc&#39;</span><span class="p">],</span>
+                <span class="n">scale</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">],</span>
+                <span class="n">size</span><span class="o">=</span><span class="n">n_simulations</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;distribution&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;lognormal&#39;</span><span class="p">:</span>
+            <span class="n">raw_samples</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span>
+                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;s&#39;</span><span class="p">],</span>
+                <span class="n">scale</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">],</span>
+                <span class="n">size</span><span class="o">=</span><span class="n">n_simulations</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;distribution&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;gamma&#39;</span><span class="p">:</span>
+            <span class="n">raw_samples</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">gamma</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span>
+                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+                <span class="n">scale</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">][</span><span class="s1">&#39;scale&#39;</span><span class="p">],</span>
+                <span class="n">size</span><span class="o">=</span><span class="n">n_simulations</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Apply bounds</span>
+        <span class="n">samples</span><span class="p">[</span><span class="n">param</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">raw_samples</span><span class="p">,</span> 
+                                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;bounds&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> 
+                                <span class="n">config</span><span class="p">[</span><span class="s1">&#39;bounds&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="c1"># Run simulations</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_simulations</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running simulation </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_simulations</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Create scenario configuration</span>
+        <span class="n">scenario_config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">uncertain_params</span><span class="p">:</span>
+            <span class="n">scenario_config</span><span class="p">[</span><span class="n">param</span><span class="p">]</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[</span><span class="n">param</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+        
+        <span class="c1"># Run model</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">run_storage_model_with_uncertainty</span><span class="p">(</span><span class="n">scenario_config</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulation </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> failed: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+    
+    <span class="c1"># Analyze results</span>
+    <span class="n">successful_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">analysis</span> <span class="o">=</span> <span class="n">analyze_monte_carlo_results</span><span class="p">(</span><span class="n">successful_results</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">analysis</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_monte_carlo_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">input_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze Monte Carlo simulation results&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Extract key metrics from results</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;total_cost&#39;</span><span class="p">,</span> <span class="s1">&#39;storage_capacity&#39;</span><span class="p">,</span> <span class="s1">&#39;renewable_share&#39;</span><span class="p">,</span> <span class="s1">&#39;emissions&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
+                    <span class="n">metrics</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">metrics</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    
+    <span class="c1"># Statistical analysis</span>
+    <span class="n">statistics</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">statistics</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">),</span>
+            <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">values</span><span class="p">),</span>
+            <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">values</span><span class="p">),</span>
+            <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values</span><span class="p">),</span>
+            <span class="s1">&#39;q25&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span>
+            <span class="s1">&#39;q50&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+            <span class="s1">&#39;q75&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">75</span><span class="p">),</span>
+            <span class="s1">&#39;q95&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">95</span><span class="p">),</span>
+            <span class="s1">&#39;q99&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>
+        <span class="p">}</span>
+    
+    <span class="c1"># Sensitivity analysis</span>
+    <span class="n">sensitivity</span> <span class="o">=</span> <span class="n">calculate_sensitivity_indices</span><span class="p">(</span><span class="n">input_samples</span><span class="p">,</span> <span class="n">metrics</span><span class="p">)</span>
+    
+    <span class="c1"># Risk metrics</span>
+    <span class="n">risk_metrics</span> <span class="o">=</span> <span class="n">calculate_risk_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;statistics&#39;</span><span class="p">:</span> <span class="n">statistics</span><span class="p">,</span>
+        <span class="s1">&#39;sensitivity&#39;</span><span class="p">:</span> <span class="n">sensitivity</span><span class="p">,</span>
+        <span class="s1">&#39;risk_metrics&#39;</span><span class="p">:</span> <span class="n">risk_metrics</span><span class="p">,</span>
+        <span class="s1">&#39;raw_results&#39;</span><span class="p">:</span> <span class="n">results</span>
+    <span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_uncertainty_analysis</span><span class="p">(</span><span class="n">analysis</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot uncertainty analysis results&quot;&quot;&quot;</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Storage Planning Under Uncertainty&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    
+    <span class="c1"># Probability distributions</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total_cost&#39;</span><span class="p">,</span> <span class="s1">&#39;storage_capacity&#39;</span><span class="p">,</span> <span class="s1">&#39;renewable_share&#39;</span><span class="p">,</span> <span class="s1">&#39;emissions&#39;</span><span class="p">]</span>
+    <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Total Cost (M$)&#39;</span><span class="p">,</span> <span class="s1">&#39;Storage Capacity (GW)&#39;</span><span class="p">,</span> 
+              <span class="s1">&#39;Renewable Share (%)&#39;</span><span class="p">,</span> <span class="s1">&#39;CO2 Emissions (Mt)&#39;</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">metrics</span><span class="p">,</span> <span class="n">titles</span><span class="p">)):</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="p">]</span>
+        
+        <span class="n">values</span> <span class="o">=</span> <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;statistics&#39;</span><span class="p">][</span><span class="n">metric</span><span class="p">]</span>
+        
+        <span class="c1"># Histogram</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># Statistical markers</span>
+        <span class="n">mean_val</span> <span class="o">=</span> <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;statistics&#39;</span><span class="p">][</span><span class="n">metric</span><span class="p">][</span><span class="s1">&#39;mean&#39;</span><span class="p">]</span>
+        <span class="n">q95_val</span> <span class="o">=</span> <span class="n">analysis</span><span class="p">[</span><span class="s1">&#39;statistics&#39;</span><span class="p">][</span><span class="n">metric</span><span class="p">][</span><span class="s1">&#39;q95&#39;</span><span class="p">]</span>
+        
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean_val</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">q95_val</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;95th Percentile&#39;</span><span class="p">)</span>
+        
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s1"> Distribution&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">fig</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-temporal-modeling">
+<h2>Advanced Temporal Modeling<a class="headerlink" href="#advanced-temporal-modeling" title="Link to this heading">#</a></h2>
+<section id="custom-clustering-algorithms">
+<h3>Custom Clustering Algorithms<a class="headerlink" href="#custom-clustering-algorithms" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># custom_clustering.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">silhouette_score</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">adaptive_temporal_clustering</span><span class="p">(</span><span class="n">time_series_data</span><span class="p">,</span> <span class="n">storage_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implement adaptive temporal clustering for storage systems&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Prepare features for clustering</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">prepare_clustering_features</span><span class="p">(</span><span class="n">time_series_data</span><span class="p">,</span> <span class="n">storage_data</span><span class="p">)</span>
+    
+    <span class="c1"># Determine optimal number of clusters</span>
+    <span class="n">optimal_clusters</span> <span class="o">=</span> <span class="n">find_optimal_clusters</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+    
+    <span class="c1"># Perform clustering with storage-aware objectives</span>
+    <span class="n">clusters</span> <span class="o">=</span> <span class="n">storage_aware_clustering</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">optimal_clusters</span><span class="p">)</span>
+    
+    <span class="c1"># Generate representative periods</span>
+    <span class="n">representative_periods</span> <span class="o">=</span> <span class="n">generate_representative_periods</span><span class="p">(</span>
+        <span class="n">time_series_data</span><span class="p">,</span> <span class="n">clusters</span><span class="p">,</span> <span class="n">storage_data</span>
+    <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;clusters&#39;</span><span class="p">:</span> <span class="n">clusters</span><span class="p">,</span>
+        <span class="s1">&#39;representative_periods&#39;</span><span class="p">:</span> <span class="n">representative_periods</span><span class="p">,</span>
+        <span class="s1">&#39;cluster_weights&#39;</span><span class="p">:</span> <span class="n">calculate_cluster_weights</span><span class="p">(</span><span class="n">clusters</span><span class="p">),</span>
+        <span class="s1">&#39;clustering_metrics&#39;</span><span class="p">:</span> <span class="n">evaluate_clustering_quality</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">clusters</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">prepare_clustering_features</span><span class="p">(</span><span class="n">time_series_data</span><span class="p">,</span> <span class="n">storage_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepare features for clustering including storage considerations&quot;&quot;&quot;</span>
+    
+    <span class="n">features</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># Basic load and renewable features</span>
+    <span class="n">features</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+        <span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;demand&#39;</span><span class="p">],</span>
+        <span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;wind&#39;</span><span class="p">],</span>
+        <span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;solar&#39;</span><span class="p">]</span>
+    <span class="p">])</span>
+    
+    <span class="c1"># Storage-specific features</span>
+    <span class="k">if</span> <span class="n">storage_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Net load (demand - renewables)</span>
+        <span class="n">net_load</span> <span class="o">=</span> <span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;demand&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;wind&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;solar&#39;</span><span class="p">]</span>
+        <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">net_load</span><span class="p">)</span>
+        
+        <span class="c1"># Ramp rates</span>
+        <span class="n">demand_ramp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;demand&#39;</span><span class="p">],</span> <span class="n">prepend</span><span class="o">=</span><span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;demand&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">renewable_ramp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;wind&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;solar&#39;</span><span class="p">],</span> 
+                               <span class="n">prepend</span><span class="o">=</span><span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;wind&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;solar&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">features</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">demand_ramp</span><span class="p">,</span> <span class="n">renewable_ramp</span><span class="p">])</span>
+        
+        <span class="c1"># Storage opportunity index</span>
+        <span class="n">storage_opportunity</span> <span class="o">=</span> <span class="n">calculate_storage_opportunity_index</span><span class="p">(</span><span class="n">time_series_data</span><span class="p">)</span>
+        <span class="n">features</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">storage_opportunity</span><span class="p">)</span>
+    
+    <span class="c1"># Temporal features</span>
+    <span class="n">hour_of_day</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;demand&#39;</span><span class="p">]))</span> <span class="o">%</span> <span class="mi">24</span>
+    <span class="n">day_of_week</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">time_series_data</span><span class="p">[</span><span class="s1">&#39;demand&#39;</span><span class="p">]))</span> <span class="o">//</span> <span class="mi">24</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span>
+    <span class="n">features</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">hour_of_day</span><span class="p">,</span> <span class="n">day_of_week</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">storage_aware_clustering</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform clustering with storage system considerations&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Initialize clustering with storage-aware objective</span>
+    <span class="n">clustering</span> <span class="o">=</span> <span class="n">StorageAwareKMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">)</span>
+    <span class="n">clusters</span> <span class="o">=</span> <span class="n">clustering</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">clusters</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StorageAwareKMeans</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom K-means clustering that considers storage operation patterns&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">storage_weight</span><span class="o">=</span><span class="mf">0.3</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">n_clusters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage_weight</span> <span class="o">=</span> <span class="n">storage_weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+        
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">):</span>
+        <span class="c1"># Standard clustering</span>
+        <span class="n">standard_clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+        
+        <span class="c1"># Storage-aware refinement</span>
+        <span class="n">refined_clusters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">refine_clusters_for_storage</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">standard_clusters</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">refined_clusters</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">refine_clusters_for_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">initial_clusters</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Refine clusters to better represent storage operation patterns&quot;&quot;&quot;</span>
+        
+        <span class="c1"># Calculate storage operation patterns for each cluster</span>
+        <span class="n">cluster_storage_patterns</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">cluster_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_clusters</span><span class="p">):</span>
+            <span class="n">cluster_mask</span> <span class="o">=</span> <span class="n">initial_clusters</span> <span class="o">==</span> <span class="n">cluster_id</span>
+            <span class="n">cluster_features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">cluster_mask</span><span class="p">]</span>
+            
+            <span class="c1"># Calculate storage opportunity for this cluster</span>
+            <span class="n">storage_pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_cluster_storage_pattern</span><span class="p">(</span><span class="n">cluster_features</span><span class="p">)</span>
+            <span class="n">cluster_storage_patterns</span><span class="p">[</span><span class="n">cluster_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">storage_pattern</span>
+        
+        <span class="c1"># Refine cluster assignments based on storage patterns</span>
+        <span class="n">refined_clusters</span> <span class="o">=</span> <span class="n">initial_clusters</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        
+        <span class="c1"># Implementation of refinement algorithm</span>
+        <span class="c1"># (Details would depend on specific storage modeling requirements)</span>
+        
+        <span class="k">return</span> <span class="n">refined_clusters</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_cluster_storage_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cluster_features</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate storage operation pattern for a cluster&quot;&quot;&quot;</span>
+        
+        <span class="c1"># Extract relevant features for storage analysis</span>
+        <span class="n">net_load</span> <span class="o">=</span> <span class="n">cluster_features</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span>  <span class="c1"># Assuming net load is 4th feature</span>
+        <span class="n">ramp_rates</span> <span class="o">=</span> <span class="n">cluster_features</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>  <span class="c1"># Demand and renewable ramps</span>
+        
+        <span class="c1"># Calculate storage metrics</span>
+        <span class="n">storage_potential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">net_load</span><span class="p">)</span>  <span class="c1"># Variability indicates storage potential</span>
+        <span class="n">ramp_severity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ramp_rates</span><span class="p">))</span>  <span class="c1"># Average ramp magnitude</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;storage_potential&#39;</span><span class="p">:</span> <span class="n">storage_potential</span><span class="p">,</span>
+            <span class="s1">&#39;ramp_severity&#39;</span><span class="p">:</span> <span class="n">ramp_severity</span><span class="p">,</span>
+            <span class="s1">&#39;average_net_load&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">net_load</span><span class="p">)</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-results-analysis">
+<h2>Advanced Results Analysis<a class="headerlink" href="#advanced-results-analysis" title="Link to this heading">#</a></h2>
+<section id="machine-learning-enhanced-analysis">
+<h3>Machine Learning-Enhanced Analysis<a class="headerlink" href="#machine-learning-enhanced-analysis" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ml_enhanced_analysis.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shap</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ml_enhanced_results_analysis</span><span class="p">(</span><span class="n">historical_results</span><span class="p">,</span> <span class="n">scenario_parameters</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use machine learning to analyze and predict storage system performance&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Prepare dataset</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">prepare_ml_dataset</span><span class="p">(</span><span class="n">historical_results</span><span class="p">,</span> <span class="n">scenario_parameters</span><span class="p">)</span>
+    
+    <span class="c1"># Train models for different metrics</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="n">target_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total_cost&#39;</span><span class="p">,</span> <span class="s1">&#39;storage_capacity&#39;</span><span class="p">,</span> <span class="s1">&#39;renewable_integration&#39;</span><span class="p">,</span> <span class="s1">&#39;reliability&#39;</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">target_metrics</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training model for </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Split data</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">metric</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Train model</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        
+        <span class="c1"># Evaluate</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+        <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  R² Score: </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  MAE: </span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">models</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="n">predictions</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;y_true&#39;</span><span class="p">:</span> <span class="n">y_test</span><span class="p">,</span>
+            <span class="s1">&#39;y_pred&#39;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">,</span>
+            <span class="s1">&#39;r2&#39;</span><span class="p">:</span> <span class="n">r2</span><span class="p">,</span>
+            <span class="s1">&#39;mae&#39;</span><span class="p">:</span> <span class="n">mae</span>
+        <span class="p">}</span>
+    
+    <span class="c1"># Feature importance analysis</span>
+    <span class="n">feature_importance</span> <span class="o">=</span> <span class="n">analyze_feature_importance</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    
+    <span class="c1"># SHAP analysis for interpretability</span>
+    <span class="n">shap_analysis</span> <span class="o">=</span> <span class="n">perform_shap_analysis</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;models&#39;</span><span class="p">:</span> <span class="n">models</span><span class="p">,</span>
+        <span class="s1">&#39;predictions&#39;</span><span class="p">:</span> <span class="n">predictions</span><span class="p">,</span>
+        <span class="s1">&#39;feature_importance&#39;</span><span class="p">:</span> <span class="n">feature_importance</span><span class="p">,</span>
+        <span class="s1">&#39;shap_analysis&#39;</span><span class="p">:</span> <span class="n">shap_analysis</span>
+    <span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">scenario_optimization_with_ml</span><span class="p">(</span><span class="n">ml_models</span><span class="p">,</span> <span class="n">constraints</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use ML models to optimize scenario parameters&quot;&quot;&quot;</span>
+    
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">differential_evolution</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">objective_function</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+        <span class="c1"># Convert params to scenario configuration</span>
+        <span class="n">scenario_config</span> <span class="o">=</span> <span class="n">params_to_scenario_config</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        
+        <span class="c1"># Predict outcomes using ML models</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">ml_models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">scenario_config</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">predictions</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred</span>
+        
+        <span class="c1"># Multi-objective optimization</span>
+        <span class="c1"># Minimize cost and maximize renewable integration</span>
+        <span class="n">cost_weight</span> <span class="o">=</span> <span class="mf">0.6</span>
+        <span class="n">renewable_weight</span> <span class="o">=</span> <span class="mf">0.4</span>
+        
+        <span class="n">normalized_cost</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span><span class="s1">&#39;total_cost&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># Normalize to thousands</span>
+        <span class="n">normalized_renewable</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="s1">&#39;renewable_integration&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Invert for minimization</span>
+        
+        <span class="n">objective</span> <span class="o">=</span> <span class="n">cost_weight</span> <span class="o">*</span> <span class="n">normalized_cost</span> <span class="o">+</span> <span class="n">renewable_weight</span> <span class="o">*</span> <span class="n">normalized_renewable</span>
+        
+        <span class="k">return</span> <span class="n">objective</span>
+    
+    <span class="c1"># Define bounds for optimization variables</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="n">get_optimization_bounds</span><span class="p">(</span><span class="n">constraints</span><span class="p">)</span>
+    
+    <span class="c1"># Optimize</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">differential_evolution</span><span class="p">(</span><span class="n">objective_function</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    
+    <span class="c1"># Convert result back to scenario configuration</span>
+    <span class="n">optimal_scenario</span> <span class="o">=</span> <span class="n">params_to_scenario_config</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;optimal_params&#39;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
+        <span class="s1">&#39;optimal_scenario&#39;</span><span class="p">:</span> <span class="n">optimal_scenario</span><span class="p">,</span>
+        <span class="s1">&#39;objective_value&#39;</span><span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">fun</span><span class="p">,</span>
+        <span class="s1">&#39;optimization_result&#39;</span><span class="p">:</span> <span class="n">result</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="integration-with-external-tools">
+<h2>Integration with External Tools<a class="headerlink" href="#integration-with-external-tools" title="Link to this heading">#</a></h2>
+<section id="api-development">
+<h3>API Development<a class="headerlink" href="#api-development" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># storage_api.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">BackgroundTasks</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uvicorn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Storage-in-OSeMOSYS API&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;2025.07&quot;</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StorageModelRequest</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="n">input_data</span><span class="p">:</span> <span class="nb">dict</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">StorageModelResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">status</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># In-memory job storage (use Redis/database in production)</span>
+<span class="n">active_jobs</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/run_model&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">StorageModelResponse</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_storage_model_api</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">StorageModelRequest</span><span class="p">,</span> <span class="n">background_tasks</span><span class="p">:</span> <span class="n">BackgroundTasks</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run storage model asynchronously&quot;&quot;&quot;</span>
+    
+    <span class="n">job_id</span> <span class="o">=</span> <span class="n">generate_job_id</span><span class="p">()</span>
+    
+    <span class="c1"># Start background task</span>
+    <span class="n">background_tasks</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
+        <span class="n">execute_storage_model_task</span><span class="p">,</span>
+        <span class="n">job_id</span><span class="p">,</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="p">,</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">input_data</span>
+    <span class="p">)</span>
+    
+    <span class="n">active_jobs</span><span class="p">[</span><span class="n">job_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;running&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="kc">None</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">StorageModelResponse</span><span class="p">(</span><span class="n">job_id</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;running&#39;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/job_status/</span><span class="si">{job_id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">StorageModelResponse</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_job_status</span><span class="p">(</span><span class="n">job_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get status of running job&quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">job_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">active_jobs</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">StorageModelResponse</span><span class="p">(</span>
+            <span class="n">job_id</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span>
+            <span class="n">status</span><span class="o">=</span><span class="s1">&#39;not_found&#39;</span><span class="p">,</span>
+            <span class="n">error</span><span class="o">=</span><span class="s1">&#39;Job ID not found&#39;</span>
+        <span class="p">)</span>
+    
+    <span class="n">job</span> <span class="o">=</span> <span class="n">active_jobs</span><span class="p">[</span><span class="n">job_id</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">StorageModelResponse</span><span class="p">(</span>
+        <span class="n">job_id</span><span class="o">=</span><span class="n">job_id</span><span class="p">,</span>
+        <span class="n">status</span><span class="o">=</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">],</span>
+        <span class="n">results</span><span class="o">=</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">],</span>
+        <span class="n">error</span><span class="o">=</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">execute_storage_model_task</span><span class="p">(</span><span class="n">job_id</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">input_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Execute storage model in background&quot;&quot;&quot;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Run the actual model</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">run_storage_model_async</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">input_data</span><span class="p">)</span>
+        
+        <span class="c1"># Update job status</span>
+        <span class="n">active_jobs</span><span class="p">[</span><span class="n">job_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;completed&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="n">results</span><span class="p">,</span>
+            <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="kc">None</span>
+        <span class="p">}</span>
+        
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">active_jobs</span><span class="p">[</span><span class="n">job_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;failed&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="p">}</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">uvicorn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="cloud-integration">
+<h3>Cloud Integration<a class="headerlink" href="#cloud-integration" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># cloud_integration.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">boto3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">azure.storage.blob</span><span class="w"> </span><span class="kn">import</span> <span class="n">BlobServiceClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">google.cloud</span><span class="w"> </span><span class="kn">import</span> <span class="n">storage</span> <span class="k">as</span> <span class="n">gcs</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CloudStorageManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage storage model data in cloud platforms&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider</span><span class="o">=</span><span class="s1">&#39;aws&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">=</span> <span class="n">provider</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_cloud_client</span><span class="p">()</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_cloud_client</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">==</span> <span class="s1">&#39;aws&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span> <span class="o">=</span> <span class="s1">&#39;storage-osemosys-models&#39;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">==</span> <span class="s1">&#39;azure&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">BlobServiceClient</span><span class="o">.</span><span class="n">from_connection_string</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;AZURE_STORAGE_CONNECTION_STRING&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">container</span> <span class="o">=</span> <span class="s1">&#39;storage-models&#39;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">==</span> <span class="s1">&#39;gcp&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">gcs</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">bucket</span><span class="p">(</span><span class="s1">&#39;storage-osemosys-models&#39;</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">upload_model_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_path</span><span class="p">,</span> <span class="n">cloud_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Upload model data to cloud storage&quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">==</span> <span class="s1">&#39;aws&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span><span class="p">,</span> <span class="n">cloud_path</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">==</span> <span class="s1">&#39;azure&#39;</span><span class="p">:</span>
+            <span class="n">blob_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_blob_client</span><span class="p">(</span>
+                <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="p">,</span> <span class="n">blob</span><span class="o">=</span><span class="n">cloud_path</span>
+            <span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">data</span><span class="p">:</span>
+                <span class="n">blob_client</span><span class="o">.</span><span class="n">upload_blob</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">==</span> <span class="s1">&#39;gcp&#39;</span><span class="p">:</span>
+            <span class="n">blob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span><span class="o">.</span><span class="n">blob</span><span class="p">(</span><span class="n">cloud_path</span><span class="p">)</span>
+            <span class="n">blob</span><span class="o">.</span><span class="n">upload_from_filename</span><span class="p">(</span><span class="n">local_path</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">download_model_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cloud_path</span><span class="p">,</span> <span class="n">local_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Download model data from cloud storage&quot;&quot;&quot;</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">==</span> <span class="s1">&#39;aws&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">download_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket</span><span class="p">,</span> <span class="n">cloud_path</span><span class="p">,</span> <span class="n">local_path</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">==</span> <span class="s1">&#39;azure&#39;</span><span class="p">:</span>
+            <span class="n">blob_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_blob_client</span><span class="p">(</span>
+                <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="p">,</span> <span class="n">blob</span><span class="o">=</span><span class="n">cloud_path</span>
+            <span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">local_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">download_file</span><span class="p">:</span>
+                <span class="n">download_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">blob_client</span><span class="o">.</span><span class="n">download_blob</span><span class="p">()</span><span class="o">.</span><span class="n">readall</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">==</span> <span class="s1">&#39;gcp&#39;</span><span class="p">:</span>
+            <span class="n">blob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span><span class="o">.</span><span class="n">blob</span><span class="p">(</span><span class="n">cloud_path</span><span class="p">)</span>
+            <span class="n">blob</span><span class="o">.</span><span class="n">download_to_filename</span><span class="p">(</span><span class="n">local_path</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_cloud_computing_environment</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up cloud computing environment for large-scale studies&quot;&quot;&quot;</span>
+    
+    <span class="c1"># AWS EC2 setup</span>
+    <span class="n">ec2_config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;instance_type&#39;</span><span class="p">:</span> <span class="s1">&#39;c5.4xlarge&#39;</span><span class="p">,</span>  <span class="c1"># 16 vCPUs, 32 GB RAM</span>
+        <span class="s1">&#39;ami_id&#39;</span><span class="p">:</span> <span class="s1">&#39;ami-0c02fb55956c7d316&#39;</span><span class="p">,</span>  <span class="c1"># Amazon Linux 2</span>
+        <span class="s1">&#39;security_group&#39;</span><span class="p">:</span> <span class="s1">&#39;storage-osemosys-sg&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;key_pair&#39;</span><span class="p">:</span> <span class="s1">&#39;storage-osemosys-key&#39;</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># Auto Scaling configuration</span>
+    <span class="n">autoscaling_config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;min_size&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">&#39;max_size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s1">&#39;desired_capacity&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s1">&#39;scale_up_threshold&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>  <span class="c1"># CPU utilization %</span>
+        <span class="s1">&#39;scale_down_threshold&#39;</span><span class="p">:</span> <span class="mi">30</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">ec2_config</span><span class="p">,</span> <span class="n">autoscaling_config</span>
+</pre></div>
+</div>
+<p>This advanced configuration tutorial provides expert-level features for complex energy system modeling scenarios with sophisticated storage representations, uncertainty analysis, and cloud integration capabilities. The framework supports multi-objective optimization, machine learning-enhanced analysis, and scalable cloud deployment for large-scale studies.</p>
+<p>Continue exploring the <a class="reference internal" href="../notes/api_reference.html"><span class="std std-doc">API Reference</span></a> for detailed function documentation.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="comparative_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Comparative Analysis Tutorial</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../autoapi/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-configuration-options">Advanced Configuration Options</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-level-configuration-system">Multi-Level Configuration System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-technology-definitions">Custom Technology Definitions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-optimization">Multi-Objective Optimization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-optimal-solutions">Pareto-Optimal Solutions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-and-risk-analysis">Uncertainty and Risk Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-simulation">Monte Carlo Simulation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-temporal-modeling">Advanced Temporal Modeling</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-clustering-algorithms">Custom Clustering Algorithms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-results-analysis">Advanced Results Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-enhanced-analysis">Machine Learning-Enhanced Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-external-tools">Integration with External Tools</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-development">API Development</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cloud-integration">Cloud Integration</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bruno Borba, Md Eliasinul Islam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Bruno Borba, Md Eliasinul Islam.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

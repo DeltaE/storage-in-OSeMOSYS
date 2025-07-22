@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Storage-in-OSeMOSYS Documentation &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+    <title>Storage-in-OSeMOSYS Documentat &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
   
   
   
@@ -30,6 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -150,7 +151,14 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a></li>
@@ -160,6 +168,40 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/model_specifications.html">Model Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/results_analysis.html">Results Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="autoapi/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/cluster/index.html">src.cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/simulation/index.html">src.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_list/index.html">src.update_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/utilities/index.html">src.utilities</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -313,7 +355,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Storage-in-OSeMOSYS Documentation</h1>
+    <h1>Storage-in-OSeMOSYS Documentat</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -352,10 +394,167 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="storage-in-osemosys-documentation">
-<h1>Storage-in-OSeMOSYS Documentation<a class="headerlink" href="#storage-in-osemosys-documentation" title="Link to this heading">#</a></h1>
+  <section id="storage-in-osemosys-documentat">
+<h1>Storage-in-OSeMOSYS Documentat<a class="headerlink" href="#storage-in-osemosys-documentat" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#system-requirements">System Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#required-software">Required Software</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#quick-setup">Quick Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#clone-repository">1. Clone Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#automated-environment-setup">2. Automated Environment Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#test-installation">3. Test Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#manual-environment-setup">Manual Environment Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#create-conda-environment">1. Create Conda Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#install-core-dependencies">2. Install Core Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#install-additional-dependencies">3. Install Additional Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-file-management">Environment File Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#using-environment-yml">Using environment.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-export">Environment Export</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#makefile-commands">Makefile Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-management">Environment Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-workflow">Development Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#package-details">Package Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#core-scientific-stack">Core Scientific Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#energy-system-modeling">Energy System Modeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-and-documentation">Development and Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-verification">Environment Verification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#comprehensive-test-script">Comprehensive Test Script</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#performance-optimization">Performance Optimization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-tuning">Environment Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#memory-management">Memory Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-environment">Development Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#additional-tools-for-development">Additional Tools for Development</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#ide-configuration">IDE Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-maintenance">Environment Maintenance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#regular-updates">Regular Updates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-backup">Environment Backup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#workflow-architecture">Workflow Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#detailed-workflow-steps">Detailed Workflow Steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#configuration-and-initialization">1. Configuration and Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#data-preprocessing-and-clustering">2. Data Preprocessing and Clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#model-specific-processing">3. Model-Specific Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#osemosys-model-conversion-and-simulation">4. OSeMOSYS Model Conversion and Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#results-collection-and-processing">5. Results Collection and Processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#post-processing-and-visualization">6. Post-Processing and Visualization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#execution-commands">Execution Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#basic-execution">Basic Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#environment-management">Environment Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#configuration-options">Configuration Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#output-structure">Output Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#performance-considerations">Performance Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#common-issues">Common Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notes/about_storage_algorithms.html">About Storage Modelling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notes/about_storage_algorithms.html#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#niet-direct-link-continuous-diary">Niet (Direct Link) — “Continuous Diary”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/about_storage_algorithms.html#quick-summary-on-storage-algorithms-in-modelling">Quick Summary on Storage Algorithms in Modelling :</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#comparative-table-of-storage-modeling-methods">📊 Comparative Table of Storage Modeling Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notes/configuration_guide.html">Configuration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-file-structure">Configuration File Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#key-configuration-parameters">Key Configuration Parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#analysis-parameters">Analysis Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#storage-parameters">Storage Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#model-specific-configuration">Model-Specific Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#model-cluster-configuration">Model_Cluster Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#model-kotzur-configuration">Model_Kotzur Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#model-welsch-configuration">Model_Welsch Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#data-configuration">Data Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#input-data-paths">Input Data Paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#results-configuration">Results Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#common-configuration-scenarios">Common Configuration Scenarios</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#high-resolution-analysis">High-Resolution Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#fast-prototyping">Fast Prototyping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#seasonal-analysis">Seasonal Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#computational-efficiency">Computational Efficiency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-validation">Configuration Validation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#parameter-relationships">Parameter Relationships</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#validation-checks">Validation Checks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#advanced-configuration">Advanced Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#custom-data-sources">Custom Data Sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#multiple-scenarios">Multiple Scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#solver-configuration">Solver Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-best-practices">Configuration Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#naming-conventions">1. Naming Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#parameter-selection-guidelines">2. Parameter Selection Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#storage-parameter-guidelines">3. Storage Parameter Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#computational-considerations">4. Computational Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-file-management">Configuration File Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#version-control">Version Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#configuration-templates">Configuration Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#environment-specific-configs">Environment-Specific Configs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
 <p>A comprehensive framework for analyzing energy storage systems using OSeMOSYS with time-series clustering and temporal disaggregation methods.</p>
-<img src="_static/storage_models_overview.png" alt="Storage Models Overview" width="800"/>
+<!-- <img src="_static/storage_models_overview.png" alt="Storage Models Overview" width="800"/> -->
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This library is under active development. For latest updates, check the <a class="reference external" href="https://github.com/DeltaE/storage-in-OSeMOSYS">GitHub repository</a>.</p>
@@ -560,9 +759,67 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#usage-examples">Usage Examples</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="notes/model_specifications.html">Model Specifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#osemosys-integration">OSeMOSYS Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#storage-technologies">Storage Technologies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#technical-implementation">Technical Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#future-development">Future Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notes/results_analysis.html">Results Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#output-files">Output Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#analysis-techniques">Analysis Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#performance-metrics">Performance Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#quality-assurance">Quality Assurance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#future-enhancements">Future Enhancements</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_usage.html">Basic Usage Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#getting-started-with-storage-in-osemosys">Getting Started with Storage-in-OSeMOSYS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#quick-start-example">Quick Start Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#step-by-step-workflow">Step-by-Step Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#common-use-cases">Common Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#best-practices">Best Practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#temporal-clustering-methods-comparison">Temporal Clustering Methods Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#storage-technology-comparison">Storage Technology Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#accuracy-vs-efficiency-trade-offs">Accuracy vs. Efficiency Trade-offs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#sensitivity-analysis">Sensitivity Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#regional-comparison">Regional Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#economic-analysis">Economic Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#results-visualization">Results Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#key-insights-and-recommendations">Key Insights and Recommendations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#advanced-configuration-options">Advanced Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#multi-objective-optimization">Multi-Objective Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#uncertainty-and-risk-analysis">Uncertainty and Risk Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#advanced-temporal-modeling">Advanced Temporal Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#advanced-results-analysis">Advanced Results Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#integration-with-external-tools">Integration with External Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/src/index.html">src</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </section>
 <section id="quick-start">

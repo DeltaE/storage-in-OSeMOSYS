@@ -1,0 +1,7 @@
+# Logo Placeholder
+
+This is a placeholder for the logo. 
+Replace this file with the actual logo: XXXX.jpg
+
+The logo should be placed in docs/source/_static/ directory and referenced in conf.py as:
+html_logo = "_static/XXXX.jpg"
