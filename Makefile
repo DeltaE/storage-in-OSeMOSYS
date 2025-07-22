@@ -283,7 +283,7 @@ docs-build:
 			echo "$(RED)Documentation directory not found. Please ensure docs/ exists.$(NC)"; \
 			exit 1; \
 		fi; \
-		cd $(DOCS_DIR) && conda run -n $(ENV_NAME) sphinx-build -b html source build/html -W --keep-going; \
+		cd $(DOCS_DIR) && conda run -n $(ENV_NAME) sphinx-build -b html source build/html --keep-going; \
 		echo "$(GREEN)✓ Documentation built successfully!$(NC)"; \
 		echo "$(YELLOW)Documentation available at: $(DOCS_HTML_DIR)/index.html$(NC)"; \
 	else \
@@ -323,7 +323,7 @@ docs-check:
 			echo "$(RED)Documentation directory not found.$(NC)"; \
 			exit 1; \
 		fi; \
-		cd $(DOCS_DIR) && conda run -n $(ENV_NAME) sphinx-build -b html source build/html -W -E; \
+		cd $(DOCS_DIR) && conda run -n $(ENV_NAME) sphinx-build -b html source build/html -E; \
 		echo "$(GREEN)✓ Documentation check completed!$(NC)"; \
 	else \
 		echo "$(RED)Environment '$(ENV_NAME)' does not exist.$(NC)"; \

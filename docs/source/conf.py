@@ -34,6 +34,7 @@ release = '2025.07'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
+    'autoapi.extension',
     "myst_parser",  # For Markdown support - must be first
     "sphinx.ext.duration",  # For generating documentation
     "sphinx.ext.autodoc",  # For automatic documentation generation from docstrings
@@ -46,6 +47,7 @@ extensions = [
 
 # MyST parser configuration
 myst_enable_extensions = [
+    'autoapi.extension',
     "colon_fence",
     "html_admonition",
 ]
@@ -96,7 +98,7 @@ autodoc_inherit_docstrings = False
 # Suppress warnings for missing imports
 suppress_warnings = ['autodoc.import_error']
 
-html_logo = "_static/RESource_logo_2025.07.jpg"
+# html_logo = "_static/RESource_logo_2025.07.jpg"  # Commented out until logo is available
 
 # NBSphinx configuration for Jupyter notebooks
 nbsphinx_execute = 'never'  # Don't execute notebooks during build
@@ -199,3 +201,11 @@ def setup(app):
         'parallel_read_safe': True,
         'parallel_write_safe': True,
     }
+
+# AutoAPI configuration
+autoapi_dirs = ['../../src']
+autoapi_type = 'python'
+autoapi_template_dir = '_templates/autoapi'
+autoapi_options = ['members', 'undoc-members', 'show-inheritance', 'show-module-summary', 'special-members', 'imported-members']
+autoapi_python_class_content = 'both'
+autoapi_member_order = 'bysource'

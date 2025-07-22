@@ -196,10 +196,7 @@ representative_days, sequence = cluster_data(
 ### Results Analysis
 ```python
 # Load and analyze results
-import pandas as pd
-
-results = pd.read_csv("Results/k4h1WND_Storage_Level_Model_Cluster.csv")
-print(results.describe())
+TO BE UPDATED
 ```
 
 ## Environment Management
@@ -275,7 +272,7 @@ If you use this work, please cite:
 ```bibtex
 @software{storage_osemosys,
   title={Storage-in-OSeMOSYS: Temporal Representation Methods for Energy Storage Analysis},
-  author={Md Eliasinul Islam},
+  author={Bruno Borba, Md Eliasinul Islam, Taco Niet},
   year={2025},
   url={https://github.com/DeltaE/storage-in-OSeMOSYS}
 }

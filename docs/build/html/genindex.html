@@ -29,6 +29,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -158,6 +159,40 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/model_specifications.html">Model Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/results_analysis.html">Results Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="autoapi/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/cluster/index.html">src.cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/simulation/index.html">src.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_list/index.html">src.update_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/src/utilities/index.html">src.utilities</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -279,8 +314,433 @@ document.write(`
 <h1 id="index">Index</h1>
 
 <div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
  
 </div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/src.table_generator.html#src.table_generator.append_to_excel">append_to_excel() (in module src.table_generator)</a>, <a href="autoapi/src/table_generator/index.html#src.table_generator.append_to_excel">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.CFandSDP">CFandSDP() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.update_CFandSDP.html#src.update_CFandSDP.CFandSDP">(in module src.update_CFandSDP)</a>, <a href="autoapi/src/update_CFandSDP/index.html#src.update_CFandSDP.CFandSDP">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/src/index.html#src.cluster_data">cluster_data() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.cluster.html#src.cluster.cluster_data">(in module src.cluster)</a>, <a href="autoapi/src/cluster/index.html#src.cluster.cluster_data">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/src/index.html#src.conversionld">conversionld() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.update_conversionld.html#src.update_conversionld.conversionld">(in module src.update_conversionld)</a>, <a href="autoapi/src/update_conversionld/index.html#src.update_conversionld.conversionld">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/src/index.html#src.conversionldc">conversionldc() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.update_conversionldc.html#src.update_conversionldc.conversionldc">(in module src.update_conversionldc)</a>, <a href="autoapi/src/update_conversionldc/index.html#src.update_conversionldc.conversionldc">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.conversionlh">conversionlh() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.update_conversionlh.html#src.update_conversionlh.conversionlh">(in module src.update_conversionlh)</a>, <a href="autoapi/src/update_conversionlh/index.html#src.update_conversionlh.conversionlh">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/src/index.html#src.conversionlts">conversionlts() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.update_conversionlts.html#src.update_conversionlts.conversionlts">(in module src.update_conversionlts)</a>, <a href="autoapi/src/update_conversionlts/index.html#src.update_conversionlts.conversionlts">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/src/index.html#src.copy_and_rename">copy_and_rename() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.copy_rename_csv.html#src.copy_rename_csv.copy_and_rename">(in module src.copy_rename_csv)</a>, <a href="autoapi/src/copy_rename_csv/index.html#src.copy_rename_csv.copy_and_rename">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.daysindaytype">daysindaytype() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.update_daysindaytype.html#src.update_daysindaytype.daysindaytype">(in module src.update_daysindaytype)</a>, <a href="autoapi/src/update_daysindaytype/index.html#src.update_daysindaytype.daysindaytype">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.graph">graph() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.graph_generator.html#src.graph_generator.graph">(in module src.graph_generator)</a>, <a href="autoapi/src/graph_generator/index.html#src.graph_generator.graph">[1]</a>
+</li>
+        <li><a href="api/src.graph_generator_3graphs.html#src.graph_generator_3graphs.graph">(in module src.graph_generator_3graphs)</a>, <a href="autoapi/src/graph_generator_3graphs/index.html#src.graph_generator_3graphs.graph">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.intraday_kotzur">intraday_kotzur() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.Kotzur_intraday.html#src.Kotzur_intraday.intraday_kotzur">(in module src.Kotzur_intraday)</a>, <a href="autoapi/src/Kotzur_intraday/index.html#src.Kotzur_intraday.intraday_kotzur">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="autoapi/src/index.html#src.intraday_welsch">intraday_welsch() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.Welsch_intraday.html#src.Welsch_intraday.intraday_welsch">(in module src.Welsch_intraday)</a>, <a href="autoapi/src/Welsch_intraday/index.html#src.Welsch_intraday.intraday_welsch">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.intraday_welsch2">intraday_welsch2() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.Welsch_intraday2.html#src.Welsch_intraday2.intraday_welsch2">(in module src.Welsch_intraday2)</a>, <a href="autoapi/src/Welsch_intraday2/index.html#src.Welsch_intraday2.intraday_welsch2">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/src.utilities.html#src.utilities.load_config">load_config() (in module src.utilities)</a>, <a href="autoapi/src/utilities/index.html#src.utilities.load_config">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    module
+
+      <ul>
+        <li><a href="api/_autosummary/src.html#module-src">src</a>, <a href="api/src.html#module-src">[1]</a>, <a href="autoapi/src/index.html#module-src">[2]</a>
+</li>
+        <li><a href="api/src.cluster.html#module-src.cluster">src.cluster</a>, <a href="autoapi/src/cluster/index.html#module-src.cluster">[1]</a>
+</li>
+        <li><a href="api/src.copy_rename_csv.html#module-src.copy_rename_csv">src.copy_rename_csv</a>, <a href="autoapi/src/copy_rename_csv/index.html#module-src.copy_rename_csv">[1]</a>
+</li>
+        <li><a href="api/src.graph_generator.html#module-src.graph_generator">src.graph_generator</a>, <a href="autoapi/src/graph_generator/index.html#module-src.graph_generator">[1]</a>
+</li>
+        <li><a href="api/src.graph_generator_3graphs.html#module-src.graph_generator_3graphs">src.graph_generator_3graphs</a>, <a href="autoapi/src/graph_generator_3graphs/index.html#module-src.graph_generator_3graphs">[1]</a>
+</li>
+        <li><a href="api/src.Kotzur_intraday.html#module-src.Kotzur_intraday">src.Kotzur_intraday</a>, <a href="autoapi/src/Kotzur_intraday/index.html#module-src.Kotzur_intraday">[1]</a>
+</li>
+        <li><a href="api/src.read_csv.html#module-src.read_csv">src.read_csv</a>, <a href="autoapi/src/read_csv/index.html#module-src.read_csv">[1]</a>
+</li>
+        <li><a href="api/src.simulation.html#module-src.simulation">src.simulation</a>, <a href="autoapi/src/simulation/index.html#module-src.simulation">[1]</a>
+</li>
+        <li><a href="api/src.table_generator.html#module-src.table_generator">src.table_generator</a>, <a href="autoapi/src/table_generator/index.html#module-src.table_generator">[1]</a>
+</li>
+        <li><a href="api/src.update_CFandSDP.html#module-src.update_CFandSDP">src.update_CFandSDP</a>, <a href="autoapi/src/update_CFandSDP/index.html#module-src.update_CFandSDP">[1]</a>
+</li>
+        <li><a href="api/src.update_conversionld.html#module-src.update_conversionld">src.update_conversionld</a>, <a href="autoapi/src/update_conversionld/index.html#module-src.update_conversionld">[1]</a>
+</li>
+        <li><a href="api/src.update_conversionldc.html#module-src.update_conversionldc">src.update_conversionldc</a>, <a href="autoapi/src/update_conversionldc/index.html#module-src.update_conversionldc">[1]</a>
+</li>
+        <li><a href="api/src.update_conversionlh.html#module-src.update_conversionlh">src.update_conversionlh</a>, <a href="autoapi/src/update_conversionlh/index.html#module-src.update_conversionlh">[1]</a>
+</li>
+        <li><a href="api/src.update_conversionlts.html#module-src.update_conversionlts">src.update_conversionlts</a>, <a href="autoapi/src/update_conversionlts/index.html#module-src.update_conversionlts">[1]</a>
+</li>
+        <li><a href="api/src.update_daysindaytype.html#module-src.update_daysindaytype">src.update_daysindaytype</a>, <a href="autoapi/src/update_daysindaytype/index.html#module-src.update_daysindaytype">[1]</a>
+</li>
+        <li><a href="api/src.update_list.html#module-src.update_list">src.update_list</a>, <a href="autoapi/src/update_list/index.html#module-src.update_list">[1]</a>
+</li>
+        <li><a href="api/src.update_params_yaml_otoole.html#module-src.update_params_yaml_otoole">src.update_params_yaml_otoole</a>, <a href="autoapi/src/update_params_yaml_otoole/index.html#module-src.update_params_yaml_otoole">[1]</a>
+</li>
+        <li><a href="api/src.update_yearsplit.html#module-src.update_yearsplit">src.update_yearsplit</a>, <a href="autoapi/src/update_yearsplit/index.html#module-src.update_yearsplit">[1]</a>
+</li>
+        <li><a href="api/src.utilities.html#module-src.utilities">src.utilities</a>, <a href="autoapi/src/utilities/index.html#module-src.utilities">[1]</a>
+</li>
+        <li><a href="api/src.Welsch_intraday.html#module-src.Welsch_intraday">src.Welsch_intraday</a>, <a href="autoapi/src/Welsch_intraday/index.html#module-src.Welsch_intraday">[1]</a>
+</li>
+        <li><a href="api/src.Welsch_intraday2.html#module-src.Welsch_intraday2">src.Welsch_intraday2</a>, <a href="autoapi/src/Welsch_intraday2/index.html#module-src.Welsch_intraday2">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.new_list">new_list() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.update_list.html#src.update_list.new_list">(in module src.update_list)</a>, <a href="autoapi/src/update_list/index.html#src.update_list.new_list">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.new_yaml_param">new_yaml_param() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.update_params_yaml_otoole.html#src.update_params_yaml_otoole.new_yaml_param">(in module src.update_params_yaml_otoole)</a>, <a href="autoapi/src/update_params_yaml_otoole/index.html#src.update_params_yaml_otoole.new_yaml_param">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/src.utilities.html#src.utilities.print_banner">print_banner() (in module src.utilities)</a>, <a href="autoapi/src/utilities/index.html#src.utilities.print_banner">[1]</a>
+</li>
+      <li><a href="api/src.utilities.html#src.utilities.print_info">print_info() (in module src.utilities)</a>, <a href="autoapi/src/utilities/index.html#src.utilities.print_info">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/src.utilities.html#src.utilities.print_module_title">print_module_title() (in module src.utilities)</a>, <a href="autoapi/src/utilities/index.html#src.utilities.print_module_title">[1]</a>
+</li>
+      <li><a href="api/src.utilities.html#src.utilities.print_update">print_update() (in module src.utilities)</a>, <a href="autoapi/src/utilities/index.html#src.utilities.print_update">[1]</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.read_csvfile">read_csvfile() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.read_csv.html#src.read_csv.read_csvfile">(in module src.read_csv)</a>, <a href="autoapi/src/read_csv/index.html#src.read_csv.read_csvfile">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="api/src.table_generator.html#src.table_generator.read_excel_value">read_excel_value() (in module src.table_generator)</a>, <a href="autoapi/src/table_generator/index.html#src.table_generator.read_excel_value">[1]</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/src.table_generator.html#src.table_generator.read_simulation_results">read_simulation_results() (in module src.table_generator)</a>, <a href="autoapi/src/table_generator/index.html#src.table_generator.read_simulation_results">[1]</a>
+</li>
+      <li><a href="api/src.table_generator.html#src.table_generator.read_sol_file">read_sol_file() (in module src.table_generator)</a>, <a href="autoapi/src/table_generator/index.html#src.table_generator.read_sol_file">[1]</a>
+</li>
+      <li><a href="autoapi/src/index.html#src.run_simulation">run_simulation() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.simulation.html#src.simulation.run_simulation">(in module src.simulation)</a>, <a href="autoapi/src/simulation/index.html#src.simulation.run_simulation">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    src
+
+      <ul>
+        <li><a href="api/_autosummary/src.html#module-src">module</a>, <a href="api/src.html#module-src">[1]</a>, <a href="autoapi/src/index.html#module-src">[2]</a>
+</li>
+      </ul></li>
+      <li>
+    src.cluster
+
+      <ul>
+        <li><a href="api/src.cluster.html#module-src.cluster">module</a>, <a href="autoapi/src/cluster/index.html#module-src.cluster">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.copy_rename_csv
+
+      <ul>
+        <li><a href="api/src.copy_rename_csv.html#module-src.copy_rename_csv">module</a>, <a href="autoapi/src/copy_rename_csv/index.html#module-src.copy_rename_csv">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.graph_generator
+
+      <ul>
+        <li><a href="api/src.graph_generator.html#module-src.graph_generator">module</a>, <a href="autoapi/src/graph_generator/index.html#module-src.graph_generator">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.graph_generator_3graphs
+
+      <ul>
+        <li><a href="api/src.graph_generator_3graphs.html#module-src.graph_generator_3graphs">module</a>, <a href="autoapi/src/graph_generator_3graphs/index.html#module-src.graph_generator_3graphs">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.Kotzur_intraday
+
+      <ul>
+        <li><a href="api/src.Kotzur_intraday.html#module-src.Kotzur_intraday">module</a>, <a href="autoapi/src/Kotzur_intraday/index.html#module-src.Kotzur_intraday">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.read_csv
+
+      <ul>
+        <li><a href="api/src.read_csv.html#module-src.read_csv">module</a>, <a href="autoapi/src/read_csv/index.html#module-src.read_csv">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.simulation
+
+      <ul>
+        <li><a href="api/src.simulation.html#module-src.simulation">module</a>, <a href="autoapi/src/simulation/index.html#module-src.simulation">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.table_generator
+
+      <ul>
+        <li><a href="api/src.table_generator.html#module-src.table_generator">module</a>, <a href="autoapi/src/table_generator/index.html#module-src.table_generator">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.update_CFandSDP
+
+      <ul>
+        <li><a href="api/src.update_CFandSDP.html#module-src.update_CFandSDP">module</a>, <a href="autoapi/src/update_CFandSDP/index.html#module-src.update_CFandSDP">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.update_conversionld
+
+      <ul>
+        <li><a href="api/src.update_conversionld.html#module-src.update_conversionld">module</a>, <a href="autoapi/src/update_conversionld/index.html#module-src.update_conversionld">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    src.update_conversionldc
+
+      <ul>
+        <li><a href="api/src.update_conversionldc.html#module-src.update_conversionldc">module</a>, <a href="autoapi/src/update_conversionldc/index.html#module-src.update_conversionldc">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.update_conversionlh
+
+      <ul>
+        <li><a href="api/src.update_conversionlh.html#module-src.update_conversionlh">module</a>, <a href="autoapi/src/update_conversionlh/index.html#module-src.update_conversionlh">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.update_conversionlts
+
+      <ul>
+        <li><a href="api/src.update_conversionlts.html#module-src.update_conversionlts">module</a>, <a href="autoapi/src/update_conversionlts/index.html#module-src.update_conversionlts">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.update_daysindaytype
+
+      <ul>
+        <li><a href="api/src.update_daysindaytype.html#module-src.update_daysindaytype">module</a>, <a href="autoapi/src/update_daysindaytype/index.html#module-src.update_daysindaytype">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.update_list
+
+      <ul>
+        <li><a href="api/src.update_list.html#module-src.update_list">module</a>, <a href="autoapi/src/update_list/index.html#module-src.update_list">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.update_params_yaml_otoole
+
+      <ul>
+        <li><a href="api/src.update_params_yaml_otoole.html#module-src.update_params_yaml_otoole">module</a>, <a href="autoapi/src/update_params_yaml_otoole/index.html#module-src.update_params_yaml_otoole">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.update_yearsplit
+
+      <ul>
+        <li><a href="api/src.update_yearsplit.html#module-src.update_yearsplit">module</a>, <a href="autoapi/src/update_yearsplit/index.html#module-src.update_yearsplit">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.utilities
+
+      <ul>
+        <li><a href="api/src.utilities.html#module-src.utilities">module</a>, <a href="autoapi/src/utilities/index.html#module-src.utilities">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.Welsch_intraday
+
+      <ul>
+        <li><a href="api/src.Welsch_intraday.html#module-src.Welsch_intraday">module</a>, <a href="autoapi/src/Welsch_intraday/index.html#module-src.Welsch_intraday">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    src.Welsch_intraday2
+
+      <ul>
+        <li><a href="api/src.Welsch_intraday2.html#module-src.Welsch_intraday2">module</a>, <a href="autoapi/src/Welsch_intraday2/index.html#module-src.Welsch_intraday2">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.table">table() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.table_generator.html#src.table_generator.table">(in module src.table_generator)</a>, <a href="autoapi/src/table_generator/index.html#src.table_generator.table">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="autoapi/src/index.html#src.yearsplit">yearsplit() (in module src)</a>
+
+      <ul>
+        <li><a href="api/src.update_yearsplit.html#src.update_yearsplit.yearsplit">(in module src.update_yearsplit)</a>, <a href="autoapi/src/update_yearsplit/index.html#src.update_yearsplit.yearsplit">[1]</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
 
 
                 </article>

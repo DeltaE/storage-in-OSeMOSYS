@@ -7,7 +7,9 @@ notes/workflow_guide
 notes/about_storage_algorithms
 notes/configuration_guide
 notes/QUICK_REFERENCE
-```mprehensive framework for analyzing energy storage systems using OSeMOSYS with time-series clustering and temporal disaggregation methods.
+```
+
+A comprehensive framework for analyzing energy storage systems using OSeMOSYS with time-series clustering and temporal disaggregation methods.
 
 <img src="_static/storage_models_overview.png" alt="Storage Models Overview" width="800"/>
 
@@ -52,6 +54,7 @@ notes/configuration_guide
 :maxdepth: 2
 
 notes/api_reference
+api/index
 notes/model_specifications
 notes/results_analysis
 ```

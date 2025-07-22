@@ -1,4 +1,13 @@
-# Storage-in-OSeMOSYS Documentation
+# Storage-in-OSeMOSYS Documentat```{toctree}
+:caption: 'Documentation:'
+:maxdepth: 3
+
+notes/README_ENVIRONMENT
+notes/workflow_guide
+notes/about_storage_algorithms
+notes/configuration_guide
+notes/QUICK_REFERENCE
+```
 
 A comprehensive framework for analyzing energy storage systems using OSeMOSYS with time-series clustering and temporal disaggregation methods.
 
@@ -45,6 +54,7 @@ notes/configuration_guide
 :maxdepth: 2
 
 notes/api_reference
+api/index
 notes/model_specifications
 notes/results_analysis
 ```
