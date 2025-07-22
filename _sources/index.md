@@ -30,6 +30,31 @@ Storage-in-OSeMOSYS implements four different temporal representation methods fo
 - 🐍 **Python 3.13** support with modern pathlib usage
 - 📋 **Conda environment** management with comprehensive Makefile
 
+## Research Context
+
+This framework addresses the critical challenge of modeling energy storage systems in large-scale energy planning. Storage systems fundamentally differ from conventional generation and demand technologies because they **move energy across time**, creating complex temporal dependencies that are computationally expensive to model accurately.
+
+### The Storage Modeling Challenge
+
+Energy storage modeling is complex because:
+
+1. **🔁 Time-shifting behavior**: Storage moves energy across time periods rather than just producing or consuming
+2. **⏳ State continuity**: The state of charge depends on all previous time periods  
+3. **🔗 Temporal coupling**: Decisions in one hour affect options in future hours
+4. **⚡ Multi-scale dynamics**: From minute-level frequency regulation to seasonal energy shifting
+
+### Our Solution
+
+Storage-in-OSeMOSYS provides a systematic comparison of four established temporal representation methods, allowing researchers to:
+
+- **Evaluate trade-offs** between computational efficiency and model accuracy
+- **Compare results** across different temporal abstraction approaches  
+- **Select appropriate methods** based on specific research questions and constraints
+- **Understand limitations** of each approach for storage system analysis
+
+```{include} notes/about_storage_algorithms.md
+```
+
 ## Documentation Structure
 
 ```{toctree}
@@ -38,7 +63,6 @@ Storage-in-OSeMOSYS implements four different temporal representation methods fo
 
 notes/README_ENVIRONMENT
 notes/workflow_guide
-notes/about_storage_algorithms
 notes/configuration_guide
 ```
 
@@ -93,31 +117,6 @@ scenario_name: "k4h1WND"
 days_in_year: 365
 n_clusters: 4
 hour_grouping: 1
-```
-
-## Research Context
-
-This framework addresses the critical challenge of modeling energy storage systems in large-scale energy planning. Storage systems fundamentally differ from conventional generation and demand technologies because they **move energy across time**, creating complex temporal dependencies that are computationally expensive to model accurately.
-
-### The Storage Modeling Challenge
-
-Energy storage modeling is complex because:
-
-1. **🔁 Time-shifting behavior**: Storage moves energy across time periods rather than just producing or consuming
-2. **⏳ State continuity**: The state of charge depends on all previous time periods  
-3. **🔗 Temporal coupling**: Decisions in one hour affect options in future hours
-4. **⚡ Multi-scale dynamics**: From minute-level frequency regulation to seasonal energy shifting
-
-### Our Solution
-
-Storage-in-OSeMOSYS provides a systematic comparison of four established temporal representation methods, allowing researchers to:
-
-- **Evaluate trade-offs** between computational efficiency and model accuracy
-- **Compare results** across different temporal abstraction approaches  
-- **Select appropriate methods** based on specific research questions and constraints
-- **Understand limitations** of each approach for storage system analysis
-
-```{include} notes/about_storage_algorithms.md
 ```
 
 ## Project Team
