@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Storage-in-OSeMOSYS Documentat &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+    <title>Storage-in-OSeMOSYS Documentation &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
   
   
   
@@ -151,14 +151,7 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notes/about_storage_algorithms.html">About Storage Modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notes/configuration_guide.html">Configuration Guide</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a></li>
@@ -355,7 +348,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Storage-in-OSeMOSYS Documentat</h1>
+    <h1>Storage-in-OSeMOSYS Documentation</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -365,6 +358,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Storage-in-OSeMOSYS Documentation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-overview">Project Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-structure">Documentation Structure</a><ul class="visible nav section-nav flex-column">
@@ -381,9 +375,26 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#our-solution">Our Solution</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-storage-modelling">About Storage Modelling</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#niet-direct-link-continuous-diary">Niet (Direct Link) — “Continuous Diary”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-summary-on-storage-algorithms-in-modelling">Quick Summary on Storage Algorithms in Modelling :</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparative-table-of-storage-modeling-methods">📊 Comparative Table of Storage Modeling Methods</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-team">Project Team</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -394,165 +405,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="storage-in-osemosys-documentat">
-<h1>Storage-in-OSeMOSYS Documentat<a class="headerlink" href="#storage-in-osemosys-documentat" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#prerequisites">Prerequisites</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#system-requirements">System Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#required-software">Required Software</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#quick-setup">Quick Setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#clone-repository">1. Clone Repository</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#automated-environment-setup">2. Automated Environment Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#test-installation">3. Test Installation</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#manual-environment-setup">Manual Environment Setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#create-conda-environment">1. Create Conda Environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#install-core-dependencies">2. Install Core Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#install-additional-dependencies">3. Install Additional Dependencies</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-file-management">Environment File Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#using-environment-yml">Using environment.yml</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-export">Environment Export</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#makefile-commands">Makefile Commands</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-management">Environment Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-workflow">Development Workflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#documentation">Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#package-details">Package Details</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#core-scientific-stack">Core Scientific Stack</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#energy-system-modeling">Energy System Modeling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-and-documentation">Development and Documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#utilities">Utilities</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-verification">Environment Verification</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#comprehensive-test-script">Comprehensive Test Script</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#troubleshooting">Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#performance-optimization">Performance Optimization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-tuning">Environment Tuning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#memory-management">Memory Management</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-environment">Development Environment</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#additional-tools-for-development">Additional Tools for Development</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#ide-configuration">IDE Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-maintenance">Environment Maintenance</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#regular-updates">Regular Updates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-backup">Environment Backup</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#workflow-architecture">Workflow Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#detailed-workflow-steps">Detailed Workflow Steps</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#configuration-and-initialization">1. Configuration and Initialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#data-preprocessing-and-clustering">2. Data Preprocessing and Clustering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#model-specific-processing">3. Model-Specific Processing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#osemosys-model-conversion-and-simulation">4. OSeMOSYS Model Conversion and Simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#results-collection-and-processing">5. Results Collection and Processing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#post-processing-and-visualization">6. Post-Processing and Visualization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#execution-commands">Execution Commands</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#basic-execution">Basic Execution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#environment-management">Environment Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#configuration-options">Configuration Options</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#output-structure">Output Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#troubleshooting">Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#common-issues">Common Issues</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/about_storage_algorithms.html">About Storage Modelling</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/about_storage_algorithms.html#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#niet-direct-link-continuous-diary">Niet (Direct Link) — “Continuous Diary”</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/about_storage_algorithms.html#quick-summary-on-storage-algorithms-in-modelling">Quick Summary on Storage Algorithms in Modelling :</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/about_storage_algorithms.html#comparative-table-of-storage-modeling-methods">📊 Comparative Table of Storage Modeling Methods</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/configuration_guide.html">Configuration Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-file-structure">Configuration File Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#key-configuration-parameters">Key Configuration Parameters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#analysis-parameters">Analysis Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#storage-parameters">Storage Parameters</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#model-specific-configuration">Model-Specific Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#model-cluster-configuration">Model_Cluster Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#model-kotzur-configuration">Model_Kotzur Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#model-welsch-configuration">Model_Welsch Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#data-configuration">Data Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#input-data-paths">Input Data Paths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#results-configuration">Results Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#common-configuration-scenarios">Common Configuration Scenarios</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#high-resolution-analysis">High-Resolution Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#fast-prototyping">Fast Prototyping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#seasonal-analysis">Seasonal Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#computational-efficiency">Computational Efficiency</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-validation">Configuration Validation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#parameter-relationships">Parameter Relationships</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#validation-checks">Validation Checks</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#advanced-configuration">Advanced Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#custom-data-sources">Custom Data Sources</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#multiple-scenarios">Multiple Scenarios</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#solver-configuration">Solver Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-best-practices">Configuration Best Practices</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#naming-conventions">1. Naming Conventions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#parameter-selection-guidelines">2. Parameter Selection Guidelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#storage-parameter-guidelines">3. Storage Parameter Guidelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#computational-considerations">4. Computational Considerations</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-file-management">Configuration File Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#version-control">Version Control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#configuration-templates">Configuration Templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#environment-specific-configs">Environment-Specific Configs</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+  <section id="storage-in-osemosys-documentation">
+<h1>Storage-in-OSeMOSYS Documentation<a class="headerlink" href="#storage-in-osemosys-documentation" title="Link to this heading">#</a></h1>
 <p>A comprehensive framework for analyzing energy storage systems using OSeMOSYS with time-series clustering and temporal disaggregation methods.</p>
 <!-- <img src="_static/storage_models_overview.png" alt="Storage Models Overview" width="800"/> -->
 <div class="admonition warning">
@@ -884,6 +738,202 @@ ls<span class="w"> </span>Results/
 </ul>
 </section>
 </section>
+</section>
+<section id="about-storage-modelling">
+<h1>About Storage Modelling<a class="headerlink" href="#about-storage-modelling" title="Link to this heading">#</a></h1>
+<p>Storage modeling is complex because storage systems behave differently than generation or demand. <strong>Storages move energy across time, not just produce or consume it</strong>. This means:</p>
+<p><strong>🔁 1. Storage shifts energy in time</strong></p>
+<p>Unlike solar panels (generate) or homes (consume), storage stores energy when it’s abundant and releases it when needed. That means:</p>
+<ul>
+<li><p>You can't look at one hour in isolation — what happened before matters.</p></li>
+<li><p>The state of charge (SOC) today depends on all previous hours.</p>
+<blockquote>
+<div><p>Analogy: It's like a savings account — what you can spend today depends on how much you saved earlier.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>⏳ 2. Time resolution matters</strong></p>
+<p>Should you model every single hour? Every day? A few representative days? Each choice impacts:</p>
+<ul>
+<li><p>Accuracy (high resolution = realistic, but slow to compute)</p></li>
+<li><p>Computational effort (simplified models lose detail)</p>
+<blockquote>
+<div><p>If you model storage with only a few sample days, you risk missing important patterns, like a long wind lull or weekend charging habits.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>🔗 3. Storage needs continuity</strong></p>
+<p>Many simplification techniques (e.g. clustering days) break the continuity of storage:</p>
+<ul class="simple">
+<li><p>The model might forget how full the battery was yesterday.</p></li>
+<li><p>Artificial resets can distort when charging/discharging actually happens.</p></li>
+</ul>
+<p>This makes it tricky to model seasonal storage or multi-day balancing.</p>
+<p><strong>⚡ 4. Storage interacts with everything</strong>
+Storage isn’t just an isolated battery:</p>
+<ul class="simple">
+<li><p>It interacts with renewables (absorbing variability)</p></li>
+<li><p>It supports grid reliability (fast response)</p></li>
+<li><p>It responds to prices, constraints, and emissions goals</p></li>
+</ul>
+<p>So modeling it well requires integrating with the rest of the energy system.</p>
+<section id="state-of-the-art-energy-storage-algorithms">
+<h2>state of the art <strong>energy storage algorithms</strong>:<a class="headerlink" href="#state-of-the-art-energy-storage-algorithms" title="Link to this heading">#</a></h2>
+<section id="niet-direct-link-continuous-diary">
+<h3>Niet (Direct Link) — “Continuous Diary”<a class="headerlink" href="#niet-direct-link-continuous-diary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: Imagine someone writes in their diary every hour without skipping, and each day picks up exactly where the last one left off. The emotional ups and downs (mood swings) are smooth and continuous over the week.</p></li>
+<li><p><strong>Key idea</strong>: Full hourly resolution; perfect continuity over time.</p></li>
+<li><p><strong>Use case</strong>: Most accurate but data-heavy.</p></li>
+</ul>
+</section>
+<section id="welsch-fixed-pattern-photocopied-day">
+<h3>Welsch (Fixed-Pattern) — “Photocopied Day”<a class="headerlink" href="#welsch-fixed-pattern-photocopied-day" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: This person writes down one typical day of feelings and then photocopies that same page for each day of the week. So Monday, Tuesday, etc., look exactly the same.</p></li>
+<li><p><strong>Key idea</strong>: Same daily pattern repeated; no inter-day variation.</p></li>
+<li><p><strong>Use case</strong>: Fast and simple but ignores variation between days.</p></li>
+</ul>
+</section>
+<section id="kotzur-unverified-cluster-alternating-diaries">
+<h3>Kotzur (Unverified Cluster) — “Alternating Diaries”<a class="headerlink" href="#kotzur-unverified-cluster-alternating-diaries" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: This person has two types of days — maybe “busy” and “lazy” days — and alternates between those two. They use pre-written diary templates for each. But they don’t bother connecting one day’s feelings to the next, so it can feel jumpy or inconsistent.</p></li>
+<li><p><strong>Key idea</strong>: Captures daily diversity using clusters, but no continuity.</p></li>
+<li><p><strong>Use case</strong>: Captures more variety than Welsch but lacks smooth transitions.</p></li>
+</ul>
+</section>
+<section id="novo-hourly-verified-linked-journaling">
+<h3>Novo (Hourly-Verified) — “Linked Journaling”<a class="headerlink" href="#novo-hourly-verified-linked-journaling" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: This person still uses simplified mood templates for different kinds of days, but they always make sure each day starts where the previous one left off. So it feels realistic and connected, even if it's not a full diary.</p></li>
+<li><p><strong>Key idea</strong>: Combines typical days with continuity between hours.</p></li>
+<li><p><strong>Use case</strong>: A practical middle ground between realism and simplicity.</p></li>
+</ul>
+</section>
+</section>
+<section id="quick-summary-on-storage-algorithms-in-modelling">
+<h2>Quick Summary on Storage Algorithms in Modelling :<a class="headerlink" href="#quick-summary-on-storage-algorithms-in-modelling" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Algorithm</p></th>
+<th class="head"><p>Analogy</p></th>
+<th class="head text-center"><p>Continuity</p></th>
+<th class="head text-center"><p>Variety</p></th>
+<th class="head text-center"><p>Simplicity</p></th>
+<th class="head"><p>Use Case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Niet</p></td>
+<td><p>Full continuous diary</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>❌</p></td>
+<td><p>Most accurate but data-heavy</p></td>
+</tr>
+<tr class="row-odd"><td><p>Welsch</p></td>
+<td><p>Same page copied every day</p></td>
+<td class="text-center"><p>❌</p></td>
+<td class="text-center"><p>❌</p></td>
+<td class="text-center"><p>✅✅</p></td>
+<td><p>Fast and simple but ignores variation between days</p></td>
+</tr>
+<tr class="row-even"><td><p>Kotzur</p></td>
+<td><p>Alternating mood templates</p></td>
+<td class="text-center"><p>❌</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>✅</p></td>
+<td><p>Captures more variety than Welsch but lacks transitions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Novo</p></td>
+<td><p>Linked mood templates</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>✅</p></td>
+<td><p>Practical middle ground between realism and simplicity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A detailed comparison:</p>
+<section id="comparative-table-of-storage-modeling-methods">
+<h3>📊 Comparative Table of Storage Modeling Methods<a class="headerlink" href="#comparative-table-of-storage-modeling-methods" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p><strong>Niet</strong></p></th>
+<th class="head"><p><strong>Welsch</strong></p></th>
+<th class="head"><p><strong>Kotzur</strong></p></th>
+<th class="head"><p><strong>Novo</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Period Linking</p></td>
+<td><p>Direct Link</p></td>
+<td><p>Enhanced Periods (Fixed Pattern)</p></td>
+<td><p>Enhanced Periods (Day Cluster Mapping)</p></td>
+<td><p>Enhanced Periods (Hourly-Verified Clustering)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Time Representation</strong></p></td>
+<td><p>Representative periods (e.g. days, weeks)</p></td>
+<td><p>Representative <strong>days</strong> (fixed mapping)</p></td>
+<td><p>Representative <strong>days</strong> (arbitrary sequence allowed)</p></td>
+<td><p>Full <strong>hourly resolution</strong> mapped to rep days</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Chronological Continuity</strong></p></td>
+<td><p>✅ Maintained between periods</p></td>
+<td><p>❌ Not maintained (days are independent)</p></td>
+<td><p>✅ Maintained via day-sequence mapping</p></td>
+<td><p>✅ Maintained at hourly level</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SoC Linkage Between Periods</strong></p></td>
+<td><p>✅ Explicit (stepwise linkage)</p></td>
+<td><p>❌ No linkage; each rep day repeats independently</p></td>
+<td><p>✅ Daily SoC updated using mapped intra-day values</p></td>
+<td><p>✅ Fully verified SoC with hourly mapping</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Intra-Day Resolution</strong></p></td>
+<td><p>Average or period-level</p></td>
+<td><p>Full 24-hour profile (rep day)</p></td>
+<td><p>Full 24-hour profile (rep day)</p></td>
+<td><p>Full 24-hour profile (mapped to full year)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Reset or Loop Behavior</strong></p></td>
+<td><p>None; sequential linkage</p></td>
+<td><p>Yes; rep day is <strong>repeated</strong> N times</p></td>
+<td><p>Resets daily but allows <strong>arbitrary day ordering</strong></p></td>
+<td><p>No reset; each hour is <strong>mapped and verified</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Flexibility in Time Sequencing</strong></p></td>
+<td><p>Low (predefined order of rep periods)</p></td>
+<td><p>Very low (repeats identical rep day pattern)</p></td>
+<td><p>High (any chronological day can map to any rep day)</p></td>
+<td><p>Very high (full hourly reconstruction)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Computational Cost</strong></p></td>
+<td><p>Low (simple stepwise link across periods)</p></td>
+<td><p>Very low (repeats rep day)</p></td>
+<td><p>Medium (needs intra-day dynamics + daily tracking)</p></td>
+<td><p>High (full hourly SoC tracking and bounds checking)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Storage Bounds Verification</strong></p></td>
+<td><p>Implicit per period</p></td>
+<td><p>Start/End of rep day only</p></td>
+<td><p>Only for intra-day cycles; inter-day bounds ignored</p></td>
+<td><p>✅ Enforced at each hour</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Use Case</strong></p></td>
+<td><p>Fast approximation with minimal memory effects</p></td>
+<td><p>Simple seasonal or weekday/weekend modeling</p></td>
+<td><p>Captures non-repetitive variation (e.g. windless days)</p></td>
+<td><p>High-fidelity operational modeling (e.g., reliability)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
 <section id="project-team">
 <h2>Project Team<a class="headerlink" href="#project-team" title="Link to this heading">#</a></h2>
 <p><strong>Research Lead</strong>: Md Eliasinul Islam<br />
@@ -947,6 +997,7 @@ For research collaboration inquiries, contact the Delta E+ Research Lab.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Storage-in-OSeMOSYS Documentation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-overview">Project Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-structure">Documentation Structure</a><ul class="visible nav section-nav flex-column">
@@ -963,9 +1014,26 @@ For research collaboration inquiries, contact the Delta E+ Research Lab.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#our-solution">Our Solution</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-storage-modelling">About Storage Modelling</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#niet-direct-link-continuous-diary">Niet (Direct Link) — “Continuous Diary”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-summary-on-storage-algorithms-in-modelling">Quick Summary on Storage Algorithms in Modelling :</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparative-table-of-storage-modeling-methods">📊 Comparative Table of Storage Modeling Methods</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-team">Project Team</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

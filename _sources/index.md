@@ -1,15 +1,6 @@
-# Storage-in-OSeMOSYS Documentat
+# Storage-in-OSeMOSYS Documentation
 
-```{toctree}
-:caption: 'Documentation:'
-:maxdepth: 3
 
-notes/README_ENVIRONMENT
-notes/workflow_guide
-notes/about_storage_algorithms
-notes/configuration_guide
-notes/QUICK_REFERENCE
-```
 
 A comprehensive framework for analyzing energy storage systems using OSeMOSYS with time-series clustering and temporal disaggregation methods.
 
@@ -125,6 +116,9 @@ Storage-in-OSeMOSYS provides a systematic comparison of four established tempora
 - **Compare results** across different temporal abstraction approaches  
 - **Select appropriate methods** based on specific research questions and constraints
 - **Understand limitations** of each approach for storage system analysis
+
+```{include} notes/about_storage_algorithms.md
+```
 
 ## Project Team
 
