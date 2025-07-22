@@ -1,0 +1,1057 @@
+
+<!DOCTYPE html>
+
+
+<html lang="Python" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Environment Setup Guide &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=e9b82cb4"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/README_ENVIRONMENT';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Workflow Guide" href="workflow_guide.html" />
+    <link rel="prev" title="Storage-in-OSeMOSYS Documentation" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="Python"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Storage in OSEMoSYS 2025.07 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/DeltaE/RESource" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/README_ENVIRONMENT.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Environment Setup Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-requirements">System Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-software">Required Software</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-setup">Quick Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-repository">1. Clone Repository</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-environment-setup">2. Automated Environment Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-installation">3. Test Installation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-environment-setup">Manual Environment Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-conda-environment">1. Create Conda Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-core-dependencies">2. Install Core Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-additional-dependencies">3. Install Additional Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-file-management">Environment File Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-environment-yml">Using environment.yml</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-export">Environment Export</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#makefile-commands">Makefile Commands</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development-workflow">Development Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-details">Package Details</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-scientific-stack">Core Scientific Stack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-system-modeling">Energy System Modeling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development-and-documentation">Development and Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-verification">Environment Verification</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comprehensive-test-script">Comprehensive Test Script</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues-and-solutions">Common Issues and Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environment-creation-fails">1. Conda Environment Creation Fails</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#glpk-installation-issues">2. GLPK Installation Issues</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#otoole-installation-problems">3. OtoOle Installation Problems</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#import-errors">4. Import Errors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-issues-during-installation">5. Memory Issues During Installation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#path-issues-on-windows">6. Path Issues on Windows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization">Performance Optimization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-tuning">Environment Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-management">Memory Management</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-environment">Development Environment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-tools-for-development">Additional Tools for Development</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ide-configuration">IDE Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code">VS Code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycharm">PyCharm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-maintenance">Environment Maintenance</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-updates">Regular Updates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-backup">Environment Backup</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="environment-setup-guide">
+<h1>Environment Setup Guide<a class="headerlink" href="#environment-setup-guide" title="Link to this heading">#</a></h1>
+<p>This guide provides detailed instructions for setting up the Storage-in-OSeMOSYS development and execution environment.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<section id="system-requirements">
+<h3>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Operating System</strong>: Linux, macOS, or Windows with WSL2</p></li>
+<li><p><strong>Memory</strong>: Minimum 8GB RAM (16GB recommended for large datasets)</p></li>
+<li><p><strong>Storage</strong>: 5GB free space for dependencies and results</p></li>
+<li><p><strong>Python</strong>: 3.11+ (3.13 recommended)</p></li>
+</ul>
+</section>
+<section id="required-software">
+<h3>Required Software<a class="headerlink" href="#required-software" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Conda/Miniconda</strong>: For environment management</p></li>
+<li><p><strong>Git</strong>: For version control and repository cloning</p></li>
+<li><p><strong>GLPK</strong>: Linear programming solver (installed via conda)</p></li>
+</ul>
+</section>
+</section>
+<section id="quick-setup">
+<h2>Quick Setup<a class="headerlink" href="#quick-setup" title="Link to this heading">#</a></h2>
+<section id="clone-repository">
+<h3>1. Clone Repository<a class="headerlink" href="#clone-repository" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/DeltaE/storage-in-OSeMOSYS.git
+<span class="nb">cd</span><span class="w"> </span>storage-in-OSeMOSYS
+</pre></div>
+</div>
+</section>
+<section id="automated-environment-setup">
+<h3>2. Automated Environment Setup<a class="headerlink" href="#automated-environment-setup" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create environment and install all dependencies</span>
+make<span class="w"> </span>setup
+
+<span class="c1"># Activate environment</span>
+conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
+
+<span class="c1"># Verify installation</span>
+make<span class="w"> </span>test-env
+</pre></div>
+</div>
+</section>
+<section id="test-installation">
+<h3>3. Test Installation<a class="headerlink" href="#test-installation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run basic functionality test</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import src.utilities as utils; print(&#39;✓ Imports working&#39;)&quot;</span>
+
+<span class="c1"># Test GLPK solver</span>
+glpsol<span class="w"> </span>--version
+
+<span class="c1"># Check key packages</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import otoole, pandas, numpy, matplotlib; print(&#39;✓ Core packages loaded&#39;)&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="manual-environment-setup">
+<h2>Manual Environment Setup<a class="headerlink" href="#manual-environment-setup" title="Link to this heading">#</a></h2>
+<p>If you prefer manual setup or encounter issues with the automated approach:</p>
+<section id="create-conda-environment">
+<h3>1. Create Conda Environment<a class="headerlink" href="#create-conda-environment" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create environment with Python 3.13</span>
+conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>storage_osemosys<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.13<span class="w"> </span>-y
+
+<span class="c1"># Activate environment</span>
+conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
+</pre></div>
+</div>
+</section>
+<section id="install-core-dependencies">
+<h3>2. Install Core Dependencies<a class="headerlink" href="#install-core-dependencies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scientific computing stack</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">numpy</span><span class="o">=</span><span class="m">2</span>.3.1<span class="w"> </span><span class="nv">pandas</span><span class="o">=</span><span class="m">2</span>.2.3<span class="w"> </span><span class="nv">matplotlib</span><span class="o">=</span><span class="m">3</span>.10.0<span class="w"> </span>-y
+
+<span class="c1"># Machine learning for clustering</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>scikit-learn<span class="o">=</span><span class="m">1</span>.7.1<span class="w"> </span>-y
+
+<span class="c1"># File I/O and configuration</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">pyyaml</span><span class="o">=</span><span class="m">6</span>.0.2<span class="w"> </span><span class="nv">openpyxl</span><span class="o">=</span><span class="m">3</span>.1.5<span class="w"> </span>-y
+
+<span class="c1"># OSeMOSYS integration</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">glpk</span><span class="o">=</span><span class="m">5</span>.0<span class="w"> </span>-y
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">otoole</span><span class="o">==</span><span class="m">1</span>.1.5
+
+<span class="c1"># Utilities</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>colorama<span class="w"> </span>-y
+</pre></div>
+</div>
+</section>
+<section id="install-additional-dependencies">
+<h3>3. Install Additional Dependencies<a class="headerlink" href="#install-additional-dependencies" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Development tools</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>black<span class="w"> </span>flake8<span class="w"> </span>pytest<span class="w"> </span>-y
+
+<span class="c1"># Documentation tools</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>sphinx<span class="w"> </span>sphinx-book-theme<span class="w"> </span>myst-parser<span class="w"> </span>-y
+
+<span class="c1"># Jupyter for notebooks</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>jupyter<span class="w"> </span>notebook<span class="w"> </span>ipykernel<span class="w"> </span>-y
+</pre></div>
+</div>
+</section>
+</section>
+<section id="environment-file-management">
+<h2>Environment File Management<a class="headerlink" href="#environment-file-management" title="Link to this heading">#</a></h2>
+<section id="using-environment-yml">
+<h3>Using environment.yml<a class="headerlink" href="#using-environment-yml" title="Link to this heading">#</a></h3>
+<p>The project includes a comprehensive <code class="docutils literal notranslate"><span class="pre">env/environment.yml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create environment from file</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>env/environment.yml
+
+<span class="c1"># Update existing environment</span>
+conda<span class="w"> </span>env<span class="w"> </span>update<span class="w"> </span>-f<span class="w"> </span>env/environment.yml<span class="w"> </span>--prune
+</pre></div>
+</div>
+</section>
+<section id="environment-export">
+<h3>Environment Export<a class="headerlink" href="#environment-export" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Export current environment</span>
+conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&gt;<span class="w"> </span>env/environment_backup.yml
+
+<span class="c1"># Export only explicitly installed packages</span>
+conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--from-history<span class="w"> </span>&gt;<span class="w"> </span>env/environment_minimal.yml
+</pre></div>
+</div>
+</section>
+</section>
+<section id="makefile-commands">
+<h2>Makefile Commands<a class="headerlink" href="#makefile-commands" title="Link to this heading">#</a></h2>
+<p>The project includes a comprehensive Makefile for environment management:</p>
+<section id="environment-management">
+<h3>Environment Management<a class="headerlink" href="#environment-management" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>setup<span class="w">          </span><span class="c1"># Complete environment setup</span>
+make<span class="w"> </span>test-env<span class="w">       </span><span class="c1"># Test environment and dependencies</span>
+make<span class="w"> </span>clean<span class="w">          </span><span class="c1"># Remove environment</span>
+make<span class="w"> </span>update-env<span class="w">     </span><span class="c1"># Update all packages</span>
+make<span class="w"> </span>freeze<span class="w">         </span><span class="c1"># Export current environment</span>
+</pre></div>
+</div>
+</section>
+<section id="development-workflow">
+<h3>Development Workflow<a class="headerlink" href="#development-workflow" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>dev-setup<span class="w">      </span><span class="c1"># Setup with development tools</span>
+make<span class="w"> </span>format<span class="w">         </span><span class="c1"># Format code with black</span>
+make<span class="w"> </span>lint<span class="w">          </span><span class="c1"># Check code style with flake8</span>
+make<span class="w"> </span><span class="nb">test</span><span class="w">          </span><span class="c1"># Run test suite</span>
+</pre></div>
+</div>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs<span class="w">          </span><span class="c1"># Build documentation</span>
+make<span class="w"> </span>docs-serve<span class="w">    </span><span class="c1"># Serve documentation locally</span>
+make<span class="w"> </span>docs-clean<span class="w">    </span><span class="c1"># Clean documentation build</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="package-details">
+<h2>Package Details<a class="headerlink" href="#package-details" title="Link to this heading">#</a></h2>
+<section id="core-scientific-stack">
+<h3>Core Scientific Stack<a class="headerlink" href="#core-scientific-stack" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data processing and analysis</span>
+<span class="nt">numpy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.3.1</span><span class="w">         </span><span class="c1"># Numerical computing</span>
+<span class="nt">pandas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.2.3</span><span class="w">        </span><span class="c1"># Data manipulation</span>
+<span class="nt">matplotlib</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.10.0</span><span class="w">   </span><span class="c1"># Plotting and visualization</span>
+<span class="nt">scikit-learn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.7.1</span><span class="w">  </span><span class="c1"># Machine learning (clustering)</span>
+
+<span class="c1"># File I/O and configuration  </span>
+<span class="nt">pyyaml</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.0.2</span><span class="w">        </span><span class="c1"># YAML configuration files</span>
+<span class="nt">openpyxl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.1.5</span><span class="w">      </span><span class="c1"># Excel file handling</span>
+</pre></div>
+</div>
+</section>
+<section id="energy-system-modeling">
+<h3>Energy System Modeling<a class="headerlink" href="#energy-system-modeling" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># OSeMOSYS integration</span>
+<span class="nt">otoole</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.1.5</span><span class="w">        </span><span class="c1"># OSeMOSYS data processing</span>
+<span class="nt">glpk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span><span class="w">           </span><span class="c1"># Linear programming solver</span>
+
+<span class="c1"># Additional solvers (optional)</span>
+<span class="c1"># cbc: 2.10.5        # Alternative LP solver</span>
+<span class="c1"># cplex: 22.1.1      # Commercial solver (license required)</span>
+</pre></div>
+</div>
+</section>
+<section id="development-and-documentation">
+<h3>Development and Documentation<a class="headerlink" href="#development-and-documentation" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code quality</span>
+<span class="nt">black</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">24.3.0</span><span class="w">        </span><span class="c1"># Code formatting</span>
+<span class="nt">flake8</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.0.0</span><span class="w">       </span><span class="c1"># Style checking</span>
+<span class="nt">pytest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.1.1</span><span class="w">       </span><span class="c1"># Testing framework</span>
+
+<span class="c1"># Documentation</span>
+<span class="nt">sphinx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.2.6</span><span class="w">       </span><span class="c1"># Documentation generator</span>
+<span class="nt">sphinx-book-theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.1.2</span><span class="w">  </span><span class="c1"># Modern documentation theme</span>
+<span class="nt">myst-parser</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0.0</span><span class="w">  </span><span class="c1"># Markdown support in Sphinx</span>
+
+<span class="c1"># Jupyter ecosystem</span>
+<span class="nt">jupyter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0.0</span><span class="w">      </span><span class="c1"># Jupyter notebook</span>
+<span class="nt">ipykernel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.29.3</span><span class="w">   </span><span class="c1"># Jupyter kernel</span>
+<span class="nt">nbsphinx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9.3</span><span class="w">     </span><span class="c1"># Notebook integration in docs</span>
+</pre></div>
+</div>
+</section>
+<section id="utilities">
+<h3>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal and system</span>
+<span class="nt">colorama</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.4.6</span><span class="w">     </span><span class="c1"># Colored terminal output</span>
+<span class="nt">pathlib</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">built-in</span><span class="w">   </span><span class="c1"># Modern path handling (Python 3.4+)</span>
+<span class="nt">shutil</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">built-in</span><span class="w">    </span><span class="c1"># File operations</span>
+<span class="nt">typing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">built-in</span><span class="w">    </span><span class="c1"># Type hints (Python 3.5+)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="environment-verification">
+<h2>Environment Verification<a class="headerlink" href="#environment-verification" title="Link to this heading">#</a></h2>
+<section id="comprehensive-test-script">
+<h3>Comprehensive Test Script<a class="headerlink" href="#comprehensive-test-script" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the complete verification</span>
+make<span class="w"> </span>test-env
+</pre></div>
+</div>
+<p>Or manually verify components:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># test_environment.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_python_version</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test Python version compatibility.&quot;&quot;&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span>
+    <span class="k">assert</span> <span class="n">version</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Python 3 required, got </span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">major</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="n">version</span><span class="o">.</span><span class="n">minor</span> <span class="o">&gt;=</span> <span class="mi">11</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Python 3.11+ required, got </span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">major</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">minor</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Python </span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">major</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">minor</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">micro</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_core_packages</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test core package imports.&quot;&quot;&quot;</span>
+    <span class="n">packages</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;numpy&#39;</span><span class="p">,</span> <span class="s1">&#39;pandas&#39;</span><span class="p">,</span> <span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;sklearn&#39;</span><span class="p">,</span> 
+        <span class="s1">&#39;yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;openpyxl&#39;</span><span class="p">,</span> <span class="s1">&#39;otoole&#39;</span><span class="p">,</span> <span class="s1">&#39;colorama&#39;</span>
+    <span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s1">&#39;__version__&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_solver</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test GLPK solver availability.&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;glpsol&#39;</span><span class="p">,</span> <span class="s1">&#39;--version&#39;</span><span class="p">],</span> 
+                              <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ GLPK: </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;GLPK not responding&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;GLPK not found in PATH&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_project_imports</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test project-specific imports.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">src.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utils</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">src</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Project modules importable&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Test utility functions</span>
+        <span class="n">config_path</span> <span class="o">=</span> <span class="s1">&#39;config/config.yaml&#39;</span>
+        <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Configuration loading works&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠ Configuration file not found (optional for testing)&quot;</span><span class="p">)</span>
+            
+    <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Project imports failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">test_python_version</span><span class="p">()</span>
+    <span class="n">test_core_packages</span><span class="p">()</span>
+    <span class="n">test_solver</span><span class="p">()</span>
+    <span class="n">test_project_imports</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎉 Environment verification successful!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="common-issues-and-solutions">
+<h3>Common Issues and Solutions<a class="headerlink" href="#common-issues-and-solutions" title="Link to this heading">#</a></h3>
+<section id="conda-environment-creation-fails">
+<h4>1. Conda Environment Creation Fails<a class="headerlink" href="#conda-environment-creation-fails" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update conda</span>
+conda<span class="w"> </span>update<span class="w"> </span>conda
+
+<span class="c1"># Clear package cache</span>
+conda<span class="w"> </span>clean<span class="w"> </span>--all
+
+<span class="c1"># Create environment with explicit channel</span>
+conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>storage_osemosys<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.13
+</pre></div>
+</div>
+</section>
+<section id="glpk-installation-issues">
+<h4>2. GLPK Installation Issues<a class="headerlink" href="#glpk-installation-issues" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>glpk-utils
+
+<span class="c1"># For macOS with Homebrew</span>
+brew<span class="w"> </span>install<span class="w"> </span>glpk
+
+<span class="c1"># Verify installation</span>
+which<span class="w"> </span>glpsol
+glpsol<span class="w"> </span>--version
+</pre></div>
+</div>
+</section>
+<section id="otoole-installation-problems">
+<h4>3. OtoOle Installation Problems<a class="headerlink" href="#otoole-installation-problems" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install from PyPI with specific version</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">otoole</span><span class="o">==</span><span class="m">1</span>.1.5
+
+<span class="c1"># If compilation issues, try conda-forge</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>otoole
+
+<span class="c1"># Alternative: install from source</span>
+pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/OSeMOSYS/otoole.git
+</pre></div>
+</div>
+</section>
+<section id="import-errors">
+<h4>4. Import Errors<a class="headerlink" href="#import-errors" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if environment is activated</span>
+conda<span class="w"> </span>info<span class="w"> </span>--envs
+conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
+
+<span class="c1"># Verify Python path</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys; print(sys.path)&quot;</span>
+
+<span class="c1"># Check installed packages</span>
+conda<span class="w"> </span>list
+pip<span class="w"> </span>list
+</pre></div>
+</div>
+</section>
+<section id="memory-issues-during-installation">
+<h4>5. Memory Issues During Installation<a class="headerlink" href="#memory-issues-during-installation" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install packages one by one</span>
+conda<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>-y
+conda<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>-y
+<span class="c1"># ... continue individually</span>
+
+<span class="c1"># Or use pip with no-cache</span>
+pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>otoole
+</pre></div>
+</div>
+</section>
+<section id="path-issues-on-windows">
+<h4>6. Path Issues on Windows<a class="headerlink" href="#path-issues-on-windows" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use forward slashes or raw strings</span>
+<span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Path<span class="o">(</span><span class="s1">&#39;config/config.yaml&#39;</span><span class="o">)</span><span class="w">  </span><span class="c1"># Good</span>
+<span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>r<span class="s1">&#39;config\config.yaml&#39;</span><span class="w">       </span><span class="c1"># Also works</span>
+
+<span class="c1"># Avoid mixing path separators</span>
+<span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;config\\config.yaml&#39;</span><span class="w">       </span><span class="c1"># Avoid if possible</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="performance-optimization">
+<h2>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">#</a></h2>
+<section id="environment-tuning">
+<h3>Environment Tuning<a class="headerlink" href="#environment-tuning" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set environment variables for better performance</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OPENBLAS_NUM_THREADS</span><span class="o">=</span><span class="m">4</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">MKL_NUM_THREADS</span><span class="o">=</span><span class="m">4</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">NUMEXPR_MAX_THREADS</span><span class="o">=</span><span class="m">4</span>
+
+<span class="c1"># For development</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PYTHONPATH</span><span class="si">}</span><span class="s2">:</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/src&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="memory-management">
+<h3>Memory Management<a class="headerlink" href="#memory-management" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In config.yaml, adjust for available memory</span>
+<span class="n">n_clusters</span><span class="p">:</span> <span class="mi">4</span>          <span class="c1"># Reduce for less memory usage</span>
+<span class="n">hour_grouping</span><span class="p">:</span> <span class="mi">2</span>       <span class="c1"># Increase to reduce time resolution</span>
+<span class="n">days_in_year</span><span class="p">:</span> <span class="mi">365</span>      <span class="c1"># Reduce for testing (e.g., 30 days)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="development-environment">
+<h2>Development Environment<a class="headerlink" href="#development-environment" title="Link to this heading">#</a></h2>
+<section id="additional-tools-for-development">
+<h3>Additional Tools for Development<a class="headerlink" href="#additional-tools-for-development" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install development extras</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>jupyter<span class="w"> </span>jupyterlab<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ipython<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>pre-commit<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git-lfs
+
+<span class="c1"># Setup pre-commit hooks</span>
+pre-commit<span class="w"> </span>install
+
+<span class="c1"># Configure Jupyter for project</span>
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>storage_osemosys<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Storage OSeMOSYS&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="ide-configuration">
+<h3>IDE Configuration<a class="headerlink" href="#ide-configuration" title="Link to this heading">#</a></h3>
+<section id="vs-code">
+<h4>VS Code<a class="headerlink" href="#vs-code" title="Link to this heading">#</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// .vscode/settings.json</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;python.defaultInterpreterPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/miniconda3/envs/storage_osemosys/bin/python&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;python.formatting.provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;python.linting.enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;python.linting.flake8Enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;files.associations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;*.yml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;yaml&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;*.yaml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;yaml&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="pycharm">
+<h4>PyCharm<a class="headerlink" href="#pycharm" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>File → Settings → Project → Python Interpreter</p></li>
+<li><p>Add → Conda Environment → Existing Environment</p></li>
+<li><p>Select: <code class="docutils literal notranslate"><span class="pre">~/miniconda3/envs/storage_osemosys/bin/python</span></code></p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="environment-maintenance">
+<h2>Environment Maintenance<a class="headerlink" href="#environment-maintenance" title="Link to this heading">#</a></h2>
+<section id="regular-updates">
+<h3>Regular Updates<a class="headerlink" href="#regular-updates" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Monthly environment update</span>
+make<span class="w"> </span>update-env
+
+<span class="c1"># Security updates</span>
+conda<span class="w"> </span>update<span class="w"> </span>--all
+
+<span class="c1"># Check for outdated packages</span>
+conda<span class="w"> </span>list<span class="w"> </span>--outdated
+</pre></div>
+</div>
+</section>
+<section id="environment-backup">
+<h3>Environment Backup<a class="headerlink" href="#environment-backup" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backup current working environment</span>
+conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&gt;<span class="w"> </span>env/environment_<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>.yml
+
+<span class="c1"># Create minimal reproducible environment</span>
+conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--from-history<span class="w"> </span>&gt;<span class="w"> </span>env/environment_minimal.yml
+</pre></div>
+</div>
+<p>This comprehensive environment setup ensures a robust, reproducible development and execution environment for Storage-in-OSeMOSYS analysis.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Storage-in-OSeMOSYS Documentation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="workflow_guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Workflow Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-requirements">System Requirements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-software">Required Software</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-setup">Quick Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-repository">1. Clone Repository</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-environment-setup">2. Automated Environment Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-installation">3. Test Installation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-environment-setup">Manual Environment Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-conda-environment">1. Create Conda Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-core-dependencies">2. Install Core Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-additional-dependencies">3. Install Additional Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-file-management">Environment File Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-environment-yml">Using environment.yml</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-export">Environment Export</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#makefile-commands">Makefile Commands</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development-workflow">Development Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-details">Package Details</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-scientific-stack">Core Scientific Stack</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-system-modeling">Energy System Modeling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development-and-documentation">Development and Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-verification">Environment Verification</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comprehensive-test-script">Comprehensive Test Script</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues-and-solutions">Common Issues and Solutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environment-creation-fails">1. Conda Environment Creation Fails</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#glpk-installation-issues">2. GLPK Installation Issues</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#otoole-installation-problems">3. OtoOle Installation Problems</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#import-errors">4. Import Errors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-issues-during-installation">5. Memory Issues During Installation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#path-issues-on-windows">6. Path Issues on Windows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization">Performance Optimization</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-tuning">Environment Tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-management">Memory Management</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-environment">Development Environment</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-tools-for-development">Additional Tools for Development</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ide-configuration">IDE Configuration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code">VS Code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycharm">PyCharm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-maintenance">Environment Maintenance</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-updates">Regular Updates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-backup">Environment Backup</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bruno Borba, Md Eliasinul Islam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Bruno Borba, Md Eliasinul Islam.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

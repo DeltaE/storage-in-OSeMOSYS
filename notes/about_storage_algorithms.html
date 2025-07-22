@@ -1,0 +1,654 @@
+
+<!DOCTYPE html>
+
+
+<html lang="Python" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>About Storage Modelling &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=e9b82cb4"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/about_storage_algorithms';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration Guide" href="configuration_guide.html" />
+    <link rel="prev" title="Workflow Guide" href="workflow_guide.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="Python"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Storage in OSEMoSYS 2025.07 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/DeltaE/RESource" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/about_storage_algorithms.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>About Storage Modelling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#niet-direct-link-continuous-diary">Niet (Direct Link) — “Continuous Diary”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-summary-on-storage-algorithms-in-modelling">Quick Summary on Storage Algorithms in Modelling :</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparative-table-of-storage-modeling-methods">📊 Comparative Table of Storage Modeling Methods</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="about-storage-modelling">
+<h1>About Storage Modelling<a class="headerlink" href="#about-storage-modelling" title="Link to this heading">#</a></h1>
+<p>Storage modeling is complex because storage systems behave differently than generation or demand. <strong>Storages move energy across time, not just produce or consume it</strong>. This means:</p>
+<p><strong>🔁 1. Storage shifts energy in time</strong></p>
+<p>Unlike solar panels (generate) or homes (consume), storage stores energy when it’s abundant and releases it when needed. That means:</p>
+<ul>
+<li><p>You can't look at one hour in isolation — what happened before matters.</p></li>
+<li><p>The state of charge (SOC) today depends on all previous hours.</p>
+<blockquote>
+<div><p>Analogy: It's like a savings account — what you can spend today depends on how much you saved earlier.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>⏳ 2. Time resolution matters</strong></p>
+<p>Should you model every single hour? Every day? A few representative days? Each choice impacts:</p>
+<ul>
+<li><p>Accuracy (high resolution = realistic, but slow to compute)</p></li>
+<li><p>Computational effort (simplified models lose detail)</p>
+<blockquote>
+<div><p>If you model storage with only a few sample days, you risk missing important patterns, like a long wind lull or weekend charging habits.</p>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>🔗 3. Storage needs continuity</strong></p>
+<p>Many simplification techniques (e.g. clustering days) break the continuity of storage:</p>
+<ul class="simple">
+<li><p>The model might forget how full the battery was yesterday.</p></li>
+<li><p>Artificial resets can distort when charging/discharging actually happens.</p></li>
+</ul>
+<p>This makes it tricky to model seasonal storage or multi-day balancing.</p>
+<p><strong>⚡ 4. Storage interacts with everything</strong>
+Storage isn’t just an isolated battery:</p>
+<ul class="simple">
+<li><p>It interacts with renewables (absorbing variability)</p></li>
+<li><p>It supports grid reliability (fast response)</p></li>
+<li><p>It responds to prices, constraints, and emissions goals</p></li>
+</ul>
+<p>So modeling it well requires integrating with the rest of the energy system.</p>
+<section id="state-of-the-art-energy-storage-algorithms">
+<h2>state of the art <strong>energy storage algorithms</strong>:<a class="headerlink" href="#state-of-the-art-energy-storage-algorithms" title="Link to this heading">#</a></h2>
+<section id="niet-direct-link-continuous-diary">
+<h3>Niet (Direct Link) — “Continuous Diary”<a class="headerlink" href="#niet-direct-link-continuous-diary" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: Imagine someone writes in their diary every hour without skipping, and each day picks up exactly where the last one left off. The emotional ups and downs (mood swings) are smooth and continuous over the week.</p></li>
+<li><p><strong>Key idea</strong>: Full hourly resolution; perfect continuity over time.</p></li>
+<li><p><strong>Use case</strong>: Most accurate but data-heavy.</p></li>
+</ul>
+</section>
+<section id="welsch-fixed-pattern-photocopied-day">
+<h3>Welsch (Fixed-Pattern) — “Photocopied Day”<a class="headerlink" href="#welsch-fixed-pattern-photocopied-day" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: This person writes down one typical day of feelings and then photocopies that same page for each day of the week. So Monday, Tuesday, etc., look exactly the same.</p></li>
+<li><p><strong>Key idea</strong>: Same daily pattern repeated; no inter-day variation.</p></li>
+<li><p><strong>Use case</strong>: Fast and simple but ignores variation between days.</p></li>
+</ul>
+</section>
+<section id="kotzur-unverified-cluster-alternating-diaries">
+<h3>Kotzur (Unverified Cluster) — “Alternating Diaries”<a class="headerlink" href="#kotzur-unverified-cluster-alternating-diaries" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: This person has two types of days — maybe “busy” and “lazy” days — and alternates between those two. They use pre-written diary templates for each. But they don’t bother connecting one day’s feelings to the next, so it can feel jumpy or inconsistent.</p></li>
+<li><p><strong>Key idea</strong>: Captures daily diversity using clusters, but no continuity.</p></li>
+<li><p><strong>Use case</strong>: Captures more variety than Welsch but lacks smooth transitions.</p></li>
+</ul>
+</section>
+<section id="novo-hourly-verified-linked-journaling">
+<h3>Novo (Hourly-Verified) — “Linked Journaling”<a class="headerlink" href="#novo-hourly-verified-linked-journaling" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Analogy</strong>: This person still uses simplified mood templates for different kinds of days, but they always make sure each day starts where the previous one left off. So it feels realistic and connected, even if it's not a full diary.</p></li>
+<li><p><strong>Key idea</strong>: Combines typical days with continuity between hours.</p></li>
+<li><p><strong>Use case</strong>: A practical middle ground between realism and simplicity.</p></li>
+</ul>
+</section>
+</section>
+<section id="quick-summary-on-storage-algorithms-in-modelling">
+<h2>Quick Summary on Storage Algorithms in Modelling :<a class="headerlink" href="#quick-summary-on-storage-algorithms-in-modelling" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Algorithm</p></th>
+<th class="head"><p>Analogy</p></th>
+<th class="head text-center"><p>Continuity</p></th>
+<th class="head text-center"><p>Variety</p></th>
+<th class="head text-center"><p>Simplicity</p></th>
+<th class="head"><p>Use Case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Niet</p></td>
+<td><p>Full continuous diary</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>❌</p></td>
+<td><p>Most accurate but data-heavy</p></td>
+</tr>
+<tr class="row-odd"><td><p>Welsch</p></td>
+<td><p>Same page copied every day</p></td>
+<td class="text-center"><p>❌</p></td>
+<td class="text-center"><p>❌</p></td>
+<td class="text-center"><p>✅✅</p></td>
+<td><p>Fast and simple but ignores variation between days</p></td>
+</tr>
+<tr class="row-even"><td><p>Kotzur</p></td>
+<td><p>Alternating mood templates</p></td>
+<td class="text-center"><p>❌</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>✅</p></td>
+<td><p>Captures more variety than Welsch but lacks transitions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Novo</p></td>
+<td><p>Linked mood templates</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>✅</p></td>
+<td class="text-center"><p>✅</p></td>
+<td><p>Practical middle ground between realism and simplicity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A detailed comparison:</p>
+<section id="comparative-table-of-storage-modeling-methods">
+<h3>📊 Comparative Table of Storage Modeling Methods<a class="headerlink" href="#comparative-table-of-storage-modeling-methods" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p><strong>Niet</strong></p></th>
+<th class="head"><p><strong>Welsch</strong></p></th>
+<th class="head"><p><strong>Kotzur</strong></p></th>
+<th class="head"><p><strong>Novo</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Period Linking</p></td>
+<td><p>Direct Link</p></td>
+<td><p>Enhanced Periods (Fixed Pattern)</p></td>
+<td><p>Enhanced Periods (Day Cluster Mapping)</p></td>
+<td><p>Enhanced Periods (Hourly-Verified Clustering)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Time Representation</strong></p></td>
+<td><p>Representative periods (e.g. days, weeks)</p></td>
+<td><p>Representative <strong>days</strong> (fixed mapping)</p></td>
+<td><p>Representative <strong>days</strong> (arbitrary sequence allowed)</p></td>
+<td><p>Full <strong>hourly resolution</strong> mapped to rep days</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Chronological Continuity</strong></p></td>
+<td><p>✅ Maintained between periods</p></td>
+<td><p>❌ Not maintained (days are independent)</p></td>
+<td><p>✅ Maintained via day-sequence mapping</p></td>
+<td><p>✅ Maintained at hourly level</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SoC Linkage Between Periods</strong></p></td>
+<td><p>✅ Explicit (stepwise linkage)</p></td>
+<td><p>❌ No linkage; each rep day repeats independently</p></td>
+<td><p>✅ Daily SoC updated using mapped intra-day values</p></td>
+<td><p>✅ Fully verified SoC with hourly mapping</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Intra-Day Resolution</strong></p></td>
+<td><p>Average or period-level</p></td>
+<td><p>Full 24-hour profile (rep day)</p></td>
+<td><p>Full 24-hour profile (rep day)</p></td>
+<td><p>Full 24-hour profile (mapped to full year)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Reset or Loop Behavior</strong></p></td>
+<td><p>None; sequential linkage</p></td>
+<td><p>Yes; rep day is <strong>repeated</strong> N times</p></td>
+<td><p>Resets daily but allows <strong>arbitrary day ordering</strong></p></td>
+<td><p>No reset; each hour is <strong>mapped and verified</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Flexibility in Time Sequencing</strong></p></td>
+<td><p>Low (predefined order of rep periods)</p></td>
+<td><p>Very low (repeats identical rep day pattern)</p></td>
+<td><p>High (any chronological day can map to any rep day)</p></td>
+<td><p>Very high (full hourly reconstruction)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Computational Cost</strong></p></td>
+<td><p>Low (simple stepwise link across periods)</p></td>
+<td><p>Very low (repeats rep day)</p></td>
+<td><p>Medium (needs intra-day dynamics + daily tracking)</p></td>
+<td><p>High (full hourly SoC tracking and bounds checking)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Storage Bounds Verification</strong></p></td>
+<td><p>Implicit per period</p></td>
+<td><p>Start/End of rep day only</p></td>
+<td><p>Only for intra-day cycles; inter-day bounds ignored</p></td>
+<td><p>✅ Enforced at each hour</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Use Case</strong></p></td>
+<td><p>Fast approximation with minimal memory effects</p></td>
+<td><p>Simple seasonal or weekday/weekend modeling</p></td>
+<td><p>Captures non-repetitive variation (e.g. windless days)</p></td>
+<td><p>High-fidelity operational modeling (e.g., reliability)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="workflow_guide.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Workflow Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="configuration_guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Configuration Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#niet-direct-link-continuous-diary">Niet (Direct Link) — “Continuous Diary”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-summary-on-storage-algorithms-in-modelling">Quick Summary on Storage Algorithms in Modelling :</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparative-table-of-storage-modeling-methods">📊 Comparative Table of Storage Modeling Methods</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bruno Borba, Md Eliasinul Islam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Bruno Borba, Md Eliasinul Islam.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

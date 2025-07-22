@@ -1,0 +1,985 @@
+
+<!DOCTYPE html>
+
+
+<html lang="Python" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Configuration Guide &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=e9b82cb4"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/configuration_guide';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="api_reference.html" />
+    <link rel="prev" title="About Storage Modelling" href="about_storage_algorithms.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="Python"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Storage in OSEMoSYS 2025.07 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/DeltaE/RESource" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/configuration_guide.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Configuration Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-file-structure">Configuration File Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-configuration-parameters">Key Configuration Parameters</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-parameters">Analysis Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-name"><code class="docutils literal notranslate"><span class="pre">scenario_name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#days-in-year"><code class="docutils literal notranslate"><span class="pre">days_in_year</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#n-clusters"><code class="docutils literal notranslate"><span class="pre">n_clusters</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hour-grouping"><code class="docutils literal notranslate"><span class="pre">hour_grouping</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasons"><code class="docutils literal notranslate"><span class="pre">seasons</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-parameters">Storage Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#storagelevelstart"><code class="docutils literal notranslate"><span class="pre">StorageLevelStart</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#storagemaxcapacity"><code class="docutils literal notranslate"><span class="pre">StorageMaxCapacity</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#residualstoragecapacity"><code class="docutils literal notranslate"><span class="pre">ResidualStorageCapacity</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-specific-configuration">Model-Specific Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-cluster-configuration">Model_Cluster Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-kotzur-configuration">Model_Kotzur Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-welsch-configuration">Model_Welsch Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-configuration">Data Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data-paths">Input Data Paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-configuration">Results Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-configuration-scenarios">Common Configuration Scenarios</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-resolution-analysis">High-Resolution Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-prototyping">Fast Prototyping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-analysis">Seasonal Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-efficiency">Computational Efficiency</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-validation">Configuration Validation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-relationships">Parameter Relationships</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-checks">Validation Checks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-configuration">Advanced Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-data-sources">Custom Data Sources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-scenarios">Multiple Scenarios</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solver-configuration">Solver Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-best-practices">Configuration Best Practices</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-conventions">1. Naming Conventions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-selection-guidelines">2. Parameter Selection Guidelines</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-resolution">Time Resolution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">Clustering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#duration">Duration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-parameter-guidelines">3. Storage Parameter Guidelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-considerations">4. Computational Considerations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-file-management">Configuration File Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-control">Version Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-templates">Configuration Templates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-specific-configs">Environment-Specific Configs</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="configuration-guide">
+<h1>Configuration Guide<a class="headerlink" href="#configuration-guide" title="Link to this heading">#</a></h1>
+<p>This guide explains how to configure Storage-in-OSeMOSYS for different analysis scenarios.</p>
+<section id="configuration-file-structure">
+<h2>Configuration File Structure<a class="headerlink" href="#configuration-file-structure" title="Link to this heading">#</a></h2>
+<p>The main configuration is stored in <code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analysis Parameters</span>
+<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;k4h1WND&quot;</span>
+<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span>
+<span class="nt">seasons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+
+<span class="c1"># Storage Parameters</span>
+<span class="nt">StorageLevelStart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="nt">StorageMaxCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="nt">ResidualStorageCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+
+<span class="c1"># Data Sources</span>
+<span class="nt">data_8760</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Data_8760&quot;</span>
+<span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CapacityFactor.csv&quot;</span>
+<span class="w">  </span><span class="nt">SDP</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SpecifiedDemandProfile.csv&quot;</span>
+
+<span class="c1"># Model Cases</span>
+<span class="nt">cases</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">Model_Cluster</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">root_directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Model_Cluster&quot;</span>
+<span class="w">    </span><span class="nt">otoole_config</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;config_fast_Cluster.yaml&quot;</span>
+<span class="w">    </span><span class="c1"># ... additional case-specific settings</span>
+</pre></div>
+</div>
+</section>
+<section id="key-configuration-parameters">
+<h2>Key Configuration Parameters<a class="headerlink" href="#key-configuration-parameters" title="Link to this heading">#</a></h2>
+<section id="analysis-parameters">
+<h3>Analysis Parameters<a class="headerlink" href="#analysis-parameters" title="Link to this heading">#</a></h3>
+<section id="scenario-name">
+<h4><code class="docutils literal notranslate"><span class="pre">scenario_name</span></code><a class="headerlink" href="#scenario-name" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Type</strong>: String</p></li>
+<li><p><strong>Description</strong>: Identifier for the analysis run</p></li>
+<li><p><strong>Example</strong>: <code class="docutils literal notranslate"><span class="pre">&quot;k4h1WND&quot;</span></code> (4 clusters, 1-hour grouping, wind scenario)</p></li>
+<li><p><strong>Usage</strong>: Used in output file naming and result identification</p></li>
+</ul>
+</section>
+<section id="days-in-year">
+<h4><code class="docutils literal notranslate"><span class="pre">days_in_year</span></code><a class="headerlink" href="#days-in-year" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Type</strong>: Integer</p></li>
+<li><p><strong>Default</strong>: 365</p></li>
+<li><p><strong>Description</strong>: Total number of days to model</p></li>
+<li><p><strong>Options</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">365</span></code>: Full year analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">30-90</span></code>: Seasonal analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">7-14</span></code>: Weekly analysis for testing</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="n-clusters">
+<h4><code class="docutils literal notranslate"><span class="pre">n_clusters</span></code><a class="headerlink" href="#n-clusters" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Type</strong>: Integer</p></li>
+<li><p><strong>Range</strong>: 2-20 (recommended: 3-8)</p></li>
+<li><p><strong>Description</strong>: Number of representative days for clustering</p></li>
+<li><p><strong>Trade-offs</strong>:</p>
+<ul>
+<li><p>More clusters = Higher accuracy, longer computation</p></li>
+<li><p>Fewer clusters = Faster computation, less detail</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="hour-grouping">
+<h4><code class="docutils literal notranslate"><span class="pre">hour_grouping</span></code><a class="headerlink" href="#hour-grouping" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Type</strong>: Integer</p></li>
+<li><p><strong>Options</strong>: 1, 2, 3, 4, 6, 8, 12, 24</p></li>
+<li><p><strong>Description</strong>: Hours aggregated into single time block</p></li>
+<li><p><strong>Examples</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code>: Hourly resolution (8760 time steps)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code>: 2-hour blocks (4380 time steps)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">24</span></code>: Daily resolution (365 time steps)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="seasons">
+<h4><code class="docutils literal notranslate"><span class="pre">seasons</span></code><a class="headerlink" href="#seasons" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Type</strong>: Integer</p></li>
+<li><p><strong>Default</strong>: 4</p></li>
+<li><p><strong>Description</strong>: Number of seasons for Welsch method</p></li>
+<li><p><strong>Common values</strong>: 1 (no seasons), 2 (summer/winter), 4 (quarterly)</p></li>
+</ul>
+</section>
+</section>
+<section id="storage-parameters">
+<h3>Storage Parameters<a class="headerlink" href="#storage-parameters" title="Link to this heading">#</a></h3>
+<section id="storagelevelstart">
+<h4><code class="docutils literal notranslate"><span class="pre">StorageLevelStart</span></code><a class="headerlink" href="#storagelevelstart" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Type</strong>: Float (0.0-1.0)</p></li>
+<li><p><strong>Description</strong>: Initial state of charge as fraction of capacity</p></li>
+<li><p><strong>Examples</strong>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">0.0</span></code>: Empty battery at start</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">0.5</span></code>: Half-charged battery</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1.0</span></code>: Fully charged battery</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="storagemaxcapacity">
+<h4><code class="docutils literal notranslate"><span class="pre">StorageMaxCapacity</span></code><a class="headerlink" href="#storagemaxcapacity" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Type</strong>: Float</p></li>
+<li><p><strong>Units</strong>: Energy units (e.g., MWh)</p></li>
+<li><p><strong>Description</strong>: Maximum storage capacity</p></li>
+<li><p><strong>Considerations</strong>: Should match your system scale</p></li>
+</ul>
+</section>
+<section id="residualstoragecapacity">
+<h4><code class="docutils literal notranslate"><span class="pre">ResidualStorageCapacity</span></code><a class="headerlink" href="#residualstoragecapacity" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Type</strong>: Float</p></li>
+<li><p><strong>Description</strong>: Pre-existing storage capacity</p></li>
+<li><p><strong>Default</strong>: 0 (no existing storage)</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="model-specific-configuration">
+<h2>Model-Specific Configuration<a class="headerlink" href="#model-specific-configuration" title="Link to this heading">#</a></h2>
+<p>Each temporal method has specific configuration requirements:</p>
+<section id="model-cluster-configuration">
+<h3>Model_Cluster Configuration<a class="headerlink" href="#model-cluster-configuration" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Model_Cluster</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root_directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Model_Cluster&quot;</span>
+<span class="w">  </span><span class="nt">otoole_config</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;config_fast_Cluster.yaml&quot;</span>
+<span class="w">  </span><span class="nt">output_otoole_txt</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;osemosys_fast_Cluster.txt&quot;</span>
+<span class="w">  </span><span class="nt">input_otoole_csv</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data&quot;</span>
+<span class="w">    </span><span class="nt">timeslice</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TIMESLICE.csv&quot;</span>
+<span class="w">    </span><span class="nt">timeslicecro</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TIMESLICECRO.csv&quot;</span>
+<span class="w">    </span><span class="nt">conversionlts</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Conversionlts.csv&quot;</span>
+<span class="w">    </span><span class="c1"># ... other CSV files</span>
+</pre></div>
+</div>
+</section>
+<section id="model-kotzur-configuration">
+<h3>Model_Kotzur Configuration<a class="headerlink" href="#model-kotzur-configuration" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Model_Kotzur</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root_directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Model_Kotzur&quot;</span>
+<span class="w">  </span><span class="nt">otoole_config</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;config_fast_Kotzur.yaml&quot;</span>
+<span class="w">  </span><span class="nt">input_otoole_csv</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dayscro</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DAYSCRO.csv&quot;</span>
+<span class="w">    </span><span class="nt">conversionld</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Conversionld.csv&quot;</span>
+<span class="w">    </span><span class="nt">conversionldc</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Conversionldc.csv&quot;</span>
+<span class="w">    </span><span class="c1"># ... other CSV files</span>
+</pre></div>
+</div>
+</section>
+<section id="model-welsch-configuration">
+<h3>Model_Welsch Configuration<a class="headerlink" href="#model-welsch-configuration" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">Model_Welsch</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">root_directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Model_Welsch&quot;</span>
+<span class="w">  </span><span class="nt">otoole_config</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;config_fast_Welsch.yaml&quot;</span>
+<span class="w">  </span><span class="nt">input_otoole_csv</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dailytimebracket</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DAILYTIMEBRACKET.csv&quot;</span>
+<span class="w">    </span><span class="nt">conversionlh</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Conversionlh.csv&quot;</span>
+<span class="w">    </span><span class="nt">conversionls</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Conversionls.csv&quot;</span>
+<span class="w">    </span><span class="nt">daysindaytype</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;DaysInDayType.csv&quot;</span>
+<span class="w">    </span><span class="c1"># ... other CSV files</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="data-configuration">
+<h2>Data Configuration<a class="headerlink" href="#data-configuration" title="Link to this heading">#</a></h2>
+<section id="input-data-paths">
+<h3>Input Data Paths<a class="headerlink" href="#input-data-paths" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">data_8760</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Data_8760&quot;</span>
+<span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CapacityFactor.csv&quot;</span><span class="w">     </span><span class="c1"># Renewable generation profiles</span>
+<span class="w">  </span><span class="nt">SDP</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SpecifiedDemandProfile.csv&quot;</span><span class="w">  </span><span class="c1"># Electricity demand profiles</span>
+</pre></div>
+</div>
+</section>
+<section id="results-configuration">
+<h3>Results Configuration<a class="headerlink" href="#results-configuration" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">results</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Results&quot;</span><span class="w">                    </span><span class="c1"># Main results folder</span>
+<span class="w">  </span><span class="nt">directory_GUI</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Results_GUI&quot;</span><span class="w">           </span><span class="c1"># GUI-specific results</span>
+<span class="w">  </span><span class="nt">results_copied_filename</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Storage_Level&quot;</span><span class="w">  </span><span class="c1"># Base filename for results</span>
+<span class="w">  </span><span class="nt">results_excel_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results.xlsx&quot;</span><span class="w">     </span><span class="c1"># Summary Excel file</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-configuration-scenarios">
+<h2>Common Configuration Scenarios<a class="headerlink" href="#common-configuration-scenarios" title="Link to this heading">#</a></h2>
+<section id="high-resolution-analysis">
+<h3>High-Resolution Analysis<a class="headerlink" href="#high-resolution-analysis" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># For detailed analysis with high temporal resolution</span>
+<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;detailed_k8h1&quot;</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span>
+</pre></div>
+</div>
+</section>
+<section id="fast-prototyping">
+<h3>Fast Prototyping<a class="headerlink" href="#fast-prototyping" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># For quick testing and development</span>
+<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test_k3h4&quot;</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">      </span><span class="c1"># 6-hour blocks</span>
+<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w">      </span><span class="c1"># One month only</span>
+</pre></div>
+</div>
+</section>
+<section id="seasonal-analysis">
+<h3>Seasonal Analysis<a class="headerlink" href="#seasonal-analysis" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># For seasonal storage studies</span>
+<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;seasonal_k6h1&quot;</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="nt">seasons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span>
+</pre></div>
+</div>
+</section>
+<section id="computational-efficiency">
+<h3>Computational Efficiency<a class="headerlink" href="#computational-efficiency" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># For large-scale studies with computational constraints</span>
+<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;efficient_k4h8&quot;</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span><span class="w">      </span><span class="c1"># 8-hour blocks</span>
+<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configuration-validation">
+<h2>Configuration Validation<a class="headerlink" href="#configuration-validation" title="Link to this heading">#</a></h2>
+<section id="parameter-relationships">
+<h3>Parameter Relationships<a class="headerlink" href="#parameter-relationships" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">timeslices</span> <span class="pre">=</span> <span class="pre">n_clusters</span> <span class="pre">*</span> <span class="pre">(24</span> <span class="pre">/</span> <span class="pre">hour_grouping)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chronological_timeslices</span> <span class="pre">=</span> <span class="pre">days_in_year</span> <span class="pre">*</span> <span class="pre">(24</span> <span class="pre">/</span> <span class="pre">hour_grouping)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">year_split</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">/</span> <span class="pre">timeslices</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">day_split</span> <span class="pre">=</span> <span class="pre">hour_grouping</span> <span class="pre">/</span> <span class="pre">(24</span> <span class="pre">*</span> <span class="pre">365)</span></code></p></li>
+</ul>
+</section>
+<section id="validation-checks">
+<h3>Validation Checks<a class="headerlink" href="#validation-checks" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Built-in validation in utilities</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_config</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate configuration parameters.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Check temporal parameters</span>
+    <span class="k">assert</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;n_clusters&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Need at least 2 clusters&quot;</span>
+    <span class="k">assert</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;hour_grouping&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">24</span><span class="p">],</span> <span class="s2">&quot;Invalid hour grouping&quot;</span>
+    <span class="k">assert</span> <span class="mi">24</span> <span class="o">%</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;hour_grouping&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Hour grouping must divide 24&quot;</span>
+    
+    <span class="c1"># Check storage parameters</span>
+    <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;StorageLevelStart&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Storage start level must be 0-1&quot;</span>
+    <span class="k">assert</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;StorageMaxCapacity&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Storage capacity must be positive&quot;</span>
+    
+    <span class="c1"># Check file paths</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_8760&#39;</span><span class="p">][</span><span class="s1">&#39;directory&#39;</span><span class="p">])</span>
+    <span class="k">assert</span> <span class="n">data_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;Data directory not found: </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-configuration">
+<h2>Advanced Configuration<a class="headerlink" href="#advanced-configuration" title="Link to this heading">#</a></h2>
+<section id="custom-data-sources">
+<h3>Custom Data Sources<a class="headerlink" href="#custom-data-sources" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using custom input data</span>
+<span class="nt">data_8760</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Custom_Data&quot;</span>
+<span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;wind_solar_profiles.csv&quot;</span>
+<span class="w">  </span><span class="nt">SDP</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;demand_profiles_2024.csv&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="multiple-scenarios">
+<h3>Multiple Scenarios<a class="headerlink" href="#multiple-scenarios" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define scenario variants</span>
+<span class="nt">scenarios</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">base_case</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">StorageMaxCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">    </span><span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="nt">high_storage</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">StorageMaxCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span>
+<span class="w">    </span><span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="nt">low_resolution</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">    </span><span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+</pre></div>
+</div>
+</section>
+<section id="solver-configuration">
+<h3>Solver Configuration<a class="headerlink" href="#solver-configuration" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solver-specific settings (in otoole config files)</span>
+<span class="nt">solver</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;glpk&quot;</span>
+<span class="w">  </span><span class="nt">options</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tmlim</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3600</span><span class="w">      </span><span class="c1"># Time limit in seconds</span>
+<span class="w">    </span><span class="nt">mipgap</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.01</span><span class="w">     </span><span class="c1"># MIP gap tolerance</span>
+<span class="w">    </span><span class="nt">presolve</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">   </span><span class="c1"># Enable presolving</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configuration-best-practices">
+<h2>Configuration Best Practices<a class="headerlink" href="#configuration-best-practices" title="Link to this heading">#</a></h2>
+<section id="naming-conventions">
+<h3>1. Naming Conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use descriptive scenario names: <code class="docutils literal notranslate"><span class="pre">k{clusters}h{hours}_{technology}</span></code></p></li>
+<li><p>Include resolution info: <code class="docutils literal notranslate"><span class="pre">high_res</span></code>, <code class="docutils literal notranslate"><span class="pre">daily</span></code>, <code class="docutils literal notranslate"><span class="pre">seasonal</span></code></p></li>
+<li><p>Add version numbers for iterations: <code class="docutils literal notranslate"><span class="pre">v1</span></code>, <code class="docutils literal notranslate"><span class="pre">v2</span></code>, etc.</p></li>
+</ul>
+</section>
+<section id="parameter-selection-guidelines">
+<h3>2. Parameter Selection Guidelines<a class="headerlink" href="#parameter-selection-guidelines" title="Link to this heading">#</a></h3>
+<section id="time-resolution">
+<h4>Time Resolution<a class="headerlink" href="#time-resolution" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Hourly (<code class="docutils literal notranslate"><span class="pre">hour_grouping=1</span></code>)</strong>: For intraday storage, frequency regulation</p></li>
+<li><p><strong>2-4 hour blocks</strong>: For daily cycle analysis</p></li>
+<li><p><strong>Daily (<code class="docutils literal notranslate"><span class="pre">hour_grouping=24</span></code>)</strong>: For seasonal studies</p></li>
+</ul>
+</section>
+<section id="clustering">
+<h4>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>3-4 clusters</strong>: Basic representative days (weekday, weekend, peak, off-peak)</p></li>
+<li><p><strong>5-8 clusters</strong>: Seasonal variations</p></li>
+<li><p><strong>8+ clusters</strong>: High diversity in renewable/demand patterns</p></li>
+</ul>
+</section>
+<section id="duration">
+<h4>Duration<a class="headerlink" href="#duration" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Full year</strong>: For annual planning studies</p></li>
+<li><p><strong>Seasonal</strong>: For specific season analysis</p></li>
+<li><p><strong>Monthly</strong>: For testing and development</p></li>
+</ul>
+</section>
+</section>
+<section id="storage-parameter-guidelines">
+<h3>3. Storage Parameter Guidelines<a class="headerlink" href="#storage-parameter-guidelines" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Start with moderate storage sizes (10-20% of daily demand)</p></li>
+<li><p>Initial state of charge: 0.5 for neutral start</p></li>
+<li><p>Consider real-world storage characteristics</p></li>
+</ul>
+</section>
+<section id="computational-considerations">
+<h3>4. Computational Considerations<a class="headerlink" href="#computational-considerations" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Memory usage estimation</span>
+<span class="l l-Scalar l-Scalar-Plain">estimated_variables = n_clusters * (24/hour_grouping) * n_technologies * n_years</span>
+<span class="l l-Scalar l-Scalar-Plain">memory_gb = estimated_variables / 1000000</span><span class="w">  </span><span class="c1"># Rough estimate</span>
+
+<span class="c1"># Time estimation</span>
+<span class="l l-Scalar l-Scalar-Plain">computation_time_minutes = (n_clusters * (24/hour_grouping)) / 100</span><span class="w">  </span><span class="c1"># Rough estimate</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="configuration-file-management">
+<h2>Configuration File Management<a class="headerlink" href="#configuration-file-management" title="Link to this heading">#</a></h2>
+<section id="version-control">
+<h3>Version Control<a class="headerlink" href="#version-control" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keep configuration files in version control</span>
+git<span class="w"> </span>add<span class="w"> </span>config/
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update configuration for scenario X&quot;</span>
+
+<span class="c1"># Tag important configurations</span>
+git<span class="w"> </span>tag<span class="w"> </span>-a<span class="w"> </span>config_v1.0<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Baseline configuration&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="configuration-templates">
+<h3>Configuration Templates<a class="headerlink" href="#configuration-templates" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create configuration templates</span>
+cp<span class="w"> </span>config/config.yaml<span class="w"> </span>config/templates/baseline.yaml
+cp<span class="w"> </span>config/config.yaml<span class="w"> </span>config/templates/high_resolution.yaml
+cp<span class="w"> </span>config/config.yaml<span class="w"> </span>config/templates/fast_testing.yaml
+</pre></div>
+</div>
+</section>
+<section id="environment-specific-configs">
+<h3>Environment-Specific Configs<a class="headerlink" href="#environment-specific-configs" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># config/config_dev.yaml - Development settings</span>
+<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;dev_test&quot;</span>
+<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+
+<span class="c1"># config/config_prod.yaml - Production settings  </span>
+<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;production_run&quot;</span>
+<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+</pre></div>
+</div>
+<p>This configuration guide enables users to customize Storage-in-OSeMOSYS for their specific research needs while understanding the implications of different parameter choices.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="about_storage_algorithms.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">About Storage Modelling</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api_reference.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">API Reference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-file-structure">Configuration File Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-configuration-parameters">Key Configuration Parameters</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-parameters">Analysis Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-name"><code class="docutils literal notranslate"><span class="pre">scenario_name</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#days-in-year"><code class="docutils literal notranslate"><span class="pre">days_in_year</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#n-clusters"><code class="docutils literal notranslate"><span class="pre">n_clusters</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hour-grouping"><code class="docutils literal notranslate"><span class="pre">hour_grouping</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#seasons"><code class="docutils literal notranslate"><span class="pre">seasons</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-parameters">Storage Parameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#storagelevelstart"><code class="docutils literal notranslate"><span class="pre">StorageLevelStart</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#storagemaxcapacity"><code class="docutils literal notranslate"><span class="pre">StorageMaxCapacity</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#residualstoragecapacity"><code class="docutils literal notranslate"><span class="pre">ResidualStorageCapacity</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-specific-configuration">Model-Specific Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-cluster-configuration">Model_Cluster Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-kotzur-configuration">Model_Kotzur Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-welsch-configuration">Model_Welsch Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-configuration">Data Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-data-paths">Input Data Paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-configuration">Results Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-configuration-scenarios">Common Configuration Scenarios</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#high-resolution-analysis">High-Resolution Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fast-prototyping">Fast Prototyping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonal-analysis">Seasonal Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-efficiency">Computational Efficiency</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-validation">Configuration Validation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-relationships">Parameter Relationships</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-checks">Validation Checks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-configuration">Advanced Configuration</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-data-sources">Custom Data Sources</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-scenarios">Multiple Scenarios</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solver-configuration">Solver Configuration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-best-practices">Configuration Best Practices</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-conventions">1. Naming Conventions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-selection-guidelines">2. Parameter Selection Guidelines</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#time-resolution">Time Resolution</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">Clustering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#duration">Duration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-parameter-guidelines">3. Storage Parameter Guidelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-considerations">4. Computational Considerations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-file-management">Configuration File Management</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-control">Version Control</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-templates">Configuration Templates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-specific-configs">Environment-Specific Configs</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bruno Borba, Md Eliasinul Islam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Bruno Borba, Md Eliasinul Islam.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
