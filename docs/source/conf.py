@@ -25,9 +25,9 @@ if on_rtd:
         'pyarrow', 'fastparquet', 'tables', 'bottleneck', 'numexpr'
     ]
 
-project = 'RESource'
-copyright = '2025, Md Eliasinul Islam'
-author = 'Md Eliasinul Islam'
+project = 'Storage in OSEMoSYS'
+copyright = '2025, Bruno Borba, Md Eliasinul Islam'
+author = 'Bruno Borba, Md Eliasinul Islam'
 release = '2025.07'
 
 # -- General configuration ---------------------------------------------------
