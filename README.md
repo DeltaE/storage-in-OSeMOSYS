@@ -1,4 +1,4 @@
-# Storage-in-OSeMOSYS
+<img src="docs/source/_static/storage_in_osemosys_banner_202508.jpg" alt="banner" width="800">
 
 A comprehensive framework for analyzing energy storage systems using OSeMOSYS with time-series clustering and temporal disaggregation methods.
 
