@@ -1,16 +1,16 @@
-# Storage-in-OSeMOSYS Documentation
+<img src="_static/storage_in_osemosys_banner_202508.jpg" alt="banner" width="700">
 
 
-
+<!-- # Storage-in-OSeMOSYS -->
 A comprehensive framework for analyzing energy storage systems using OSeMOSYS with time-series clustering and temporal disaggregation methods.
 
 <!-- <img src="_static/storage_models_overview.png" alt="Storage Models Overview" width="800"/> -->
 
 ```{warning}
-This library is under active development. For latest updates, check the [GitHub repository](https://github.com/DeltaE/storage-in-OSeMOSYS).
+This library is under active development. For latest release and updates, please check the [GitHub repository](https://github.com/DeltaE/storage-in-OSeMOSYS).
 ```
 
-## Project Overview
+## Overview
 
 Storage-in-OSeMOSYS implements four different temporal representation methods for energy system optimization, each addressing the challenge of modeling energy storage systems with varying levels of computational complexity and accuracy:
 
@@ -45,7 +45,7 @@ Energy storage modeling is complex because:
 
 ### Our Solution
 
-Storage-in-OSeMOSYS provides a systematic comparison of four established temporal representation methods, allowing researchers to:
+__Storage-in-OSeMOSYS__ provides a systematic comparison of four established temporal representation methods, allowing researchers to:
 
 - **Evaluate trade-offs** between computational efficiency and model accuracy
 - **Compare results** across different temporal abstraction approaches  
@@ -60,7 +60,7 @@ Storage-in-OSeMOSYS provides a systematic comparison of four established tempora
 ```{toctree}
 :caption: 'User Guide:'
 :maxdepth: 3
-
+<!-- notes/about_storage_algorithms.md -->
 notes/README_ENVIRONMENT
 notes/workflow_guide
 notes/configuration_guide
@@ -121,8 +121,9 @@ hour_grouping: 1
 
 ## Project Team
 
-**Research Lead**: Md Eliasinul Islam  
-**Institution**: Delta E+ Research Lab, Simon Fraser University  
+**Research Lead**: Bruno Borba
+**Development Support**: Md Eliasinul Islam  
+**Affiliation**: Delta E+ Research Lab, Simon Fraser University  
 **License**: MIT License
 
 ## Citation
