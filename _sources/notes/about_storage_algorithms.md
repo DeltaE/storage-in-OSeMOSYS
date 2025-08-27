@@ -63,18 +63,6 @@ So modeling it well requires integrating with the rest of the energy system.
 - __Key idea__: Combines typical days with continuity between hours.
 - __Use case__: A practical middle ground between realism and simplicity.
 
-
-Quick Summary on Storage Algorithms in Modelling : 
----
-| Algorithm | Analogy                        | Continuity | Variety | Simplicity | Use Case                                               |
-|-----------|-------------------------------|:----------:|:-------:|:----------:|--------------------------------------------------------|
-| Niet      | Full continuous diary          | ✅         | ✅      | ❌         | Most accurate but data-heavy                           |
-| Welsch    | Same page copied every day     | ❌         | ❌      | ✅✅        | Fast and simple but ignores variation between days     |
-| Kotzur    | Alternating mood templates     | ❌         | ✅      | ✅         | Captures more variety than Welsch but lacks transitions|
-| Novo      | Linked mood templates          | ✅         | ✅      | ✅         | Practical middle ground between realism and simplicity |
-
-
-
 A detailed comparison:
 
 ### 📊 Comparative Table of Storage Modeling Methods
