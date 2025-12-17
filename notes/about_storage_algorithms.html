@@ -367,7 +367,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparative-table-of-storage-modeling-methods">📊 Comparative Table of Storage Modeling Methods</a></li>
 </ul>
 </li>
 </ul>
@@ -384,6 +383,10 @@ document.write(`
   <section id="about-storage-modelling">
 <h1>About Storage Modelling<a class="headerlink" href="#about-storage-modelling" title="Link to this heading">#</a></h1>
 <p>Storage modeling is complex because storage systems behave differently than generation or demand. <strong>Storages move energy across time, not just produce or consume it</strong>. This means:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This library is under active development and some of the contents are not displayed as a requirement for the publication process of the paper. Complete content will be available after the publication.</p>
+</div>
 <p><strong>🔁 1. Storage shifts energy in time</strong></p>
 <p>Unlike solar panels (generate) or homes (consume), storage stores energy when it’s abundant and releases it when needed. That means:</p>
 <ul>
@@ -452,83 +455,6 @@ Storage isn’t just an isolated battery:</p>
 <li><p><strong>Key idea</strong>: Combines typical days with continuity between hours.</p></li>
 <li><p><strong>Use case</strong>: A practical middle ground between realism and simplicity.</p></li>
 </ul>
-<p>A detailed comparison:</p>
-</section>
-<section id="comparative-table-of-storage-modeling-methods">
-<h3>📊 Comparative Table of Storage Modeling Methods<a class="headerlink" href="#comparative-table-of-storage-modeling-methods" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Feature</p></th>
-<th class="head"><p><strong>Niet</strong></p></th>
-<th class="head"><p><strong>Welsch</strong></p></th>
-<th class="head"><p><strong>Kotzur</strong></p></th>
-<th class="head"><p><strong>Novo</strong></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Period Linking</p></td>
-<td><p>Direct Link</p></td>
-<td><p>Enhanced Periods (Fixed Pattern)</p></td>
-<td><p>Enhanced Periods (Day Cluster Mapping)</p></td>
-<td><p>Enhanced Periods (Hourly-Verified Clustering)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Time Representation</strong></p></td>
-<td><p>Representative periods (e.g. days, weeks)</p></td>
-<td><p>Representative <strong>days</strong> (fixed mapping)</p></td>
-<td><p>Representative <strong>days</strong> (arbitrary sequence allowed)</p></td>
-<td><p>Full <strong>hourly resolution</strong> mapped to rep days</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Chronological Continuity</strong></p></td>
-<td><p>✅ Maintained between periods</p></td>
-<td><p>❌ Not maintained (days are independent)</p></td>
-<td><p>✅ Maintained via day-sequence mapping</p></td>
-<td><p>✅ Maintained at hourly level</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>SoC Linkage Between Periods</strong></p></td>
-<td><p>✅ Explicit (stepwise linkage)</p></td>
-<td><p>❌ No linkage; each rep day repeats independently</p></td>
-<td><p>✅ Daily SoC updated using mapped intra-day values</p></td>
-<td><p>✅ Fully verified SoC with hourly mapping</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Intra-Day Resolution</strong></p></td>
-<td><p>Average or period-level</p></td>
-<td><p>Full 24-hour profile (rep day)</p></td>
-<td><p>Full 24-hour profile (rep day)</p></td>
-<td><p>Full 24-hour profile (mapped to full year)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Reset or Loop Behavior</strong></p></td>
-<td><p>None; sequential linkage</p></td>
-<td><p>Yes; rep day is <strong>repeated</strong> N times</p></td>
-<td><p>Resets daily but allows <strong>arbitrary day ordering</strong></p></td>
-<td><p>No reset; each hour is <strong>mapped and verified</strong></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Flexibility in Time Sequencing</strong></p></td>
-<td><p>Low (predefined order of rep periods)</p></td>
-<td><p>Very low (repeats identical rep day pattern)</p></td>
-<td><p>High (any chronological day can map to any rep day)</p></td>
-<td><p>Very high (full hourly reconstruction)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Computational Cost</strong></p></td>
-<td><p>Low (simple stepwise link across periods)</p></td>
-<td><p>Very low (repeats rep day)</p></td>
-<td><p>Medium (needs intra-day dynamics + daily tracking)</p></td>
-<td><p>High (full hourly SoC tracking and bounds checking)</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Storage Bounds Verification</strong></p></td>
-<td><p>Implicit per period</p></td>
-<td><p>Start/End of rep day only</p></td>
-<td><p>Only for intra-day cycles; inter-day bounds ignored</p></td>
-<td><p>✅ Enforced at each hour</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Use Case</strong></p></td>
-<td><p>Fast approximation with minimal memory effects</p></td>
-<td><p>Simple seasonal or weekday/weekend modeling</p></td>
-<td><p>Captures non-repetitive variation (e.g. windless days)</p></td>
-<td><p>High-fidelity operational modeling (e.g., reliability)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 </section>
 </section>
 </section>
@@ -565,7 +491,6 @@ Storage isn’t just an isolated battery:</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparative-table-of-storage-modeling-methods">📊 Comparative Table of Storage Modeling Methods</a></li>
 </ul>
 </li>
 </ul>

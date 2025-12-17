@@ -7,7 +7,7 @@ A comprehensive framework for analyzing energy storage systems using OSeMOSYS wi
 <!-- <img src="_static/storage_models_overview.png" alt="Storage Models Overview" width="800"/> -->
 
 ```{warning}
-This library is under active development. For latest release and updates, please check the [GitHub repository](https://github.com/DeltaE/storage-in-OSeMOSYS).
+This library is under active development. For latest release and updates, please check the [GitHub repository](https://github.com/DeltaE/storage-in-OSeMOSYS).Some of the contents are not displayed as a requirement for the publication process of the paper. Complete content will be available after the publication.
 ```
 
 ## Overview

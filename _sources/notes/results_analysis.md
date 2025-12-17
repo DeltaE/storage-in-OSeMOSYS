@@ -1,5 +1,9 @@
 # Results Analysis
 
+```{warning}
+This library is under active development and some of the contents are not displayed as a requirement for the publication process of the paper. Complete content will be available after the publication.
+```
+
 ## Overview
 
 This section covers the analysis and interpretation of Storage-in-OSeMOSYS model results.

@@ -1,6 +1,10 @@
 # About Storage Modelling
 Storage modeling is complex because storage systems behave differently than generation or demand. __Storages move energy across time, not just produce or consume it__. This means:
 
+```{warning}
+This library is under active development and some of the contents are not displayed as a requirement for the publication process of the paper. Complete content will be available after the publication.
+```
+
 __🔁 1. Storage shifts energy in time__
 
 Unlike solar panels (generate) or homes (consume), storage stores energy when it’s abundant and releases it when needed. That means:
@@ -63,19 +67,3 @@ So modeling it well requires integrating with the rest of the energy system.
 - __Key idea__: Combines typical days with continuity between hours.
 - __Use case__: A practical middle ground between realism and simplicity.
 
-A detailed comparison:
-
-### 📊 Comparative Table of Storage Modeling Methods
-
-| Feature                              | **Niet**                          | **Welsch**                             | **Kotzur**                       | **Novo**                  |
-|--------------------------------------|--------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------|---------------------------------------------------------|
-| Period Linking                              | Direct Link                        | Enhanced Periods (Fixed Pattern)                           | Enhanced Periods (Day Cluster Mapping)                       | Enhanced Periods (Hourly-Verified Clustering)                 |
-| **Time Representation**             | Representative periods (e.g. days, weeks)       | Representative **days** (fixed mapping)                | Representative **days** (arbitrary sequence allowed)      | Full **hourly resolution** mapped to rep days          |
-| **Chronological Continuity**        | ✅ Maintained between periods                    | ❌ Not maintained (days are independent)               | ✅ Maintained via day-sequence mapping                    | ✅ Maintained at hourly level                          |
-| **SoC Linkage Between Periods**     | ✅ Explicit (stepwise linkage)                   | ❌ No linkage; each rep day repeats independently       | ✅ Daily SoC updated using mapped intra-day values        | ✅ Fully verified SoC with hourly mapping              |
-| **Intra-Day Resolution**            | Average or period-level                         | Full 24-hour profile (rep day)                         | Full 24-hour profile (rep day)                            | Full 24-hour profile (mapped to full year)            |
-| **Reset or Loop Behavior**          | None; sequential linkage                        | Yes; rep day is **repeated** N times                   | Resets daily but allows **arbitrary day ordering**        | No reset; each hour is **mapped and verified**         |
-| **Flexibility in Time Sequencing**  | Low (predefined order of rep periods)           | Very low (repeats identical rep day pattern)           | High (any chronological day can map to any rep day)       | Very high (full hourly reconstruction)                 |
-| **Computational Cost**              | Low (simple stepwise link across periods)       | Very low (repeats rep day)                             | Medium (needs intra-day dynamics + daily tracking)        | High (full hourly SoC tracking and bounds checking)    |
-| **Storage Bounds Verification**     | Implicit per period                             | Start/End of rep day only                              | Only for intra-day cycles; inter-day bounds ignored       | ✅ Enforced at each hour                              |
-| **Use Case**                        | Fast approximation with minimal memory effects  | Simple seasonal or weekday/weekend modeling            | Captures non-repetitive variation (e.g. windless days)    | High-fidelity operational modeling (e.g., reliability) |
