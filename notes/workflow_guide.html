@@ -381,6 +381,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-commands">Execution Commands</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-execution">Basic Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-parametric-execution">Batch / Parametric Execution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
 </ul>
@@ -538,7 +539,7 @@ document.write(`
 <span class="k">if</span> <span class="n">case_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Model_Niet&#39;</span><span class="p">,</span> <span class="s1">&#39;Model_Cluster&#39;</span><span class="p">,</span> <span class="s1">&#39;Model_Kotzur&#39;</span><span class="p">,</span> <span class="s1">&#39;Model_Welsch&#39;</span><span class="p">]:</span>
     <span class="c1"># Copy base input files</span>
     <span class="k">for</span> <span class="n">csv_file</span> <span class="ow">in</span> <span class="n">csv_files</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">stem</span> <span class="ow">in</span> <span class="n">expected_file_names</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">stem</span> <span class="ow">in</span> <span class="n">excepted_file_names</span><span class="p">:</span>  <span class="c1"># note: variable is named &#39;excepted_file_names&#39; in code</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">input_csv_dir</span> <span class="o">/</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     
     <span class="c1"># Update core timeslice structure</span>
@@ -628,8 +629,20 @@ document.write(`
 <h2>Execution Commands<a class="headerlink" href="#execution-commands" title="Link to this heading">#</a></h2>
 <section id="basic-execution">
 <h3>Basic Execution<a class="headerlink" href="#basic-execution" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run complete workflow</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run complete workflow for the scenario defined in config/config.yaml</span>
 python<span class="w"> </span>main.py
+</pre></div>
+</div>
+</section>
+<section id="batch-parametric-execution">
+<h3>Batch / Parametric Execution<a class="headerlink" href="#batch-parametric-execution" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">automation.py</span></code> provides batch execution over multiple <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">hour_grouping</span></code> values. It updates <code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code> automatically for each combination and calls <code class="docutils literal notranslate"><span class="pre">main.py</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>automation.py
+</pre></div>
+</div>
+<p>Edit the lists at the top of <code class="docutils literal notranslate"><span class="pre">automation.py</span></code> to control which combinations are run:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_clusters</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>          <span class="c1"># e.g. [2, 4, 8, 12]</span>
+<span class="n">hour_grouping</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>          <span class="c1"># e.g. [1, 2, 4, 6, 12]</span>
 </pre></div>
 </div>
 </section>
@@ -653,49 +666,52 @@ make<span class="w"> </span>update-env
 <h3>Configuration Options<a class="headerlink" href="#configuration-options" title="Link to this heading">#</a></h3>
 <p>Edit <code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code> before running:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analysis parameters</span>
-<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;k4h1WND&quot;</span><span class="w">      </span><span class="c1"># Scenario identifier</span>
-<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span><span class="w">             </span><span class="c1"># Total days to model</span>
-<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">                 </span><span class="c1"># Representative days</span>
-<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">              </span><span class="c1"># Time resolution (1=hourly)</span>
-<span class="nt">seasons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">                    </span><span class="c1"># Seasonal divisions</span>
+<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;k4h1WND_limited&quot;</span><span class="w">  </span><span class="c1"># Scenario identifier</span>
+<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span><span class="w">                  </span><span class="c1"># Total days to model</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">                      </span><span class="c1"># Representative days</span>
+<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">                   </span><span class="c1"># Time resolution (1=hourly)</span>
+<span class="nt">seasons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">                         </span><span class="c1"># Seasonal divisions</span>
 
 <span class="c1"># Storage parameters</span>
-<span class="nt">StorageLevelStart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w">        </span><span class="c1"># Initial state of charge</span>
-<span class="nt">StorageMaxCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">       </span><span class="c1"># Maximum storage capacity</span>
-<span class="nt">ResidualStorageCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w">    </span><span class="c1"># Pre-existing storage</span>
+<span class="nt">StorageLevelStart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.10</span><span class="w">            </span><span class="c1"># Initial state of charge</span>
+<span class="nt">StorageMaxCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w">            </span><span class="c1"># Maximum storage capacity (GW)</span>
+<span class="nt">ResidualStorageCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span><span class="w">      </span><span class="c1"># Pre-existing storage</span>
 
 <span class="c1"># Data paths</span>
 <span class="nt">data_8760</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Data_8760&quot;</span>
-<span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CapacityFactor.csv&quot;</span><span class="w">    </span><span class="c1"># Renewable profiles</span>
+<span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CapacityFactor_Wind.csv&quot;</span><span class="w">    </span><span class="c1"># Renewable profiles</span>
 <span class="w">  </span><span class="nt">SDP</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SpecifiedDemandProfile.csv&quot;</span><span class="w">  </span><span class="c1"># Demand profiles</span>
 
 <span class="c1"># Results configuration</span>
 <span class="nt">results</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Results&quot;</span>
-<span class="w">  </span><span class="nt">directory_GUI</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Results_GUI&quot;</span>
+<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Results_Limited&quot;</span>
+<span class="w">  </span><span class="nt">directory_GUI</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Results_Limited/GUI_WND_Limited&quot;</span>
 <span class="w">  </span><span class="nt">results_copied_filename</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Storage_Level&quot;</span>
-<span class="w">  </span><span class="nt">results_excel_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;results.xlsx&quot;</span>
+<span class="w">  </span><span class="nt">results_excel_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Simulation_Results.xlsx&quot;</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="output-structure">
 <h2>Output Structure<a class="headerlink" href="#output-structure" title="Link to this heading">#</a></h2>
-<p>After execution, the workflow generates:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Results/
-├── k4h1WND_Storage_Level_Model_Cluster.csv
-├── k4h1WND_Storage_Level_Model_Kotzur.csv  
-├── k4h1WND_Storage_Level_Model_Welsch.csv
-├── k4h1WND_Storage_Level_Model_Niet.csv
-├── k4h1WND_Storage_Level_Model_Kotzur_intraday.csv
-├── k4h1WND_Storage_Level_Model_Welsch_intraday.csv
-├── k4h1WND_Figure.png                    # Overview comparison
-├── k4h1WND_Figure_Hourly.png            # Detailed hourly view  
-├── k4h1WND_Figure_Hourly_2Weeks.png     # Two-week detail
-└── results.xlsx                          # Summary tables
+<p>After execution, the workflow generates (using the default <code class="docutils literal notranslate"><span class="pre">scenario_name:</span> <span class="pre">k4h1WND_limited</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Results_Limited/
+├── k4h1WND_limited_Storage_Level_Model_Cluster.csv
+├── k4h1WND_limited_Storage_Level_Model_Kotzur.csv
+├── k4h1WND_limited_Storage_Level_Model_Welsch.csv
+├── k4h1WND_limited_Storage_Level_Model_Niet.csv
+├── k4h1WND_limited_Storage_Level_Model_Kotzur_intraday.csv
+├── k4h1WND_limited_Storage_Level_Model_Welsch_intraday.csv
+├── k4h1WND_limited_Figure.png                # Overview comparison
+├── k4h1WND_limited_Figure_Hourly.png         # Detailed hourly view
+├── k4h1WND_limited_Figure_Hourly_2Weeks.png  # Two-week detail
+└── Simulation_Results.xlsx                    # Summary tables
 </pre></div>
 </div>
+<blockquote>
+<div><p><strong>Note:</strong> The base reference file used for graph comparison (<code class="docutils literal notranslate"><span class="pre">file_base</span></code>) is currently hardcoded in <code class="docutils literal notranslate"><span class="pre">main.py</span></code> as <code class="docutils literal notranslate"><span class="pre">k365h1WND_Storage_Level_Model_Niet.csv</span></code>. This file must exist in the results folder before running a scenario with a different <code class="docutils literal notranslate"><span class="pre">scenario_name</span></code>.</p>
+</div></blockquote>
 </section>
 <section id="performance-considerations">
 <h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">#</a></h2>
@@ -809,6 +825,7 @@ ls<span class="w"> </span>Model_*/Results/
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-commands">Execution Commands</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-execution">Basic Execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-parametric-execution">Batch / Parametric Execution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
 </ul>

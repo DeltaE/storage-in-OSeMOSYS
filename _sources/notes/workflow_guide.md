@@ -131,7 +131,7 @@ if case_name == 'Model_Welsch':
 if case_name in ['Model_Niet', 'Model_Cluster', 'Model_Kotzur', 'Model_Welsch']:
     # Copy base input files
     for csv_file in csv_files:
-        if csv_file.stem in expected_file_names:
+        if csv_file.stem in excepted_file_names:  # note: variable is named 'excepted_file_names' in code
             shutil.copy(csv_file, input_csv_dir / csv_file.name)
     
     # Update core timeslice structure
@@ -216,8 +216,23 @@ fig3.savefig(Path(results_destination_folder) / f"{scenario_name}_Figure_Hourly_
 
 ### Basic Execution
 ```bash
-# Run complete workflow
+# Run complete workflow for the scenario defined in config/config.yaml
 python main.py
+```
+
+### Batch / Parametric Execution
+
+`automation.py` provides batch execution over multiple `n_clusters` and `hour_grouping` values. It updates `config/config.yaml` automatically for each combination and calls `main.py`:
+
+```bash
+python automation.py
+```
+
+Edit the lists at the top of `automation.py` to control which combinations are run:
+
+```python
+n_clusters    = [4]          # e.g. [2, 4, 8, 12]
+hour_grouping = [1]          # e.g. [1, 2, 4, 6, 12]
 ```
 
 ### Environment Management
@@ -241,48 +256,50 @@ Edit `config/config.yaml` before running:
 
 ```yaml
 # Analysis parameters
-scenario_name: "k4h1WND"      # Scenario identifier
-days_in_year: 365             # Total days to model
-n_clusters: 4                 # Representative days
-hour_grouping: 1              # Time resolution (1=hourly)
-seasons: 4                    # Seasonal divisions
+scenario_name: "k4h1WND_limited"  # Scenario identifier
+days_in_year: 365                  # Total days to model
+n_clusters: 4                      # Representative days
+hour_grouping: 1                   # Time resolution (1=hourly)
+seasons: 1                         # Seasonal divisions
 
 # Storage parameters
-StorageLevelStart: 0.5        # Initial state of charge
-StorageMaxCapacity: 100       # Maximum storage capacity
-ResidualStorageCapacity: 0    # Pre-existing storage
+StorageLevelStart: 0.10            # Initial state of charge
+StorageMaxCapacity: 0.5            # Maximum storage capacity (GW)
+ResidualStorageCapacity: 0.05      # Pre-existing storage
 
 # Data paths
 data_8760:
   directory: "Data_8760"
-  CF: "CapacityFactor.csv"    # Renewable profiles
+  CF: "CapacityFactor_Wind.csv"    # Renewable profiles
   SDP: "SpecifiedDemandProfile.csv"  # Demand profiles
 
 # Results configuration
 results:
-  directory: "Results"
-  directory_GUI: "Results_GUI"
+  directory: "Results_Limited"
+  directory_GUI: "Results_Limited/GUI_WND_Limited"
   results_copied_filename: "Storage_Level"
-  results_excel_file: "results.xlsx"
+  results_excel_file: "Simulation_Results.xlsx"
 ```
 
 ## Output Structure
 
-After execution, the workflow generates:
+After execution, the workflow generates (using the default `scenario_name: k4h1WND_limited`):
 
 ```
-Results/
-├── k4h1WND_Storage_Level_Model_Cluster.csv
-├── k4h1WND_Storage_Level_Model_Kotzur.csv  
-├── k4h1WND_Storage_Level_Model_Welsch.csv
-├── k4h1WND_Storage_Level_Model_Niet.csv
-├── k4h1WND_Storage_Level_Model_Kotzur_intraday.csv
-├── k4h1WND_Storage_Level_Model_Welsch_intraday.csv
-├── k4h1WND_Figure.png                    # Overview comparison
-├── k4h1WND_Figure_Hourly.png            # Detailed hourly view  
-├── k4h1WND_Figure_Hourly_2Weeks.png     # Two-week detail
-└── results.xlsx                          # Summary tables
+Results_Limited/
+├── k4h1WND_limited_Storage_Level_Model_Cluster.csv
+├── k4h1WND_limited_Storage_Level_Model_Kotzur.csv
+├── k4h1WND_limited_Storage_Level_Model_Welsch.csv
+├── k4h1WND_limited_Storage_Level_Model_Niet.csv
+├── k4h1WND_limited_Storage_Level_Model_Kotzur_intraday.csv
+├── k4h1WND_limited_Storage_Level_Model_Welsch_intraday.csv
+├── k4h1WND_limited_Figure.png                # Overview comparison
+├── k4h1WND_limited_Figure_Hourly.png         # Detailed hourly view
+├── k4h1WND_limited_Figure_Hourly_2Weeks.png  # Two-week detail
+└── Simulation_Results.xlsx                    # Summary tables
 ```
+
+> **Note:** The base reference file used for graph comparison (`file_base`) is currently hardcoded in `main.py` as `k365h1WND_Storage_Level_Model_Niet.csv`. This file must exist in the results folder before running a scenario with a different `scenario_name`.
 
 ## Performance Considerations
 

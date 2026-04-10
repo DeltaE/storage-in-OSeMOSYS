@@ -119,26 +119,41 @@ The project includes a comprehensive Makefile for environment management:
 
 ### Environment Management
 ```bash
-make setup          # Complete environment setup
+make setup          # Complete environment setup (create + deps + test)
+make env-create     # Create environment from environment.yml
+make env-update     # Update existing environment from environment.yml
+make env-export     # Export current environment to environment.yml
+make env-remove     # Remove the conda environment
+make env-list       # List all conda environments
+make env-info       # Show environment information
 make test-env       # Test environment and dependencies
-make clean          # Remove environment
-make update-env     # Update all packages
-make freeze         # Export current environment
+make clean          # Remove .pyc files and __pycache__ directories
+make recreate       # Remove and recreate the environment from scratch
+make backup         # Export environment to timestamped backup file
+```
+
+### Running the Model
+```bash
+make run-main       # Run main.py inside the conda environment
+make activate       # Print the conda activate command
 ```
 
 ### Development Workflow
 ```bash
-make dev-setup      # Setup with development tools
-make format         # Format code with black
-make lint          # Check code style with flake8
-make test          # Run test suite
+make dev-setup      # Setup with development tools (black, flake8, pytest)
 ```
 
 ### Documentation
 ```bash
-make docs          # Build documentation
-make docs-serve    # Serve documentation locally
-make docs-clean    # Clean documentation build
+make docs-build    # Build documentation with Sphinx
+make docs-serve    # Serve documentation locally at http://localhost:8000
+make docs-clean    # Clean documentation build files
+make docs-setup    # Install documentation dependencies
+make docs-autodoc  # Auto-generate API docs from source code
+make docs-full     # Complete workflow: autodoc + build
+make docs-live     # Live development server with auto-reload
+make docs-deploy   # Deploy documentation to GitHub Pages
+make docs-check    # Check documentation for errors
 ```
 
 ## Package Details
@@ -208,6 +223,7 @@ Or manually verify components:
 # test_environment.py
 import sys
 import importlib
+from pathlib import Path
 
 def test_python_version():
     """Test Python version compatibility."""

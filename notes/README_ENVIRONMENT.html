@@ -386,6 +386,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#makefile-commands">Makefile Commands</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-model">Running the Model</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development-workflow">Development Workflow</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
 </ul>
@@ -578,28 +579,44 @@ conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export<
 <p>The project includes a comprehensive Makefile for environment management:</p>
 <section id="environment-management">
 <h3>Environment Management<a class="headerlink" href="#environment-management" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>setup<span class="w">          </span><span class="c1"># Complete environment setup</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>setup<span class="w">          </span><span class="c1"># Complete environment setup (create + deps + test)</span>
+make<span class="w"> </span>env-create<span class="w">     </span><span class="c1"># Create environment from environment.yml</span>
+make<span class="w"> </span>env-update<span class="w">     </span><span class="c1"># Update existing environment from environment.yml</span>
+make<span class="w"> </span>env-export<span class="w">     </span><span class="c1"># Export current environment to environment.yml</span>
+make<span class="w"> </span>env-remove<span class="w">     </span><span class="c1"># Remove the conda environment</span>
+make<span class="w"> </span>env-list<span class="w">       </span><span class="c1"># List all conda environments</span>
+make<span class="w"> </span>env-info<span class="w">       </span><span class="c1"># Show environment information</span>
 make<span class="w"> </span>test-env<span class="w">       </span><span class="c1"># Test environment and dependencies</span>
-make<span class="w"> </span>clean<span class="w">          </span><span class="c1"># Remove environment</span>
-make<span class="w"> </span>update-env<span class="w">     </span><span class="c1"># Update all packages</span>
-make<span class="w"> </span>freeze<span class="w">         </span><span class="c1"># Export current environment</span>
+make<span class="w"> </span>clean<span class="w">          </span><span class="c1"># Remove .pyc files and __pycache__ directories</span>
+make<span class="w"> </span>recreate<span class="w">       </span><span class="c1"># Remove and recreate the environment from scratch</span>
+make<span class="w"> </span>backup<span class="w">         </span><span class="c1"># Export environment to timestamped backup file</span>
+</pre></div>
+</div>
+</section>
+<section id="running-the-model">
+<h3>Running the Model<a class="headerlink" href="#running-the-model" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>run-main<span class="w">       </span><span class="c1"># Run main.py inside the conda environment</span>
+make<span class="w"> </span>activate<span class="w">       </span><span class="c1"># Print the conda activate command</span>
 </pre></div>
 </div>
 </section>
 <section id="development-workflow">
 <h3>Development Workflow<a class="headerlink" href="#development-workflow" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>dev-setup<span class="w">      </span><span class="c1"># Setup with development tools</span>
-make<span class="w"> </span>format<span class="w">         </span><span class="c1"># Format code with black</span>
-make<span class="w"> </span>lint<span class="w">          </span><span class="c1"># Check code style with flake8</span>
-make<span class="w"> </span><span class="nb">test</span><span class="w">          </span><span class="c1"># Run test suite</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>dev-setup<span class="w">      </span><span class="c1"># Setup with development tools (black, flake8, pytest)</span>
 </pre></div>
 </div>
 </section>
 <section id="documentation">
 <h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs<span class="w">          </span><span class="c1"># Build documentation</span>
-make<span class="w"> </span>docs-serve<span class="w">    </span><span class="c1"># Serve documentation locally</span>
-make<span class="w"> </span>docs-clean<span class="w">    </span><span class="c1"># Clean documentation build</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs-build<span class="w">    </span><span class="c1"># Build documentation with Sphinx</span>
+make<span class="w"> </span>docs-serve<span class="w">    </span><span class="c1"># Serve documentation locally at http://localhost:8000</span>
+make<span class="w"> </span>docs-clean<span class="w">    </span><span class="c1"># Clean documentation build files</span>
+make<span class="w"> </span>docs-setup<span class="w">    </span><span class="c1"># Install documentation dependencies</span>
+make<span class="w"> </span>docs-autodoc<span class="w">  </span><span class="c1"># Auto-generate API docs from source code</span>
+make<span class="w"> </span>docs-full<span class="w">     </span><span class="c1"># Complete workflow: autodoc + build</span>
+make<span class="w"> </span>docs-live<span class="w">     </span><span class="c1"># Live development server with auto-reload</span>
+make<span class="w"> </span>docs-deploy<span class="w">   </span><span class="c1"># Deploy documentation to GitHub Pages</span>
+make<span class="w"> </span>docs-check<span class="w">    </span><span class="c1"># Check documentation for errors</span>
 </pre></div>
 </div>
 </section>
@@ -674,6 +691,7 @@ make<span class="w"> </span>test-env
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># test_environment.py</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">test_python_version</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test Python version compatibility.&quot;&quot;&quot;</span>
@@ -994,6 +1012,7 @@ conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export<
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#makefile-commands">Makefile Commands</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-model">Running the Model</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development-workflow">Development Workflow</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
 </ul>
