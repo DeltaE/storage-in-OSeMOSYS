@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6d335f45" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -370,53 +370,46 @@
   <section id="results">
 <h1>Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h1>
 <p>How to regenerate the results of the published study, what each output file contains, and how to
-analyse them.</p>
+analyse them. Pick a card to open the detailed steps.</p>
+<div class="section-cards section-cards--results">
+  <a class="section-card section-card--steps" href="notes/reproducibility.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Guide</span>
+    </span>
+    <span class="section-card__title">Reproducibility guide</span>
+    <span class="section-card__text">What you need, a 2-minute check, the full regeneration, and which run produced each published number.</span>
+    <span class="section-card__more">Open the steps →</span>
+  </a>
+  <a class="section-card section-card--notebook" href="notebooks/reproduce_study.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Notebook</span>
+    </span>
+    <span class="section-card__title">Reproduce the study</span>
+    <span class="section-card__text">Twelve executed steps, from inputs and representative days to Table 4, the stress test and seed sensitivity.</span>
+    <span class="section-card__more">Open the notebook →</span>
+  </a>
+  <a class="section-card section-card--outputs" href="notes/outputs.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Files</span>
+    </span>
+    <span class="section-card__title">Outputs</span>
+    <span class="section-card__text">What is in <code>Simulation_Results.xlsx</code> and the state-of-charge files, and how to load them in Python.</span>
+    <span class="section-card__more">See the files →</span>
+  </a>
+  <a class="section-card section-card--results" href="notes/results_analysis.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Analysis</span>
+    </span>
+    <span class="section-card__title">Results analysis</span>
+    <span class="section-card__text">Comparing formulations on cost, capacity and runtime, recommended plots, and quality checks.</span>
+    <span class="section-card__more">Start analysing →</span>
+  </a>
+</div>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notes/reproducibility.html">Reproducibility guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/reproducibility.html#what-you-need">1. What you need</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/reproducibility.html#what-is-in-the-repository">2. What is in the repository</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/reproducibility.html#step-by-step">3. Step by step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/reproducibility.html#where-each-result-comes-from">4. Where each result comes from</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/reproducibility.html#what-was-verified">5. What was verified</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/reproducibility.html#numerical-and-platform-notes">6. Numerical and platform notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/reproducibility.html#changes-made-for-the-published-version">7. Changes made for the published version</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/reproduce_study.html">Reproducing the study step by step</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#0.-Setup">0. Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#1.-Computational-environment-(Section-3.4)">1. Computational environment (Section 3.4)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#2.-Model-inputs-(Section-3.3,-Table-3;-Figures-4–5)">2. Model inputs (Section 3.3, Table 3; Figures 4–5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#3.-Representative-days-(Section-3.2)">3. Representative days (Section 3.2)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#4.-Independent-SoC-verification-(Section-4.1;-reviewer-comment-C4)">4. Independent SoC verification (Section 4.1; reviewer comment C4)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#5.-Reproduction-check-against-the-archived-results">5. Reproduction check against the archived results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#6.-Full-year-hourly-benchmarks-(Section-4.1,-Figure-6,-Table-S1)">6. Full-year hourly benchmarks (Section 4.1, Figure 6, Table S1)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#7.-Aggregated-configurations-(Sections-4.2–4.3)">7. Aggregated configurations (Sections 4.2–4.3)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#8.-Table-4-and-cost-error-curves-(Section-4.2;-Figure-7)">8. Table 4 and cost-error curves (Section 4.2; Figure 7)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#9.-Binding-storage-capacity-stress-test-(Section-4.4;-Figures-9–10)">9. Binding storage-capacity stress test (Section 4.4; Figures 9–10)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#10.-SoC-fidelity-metrics-(Section-4.3;-Figure-8)">10. SoC fidelity metrics (Section 4.3; Figure 8)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#11.-Seed-sensitivity-of-system-cost-(reviewer-comment-C2)">11. Seed sensitivity of system cost (reviewer comment C2)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/reproduce_study.html#12.-Where-each-published-number-comes-from">12. Where each published number comes from</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/outputs.html">Outputs</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/outputs.html#simulation-results-xlsx"><code class="docutils literal notranslate"><span class="pre">Simulation_Results.xlsx</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/outputs.html#state-of-charge-files">State-of-charge files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/outputs.html#other-files">Other files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/outputs.html#loading-results-in-python">Loading results in Python</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/results_analysis.html">Results Analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#output-files">Output Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#analysis-techniques">Analysis Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#visualization">Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#performance-metrics">Performance Metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#quality-assurance">Quality Assurance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#future-enhancements">Future Enhancements</a></li>
-</ul>
-</li>
-</ul>
 </div>
 </section>
 

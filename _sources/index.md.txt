@@ -1,30 +1,46 @@
 # Storage in OSeMOSYS
 
 <p class="lead">
-Storage formulations for long-term energy planning models with temporal aggregation —
-four ways to represent energy storage in OSeMOSYS, compared side by side.
+Long-term energy models often simulate only a handful of "representative days" instead of every
+hour of the year, which keeps them fast but makes energy storage hard to capture. This site
+accompanies a study that compares four ways of modelling storage in
+<a href="https://osemosys.github.io/">OSeMOSYS</a> under that simplification, and shares the code
+to rerun it. The four cards below follow the order you would read it in: the idea, how to run
+the models, what the study found, and the code behind it.
 </p>
 
 <div class="section-cards">
-  <a class="section-card" href="concept.html">
-    <span class="section-card__step">01</span>
+  <a class="section-card section-card--concept" href="concept.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">01</span>
+    </span>
     <span class="section-card__title">Concept</span>
-    <span class="section-card__text">Why storage is hard to model under temporal aggregation, and the four formulations compared.</span>
+    <span class="section-card__text">Why storage is hard to model with representative days, and the four formulations compared.</span>
   </a>
-  <a class="section-card" href="workflow.html">
-    <span class="section-card__step">02</span>
+  <a class="section-card section-card--workflow" href="workflow.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">02</span>
+    </span>
     <span class="section-card__title">Modelling workflow</span>
-    <span class="section-card__text">Installation, quickstart, pipeline steps, configuration and assumptions.</span>
+    <span class="section-card__text">Install, run the pipeline and set up your own scenarios.</span>
   </a>
-  <a class="section-card" href="results.html">
-    <span class="section-card__step">03</span>
+  <a class="section-card section-card--results" href="results.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">03</span>
+    </span>
     <span class="section-card__title">Results</span>
-    <span class="section-card__text">Reproduce the published study, output files and how to analyse them.</span>
+    <span class="section-card__text">Reproduce the published study, read the output files and analyse them.</span>
   </a>
-  <a class="section-card" href="api.html">
-    <span class="section-card__step">04</span>
+  <a class="section-card section-card--api" href="api.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">04</span>
+    </span>
     <span class="section-card__title">API</span>
-    <span class="section-card__text">Reference for the <code>src</code> package, generated from the source code.</span>
+    <span class="section-card__text">What each module in <code>src</code> does and how to reuse it in your own work.</span>
   </a>
 </div>
 
@@ -41,8 +57,14 @@ See {doc}`quickstart` for what this does and where the results go.
 
 ## Citation
 
-> Borba, B., Islam, M. E., & Niet, T. *Storage in Long-Term Energy Planning Models with Temporal
-> Aggregation: Best Practices and Algorithms.* Environmental Research Communications (2026).
+<div class="citation-box">
+  <span class="status-badge">Under review</span>
+  <p>
+    Borba, B., <a href="https://eliasinul.com">Md Eliasinul Islam</a>, &amp; Niet, T.
+    <em>Storage in Long-Term Energy Planning Models with Temporal Aggregation: Best Practices and
+    Algorithms.</em> Environmental Research Communications (2026).
+  </p>
+</div>
 
 Developed at the Delta E+ Research Lab, Simon Fraser University · MIT License
 

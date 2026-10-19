@@ -1,7 +1,51 @@
 # API
 
-The pipeline lives in the `src` package. The overview explains how the modules fit together; the
-reference is generated from the source code.
+The pipeline lives in the `src` package. You do not need to read it to run the study:
+`python main.py` calls everything for you. This page is for when you want to reuse a piece of the
+method, or understand how a step in the paper turns into code.
+
+## How to use this section
+
+**1. Find the step you care about.** Each module does one step of the method, so the reference
+reads like the method section of the paper:
+
+| Step in the study | Module | What it gives you |
+| --- | --- | --- |
+| Pick representative days | `src.cluster` | `cluster_data()` groups the 365 days with k-means and returns the chosen days plus a day-by-day map of which representative day stands in for each real day |
+| Shrink the hourly data | `src.update_CFandSDP` | `CFandSDP()` keeps only the representative days and averages (or sums) hours into blocks |
+| Build the time structure | `src.update_yearsplit`, `src.update_conversion*`, `src.update_daysindaytype` | The OSeMOSYS time-slice sets and weights each storage formulation needs |
+| Rebuild the full year | `src.Kotzur_intraday`, `src.Welsch_intraday2` | Turns the solved storage levels back into an 8760-hour state-of-charge series |
+| Solve and collect | `src.simulation`, `src.table_generator` | Runs GLPK and writes cost, capacity and runtime to `Simulation_Results.xlsx` |
+| Reproduce the paper | `src.reproduce` | `run_case()`, `load_results()`, `add_errors()`, `table4()` for scripted scenario sweeps |
+
+**2. Call it from your own script.** The functions take file paths and plain Python values, so
+you can use one without the rest. For example, to see which days the clustering would pick for
+your own wind and demand profiles:
+
+```python
+from src.cluster import cluster_data
+
+days, sequence = cluster_data("my_wind_cf.csv", "my_demand.csv", n_clusters=8, random_state=0)
+print(days)          # the 8 representative days
+print(sequence[:7])  # which representative day stands in for each day of the first week
+```
+
+Or, to rerun one scenario of the study with all four formulations and get a table back:
+
+```python
+from src.reproduce import run_case
+
+df = run_case("WND", k=8, h=1)
+print(df[["Model", "Total cost", "Storage Capacity"]])
+```
+
+**3. Use it as a reference for your own model.** If you work in another framework, the modules
+are a compact recipe: how many representative days to use, how to weight them, and how each
+formulation links storage across days. Reading `src.update_yearsplit` and the `update_conversion*`
+modules next to {doc}`notes/about_storage_algorithms` shows exactly what each formulation adds to a
+model, which you can port to your own tool.
+
+## Reference
 
 ```{toctree}
 :maxdepth: 2

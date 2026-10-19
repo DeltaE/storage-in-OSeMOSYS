@@ -1,9 +1,49 @@
 # Results
 
 How to regenerate the results of the published study, what each output file contains, and how to
-analyse them.
+analyse them. Pick a card to open the detailed steps.
+
+<div class="section-cards section-cards--results">
+  <a class="section-card section-card--steps" href="notes/reproducibility.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Guide</span>
+    </span>
+    <span class="section-card__title">Reproducibility guide</span>
+    <span class="section-card__text">What you need, a 2-minute check, the full regeneration, and which run produced each published number.</span>
+    <span class="section-card__more">Open the steps →</span>
+  </a>
+  <a class="section-card section-card--notebook" href="notebooks/reproduce_study.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Notebook</span>
+    </span>
+    <span class="section-card__title">Reproduce the study</span>
+    <span class="section-card__text">Twelve executed steps, from inputs and representative days to Table 4, the stress test and seed sensitivity.</span>
+    <span class="section-card__more">Open the notebook →</span>
+  </a>
+  <a class="section-card section-card--outputs" href="notes/outputs.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Files</span>
+    </span>
+    <span class="section-card__title">Outputs</span>
+    <span class="section-card__text">What is in <code>Simulation_Results.xlsx</code> and the state-of-charge files, and how to load them in Python.</span>
+    <span class="section-card__more">See the files →</span>
+  </a>
+  <a class="section-card section-card--results" href="notes/results_analysis.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Analysis</span>
+    </span>
+    <span class="section-card__title">Results analysis</span>
+    <span class="section-card__text">Comparing formulations on cost, capacity and runtime, recommended plots, and quality checks.</span>
+    <span class="section-card__more">Start analysing →</span>
+  </a>
+</div>
 
 ```{toctree}
+:hidden:
 :maxdepth: 2
 
 notes/reproducibility

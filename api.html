@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=674d5774" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -203,6 +203,10 @@
   
   
 
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
   
 </div>
 
@@ -390,8 +394,73 @@
                   
   <section id="api">
 <h1>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h1>
-<p>The pipeline lives in the <code class="docutils literal notranslate"><span class="pre">src</span></code> package. The overview explains how the modules fit together; the
-reference is generated from the source code.</p>
+<p>The pipeline lives in the <code class="docutils literal notranslate"><span class="pre">src</span></code> package. You do not need to read it to run the study:
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">main.py</span></code> calls everything for you. This page is for when you want to reuse a piece of the
+method, or understand how a step in the paper turns into code.</p>
+<section id="how-to-use-this-section">
+<h2>How to use this section<a class="headerlink" href="#how-to-use-this-section" title="Link to this heading">#</a></h2>
+<p><strong>1. Find the step you care about.</strong> Each module does one step of the method, so the reference
+reads like the method section of the paper:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step in the study</p></th>
+<th class="head"><p>Module</p></th>
+<th class="head"><p>What it gives you</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Pick representative days</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src.cluster</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cluster_data()</span></code> groups the 365 days with k-means and returns the chosen days plus a day-by-day map of which representative day stands in for each real day</p></td>
+</tr>
+<tr class="row-odd"><td><p>Shrink the hourly data</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src.update_CFandSDP</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">CFandSDP()</span></code> keeps only the representative days and averages (or sums) hours into blocks</p></td>
+</tr>
+<tr class="row-even"><td><p>Build the time structure</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src.update_yearsplit</span></code>, <code class="docutils literal notranslate"><span class="pre">src.update_conversion*</span></code>, <code class="docutils literal notranslate"><span class="pre">src.update_daysindaytype</span></code></p></td>
+<td><p>The OSeMOSYS time-slice sets and weights each storage formulation needs</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rebuild the full year</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src.Kotzur_intraday</span></code>, <code class="docutils literal notranslate"><span class="pre">src.Welsch_intraday2</span></code></p></td>
+<td><p>Turns the solved storage levels back into an 8760-hour state-of-charge series</p></td>
+</tr>
+<tr class="row-even"><td><p>Solve and collect</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src.simulation</span></code>, <code class="docutils literal notranslate"><span class="pre">src.table_generator</span></code></p></td>
+<td><p>Runs GLPK and writes cost, capacity and runtime to <code class="docutils literal notranslate"><span class="pre">Simulation_Results.xlsx</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Reproduce the paper</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">src.reproduce</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">run_case()</span></code>, <code class="docutils literal notranslate"><span class="pre">load_results()</span></code>, <code class="docutils literal notranslate"><span class="pre">add_errors()</span></code>, <code class="docutils literal notranslate"><span class="pre">table4()</span></code> for scripted scenario sweeps</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>2. Call it from your own script.</strong> The functions take file paths and plain Python values, so
+you can use one without the rest. For example, to see which days the clustering would pick for
+your own wind and demand profiles:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">cluster_data</span>
+
+<span class="n">days</span><span class="p">,</span> <span class="n">sequence</span> <span class="o">=</span> <span class="n">cluster_data</span><span class="p">(</span><span class="s2">"my_wind_cf.csv"</span><span class="p">,</span> <span class="s2">"my_demand.csv"</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">days</span><span class="p">)</span>          <span class="c1"># the 8 representative days</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sequence</span><span class="p">[:</span><span class="mi">7</span><span class="p">])</span>  <span class="c1"># which representative day stands in for each day of the first week</span>
+</pre></div>
+</div>
+<p>Or, to rerun one scenario of the study with all four formulations and get a table back:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.reproduce</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_case</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">run_case</span><span class="p">(</span><span class="s2">"WND"</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">"Model"</span><span class="p">,</span> <span class="s2">"Total cost"</span><span class="p">,</span> <span class="s2">"Storage Capacity"</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p><strong>3. Use it as a reference for your own model.</strong> If you work in another framework, the modules
+are a compact recipe: how many representative days to use, how to weight them, and how each
+formulation links storage across days. Reading <code class="docutils literal notranslate"><span class="pre">src.update_yearsplit</span></code> and the <code class="docutils literal notranslate"><span class="pre">update_conversion*</span></code>
+modules next to <a class="reference internal" href="notes/about_storage_algorithms.html"><span class="doc">About Storage Modelling</span></a> shows exactly what each formulation adds to a
+model, which you can port to your own tool.</p>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="notes/api_reference.html">API Reference</a><ul>
@@ -417,6 +486,7 @@ reference is generated from the source code.</p>
 </li>
 </ul>
 </div>
+</section>
 </section>
 
 
@@ -453,6 +523,25 @@ reference is generated from the source code.</p>
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-this-section">How to use this section</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

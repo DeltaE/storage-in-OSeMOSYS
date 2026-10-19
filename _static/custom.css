@@ -34,12 +34,82 @@ html {
 h1 { font-weight: 650; letter-spacing: -0.01em; }
 h2 { font-weight: 600; margin-top: 2.5rem; }
 
+/* Icons (Lucide-style line icons, drawn with CSS masks so they take the text colour) */
+html {
+  --icon-concept: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d=%22M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5%22/%3E%3Cpath d=%22M9 18h6%22/%3E%3Cpath d=%22M10 22h4%22/%3E%3C/svg%3E");
+  --icon-workflow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width=%228%22 height=%228%22 x=%223%22 y=%223%22 rx=%222%22/%3E%3Cpath d=%22M7 11v4a2 2 0 0 0 2 2h4%22/%3E%3Crect width=%228%22 height=%228%22 x=%2213%22 y=%2213%22 rx=%222%22/%3E%3C/svg%3E");
+  --icon-results: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d=%22M3 3v18h18%22/%3E%3Cpath d=%22M18 17V9%22/%3E%3Cpath d=%22M13 17V5%22/%3E%3Cpath d=%22M8 17v-3%22/%3E%3C/svg%3E");
+  --icon-api: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d=%22m18 16 4-4-4-4%22/%3E%3Cpath d=%22m6 8-4 4 4 4%22/%3E%3Cpath d=%22m14.5 4-5 16%22/%3E%3C/svg%3E");
+  --icon-steps: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d=%22m3 17 2 2 4-4%22/%3E%3Cpath d=%22m3 7 2 2 4-4%22/%3E%3Cpath d=%22M13 6h8%22/%3E%3Cpath d=%22M13 12h8%22/%3E%3Cpath d=%22M13 18h8%22/%3E%3C/svg%3E");
+  --icon-notebook: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d=%22M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z%22/%3E%3Cpath d=%22M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z%22/%3E%3C/svg%3E");
+  --icon-outputs: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d=%22M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z%22/%3E%3Cpath d=%22M14 2v4a2 2 0 0 0 2 2h4%22/%3E%3Cpath d=%22M8 13h8%22/%3E%3Cpath d=%22M8 17h8%22/%3E%3C/svg%3E");
+}
+
+/* Top navigation: the four sections as spread-out pill tabs with an icon */
+.bd-header .navbar-header-items__center { flex-grow: 1; }
+.bd-header .navbar-header-items__center > .navbar-item,
+.bd-header .navbar-header-items__center nav { flex-grow: 1; width: 100%; }
+.bd-header ul.bd-navbar-elements {
+  max-width: 54rem;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  gap: 0.75rem;
+}
+.bd-header ul.navbar-nav > li.nav-item > .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 1rem !important;
+  border: 1px solid var(--pst-color-border);
+  border-radius: 999px;
+  background: #f7fafb;
+  color: var(--pst-color-text-base);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+/* The theme draws its underline with ::before; reset it and use it for the icon instead */
+.bd-header ul.navbar-nav > li.nav-item > .nav-link::before,
+.bd-header ul.navbar-nav > li.nav-item > .nav-link:hover::before,
+.bd-header ul.navbar-nav > li.nav-item.current > .nav-link::before {
+  content: "";
+  display: block;
+  position: static;
+  inset: auto;
+  margin: 0;
+  border: 0;
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  background-color: var(--pst-color-primary);
+  -webkit-mask: var(--tab-icon) center / contain no-repeat;
+          mask: var(--tab-icon) center / contain no-repeat;
+}
+.bd-header ul.navbar-nav > li.nav-item > .nav-link:hover {
+  border-color: rgba(31, 111, 139, 0.45);
+  background: #eef6f9;
+  color: var(--pst-color-primary);
+  box-shadow: 0 0 0 3px rgba(31, 111, 139, 0.10), 0 0 14px rgba(31, 111, 139, 0.22);
+  text-decoration: none;
+}
+.bd-header ul.navbar-nav > li.nav-item.current > .nav-link {
+  border-color: var(--pst-color-primary);
+  background: var(--pst-color-primary);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(31, 111, 139, 0.35);
+}
+.bd-header ul.navbar-nav > li.nav-item.current > .nav-link::before { background-color: #ffffff; }
+
+/* Matched by position: the current tab's link is just "#", so href can't identify it */
+.bd-navbar-elements > li.nav-item:nth-child(1) { --tab-icon: var(--icon-concept); }
+.bd-navbar-elements > li.nav-item:nth-child(2) { --tab-icon: var(--icon-workflow); }
+.bd-navbar-elements > li.nav-item:nth-child(3) { --tab-icon: var(--icon-results); }
+.bd-navbar-elements > li.nav-item:nth-child(4) { --tab-icon: var(--icon-api); }
+
 /* Landing page */
 .lead {
-  font-size: 1.2rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.65;
   color: var(--pst-color-text-muted);
-  max-width: 42rem;
+  max-width: 48rem;
   margin-bottom: 2rem;
 }
 
@@ -49,41 +119,109 @@ h2 { font-weight: 600; margin-top: 2.5rem; }
   gap: 1rem;
   margin: 1.5rem 0 2.5rem;
 }
-
 @media (min-width: 640px) {
   .section-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1000px) {
+  .section-cards { grid-template-columns: repeat(4, 1fr); }
 }
 
 .section-card {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  padding: 1.25rem 1.25rem 1.4rem;
+  gap: 0.4rem;
+  padding: 1.2rem 1.15rem 1.3rem;
   border: 1px solid var(--pst-color-border);
-  border-radius: 10px;
-  background: var(--pst-color-background);
+  border-radius: 12px;
+  background: #f3f5f7;
   color: var(--pst-color-text-base) !important;
   text-decoration: none !important;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 .section-card:hover {
   border-color: var(--pst-color-primary);
+  background: #ffffff;
   transform: translateY(-2px);
+  box-shadow: 0 0 0 3px rgba(31, 111, 139, 0.08), 0 6px 18px rgba(31, 111, 139, 0.14);
 }
+.section-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+.section-card__icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 8px;
+  background: rgba(31, 111, 139, 0.10);
+  position: relative;
+}
+.section-card__icon::before {
+  content: "";
+  position: absolute;
+  inset: 0.5rem;
+  background-color: var(--pst-color-primary);
+  -webkit-mask: var(--card-icon) center / contain no-repeat;
+          mask: var(--card-icon) center / contain no-repeat;
+}
+.section-card--concept  { --card-icon: var(--icon-concept); }
+.section-card--workflow { --card-icon: var(--icon-workflow); }
+.section-card--results  { --card-icon: var(--icon-results); }
+.section-card--api      { --card-icon: var(--icon-api); }
+.section-card--steps    { --card-icon: var(--icon-steps); }
+.section-card--notebook { --card-icon: var(--icon-notebook); }
+.section-card--outputs  { --card-icon: var(--icon-outputs); }
+
 .section-card__step {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--pst-color-primary);
   letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 .section-card__title {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
 }
 .section-card__text {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   color: var(--pst-color-text-muted);
+}
+.section-card__more {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--pst-color-primary);
+}
+
+/* Results page: two per row reads better for the longer card text */
+@media (min-width: 1000px) {
+  .section-cards--results { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Citation */
+.citation-box {
+  border: 1px solid var(--pst-color-border);
+  border-left: 4px solid #d9822b;
+  border-radius: 8px;
+  background: #fdf8f2;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0 1.5rem;
+}
+.citation-box p { margin: 0.5rem 0 0; line-height: 1.6; }
+.status-badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: #fbe7d1;
+  color: #8a4a0b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 /* Code blocks: flat */
