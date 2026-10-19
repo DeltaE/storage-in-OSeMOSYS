@@ -1,0 +1,858 @@
+
+<!DOCTYPE html>
+
+
+<html lang="Python" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.reproduce &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=e9b82cb4"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/reproduce';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="Python"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Storage in OSEMoSYS 2025.07 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/workflow_guide.html">Workflow Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/about_storage_algorithms.html">About Storage Modelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/configuration_guide.html">Configuration Guide</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/model_specifications.html">Model Specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notes/results_analysis.html">Results Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoapi/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/cluster/index.html">src.cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/reproduce/index.html">src.reproduce</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/simulation/index.html">src.simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/update_list/index.html">src.update_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/src/utilities/index.html">src.utilities</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/DeltaE/RESource" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for src.reproduce</h1><div class="highlight"><pre>
+<span></span><span class="sd">"""Helpers for reproducing Bruno, Islam &amp; Niet, "Storage in long-term energy planning models with</span>
+<span class="sd">temporal aggregation" (Environ. Res. Commun., ERC-105849) with this repository.</span>
+
+<span class="sd">Used by ``reproduce_study.ipynb`` and ``automation.py``. Every model run goes through ``main.py``</span>
+<span class="sd">unchanged, so the notebook exercises exactly the code path that produced the published numbers.</span>
+
+<span class="sd">Naming: the formulation called *Novo* in the paper is implemented in ``Model_Cluster``.</span>
+<span class="sd">"""</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">metadata</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="n">REPO</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="c1"># Experimental design (manuscript Sections 3.2-3.4)</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="n">RESOURCES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"WND"</span><span class="p">:</span> <span class="s2">"CapacityFactor_Wind.csv"</span><span class="p">,</span>
+             <span class="s2">"SOL"</span><span class="p">:</span> <span class="s2">"CapacityFactor_Solar.csv"</span><span class="p">,</span>
+             <span class="s2">"HYD"</span><span class="p">:</span> <span class="s2">"CapacityFactor_Hydro.csv"</span><span class="p">}</span>
+<span class="n">DEMAND_PROFILE</span> <span class="o">=</span> <span class="s2">"SpecifiedDemandProfile.csv"</span>
+<span class="n">K_VALUES</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>   <span class="c1"># 18 values</span>
+<span class="n">H_VALUES</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>                                                  <span class="c1"># 6 values</span>
+<span class="n">MODELS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Model_Niet"</span><span class="p">,</span> <span class="s2">"Model_Welsch"</span><span class="p">,</span> <span class="s2">"Model_Kotzur"</span><span class="p">,</span> <span class="s2">"Model_Cluster"</span><span class="p">]</span>
+<span class="n">FORMULATION</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Model_Niet"</span><span class="p">:</span> <span class="s2">"Niet"</span><span class="p">,</span> <span class="s2">"Model_Welsch"</span><span class="p">:</span> <span class="s2">"Welsch"</span><span class="p">,</span>
+               <span class="s2">"Model_Kotzur"</span><span class="p">:</span> <span class="s2">"Kotzur"</span><span class="p">,</span> <span class="s2">"Model_Cluster"</span><span class="p">:</span> <span class="s2">"Novo"</span><span class="p">}</span>
+<span class="n">UNCONSTRAINED_CAP</span> <span class="o">=</span> <span class="mf">1000.0</span>   <span class="c1"># kW.yr, non-binding upper limit on total storage energy capacity</span>
+<span class="n">STRESS_CAP</span> <span class="o">=</span> <span class="mf">0.2</span>             <span class="c1"># kW.yr, Section 4.4 (total = new + residual 0.05)</span>
+<span class="n">RESIDUAL_STORAGE</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="n">MANUSCRIPT_ENV</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"python"</span><span class="p">:</span> <span class="s2">"3.13.5"</span><span class="p">,</span> <span class="s2">"glpsol"</span><span class="p">:</span> <span class="s2">"5.0"</span><span class="p">,</span> <span class="s2">"otoole"</span><span class="p">:</span> <span class="s2">"1.1.5"</span><span class="p">,</span>
+                  <span class="s2">"scikit-learn"</span><span class="p">:</span> <span class="s2">"1.7.1"</span><span class="p">,</span> <span class="s2">"pandas"</span><span class="p">:</span> <span class="s2">"2.2.3"</span><span class="p">,</span> <span class="s2">"numpy"</span><span class="p">:</span> <span class="s2">"2.3.1"</span><span class="p">}</span>
+
+
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="c1"># Environment</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_glpsol_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">exe</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s2">"glpsol"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">exe</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">exe</span><span class="p">,</span> <span class="s2">"--version"</span><span class="p">],</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Solver\s+([\d.]+)"</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">m</span> <span class="k">else</span> <span class="n">out</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="check_environment">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.check_environment">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_environment</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Installed versions against the environment stated in Section 3.4."""</span>
+    <span class="n">found</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"python"</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">"glpsol"</span><span class="p">:</span> <span class="n">_glpsol_version</span><span class="p">()}</span>
+    <span class="k">for</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"otoole"</span><span class="p">,</span> <span class="s2">"scikit-learn"</span><span class="p">,</span> <span class="s2">"pandas"</span><span class="p">,</span> <span class="s2">"numpy"</span><span class="p">]:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">found</span><span class="p">[</span><span class="n">pkg</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">metadata</span><span class="o">.</span><span class="n">PackageNotFoundError</span><span class="p">:</span>
+            <span class="n">found</span><span class="p">[</span><span class="n">pkg</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">MANUSCRIPT_ENV</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">found</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">"missing"</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="s2">"match"</span> <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="n">ref</span> <span class="k">else</span> <span class="s2">"differs"</span><span class="p">)</span>
+        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"component"</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s2">"manuscript"</span><span class="p">:</span> <span class="n">ref</span><span class="p">,</span> <span class="s2">"installed"</span><span class="p">:</span> <span class="n">v</span><span class="p">,</span> <span class="s2">"status"</span><span class="p">:</span> <span class="n">status</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="c1"># Running scenarios through main.py</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_child_env</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""UTF-8 output for child Python processes; on Windows a redirected stdout otherwise uses cp1252,</span>
+<span class="sd">    which cannot encode the progress symbols printed by main.py (UnicodeEncodeError)."""</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+    <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">,</span> <span class="s2">"PYTHONUTF8"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span> <span class="s2">"PYTHONIOENCODING"</span><span class="p">:</span> <span class="s2">"utf-8"</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="scenario_name">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.scenario_name">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scenario_name</span><span class="p">(</span><span class="n">resource</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">limited</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"k</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">h</span><span class="si">{</span><span class="n">h</span><span class="si">}{</span><span class="n">resource</span><span class="si">}{</span><span class="s1">'_limited'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">limited</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="si">}{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">"</span></div>
+
+
+
+<div class="viewcode-block" id="run_case">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.run_case">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_case</span><span class="p">(</span><span class="n">resource</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">cap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">UNCONSTRAINED_CAP</span><span class="p">,</span>
+             <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">results_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">=</span> <span class="s2">"Results"</span><span class="p">,</span> <span class="n">models</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">limited</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Run one scenario (all four formulations unless ``models`` is given) via ``main.py``.</span>
+
+<span class="sd">    The config file is restored afterwards. Returns the rows appended to Simulation_Results.xlsx.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">limited</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">limited</span> <span class="o">=</span> <span class="n">cap</span> <span class="o">&lt;</span> <span class="n">UNCONSTRAINED_CAP</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">scenario_name</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">limited</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
+    <span class="n">results_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">results_dir</span><span class="p">)</span>
+    <span class="n">results_abs</span> <span class="o">=</span> <span class="n">results_dir</span> <span class="k">if</span> <span class="n">results_dir</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">()</span> <span class="k">else</span> <span class="n">REPO</span> <span class="o">/</span> <span class="n">results_dir</span>
+    <span class="p">(</span><span class="n">results_abs</span> <span class="o">/</span> <span class="s2">"logs"</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">cfg_path</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">"config"</span> <span class="o">/</span> <span class="s2">"config.yaml"</span>
+    <span class="n">original</span> <span class="o">=</span> <span class="n">cfg_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">original</span><span class="p">)</span>
+    <span class="n">cfg</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">scenario_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">,</span> <span class="n">n_clusters</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">hour_grouping</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">h</span><span class="p">),</span>
+               <span class="n">StorageMaxCapacity</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">cap</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">random_state</span><span class="p">))</span>
+    <span class="n">cfg</span><span class="p">[</span><span class="s2">"data_8760"</span><span class="p">][</span><span class="s2">"CF"</span><span class="p">]</span> <span class="o">=</span> <span class="n">RESOURCES</span><span class="p">[</span><span class="n">resource</span><span class="p">]</span>
+    <span class="n">cfg</span><span class="p">[</span><span class="s2">"data_8760"</span><span class="p">][</span><span class="s2">"SDP"</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEMAND_PROFILE</span>
+    <span class="n">cfg</span><span class="p">[</span><span class="s2">"results"</span><span class="p">][</span><span class="s2">"directory"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">results_dir</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"/"</span><span class="p">)</span>
+    <span class="n">cfg</span><span class="p">[</span><span class="s2">"results"</span><span class="p">][</span><span class="s2">"directory_GUI"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">results_dir</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/GUI"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\\</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"/"</span><span class="p">)</span>
+    <span class="n">cfg</span><span class="p">[</span><span class="s2">"models"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">models</span><span class="p">)</span> <span class="k">if</span> <span class="n">models</span> <span class="k">else</span> <span class="n">MODELS</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">results_abs</span> <span class="o">/</span> <span class="s2">"logs"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.log"</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cfg_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="n">proc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">"main.py"</span><span class="p">],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">REPO</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">fh</span><span class="p">,</span>
+                                  <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">STDOUT</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">_child_env</span><span class="p">())</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">cfg_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">proc</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: main.py failed (exit </span><span class="si">{</span><span class="n">proc</span><span class="o">.</span><span class="n">returncode</span><span class="si">}</span><span class="s2">); see </span><span class="si">{</span><span class="n">log</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: done in </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> s"</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">load_results</span><span class="p">(</span><span class="n">results_abs</span> <span class="o">/</span> <span class="s2">"Simulation_Results.xlsx"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="n">res</span><span class="p">[</span><span class="s2">"Scenario"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="run_grid">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.run_grid">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_grid</span><span class="p">(</span><span class="n">resources</span><span class="p">,</span> <span class="n">ks</span><span class="p">,</span> <span class="n">hs</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">skip_existing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Run a grid of scenarios; already-completed scenarios are skipped."""</span>
+    <span class="n">results_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"results_dir"</span><span class="p">,</span> <span class="s2">"Results"</span><span class="p">))</span>
+    <span class="n">xlsx</span> <span class="o">=</span> <span class="p">(</span><span class="n">results_dir</span> <span class="k">if</span> <span class="n">results_dir</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">()</span> <span class="k">else</span> <span class="n">REPO</span> <span class="o">/</span> <span class="n">results_dir</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"Simulation_Results.xlsx"</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">hs</span><span class="p">:</span>
+                <span class="n">done</span> <span class="o">=</span> <span class="n">load_results</span><span class="p">(</span><span class="n">xlsx</span><span class="p">)</span> <span class="k">if</span> <span class="n">xlsx</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Scenario"</span><span class="p">,</span> <span class="s2">"Model"</span><span class="p">])</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">scenario_name</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"cap"</span><span class="p">,</span> <span class="n">UNCONSTRAINED_CAP</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">UNCONSTRAINED_CAP</span><span class="p">,</span>
+                                     <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"suffix"</span><span class="p">,</span> <span class="s2">""</span><span class="p">))</span>
+                <span class="n">n_models</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"models"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">MODELS</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">skip_existing</span> <span class="ow">and</span> <span class="p">(</span><span class="n">done</span><span class="p">[</span><span class="s2">"Scenario"</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">n_models</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">run_case</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">load_results</span><span class="p">(</span><span class="n">xlsx</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="c1"># Results tables</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="n">_SCEN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^k(?P&lt;k&gt;\d+)h(?P&lt;h&gt;\d+)(?P&lt;resource&gt;WND|SOL|HYD)(?P&lt;limited&gt;_limited)?(?P&lt;suffix&gt;.*)$"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_seconds</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">"([\d.]+)"</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="k">if</span> <span class="n">m</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="load_results">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.load_results">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_results</span><span class="p">(</span><span class="n">xlsx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Tidy Simulation_Results.xlsx (one row per scenario x formulation, last run kept)."""</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">xlsx</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"Unnamed"</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="s2">"Matriz and Running Time"</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>          <span class="c1"># header spelling of earlier versions</span>
+        <span class="n">old</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"Matriz and Running Time"</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"Matrix and Running Time"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Matrix and Running Time"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">old</span><span class="p">)</span> \
+            <span class="k">if</span> <span class="s2">"Matrix and Running Time"</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="n">old</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Scenario"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">_SCEN</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"resource"</span><span class="p">]</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="s2">"resource"</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"k"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="s2">"k"</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"h"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="s2">"h"</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"limited"</span><span class="p">]</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="s2">"limited"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"formulation"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Model"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">FORMULATION</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"total_time_s"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Matrix and Running Time"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_seconds</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"solve_time_s"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Running time"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_seconds</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"memory_MB"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Memory used"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_seconds</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s2">"Scenario"</span><span class="p">,</span> <span class="s2">"Model"</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s2">"last"</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="add_errors">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.add_errors">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_errors</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Cost and storage-capacity error (%) against the k365h1 Novo benchmark of the same resource.</span>
+
+<span class="sd">    Errors use unrounded values. (Table 4 in the R2 draft divides by the benchmark rounded to two</span>
+<span class="sd">    decimals, which shifts some capacity errors by up to ~3 percentage points.)</span>
+<span class="sd">    """</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">lim</span><span class="p">),</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">"resource"</span><span class="p">,</span> <span class="s2">"limited"</span><span class="p">]):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">g</span><span class="p">[(</span><span class="n">g</span><span class="o">.</span><span class="n">k</span> <span class="o">==</span> <span class="mi">365</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">h</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">Model</span> <span class="o">==</span> <span class="s2">"Model_Cluster"</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">g</span><span class="p">[(</span><span class="n">g</span><span class="o">.</span><span class="n">k</span> <span class="o">==</span> <span class="mi">365</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">h</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">cost_err_pct</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">cap_err_pct</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">))</span>
+            <span class="k">continue</span>
+        <span class="n">bc</span><span class="p">,</span> <span class="n">bs</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="s2">"Total cost"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="s2">"Storage Capacity"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">cost_err_pct</span><span class="o">=</span><span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"Total cost"</span><span class="p">]</span> <span class="o">/</span> <span class="n">bc</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+                            <span class="n">cap_err_pct</span><span class="o">=</span><span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="s2">"Storage Capacity"</span><span class="p">]</span> <span class="o">/</span> <span class="n">bs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<span class="n">TABLE4_CASES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"WND"</span><span class="p">:</span> <span class="p">[</span><span class="mi">365</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="s2">"SOL"</span><span class="p">:</span> <span class="p">[</span><span class="mi">365</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="s2">"HYD"</span><span class="p">:</span> <span class="p">[</span><span class="mi">365</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">20</span><span class="p">]}</span>
+
+
+<div class="viewcode-block" id="table4">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.table4">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">table4</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Rebuild manuscript Table 4 (h = 1, unconstrained)."""</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">add_errors</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">limited</span><span class="p">])</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">res</span><span class="p">,</span> <span class="n">ks</span> <span class="ow">in</span> <span class="n">TABLE4_CASES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
+            <span class="n">sub</span> <span class="o">=</span> <span class="n">d</span><span class="p">[(</span><span class="n">d</span><span class="o">.</span><span class="n">resource</span> <span class="o">==</span> <span class="n">res</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">k</span> <span class="o">==</span> <span class="n">k</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">h</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)]</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"Niet"</span><span class="p">,</span> <span class="s2">"Welsch"</span><span class="p">,</span> <span class="s2">"Kotzur"</span><span class="p">,</span> <span class="s2">"Novo"</span><span class="p">]:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="n">sub</span><span class="o">.</span><span class="n">formulation</span> <span class="o">==</span> <span class="n">f</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"Scenario"</span><span class="p">:</span> <span class="n">res</span><span class="p">,</span> <span class="s2">"Case"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"k</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">h1"</span><span class="p">,</span> <span class="s2">"Formulation"</span><span class="p">:</span> <span class="n">f</span><span class="p">,</span>
+                             <span class="s2">"Total cost"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">"Total cost"</span><span class="p">],</span> <span class="s2">"Cost error (%)"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">"cost_err_pct"</span><span class="p">],</span>
+                             <span class="s2">"Storage capacity (kW·yr)"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">"Storage Capacity"</span><span class="p">],</span>
+                             <span class="s2">"Capacity error (%)"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">"cap_err_pct"</span><span class="p">],</span>
+                             <span class="s2">"Runtime (s)"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">"total_time_s"</span><span class="p">],</span> <span class="s2">"Memory (MB)"</span><span class="p">:</span> <span class="n">r</span><span class="p">[</span><span class="s2">"memory_MB"</span><span class="p">]})</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="compare_to_archive">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.compare_to_archive">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_to_archive</span><span class="p">(</span><span class="n">new</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">archive</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+                       <span class="n">cols</span><span class="o">=</span><span class="p">(</span><span class="s2">"Total cost"</span><span class="p">,</span> <span class="s2">"Power Capacity"</span><span class="p">,</span> <span class="s2">"Storage Capacity"</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Relative difference between fresh runs and the archived results (same Scenario x Model)."""</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">"Scenario"</span><span class="p">,</span> <span class="s2">"Model"</span><span class="p">],</span> <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">"_new"</span><span class="p">,</span> <span class="s2">"_archive"</span><span class="p">))</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">m</span><span class="p">[[</span><span class="s2">"Scenario"</span><span class="p">,</span> <span class="s2">"Model"</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+        <span class="n">out</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (new)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">_new"</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (archive)"</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">_archive"</span><span class="p">]</span>
+        <span class="n">out</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> rel. diff"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">_new"</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">_archive"</span><span class="p">])</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">/</span> <span class="n">m</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">_archive"</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="c1"># Clustering and seed robustness (reviewer comment C2)</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="clustering">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.clustering">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">clustering</span><span class="p">(</span><span class="n">resource</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Representative days and chronological day-&gt;representative mapping, as used by main.py."""</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">src.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">cluster_data</span>
+    <span class="k">return</span> <span class="n">cluster_data</span><span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s2">"Data_8760"</span> <span class="o">/</span> <span class="n">RESOURCES</span><span class="p">[</span><span class="n">resource</span><span class="p">],</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s2">"Data_8760"</span> <span class="o">/</span> <span class="n">DEMAND_PROFILE</span><span class="p">,</span>
+                        <span class="n">k</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="seed_robustness">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.seed_robustness">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">seed_robustness</span><span class="p">(</span><span class="n">resources</span><span class="o">=</span><span class="p">(</span><span class="s2">"WND"</span><span class="p">,</span> <span class="s2">"SOL"</span><span class="p">,</span> <span class="s2">"HYD"</span><span class="p">),</span> <span class="n">ks</span><span class="o">=</span><span class="n">K_VALUES</span><span class="p">,</span> <span class="n">seeds</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Compare clusterings for alternative seeds against seed 0.</span>
+
+<span class="sd">    day_agreement: share of the 365 days mapped to the same representative day as with seed 0.</span>
+<span class="sd">    ARI: adjusted Rand index of the day partition (label-permutation invariant).</span>
+<span class="sd">    same_rep_days: whether the set of representative days is identical.</span>
+<span class="sd">    """</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">adjusted_rand_score</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
+            <span class="n">rep0</span><span class="p">,</span> <span class="n">seq0</span> <span class="o">=</span> <span class="n">clustering</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seeds</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">rep</span><span class="p">,</span> <span class="n">seq</span> <span class="o">=</span> <span class="n">clustering</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+                <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"resource"</span><span class="p">:</span> <span class="n">r</span><span class="p">,</span> <span class="s2">"k"</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">:</span> <span class="n">s</span><span class="p">,</span>
+                             <span class="s2">"day_agreement"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">seq0</span><span class="p">))),</span>
+                             <span class="s2">"ARI"</span><span class="p">:</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">seq0</span><span class="p">,</span> <span class="n">seq</span><span class="p">),</span>
+                             <span class="s2">"same_rep_days"</span><span class="p">:</span> <span class="n">rep</span> <span class="o">==</span> <span class="n">rep0</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="c1"># Independent SoC verification (reviewer comment C4)</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="run_soc_validation">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.run_soc_validation">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_soc_validation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">proc</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s2">"validation_soc"</span> <span class="o">/</span> <span class="s2">"run.py"</span><span class="p">)],</span> <span class="n">cwd</span><span class="o">=</span><span class="n">REPO</span><span class="p">,</span>
+                          <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">,</span>
+                          <span class="n">env</span><span class="o">=</span><span class="n">_child_env</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">proc</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">proc</span><span class="o">.</span><span class="n">stdout</span><span class="p">[</span><span class="o">-</span><span class="mi">2000</span><span class="p">:]</span> <span class="o">+</span> <span class="n">proc</span><span class="o">.</span><span class="n">stderr</span><span class="p">[</span><span class="o">-</span><span class="mi">2000</span><span class="p">:])</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s2">"validation_soc"</span> <span class="o">/</span> <span class="s2">"results"</span> <span class="o">/</span> <span class="s2">"summary.csv"</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<span class="c1"># Storage trajectories, stress-test statistics and fidelity metrics</span>
+<span class="c1"># ---------------------------------------------------------------------------------------------</span>
+<div class="viewcode-block" id="read_storage">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.read_storage">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_storage</span><span class="p">(</span><span class="n">results_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Native or reconstructed storage level written by main.py.</span>
+
+<span class="sd">    model: 'Niet', 'Cluster' (Novo), 'Kotzur' (day starts), 'Kotzur_intraday', 'Welsch' (day-type</span>
+<span class="sd">    starts) or 'Welsch_intraday'.</span>
+<span class="sd">    """</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">results_dir</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">_Storage_Level_Model_</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">.csv"</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="s2">"VALUEACCUMULATED"</span> <span class="k">if</span> <span class="s2">"VALUEACCUMULATED"</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="n">d</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="soc_violations">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.soc_violations">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">soc_violations</span><span class="p">(</span><span class="n">soc</span><span class="p">,</span> <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Count bound violations of a storage trajectory.</span>
+
+<span class="sd">    strict: SoC &gt; upper + tol or SoC &lt; lower - tol (physically infeasible states).</span>
+<span class="sd">    at_or_beyond: SoC &gt;= upper - tol or SoC &lt;= lower + tol (includes states exactly on a bound,</span>
+<span class="sd">    which are feasible). The R2 draft's '183 h above' for wind equals the at_or_beyond count.</span>
+<span class="sd">    """</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">soc</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">above</span><span class="p">,</span> <span class="n">below</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">v</span> <span class="o">&gt;</span> <span class="n">upper</span> <span class="o">+</span> <span class="n">tol</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="nb">int</span><span class="p">((</span><span class="n">v</span> <span class="o">&lt;</span> <span class="n">lower</span> <span class="o">-</span> <span class="n">tol</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="n">at_up</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">v</span> <span class="o">&gt;=</span> <span class="n">upper</span> <span class="o">-</span> <span class="n">tol</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"n"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="s2">"max"</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="s2">"min"</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+            <span class="s2">"above_strict"</span><span class="p">:</span> <span class="n">above</span><span class="p">,</span> <span class="s2">"below_strict"</span><span class="p">:</span> <span class="n">below</span><span class="p">,</span> <span class="s2">"total_strict"</span><span class="p">:</span> <span class="n">above</span> <span class="o">+</span> <span class="n">below</span><span class="p">,</span>
+            <span class="s2">"share_strict_pct"</span><span class="p">:</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">above</span> <span class="o">+</span> <span class="n">below</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+            <span class="s2">"at_or_above_upper"</span><span class="p">:</span> <span class="n">at_up</span><span class="p">,</span>
+            <span class="s2">"total_if_counting_at_bound"</span><span class="p">:</span> <span class="n">at_up</span> <span class="o">+</span> <span class="n">below</span><span class="p">,</span>
+            <span class="s2">"share_if_counting_at_bound_pct"</span><span class="p">:</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">at_up</span> <span class="o">+</span> <span class="n">below</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)}</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_expand</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">block_hours</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8760</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span> <span class="n">block_hours</span><span class="p">)[:</span><span class="n">n</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="hourly_trajectory">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.hourly_trajectory">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hourly_trajectory</span><span class="p">(</span><span class="n">results_dir</span><span class="p">,</span> <span class="n">scenario</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">formulation</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">h</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""8760-h storage trajectory used for the fidelity metrics.</span>
+
+<span class="sd">    Novo and Kotzur: chronological block series (Kotzur reconstructed), held over each block.</span>
+<span class="sd">    Welsch: reconstructed series in its native grouped day-type order, as plotted by</span>
+<span class="sd">    graph_generator.py. Niet: representative blocks held for their year-split duration.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">formulation</span> <span class="o">==</span> <span class="s2">"Novo"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_expand</span><span class="p">(</span><span class="n">read_storage</span><span class="p">(</span><span class="n">results_dir</span><span class="p">,</span> <span class="n">scenario</span><span class="p">,</span> <span class="s2">"Cluster"</span><span class="p">),</span> <span class="n">h</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">formulation</span> <span class="o">==</span> <span class="s2">"Kotzur"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_expand</span><span class="p">(</span><span class="n">read_storage</span><span class="p">(</span><span class="n">results_dir</span><span class="p">,</span> <span class="n">scenario</span><span class="p">,</span> <span class="s2">"Kotzur_intraday"</span><span class="p">),</span> <span class="n">h</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">formulation</span> <span class="o">==</span> <span class="s2">"Welsch"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_expand</span><span class="p">(</span><span class="n">read_storage</span><span class="p">(</span><span class="n">results_dir</span><span class="p">,</span> <span class="n">scenario</span><span class="p">,</span> <span class="s2">"Welsch_intraday"</span><span class="p">),</span> <span class="n">h</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">formulation</span> <span class="o">==</span> <span class="s2">"Niet"</span><span class="p">:</span>
+        <span class="n">lvl</span> <span class="o">=</span> <span class="n">read_storage</span><span class="p">(</span><span class="n">results_dir</span><span class="p">,</span> <span class="n">scenario</span><span class="p">,</span> <span class="s2">"Niet"</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">results_dir</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scenario</span><span class="si">}</span><span class="s2">_clustering.json"</span>
+        <span class="k">if</span> <span class="n">js</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">js</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+            <span class="n">rep</span><span class="p">,</span> <span class="n">seq</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="s2">"representative_days"</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="s2">"chronological_sequence"</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">_SCEN</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">scenario</span><span class="p">)</span>
+            <span class="n">rep</span><span class="p">,</span> <span class="n">seq</span> <span class="o">=</span> <span class="n">clustering</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">"resource"</span><span class="p">],</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="s2">"k"</span><span class="p">]))</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">//</span> <span class="n">h</span>
+        <span class="n">hours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="n">seq</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">/</span> <span class="n">b</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">],</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">hours</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">counts</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">lvl</span><span class="p">,</span> <span class="n">counts</span><span class="p">)[:</span><span class="mi">8760</span><span class="p">]</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">formulation</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="rainflow_cycles">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.rainflow_cycles">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rainflow_cycles</span><span class="p">(</span><span class="n">series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Equivalent full cycles by rainflow counting (ASTM E1049-85 three-point method).</span>
+
+<span class="sd">    Half cycles count 0.5. Returns the total number of (equivalent full) cycles.</span>
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]]</span>          <span class="c1"># drop flat steps</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="n">rev</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">stack</span><span class="p">,</span> <span class="n">count</span> <span class="o">=</span> <span class="p">[],</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">rev</span><span class="p">:</span>
+        <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">X</span> <span class="o">&lt;</span> <span class="n">Y</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mf">0.5</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mf">1.0</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">count</span></div>
+
+
+
+<div class="viewcode-block" id="fidelity_metrics">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.fidelity_metrics">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fidelity_metrics</span><span class="p">(</span><span class="n">benchmark</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">benchmark</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">b</span><span class="p">[:</span><span class="n">n</span><span class="p">],</span> <span class="n">t</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"MAE"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">b</span><span class="p">))),</span>
+            <span class="s2">"RMSE"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))),</span>
+            <span class="s2">"Pearson"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+            <span class="s2">"rainflow_cycles"</span><span class="p">:</span> <span class="n">rainflow_cycles</span><span class="p">(</span><span class="n">t</span><span class="p">),</span>
+            <span class="s2">"rainflow_cycles_benchmark"</span><span class="p">:</span> <span class="n">rainflow_cycles</span><span class="p">(</span><span class="n">b</span><span class="p">)}</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Bruno Borba, Md Eliasinul Islam
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025, Bruno Borba, Md Eliasinul Islam.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

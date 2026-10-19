@@ -2,81 +2,80 @@
 <!DOCTYPE html>
 
 
-<html lang="Python" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="light">
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>API Reference &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+    <title>API Reference &#8212; Storage in OSeMOSYS</title>
   
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
   
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="../_static/documentation_options.js?v=e9b82cb4"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/documentation_options.js?v=6c6ff0de"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/api_reference';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="../api/index.html" />
-    <link rel="prev" title="Configuration Guide" href="configuration_guide.html" />
+    <link rel="next" title="src" href="../autoapi/src/index.html" />
+    <link rel="prev" title="API" href="../api.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="Python"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="light">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -84,44 +83,31 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
-         placeholder="Search..."
-         aria-label="Search..."
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
   
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
   
-  <div class="sidebar-header-items sidebar-primary__section">
+  <div class=" navbar-header-items__start">
     
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
+      <div class="navbar-item">
 
   
     
@@ -135,81 +121,235 @@
   
     
     
-      
     
-    
-    <img src="../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-light" alt="Storage in OSEMoSYS 2025.07 documentation - Home"/>
-    <script>document.write(`<img src="../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-dark" alt="Storage in OSEMoSYS 2025.07 documentation - Home"/>`);</script>
+    <img src="../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-dark pst-js-only" alt=""/>
   
+  
+    <p class="title logo__title">Storage in OSeMOSYS</p>
   
 </a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../concept.html">
+    Concept
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../workflow.html">
+    Modelling workflow
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../results.html">
+    Results
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/DeltaE/storage-in-OSeMOSYS" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../concept.html">
+    Concept
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../workflow.html">
+    Modelling workflow
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../results.html">
+    Results
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/DeltaE/storage-in-OSeMOSYS" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="README_ENVIRONMENT.html">Environment Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="workflow_guide.html">Workflow Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="configuration_guide.html">Configuration Guide</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
-<ul class="current nav bd-sidenav">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model_specifications.html">Model Specifications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results_analysis.html">Results Analysis</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/cluster/index.html">src.cluster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/read_csv/index.html">src.read_csv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/simulation/index.html">src.simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/table_generator/index.html">src.table_generator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_list/index.html">src.update_list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/utilities/index.html">src.utilities</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/cluster/index.html">src.cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/reproduce/index.html">src.reproduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/simulation/index.html">src.simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/update_list/index.html">src.update_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/utilities/index.html">src.utilities</a></li>
 </ul>
 </details></li>
 </ul>
-</details></li>
-</ul>
-
-    </div>
+</div>
 </nav></div>
     </div>
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -217,9 +357,6 @@
       <main id="main-content" class="bd-main" role="main">
         
         
-
-<div class="sbt-scroll-pixel-helper"></div>
-
           <div class="bd-content">
             <div class="bd-article-container">
               
@@ -228,242 +365,31 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</button></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
         <div class="header-article-item">
 
-<div class="article-header-buttons">
-
-
-<a href="https://github.com/DeltaE/storage-in-OSeMOSYS" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="Source repository"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/notes/api_reference.md" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.md</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../api.html" class="nav-link">API</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">API Reference</span></li>
   </ul>
+</nav>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
-</div></div>
       
     </div>
   
+  
 </div>
 </div>
               
               
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>API Reference</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-overview">Module Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-utilities-src-utilities">Core Utilities (<code class="docutils literal notranslate"><span class="pre">src.utilities</span></code>)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-management">Configuration Management</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#load-config-config-path-path-dict"><code class="docutils literal notranslate"><span class="pre">load_config(config_path:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">dict</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#terminal-output-functions">Terminal Output Functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#print-update-level-int-message-str-none"><code class="docutils literal notranslate"><span class="pre">print_update(level:</span> <span class="pre">int,</span> <span class="pre">message:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#print-info-message-str-none"><code class="docutils literal notranslate"><span class="pre">print_info(message:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#print-warning-message-str-none"><code class="docutils literal notranslate"><span class="pre">print_warning(message:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#print-error-message-str-none"><code class="docutils literal notranslate"><span class="pre">print_error(message:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-clustering-src-cluster">Time-Series Clustering (<code class="docutils literal notranslate"><span class="pre">src.cluster</span></code>)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-clustering-function">Main Clustering Function</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-data-cf-file-path-sdp-file-path-n-clusters-int-tuple-list-int-list-int"><code class="docutils literal notranslate"><span class="pre">cluster_data(cf_file:</span> <span class="pre">Path,</span> <span class="pre">sdp_file:</span> <span class="pre">Path,</span> <span class="pre">n_clusters:</span> <span class="pre">int)</span> <span class="pre">-&gt;</span> <span class="pre">Tuple[List[int],</span> <span class="pre">List[int]]</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-management-src-simulation">Simulation Management (<code class="docutils literal notranslate"><span class="pre">src.simulation</span></code>)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-execution">Model Execution</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-simulation-case-info-dict-bool"><code class="docutils literal notranslate"><span class="pre">run_simulation(case_info:</span> <span class="pre">dict)</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing-functions">Data Processing Functions</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-generation-src-update-list">List Generation (<code class="docutils literal notranslate"><span class="pre">src.update_list</span></code>)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#new-list-count-int-output-file-path-start-int-1-none"><code class="docutils literal notranslate"><span class="pre">new_list(count:</span> <span class="pre">int,</span> <span class="pre">output_file:</span> <span class="pre">Path,</span> <span class="pre">start:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#profile-processing-src-update-cfandsdp">Profile Processing (<code class="docutils literal notranslate"><span class="pre">src.update_CFandSDP</span></code>)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cfandsdp-input-file-path-representative-days-list-int-hour-grouping-int-output-file-path-operation-str-none"><code class="docutils literal notranslate"><span class="pre">CFandSDP(input_file:</span> <span class="pre">Path,</span> <span class="pre">representative_days:</span> <span class="pre">List[int],</span> <span class="pre">hour_grouping:</span> <span class="pre">int,</span> <span class="pre">output_file:</span> <span class="pre">Path,</span> <span class="pre">operation:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-mapping-functions">Temporal Mapping Functions</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-sequence-conversion">Time-Sequence Conversion</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversionlts-blocks-per-day-int-chronological-timeslices-int-timeslices-int-chronological-sequence-list-int-representative-days-list-int-output-file-path-none"><code class="docutils literal notranslate"><span class="pre">conversionlts(blocks_per_day:</span> <span class="pre">int,</span> <span class="pre">chronological_timeslices:</span> <span class="pre">int,</span> <span class="pre">timeslices:</span> <span class="pre">int,</span> <span class="pre">chronological_sequence:</span> <span class="pre">List[int],</span> <span class="pre">representative_days:</span> <span class="pre">List[int],</span> <span class="pre">output_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversionld-timeslices-int-representative-days-count-int-output-file-path-label-str-daytype-none"><code class="docutils literal notranslate"><span class="pre">conversionld(timeslices:</span> <span class="pre">int,</span> <span class="pre">representative_days_count:</span> <span class="pre">int,</span> <span class="pre">output_file:</span> <span class="pre">Path,</span> <span class="pre">label:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'DAYTYPE')</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversionldc-chronological-sequence-list-int-representative-days-list-int-days-in-year-int-output-file-path-none"><code class="docutils literal notranslate"><span class="pre">conversionldc(chronological_sequence:</span> <span class="pre">List[int],</span> <span class="pre">representative_days:</span> <span class="pre">List[int],</span> <span class="pre">days_in_year:</span> <span class="pre">int,</span> <span class="pre">output_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-disaggregation">Time Disaggregation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#yearsplit-timeslices-int-representative-days-list-int-chronological-sequence-list-int-days-in-year-int-output-file-path-none"><code class="docutils literal notranslate"><span class="pre">yearsplit(timeslices:</span> <span class="pre">int,</span> <span class="pre">representative_days:</span> <span class="pre">List[int],</span> <span class="pre">chronological_sequence:</span> <span class="pre">List[int],</span> <span class="pre">days_in_year:</span> <span class="pre">int,</span> <span class="pre">output_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-src-graph-generator">Visualization (<code class="docutils literal notranslate"><span class="pre">src.graph_generator</span></code>)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-plotting-function">Main Plotting Function</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-file-base-path-file-kotzur-path-file-kotzur-intraday-path-file-cluster-path-file-niet-path-file-welsch-path-file-welsch-intraday-path-representative-days-list-int-blocks-per-day-int-yearsplit-file-path-tuple-figure-figure-figure"><code class="docutils literal notranslate"><span class="pre">graph(file_base:</span> <span class="pre">Path,</span> <span class="pre">file_kotzur:</span> <span class="pre">Path,</span> <span class="pre">file_kotzur_intraday:</span> <span class="pre">Path,</span> <span class="pre">file_cluster:</span> <span class="pre">Path,</span> <span class="pre">file_niet:</span> <span class="pre">Path,</span> <span class="pre">file_welsch:</span> <span class="pre">Path,</span> <span class="pre">file_welsch_intraday:</span> <span class="pre">Path,</span> <span class="pre">representative_days:</span> <span class="pre">List[int],</span> <span class="pre">blocks_per_day:</span> <span class="pre">int,</span> <span class="pre">yearsplit_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">Tuple[Figure,</span> <span class="pre">Figure,</span> <span class="pre">Figure]</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-functions">Post-Processing Functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intraday-kotzur-conversion-file-path-storage-file-path-storage-start-float-output-file-path-none"><code class="docutils literal notranslate"><span class="pre">intraday_kotzur(conversion_file:</span> <span class="pre">Path,</span> <span class="pre">storage_file:</span> <span class="pre">Path,</span> <span class="pre">storage_start:</span> <span class="pre">float,</span> <span class="pre">output_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#intraday-welsch2-storage-file-path-blocks-per-day-int-timeslices-int-representative-days-list-int-chronological-sequence-list-int-storage-start-float-output-file-path-none"><code class="docutils literal notranslate"><span class="pre">intraday_welsch2(storage_file:</span> <span class="pre">Path,</span> <span class="pre">blocks_per_day:</span> <span class="pre">int,</span> <span class="pre">timeslices:</span> <span class="pre">int,</span> <span class="pre">representative_days:</span> <span class="pre">List[int],</span> <span class="pre">chronological_sequence:</span> <span class="pre">List[int],</span> <span class="pre">storage_start:</span> <span class="pre">float,</span> <span class="pre">output_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-analysis-src-table-generator">Results Analysis (<code class="docutils literal notranslate"><span class="pre">src.table_generator</span></code>)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table-generation">Summary Table Generation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#table-simulation-results-path-data-sol-results-path-scenario-name-str-case-name-str-capacity-path-path-storage-capacity-path-path-technology-str-storage-str-results-file-path-none"><code class="docutils literal notranslate"><span class="pre">table(simulation_results:</span> <span class="pre">Path,</span> <span class="pre">data_sol_results:</span> <span class="pre">Path,</span> <span class="pre">scenario_name:</span> <span class="pre">str,</span> <span class="pre">case_name:</span> <span class="pre">str,</span> <span class="pre">capacity_path:</span> <span class="pre">Path,</span> <span class="pre">storage_capacity_path:</span> <span class="pre">Path,</span> <span class="pre">technology:</span> <span class="pre">str,</span> <span class="pre">storage:</span> <span class="pre">str,</span> <span class="pre">results_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-updates-src-yaml-operations">Configuration Updates (<code class="docutils literal notranslate"><span class="pre">src.yaml_operations</span></code>)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yaml-parameter-updates">YAML Parameter Updates</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#new-yaml-param-yaml-file-path-parameter-str-value-union-float-int-str-none"><code class="docutils literal notranslate"><span class="pre">new_yaml_param(yaml_file:</span> <span class="pre">Path,</span> <span class="pre">parameter:</span> <span class="pre">str,</span> <span class="pre">value:</span> <span class="pre">Union[float,</span> <span class="pre">int,</span> <span class="pre">str])</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-operations">File Operations</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-management">Results Management</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-and-rename-source-dir-path-destination-dir-path-new-filename-str-none"><code class="docutils literal notranslate"><span class="pre">copy_and_rename(source_dir:</span> <span class="pre">Path,</span> <span class="pre">destination_dir:</span> <span class="pre">Path,</span> <span class="pre">new_filename:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read-csvfile-file-path-path-float"><code class="docutils literal notranslate"><span class="pre">read_csvfile(file_path:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-exceptions">Common Exceptions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-functions">Validation Functions</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-examples">Usage Examples</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-workflow-example">Complete Workflow Example</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
               
                 
 <div id="searchbox"></div>
@@ -504,13 +430,13 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">src.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utils</span>
 
-<span class="n">config</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;config/config.yaml&#39;</span><span class="p">))</span>
-<span class="n">scenario_name</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;scenario_name&#39;</span><span class="p">]</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">'config/config.yaml'</span><span class="p">))</span>
+<span class="n">scenario_name</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">'scenario_name'</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><strong>Raises:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code>: If configuration file doesn't exist</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileNotFoundError</span></code>: If configuration file doesn’t exist</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">yaml.YAMLError</span></code>: If YAML syntax is invalid</p></li>
 </ul>
 </section>
@@ -526,9 +452,9 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">message</span></code> (str): Message to display</p></li>
 </ul>
 <p><strong>Example:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Starting analysis&quot;</span><span class="p">)</span>
-<span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Loading data&quot;</span><span class="p">)</span>
-<span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Processing file: data.csv&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">"Starting analysis"</span><span class="p">)</span>
+<span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">"Loading data"</span><span class="p">)</span>
+<span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">"Processing file: data.csv"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Output:</strong></p>
@@ -582,15 +508,15 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">src</span>
 
 <span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">cluster_data</span><span class="p">(</span>
-    <span class="n">cf_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Data_8760/CapacityFactor.csv&quot;</span><span class="p">),</span>
-    <span class="n">sdp_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Data_8760/SpecifiedDemandProfile.csv&quot;</span><span class="p">),</span>
+    <span class="n">cf_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/CapacityFactor.csv"</span><span class="p">),</span>
+    <span class="n">sdp_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
     <span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Representative days: </span><span class="si">{</span><span class="n">representative_days</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Representative days: </span><span class="si">{</span><span class="n">representative_days</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="c1"># Output: Representative days: [15, 89, 156, 278]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First 10 days mapping: </span><span class="si">{</span><span class="n">chronological_sequence</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"First 10 days mapping: </span><span class="si">{</span><span class="n">chronological_sequence</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="c1"># Output: First 10 days mapping: [0, 0, 1, 1, 0, 2, 2, 1, 0, 3]</span>
 </pre></div>
 </div>
@@ -628,16 +554,16 @@ document.write(`
 </ol>
 <p><strong>Example:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">case_info</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;root_directory&#39;</span><span class="p">:</span> <span class="s1">&#39;Model_Cluster&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;output_otoole_txt&#39;</span><span class="p">:</span> <span class="s1">&#39;osemosys_fast_Cluster.txt&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;solver_command&#39;</span><span class="p">:</span> <span class="s1">&#39;glpsol --math osemosys_fast_Cluster.txt&#39;</span>
+    <span class="s1">'root_directory'</span><span class="p">:</span> <span class="s1">'Model_Cluster'</span><span class="p">,</span>
+    <span class="s1">'output_otoole_txt'</span><span class="p">:</span> <span class="s1">'osemosys_fast_Cluster.txt'</span><span class="p">,</span>
+    <span class="s1">'solver_command'</span><span class="p">:</span> <span class="s1">'glpsol --math osemosys_fast_Cluster.txt'</span>
 <span class="p">}</span>
 
 <span class="n">success</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">case_info</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation completed successfully&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Simulation completed successfully"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulation failed&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Simulation failed"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -658,7 +584,7 @@ document.write(`
 </ul>
 <p><strong>Example:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate timeslice list</span>
-<span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Model_Cluster/data/TIMESLICE.csv&quot;</span><span class="p">))</span>
+<span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/data/TIMESLICE.csv"</span><span class="p">))</span>
 
 <span class="c1"># Generated content:</span>
 <span class="c1"># TIMESLICE</span>
@@ -681,7 +607,7 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">representative_days</span></code> (List[int]): Representative day indices from clustering</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hour_grouping</span></code> (int): Hours to aggregate (1=hourly, 24=daily)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">output_file</span></code> (Path): Output processed profile file</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">operation</span></code> (str): Aggregation operation ('mean' for CF, 'sum' for demand)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">operation</span></code> (str): Aggregation operation (‘mean’ for CF, ‘sum’ for demand)</p></li>
 </ul>
 <p><strong>Processing Logic:</strong></p>
 <ol class="arabic simple">
@@ -693,20 +619,20 @@ document.write(`
 <p><strong>Example:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process capacity factors (averaging within time blocks)</span>
 <span class="n">src</span><span class="o">.</span><span class="n">CFandSDP</span><span class="p">(</span>
-    <span class="n">input_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Data_8760/CapacityFactor.csv&quot;</span><span class="p">),</span>
+    <span class="n">input_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/CapacityFactor.csv"</span><span class="p">),</span>
     <span class="n">representative_days</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">278</span><span class="p">],</span>
     <span class="n">hour_grouping</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># 2-hour blocks</span>
-    <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Model_Cluster/data/CapacityFactor.csv&quot;</span><span class="p">),</span>
-    <span class="n">operation</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span>
+    <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/data/CapacityFactor.csv"</span><span class="p">),</span>
+    <span class="n">operation</span><span class="o">=</span><span class="s1">'mean'</span>
 <span class="p">)</span>
 
 <span class="c1"># Process demand profiles (summing within time blocks)  </span>
 <span class="n">src</span><span class="o">.</span><span class="n">CFandSDP</span><span class="p">(</span>
-    <span class="n">input_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Data_8760/SpecifiedDemandProfile.csv&quot;</span><span class="p">),</span>
+    <span class="n">input_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
     <span class="n">representative_days</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">278</span><span class="p">],</span>
     <span class="n">hour_grouping</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Model_Cluster/data/SpecifiedDemandProfile.csv&quot;</span><span class="p">),</span>
-    <span class="n">operation</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span>
+    <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/data/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
+    <span class="n">operation</span><span class="o">=</span><span class="s1">'sum'</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -802,8 +728,8 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">case_name</span></code> (str): Model method name</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">capacity_path</span></code> (Path): Technology capacity results</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">storage_capacity_path</span></code> (Path): Storage capacity results</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">technology</span></code> (str): Technology name for analysis (e.g., 'WINDPOWER')</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">storage</span></code> (str): Storage technology name (e.g., 'BATTERY')</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">technology</span></code> (str): Technology name for analysis (e.g., ‘WINDPOWER’)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">storage</span></code> (str): Storage technology name (e.g., ‘BATTERY’)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">results_file</span></code> (Path): Output Excel file path</p></li>
 </ul>
 <p><strong>Generated Tables:</strong></p>
@@ -826,14 +752,14 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 <p>Updates specific parameters in OSeMOSYS configuration YAML files.</p>
 <p><strong>Example:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">.</span><span class="n">new_yaml_param</span><span class="p">(</span>
-    <span class="n">yaml_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Model_Cluster/config_fast_Cluster.yaml&quot;</span><span class="p">),</span>
-    <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;DaySplit&#39;</span><span class="p">,</span>
+    <span class="n">yaml_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/config_fast_Cluster.yaml"</span><span class="p">),</span>
+    <span class="n">parameter</span><span class="o">=</span><span class="s1">'DaySplit'</span><span class="p">,</span>
     <span class="n">value</span><span class="o">=</span><span class="mf">0.000114</span>  <span class="c1"># 1 hour / (24 hours * 365 days)</span>
 <span class="p">)</span>
 
 <span class="n">src</span><span class="o">.</span><span class="n">new_yaml_param</span><span class="p">(</span>
-    <span class="n">yaml_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Model_Cluster/config_fast_Cluster.yaml&quot;</span><span class="p">),</span>
-    <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;StorageMaxCapacity&#39;</span><span class="p">,</span>
+    <span class="n">yaml_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/config_fast_Cluster.yaml"</span><span class="p">),</span>
+    <span class="n">parameter</span><span class="o">=</span><span class="s1">'StorageMaxCapacity'</span><span class="p">,</span>
     <span class="n">value</span><span class="o">=</span><span class="mf">100.0</span>
 <span class="p">)</span>
 </pre></div>
@@ -861,17 +787,17 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 <h3>Common Exceptions<a class="headerlink" href="#common-exceptions" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuration errors</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConfigurationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when configuration parameters are invalid.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Raised when configuration parameters are invalid."""</span>
     <span class="k">pass</span>
 
 <span class="c1"># Data processing errors  </span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DataProcessingError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when data processing fails.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Raised when data processing fails."""</span>
     <span class="k">pass</span>
 
 <span class="c1"># Simulation errors</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">SimulationError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when OSeMOSYS simulation fails.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Raised when OSeMOSYS simulation fails."""</span>
     <span class="k">pass</span>
 </pre></div>
 </div>
@@ -879,13 +805,13 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 <section id="validation-functions">
 <h3>Validation Functions<a class="headerlink" href="#validation-functions" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">validate_data_files</span><span class="p">(</span><span class="n">cf_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">sdp_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate input data files exist and have correct format.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Validate input data files exist and have correct format."""</span>
     
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_config_parameters</span><span class="p">(</span><span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate configuration parameters are within acceptable ranges.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Validate configuration parameters are within acceptable ranges."""</span>
     
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_simulation_results</span><span class="p">(</span><span class="n">results_dir</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if simulation completed successfully and results exist.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check if simulation completed successfully and results exist."""</span>
 </pre></div>
 </div>
 </section>
@@ -899,52 +825,52 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">src</span>
 
 <span class="c1"># 1. Load configuration</span>
-<span class="n">config</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;config/config.yaml&#39;</span><span class="p">))</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">'config/config.yaml'</span><span class="p">))</span>
 
 <span class="c1"># 2. Perform clustering</span>
 <span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">cluster_data</span><span class="p">(</span>
-    <span class="n">cf_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Data_8760/CapacityFactor.csv&quot;</span><span class="p">),</span>
-    <span class="n">sdp_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Data_8760/SpecifiedDemandProfile.csv&quot;</span><span class="p">),</span>
-    <span class="n">n_clusters</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;n_clusters&#39;</span><span class="p">]</span>
+    <span class="n">cf_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/CapacityFactor.csv"</span><span class="p">),</span>
+    <span class="n">sdp_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
+    <span class="n">n_clusters</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">'n_clusters'</span><span class="p">]</span>
 <span class="p">)</span>
 
 <span class="c1"># 3. Process each model</span>
-<span class="k">for</span> <span class="n">case_name</span><span class="p">,</span> <span class="n">case_info</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;cases&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Processing </span><span class="si">{</span><span class="n">case_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">case_name</span><span class="p">,</span> <span class="n">case_info</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">'cases'</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Processing </span><span class="si">{</span><span class="n">case_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     
     <span class="c1"># Update data files</span>
-    <span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">&#39;Model_Cluster&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">'Model_Cluster'</span><span class="p">:</span>
         <span class="n">src</span><span class="o">.</span><span class="n">conversionlts</span><span class="p">(</span>
-            <span class="n">blocks_per_day</span><span class="o">=</span><span class="mi">24</span><span class="o">//</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;hour_grouping&#39;</span><span class="p">],</span>
-            <span class="n">chronological_timeslices</span><span class="o">=</span><span class="mi">365</span><span class="o">*</span><span class="mi">24</span><span class="o">//</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;hour_grouping&#39;</span><span class="p">],</span>
-            <span class="n">timeslices</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">representative_days</span><span class="p">)</span><span class="o">*</span><span class="mi">24</span><span class="o">//</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;hour_grouping&#39;</span><span class="p">],</span>
+            <span class="n">blocks_per_day</span><span class="o">=</span><span class="mi">24</span><span class="o">//</span><span class="n">config</span><span class="p">[</span><span class="s1">'hour_grouping'</span><span class="p">],</span>
+            <span class="n">chronological_timeslices</span><span class="o">=</span><span class="mi">365</span><span class="o">*</span><span class="mi">24</span><span class="o">//</span><span class="n">config</span><span class="p">[</span><span class="s1">'hour_grouping'</span><span class="p">],</span>
+            <span class="n">timeslices</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">representative_days</span><span class="p">)</span><span class="o">*</span><span class="mi">24</span><span class="o">//</span><span class="n">config</span><span class="p">[</span><span class="s1">'hour_grouping'</span><span class="p">],</span>
             <span class="n">chronological_sequence</span><span class="o">=</span><span class="n">chronological_sequence</span><span class="p">,</span>
             <span class="n">representative_days</span><span class="o">=</span><span class="n">representative_days</span><span class="p">,</span>
-            <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">case_info</span><span class="p">[</span><span class="s1">&#39;root_directory&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="s1">&#39;data&#39;</span> <span class="o">/</span> <span class="s1">&#39;Conversionlts.csv&#39;</span>
+            <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">case_info</span><span class="p">[</span><span class="s1">'root_directory'</span><span class="p">])</span> <span class="o">/</span> <span class="s1">'data'</span> <span class="o">/</span> <span class="s1">'Conversionlts.csv'</span>
         <span class="p">)</span>
     
     <span class="c1"># Run simulation</span>
     <span class="n">success</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">case_info</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-        <span class="n">utils</span><span class="o">.</span><span class="n">print_info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ </span><span class="si">{</span><span class="n">case_name</span><span class="si">}</span><span class="s2"> completed successfully&quot;</span><span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">print_info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ </span><span class="si">{</span><span class="n">case_name</span><span class="si">}</span><span class="s2"> completed successfully"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">utils</span><span class="o">.</span><span class="n">print_error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ </span><span class="si">{</span><span class="n">case_name</span><span class="si">}</span><span class="s2"> failed&quot;</span><span class="p">)</span>
+        <span class="n">utils</span><span class="o">.</span><span class="n">print_error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✗ </span><span class="si">{</span><span class="n">case_name</span><span class="si">}</span><span class="s2"> failed"</span><span class="p">)</span>
 
 <span class="c1"># 4. Generate visualizations</span>
 <span class="n">fig1</span><span class="p">,</span> <span class="n">fig2</span><span class="p">,</span> <span class="n">fig3</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">graph</span><span class="p">(</span>
-    <span class="n">file_base</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Results/base_Storage_Level_Model_Niet.csv&quot;</span><span class="p">),</span>
-    <span class="n">file_kotzur</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Results/k4h1WND_Storage_Level_Model_Kotzur.csv&quot;</span><span class="p">),</span>
+    <span class="n">file_base</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Results/base_Storage_Level_Model_Niet.csv"</span><span class="p">),</span>
+    <span class="n">file_kotzur</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Results/k4h1WND_Storage_Level_Model_Kotzur.csv"</span><span class="p">),</span>
     <span class="c1"># ... other file paths</span>
     <span class="n">representative_days</span><span class="o">=</span><span class="n">representative_days</span><span class="p">,</span>
-    <span class="n">blocks_per_day</span><span class="o">=</span><span class="mi">24</span><span class="o">//</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;hour_grouping&#39;</span><span class="p">],</span>
-    <span class="n">yearsplit_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;Model_Cluster/data/YearSplit.csv&quot;</span><span class="p">)</span>
+    <span class="n">blocks_per_day</span><span class="o">=</span><span class="mi">24</span><span class="o">//</span><span class="n">config</span><span class="p">[</span><span class="s1">'hour_grouping'</span><span class="p">],</span>
+    <span class="n">yearsplit_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/data/YearSplit.csv"</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># 5. Save results</span>
-<span class="n">fig1</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;Results/comparison_overview.png&quot;</span><span class="p">)</span>
-<span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;Results/comparison_detailed.png&quot;</span><span class="p">)</span>
-<span class="n">fig3</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;Results/comparison_2weeks.png&quot;</span><span class="p">)</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"Results/comparison_overview.png"</span><span class="p">)</span>
+<span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"Results/comparison_detailed.png"</span><span class="p">)</span>
+<span class="n">fig3</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"Results/comparison_2weeks.png"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This API reference provides comprehensive documentation for all functions and modules in the Storage-in-OSeMOSYS framework, enabling users to understand and extend the codebase effectively.</p>
@@ -955,7 +881,6 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 
                 </article>
               
-
               
               
               
@@ -964,20 +889,20 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="configuration_guide.html"
+       href="../api.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Configuration Guide</p>
+        <p class="prev-next-title">API</p>
       </div>
     </a>
     <a class="right-next"
-       href="../api/index.html"
+       href="../autoapi/src/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">src</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -988,17 +913,20 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-overview">Module Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-utilities-src-utilities">Core Utilities (<code class="docutils literal notranslate"><span class="pre">src.utilities</span></code>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-utilities-src-utilities">Core Utilities (<code class="docutils literal notranslate"><span class="pre">src.utilities</span></code>)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-management">Configuration Management</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#load-config-config-path-path-dict"><code class="docutils literal notranslate"><span class="pre">load_config(config_path:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">dict</span></code></a></li>
 </ul>
@@ -1012,21 +940,21 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-clustering-src-cluster">Time-Series Clustering (<code class="docutils literal notranslate"><span class="pre">src.cluster</span></code>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-clustering-src-cluster">Time-Series Clustering (<code class="docutils literal notranslate"><span class="pre">src.cluster</span></code>)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-clustering-function">Main Clustering Function</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-data-cf-file-path-sdp-file-path-n-clusters-int-tuple-list-int-list-int"><code class="docutils literal notranslate"><span class="pre">cluster_data(cf_file:</span> <span class="pre">Path,</span> <span class="pre">sdp_file:</span> <span class="pre">Path,</span> <span class="pre">n_clusters:</span> <span class="pre">int)</span> <span class="pre">-&gt;</span> <span class="pre">Tuple[List[int],</span> <span class="pre">List[int]]</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-management-src-simulation">Simulation Management (<code class="docutils literal notranslate"><span class="pre">src.simulation</span></code>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-management-src-simulation">Simulation Management (<code class="docutils literal notranslate"><span class="pre">src.simulation</span></code>)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-execution">Model Execution</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#run-simulation-case-info-dict-bool"><code class="docutils literal notranslate"><span class="pre">run_simulation(case_info:</span> <span class="pre">dict)</span> <span class="pre">-&gt;</span> <span class="pre">bool</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing-functions">Data Processing Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing-functions">Data Processing Functions</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-generation-src-update-list">List Generation (<code class="docutils literal notranslate"><span class="pre">src.update_list</span></code>)</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#new-list-count-int-output-file-path-start-int-1-none"><code class="docutils literal notranslate"><span class="pre">new_list(count:</span> <span class="pre">int,</span> <span class="pre">output_file:</span> <span class="pre">Path,</span> <span class="pre">start:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
 </ul>
@@ -1037,7 +965,7 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-mapping-functions">Temporal Mapping Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temporal-mapping-functions">Temporal Mapping Functions</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-sequence-conversion">Time-Sequence Conversion</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversionlts-blocks-per-day-int-chronological-timeslices-int-timeslices-int-chronological-sequence-list-int-representative-days-list-int-output-file-path-none"><code class="docutils literal notranslate"><span class="pre">conversionlts(blocks_per_day:</span> <span class="pre">int,</span> <span class="pre">chronological_timeslices:</span> <span class="pre">int,</span> <span class="pre">timeslices:</span> <span class="pre">int,</span> <span class="pre">chronological_sequence:</span> <span class="pre">List[int],</span> <span class="pre">representative_days:</span> <span class="pre">List[int],</span> <span class="pre">output_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conversionld-timeslices-int-representative-days-count-int-output-file-path-label-str-daytype-none"><code class="docutils literal notranslate"><span class="pre">conversionld(timeslices:</span> <span class="pre">int,</span> <span class="pre">representative_days_count:</span> <span class="pre">int,</span> <span class="pre">output_file:</span> <span class="pre">Path,</span> <span class="pre">label:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'DAYTYPE')</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
@@ -1050,7 +978,7 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-src-graph-generator">Visualization (<code class="docutils literal notranslate"><span class="pre">src.graph_generator</span></code>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-src-graph-generator">Visualization (<code class="docutils literal notranslate"><span class="pre">src.graph_generator</span></code>)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-plotting-function">Main Plotting Function</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-file-base-path-file-kotzur-path-file-kotzur-intraday-path-file-cluster-path-file-niet-path-file-welsch-path-file-welsch-intraday-path-representative-days-list-int-blocks-per-day-int-yearsplit-file-path-tuple-figure-figure-figure"><code class="docutils literal notranslate"><span class="pre">graph(file_base:</span> <span class="pre">Path,</span> <span class="pre">file_kotzur:</span> <span class="pre">Path,</span> <span class="pre">file_kotzur_intraday:</span> <span class="pre">Path,</span> <span class="pre">file_cluster:</span> <span class="pre">Path,</span> <span class="pre">file_niet:</span> <span class="pre">Path,</span> <span class="pre">file_welsch:</span> <span class="pre">Path,</span> <span class="pre">file_welsch_intraday:</span> <span class="pre">Path,</span> <span class="pre">representative_days:</span> <span class="pre">List[int],</span> <span class="pre">blocks_per_day:</span> <span class="pre">int,</span> <span class="pre">yearsplit_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">Tuple[Figure,</span> <span class="pre">Figure,</span> <span class="pre">Figure]</span></code></a></li>
 </ul>
@@ -1062,21 +990,21 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-analysis-src-table-generator">Results Analysis (<code class="docutils literal notranslate"><span class="pre">src.table_generator</span></code>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-analysis-src-table-generator">Results Analysis (<code class="docutils literal notranslate"><span class="pre">src.table_generator</span></code>)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table-generation">Summary Table Generation</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#table-simulation-results-path-data-sol-results-path-scenario-name-str-case-name-str-capacity-path-path-storage-capacity-path-path-technology-str-storage-str-results-file-path-none"><code class="docutils literal notranslate"><span class="pre">table(simulation_results:</span> <span class="pre">Path,</span> <span class="pre">data_sol_results:</span> <span class="pre">Path,</span> <span class="pre">scenario_name:</span> <span class="pre">str,</span> <span class="pre">case_name:</span> <span class="pre">str,</span> <span class="pre">capacity_path:</span> <span class="pre">Path,</span> <span class="pre">storage_capacity_path:</span> <span class="pre">Path,</span> <span class="pre">technology:</span> <span class="pre">str,</span> <span class="pre">storage:</span> <span class="pre">str,</span> <span class="pre">results_file:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-updates-src-yaml-operations">Configuration Updates (<code class="docutils literal notranslate"><span class="pre">src.yaml_operations</span></code>)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-updates-src-yaml-operations">Configuration Updates (<code class="docutils literal notranslate"><span class="pre">src.yaml_operations</span></code>)</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yaml-parameter-updates">YAML Parameter Updates</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#new-yaml-param-yaml-file-path-parameter-str-value-union-float-int-str-none"><code class="docutils literal notranslate"><span class="pre">new_yaml_param(yaml_file:</span> <span class="pre">Path,</span> <span class="pre">parameter:</span> <span class="pre">str,</span> <span class="pre">value:</span> <span class="pre">Union[float,</span> <span class="pre">int,</span> <span class="pre">str])</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-operations">File Operations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-operations">File Operations</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-management">Results Management</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#copy-and-rename-source-dir-path-destination-dir-path-new-filename-str-none"><code class="docutils literal notranslate"><span class="pre">copy_and_rename(source_dir:</span> <span class="pre">Path,</span> <span class="pre">destination_dir:</span> <span class="pre">Path,</span> <span class="pre">new_filename:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read-csvfile-file-path-path-float"><code class="docutils literal notranslate"><span class="pre">read_csvfile(file_path:</span> <span class="pre">Path)</span> <span class="pre">-&gt;</span> <span class="pre">float</span></code></a></li>
@@ -1084,12 +1012,12 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-exceptions">Common Exceptions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validation-functions">Validation Functions</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-examples">Usage Examples</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage-examples">Usage Examples</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-workflow-example">Complete Workflow Example</a></li>
 </ul>
 </li>
@@ -1102,18 +1030,22 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
           </div>
           <footer class="bd-footer-content">
             
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Bruno Borba, Md Eliasinul Islam
-</p>
-
+          </footer>
+        
+      </main>
+    </div>
   </div>
   
-  <div class="footer-item">
-    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
 
   <p class="copyright">
     
@@ -1121,30 +1053,14 @@ By Bruno Borba, Md Eliasinul Islam
       <br/>
     
   </p>
-
-  </div>
+</div>
+      
+    </div>
   
-  <div class="footer-item">
-    
-  </div>
   
-  <div class="footer-item">
-    
-  </div>
   
 </div>
-          </footer>
-        
 
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
-
-  <footer class="bd-footer">
   </footer>
   </body>
 </html>

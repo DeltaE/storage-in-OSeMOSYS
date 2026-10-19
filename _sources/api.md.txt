@@ -1,0 +1,11 @@
+# API
+
+The pipeline lives in the `src` package. The overview explains how the modules fit together; the
+reference is generated from the source code.
+
+```{toctree}
+:maxdepth: 2
+
+notes/api_reference
+autoapi/src/index
+```

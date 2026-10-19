@@ -1,0 +1,98 @@
+/* Clean, light look on top of pydata-sphinx-theme */
+
+html[data-theme="light"] {
+  --pst-color-primary: #1f6f8b;
+  --pst-color-secondary: #1f6f8b;
+  --pst-color-link: #1f6f8b;
+  --pst-color-link-hover: #144b5e;
+  --pst-color-background: #ffffff;
+  --pst-color-on-background: #ffffff;
+  --pst-color-surface: #f6f8fa;
+  --pst-color-border: #e5e8eb;
+  --pst-color-text-base: #1f2328;
+  --pst-color-text-muted: #59636e;
+}
+
+html {
+  --pst-font-size-base: 16px;
+  --pst-header-height: 3.5rem;
+}
+
+/* Header: thin border, no shadow */
+.bd-header {
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--pst-color-border);
+}
+.navbar-brand .title {
+  font-weight: 600;
+}
+.bd-header ul.navbar-nav > li.nav-item > .nav-link {
+  font-weight: 500;
+}
+
+/* Headings */
+h1 { font-weight: 650; letter-spacing: -0.01em; }
+h2 { font-weight: 600; margin-top: 2.5rem; }
+
+/* Landing page */
+.lead {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--pst-color-text-muted);
+  max-width: 42rem;
+  margin-bottom: 2rem;
+}
+
+.section-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+.section-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.25rem 1.25rem 1.4rem;
+  border: 1px solid var(--pst-color-border);
+  border-radius: 10px;
+  background: var(--pst-color-background);
+  color: var(--pst-color-text-base) !important;
+  text-decoration: none !important;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.section-card:hover {
+  border-color: var(--pst-color-primary);
+  transform: translateY(-2px);
+}
+.section-card__step {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--pst-color-primary);
+  letter-spacing: 0.05em;
+}
+.section-card__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.section-card__text {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--pst-color-text-muted);
+}
+
+/* Code blocks: flat */
+div.highlight pre {
+  border: 1px solid var(--pst-color-border);
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+/* Sidebar: no "Section Navigation" heading or collapse button */
+.bd-links__title,
+.pst-sidebar-collapse { display: none !important; }

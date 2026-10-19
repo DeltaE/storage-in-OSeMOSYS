@@ -1,0 +1,13 @@
+# Results
+
+How to regenerate the results of the published study, what each output file contains, and how to
+analyse them.
+
+```{toctree}
+:maxdepth: 2
+
+notes/reproducibility
+notebooks/reproduce_study
+notes/outputs
+notes/results_analysis
+```

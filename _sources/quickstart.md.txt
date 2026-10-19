@@ -1,0 +1,43 @@
+# Quickstart
+
+## 1. Set up the environment
+
+```bash
+git clone https://github.com/DeltaE/storage-in-OSeMOSYS.git
+cd storage-in-OSeMOSYS
+
+make setup                       # creates the conda env and installs dependencies
+conda activate storage_osemosys
+make test-env                    # checks Python packages and the GLPK solver
+```
+
+Full details and manual setup: {doc}`notes/README_ENVIRONMENT`.
+
+## 2. Choose a scenario
+
+Edit `config/config.yaml`:
+
+```yaml
+scenario_name: "k4h1WND"   # label used for result files
+days_in_year: 365
+seasons: 4
+n_clusters: 4              # number of representative days
+hour_grouping: 1           # hours per time block
+```
+
+All parameters are described in {doc}`notes/configuration_guide`.
+
+## 3. Run
+
+```bash
+python main.py               # or: make run-main
+```
+
+The pipeline clusters the hourly data into representative days, writes the inputs for each
+storage formulation, solves each model with GLPK and collects the results. The steps are
+explained in {doc}`notes/workflow_guide`.
+
+## 4. Look at the results
+
+Results are written to `Results/`. See {doc}`notes/outputs` for the file layout, or
+{doc}`notes/reproducibility` to regenerate the published study.

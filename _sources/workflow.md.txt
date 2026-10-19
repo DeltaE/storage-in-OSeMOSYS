@@ -1,0 +1,29 @@
+# Modelling workflow
+
+From a fresh clone to a solved model: set up the environment, run the pipeline, then adjust the
+configuration and assumptions for your own scenarios.
+
+```{toctree}
+:caption: Get started
+:maxdepth: 2
+
+notes/README_ENVIRONMENT
+quickstart
+```
+
+```{toctree}
+:caption: Pipeline
+:maxdepth: 2
+
+notes/workflow_guide
+notes/configuration_guide
+```
+
+```{toctree}
+:caption: Tutorials
+:maxdepth: 1
+
+notebooks/basic_usage
+notebooks/comparative_analysis
+notebooks/advanced_configuration
+```

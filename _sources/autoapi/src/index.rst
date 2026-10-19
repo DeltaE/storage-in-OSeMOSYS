@@ -18,6 +18,7 @@ Submodules
    /autoapi/src/graph_generator/index
    /autoapi/src/graph_generator_3graphs/index
    /autoapi/src/read_csv/index
+   /autoapi/src/reproduce/index
    /autoapi/src/simulation/index
    /autoapi/src/table_generator/index
    /autoapi/src/update_CFandSDP/index

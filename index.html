@@ -2,80 +2,79 @@
 <!DOCTYPE html>
 
 
-<html lang="Python" data-content_root="./" >
+<html lang="en" data-content_root="./" data-theme="light">
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Overview &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+    <title>Storage in OSeMOSYS &#8212; Storage in OSeMOSYS</title>
   
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e28e70d7" />
   
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="_static/documentation_options.js?v=e9b82cb4"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/documentation_options.js?v=6c6ff0de"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Environment Setup Guide" href="notes/README_ENVIRONMENT.html" />
+    <link rel="next" title="Concept" href="concept.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="Python"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="light">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -83,46 +82,31 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
-         placeholder="Search..."
-         aria-label="Search..."
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
   
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
   
-  <div class="sidebar-header-items sidebar-primary__section">
+  <div class=" navbar-header-items__start">
     
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
+      <div class="navbar-item">
 
   
     
@@ -136,81 +120,189 @@
   
     
     
-      
     
-    
-    <img src="_static/storage_in_osemosys_logo_202508.png" class="logo__image only-light" alt="Storage in OSEMoSYS 2025.07 documentation - Home"/>
-    <script>document.write(`<img src="_static/storage_in_osemosys_logo_202508.png" class="logo__image only-dark" alt="Storage in OSEMoSYS 2025.07 documentation - Home"/>`);</script>
+    <img src="_static/storage_in_osemosys_logo_202508.png" class="logo__image only-light" alt=""/>
+    <img src="_static/storage_in_osemosys_logo_202508.png" class="logo__image only-dark pst-js-only" alt=""/>
   
+  
+    <p class="title logo__title">Storage in OSeMOSYS</p>
   
 </a></div>
-        <div class="sidebar-primary-item">
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="concept.html">
+    Concept
+  </a>
+</li>
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notes/configuration_guide.html">Configuration Guide</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notes/api_reference.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notes/model_specifications.html">Model Specifications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notes/results_analysis.html">Results Analysis</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="autoapi/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/cluster/index.html">src.cluster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/read_csv/index.html">src.read_csv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/simulation/index.html">src.simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/table_generator/index.html">src.table_generator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_list/index.html">src.update_list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="autoapi/src/utilities/index.html">src.utilities</a></li>
-</ul>
-</details></li>
-</ul>
-</details></li>
-</ul>
 
-    </div>
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="workflow.html">
+    Modelling workflow
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="results.html">
+    Results
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API
+  </a>
+</li>
+
+  </ul>
 </nav></div>
+      
     </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/DeltaE/storage-in-OSeMOSYS" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="concept.html">
+    Concept
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="workflow.html">
+    Modelling workflow
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="results.html">
+    Results
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/DeltaE/storage-in-OSeMOSYS" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -218,613 +310,63 @@
       <main id="main-content" class="bd-main" role="main">
         
         
-
-<div class="sbt-scroll-pixel-helper"></div>
-
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article d-print-none">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</button></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
-
-
-<a href="https://github.com/DeltaE/storage-in-OSeMOSYS" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="Source repository"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="_sources/index.md" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.md</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
+              <div class="bd-header-article d-print-none"></div>
               
               
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Overview</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#research-context">Research Context</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-storage-modeling-challenge">The Storage Modeling Challenge</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-solution">Our Solution</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-storage-modelling">About Storage Modelling</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#niet-direct-link-continuous-diary">Niet (Direct Link) — “Continuous Diary”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-structure">Documentation Structure</a><ul class="visible nav section-nav flex-column">
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">1. Environment Setup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">2. Basic Usage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">3. Configuration</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-team">Project Team</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
-</ul>
-</li>
-</ul>
-
-            </nav>
-        </div>
-    </div>
-</div>
-
               
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <img src="_static/storage_in_osemosys_banner_202508.jpg" alt="banner" width="700">
-<!-- # Storage-in-OSeMOSYS -->
-<p>A comprehensive framework for analyzing energy storage systems using OSeMOSYS with time-series clustering and temporal disaggregation methods.</p>
-<!-- <img src="_static/storage_models_overview.png" alt="Storage Models Overview" width="800"/> -->
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This library is under active development. For latest release and updates, please check the <a class="reference external" href="https://github.com/DeltaE/storage-in-OSeMOSYS">GitHub repository</a>.Some of the contents are not displayed as a requirement for the publication process of the paper. Complete content will be available after the publication.</p>
+  <section id="storage-in-osemosys">
+<h1>Storage in OSeMOSYS<a class="headerlink" href="#storage-in-osemosys" title="Link to this heading">#</a></h1>
+<p class="lead">
+Storage formulations for long-term energy planning models with temporal aggregation —
+four ways to represent energy storage in OSeMOSYS, compared side by side.
+</p>
+<div class="section-cards">
+  <a class="section-card" href="concept.html">
+    <span class="section-card__step">01</span>
+    <span class="section-card__title">Concept</span>
+    <span class="section-card__text">Why storage is hard to model under temporal aggregation, and the four formulations compared.</span>
+  </a>
+  <a class="section-card" href="workflow.html">
+    <span class="section-card__step">02</span>
+    <span class="section-card__title">Modelling workflow</span>
+    <span class="section-card__text">Installation, quickstart, pipeline steps, configuration and assumptions.</span>
+  </a>
+  <a class="section-card" href="results.html">
+    <span class="section-card__step">03</span>
+    <span class="section-card__title">Results</span>
+    <span class="section-card__text">Reproduce the published study, output files and how to analyse them.</span>
+  </a>
+  <a class="section-card" href="api.html">
+    <span class="section-card__step">04</span>
+    <span class="section-card__title">API</span>
+    <span class="section-card__text">Reference for the <code>src</code> package, generated from the source code.</span>
+  </a>
 </div>
-<section id="overview">
-<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h1>
-<p>Storage-in-OSeMOSYS implements four different temporal representation methods for energy system optimization, each addressing the challenge of modeling energy storage systems with varying levels of computational complexity and accuracy:</p>
-<ul class="simple">
-<li><p><strong>🔄 Model_Cluster</strong>: Time-series clustering approach for representative day selection</p></li>
-<li><p><strong>📊 Model_Kotzur</strong>: Kotzur temporal disaggregation method with daily mapping</p></li>
-<li><p><strong>⏰ Model_Welsch</strong>: Welsch temporal representation with fixed patterns</p></li>
-<li><p><strong>🔗 Model_Niet</strong>: Niet temporal method with direct chronological linking</p></li>
-</ul>
-</section>
-<section id="key-features">
-<h1>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h1>
-<ul class="simple">
-<li><p>🔄 <strong>Time-series clustering</strong> for representative day selection using K-means</p></li>
-<li><p>📊 <strong>Multiple temporal methods</strong> comparing different storage modeling approaches</p></li>
-<li><p>⚡ <strong>OSeMOSYS integration</strong> with OtoOle for seamless data processing</p></li>
-<li><p>📈 <strong>Automated visualization</strong> and comparative results analysis</p></li>
-<li><p>🛠️ <strong>Modular design</strong> with utilities for configuration management</p></li>
-<li><p>🔧 <strong>GLPK solver integration</strong> for linear programming optimization</p></li>
-<li><p>🐍 <strong>Python 3.13</strong> support with modern pathlib usage</p></li>
-<li><p>📋 <strong>Conda environment</strong> management with comprehensive Makefile</p></li>
-</ul>
-</section>
-<section id="research-context">
-<h1>Research Context<a class="headerlink" href="#research-context" title="Link to this heading">#</a></h1>
-<p>This framework addresses the critical challenge of modeling energy storage systems in large-scale energy planning. Storage systems fundamentally differ from conventional generation and demand technologies because they <strong>move energy across time</strong>, creating complex temporal dependencies that are computationally expensive to model accurately.</p>
-<section id="the-storage-modeling-challenge">
-<h2>The Storage Modeling Challenge<a class="headerlink" href="#the-storage-modeling-challenge" title="Link to this heading">#</a></h2>
-<p>Energy storage modeling is complex because:</p>
-<ol class="arabic simple">
-<li><p><strong>🔁 Time-shifting behavior</strong>: Storage moves energy across time periods rather than just producing or consuming</p></li>
-<li><p><strong>⏳ State continuity</strong>: The state of charge depends on all previous time periods</p></li>
-<li><p><strong>🔗 Temporal coupling</strong>: Decisions in one hour affect options in future hours</p></li>
-<li><p><strong>⚡ Multi-scale dynamics</strong>: From minute-level frequency regulation to seasonal energy shifting</p></li>
-</ol>
-</section>
-<section id="our-solution">
-<h2>Our Solution<a class="headerlink" href="#our-solution" title="Link to this heading">#</a></h2>
-<p><strong>Storage-in-OSeMOSYS</strong> provides a systematic comparison of four established temporal representation methods, allowing researchers to:</p>
-<ul class="simple">
-<li><p><strong>Evaluate trade-offs</strong> between computational efficiency and model accuracy</p></li>
-<li><p><strong>Compare results</strong> across different temporal abstraction approaches</p></li>
-<li><p><strong>Select appropriate methods</strong> based on specific research questions and constraints</p></li>
-<li><p><strong>Understand limitations</strong> of each approach for storage system analysis</p></li>
-</ul>
-</section>
-</section>
-<section id="about-storage-modelling">
-<h1>About Storage Modelling<a class="headerlink" href="#about-storage-modelling" title="Link to this heading">#</a></h1>
-<p>Storage modeling is complex because storage systems behave differently than generation or demand. <strong>Storages move energy across time, not just produce or consume it</strong>. This means:</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This library is under active development and some of the contents are not displayed as a requirement for the publication process of the paper. Complete content will be available after the publication.</p>
-</div>
-<p><strong>🔁 1. Storage shifts energy in time</strong></p>
-<p>Unlike solar panels (generate) or homes (consume), storage stores energy when it’s abundant and releases it when needed. That means:</p>
-<ul>
-<li><p>You can't look at one hour in isolation — what happened before matters.</p></li>
-<li><p>The state of charge (SOC) today depends on all previous hours.</p>
-<blockquote>
-<div><p>Analogy: It's like a savings account — what you can spend today depends on how much you saved earlier.</p>
-</div></blockquote>
-</li>
-</ul>
-<p><strong>⏳ 2. Time resolution matters</strong></p>
-<p>Should you model every single hour? Every day? A few representative days? Each choice impacts:</p>
-<ul>
-<li><p>Accuracy (high resolution = realistic, but slow to compute)</p></li>
-<li><p>Computational effort (simplified models lose detail)</p>
-<blockquote>
-<div><p>If you model storage with only a few sample days, you risk missing important patterns, like a long wind lull or weekend charging habits.</p>
-</div></blockquote>
-</li>
-</ul>
-<p><strong>🔗 3. Storage needs continuity</strong></p>
-<p>Many simplification techniques (e.g. clustering days) break the continuity of storage:</p>
-<ul class="simple">
-<li><p>The model might forget how full the battery was yesterday.</p></li>
-<li><p>Artificial resets can distort when charging/discharging actually happens.</p></li>
-</ul>
-<p>This makes it tricky to model seasonal storage or multi-day balancing.</p>
-<p><strong>⚡ 4. Storage interacts with everything</strong>
-Storage isn’t just an isolated battery:</p>
-<ul class="simple">
-<li><p>It interacts with renewables (absorbing variability)</p></li>
-<li><p>It supports grid reliability (fast response)</p></li>
-<li><p>It responds to prices, constraints, and emissions goals</p></li>
-</ul>
-<p>So modeling it well requires integrating with the rest of the energy system.</p>
-<section id="state-of-the-art-energy-storage-algorithms">
-<h2>state of the art <strong>energy storage algorithms</strong>:<a class="headerlink" href="#state-of-the-art-energy-storage-algorithms" title="Link to this heading">#</a></h2>
-<section id="niet-direct-link-continuous-diary">
-<h3>Niet (Direct Link) — “Continuous Diary”<a class="headerlink" href="#niet-direct-link-continuous-diary" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Analogy</strong>: Imagine someone writes in their diary every hour without skipping, and each day picks up exactly where the last one left off. The emotional ups and downs (mood swings) are smooth and continuous over the week.</p></li>
-<li><p><strong>Key idea</strong>: Full hourly resolution; perfect continuity over time.</p></li>
-<li><p><strong>Use case</strong>: Most accurate but data-heavy.</p></li>
-</ul>
-</section>
-<section id="welsch-fixed-pattern-photocopied-day">
-<h3>Welsch (Fixed-Pattern) — “Photocopied Day”<a class="headerlink" href="#welsch-fixed-pattern-photocopied-day" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Analogy</strong>: This person writes down one typical day of feelings and then photocopies that same page for each day of the week. So Monday, Tuesday, etc., look exactly the same.</p></li>
-<li><p><strong>Key idea</strong>: Same daily pattern repeated; no inter-day variation.</p></li>
-<li><p><strong>Use case</strong>: Fast and simple but ignores variation between days.</p></li>
-</ul>
-</section>
-<section id="kotzur-unverified-cluster-alternating-diaries">
-<h3>Kotzur (Unverified Cluster) — “Alternating Diaries”<a class="headerlink" href="#kotzur-unverified-cluster-alternating-diaries" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Analogy</strong>: This person has two types of days — maybe “busy” and “lazy” days — and alternates between those two. They use pre-written diary templates for each. But they don’t bother connecting one day’s feelings to the next, so it can feel jumpy or inconsistent.</p></li>
-<li><p><strong>Key idea</strong>: Captures daily diversity using clusters, but no continuity.</p></li>
-<li><p><strong>Use case</strong>: Captures more variety than Welsch but lacks smooth transitions.</p></li>
-</ul>
-</section>
-<section id="novo-hourly-verified-linked-journaling">
-<h3>Novo (Hourly-Verified) — “Linked Journaling”<a class="headerlink" href="#novo-hourly-verified-linked-journaling" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Analogy</strong>: This person still uses simplified mood templates for different kinds of days, but they always make sure each day starts where the previous one left off. So it feels realistic and connected, even if it's not a full diary.</p></li>
-<li><p><strong>Key idea</strong>: Combines typical days with continuity between hours.</p></li>
-<li><p><strong>Use case</strong>: A practical middle ground between realism and simplicity.</p></li>
-</ul>
-</section>
-</section>
-<section id="documentation-structure">
-<h2>Documentation Structure<a class="headerlink" href="#documentation-structure" title="Link to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#prerequisites">Prerequisites</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#system-requirements">System Requirements</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#required-software">Required Software</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#quick-setup">Quick Setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#clone-repository">1. Clone Repository</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#automated-environment-setup">2. Automated Environment Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#test-installation">3. Test Installation</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#manual-environment-setup">Manual Environment Setup</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#create-conda-environment">1. Create Conda Environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#install-core-dependencies">2. Install Core Dependencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#install-additional-dependencies">3. Install Additional Dependencies</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-file-management">Environment File Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#using-environment-yml">Using environment.yml</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-export">Environment Export</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#makefile-commands">Makefile Commands</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-management">Environment Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#running-the-model">Running the Model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-workflow">Development Workflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#documentation">Documentation</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#package-details">Package Details</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#core-scientific-stack">Core Scientific Stack</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#energy-system-modeling">Energy System Modeling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-and-documentation">Development and Documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#utilities">Utilities</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-verification">Environment Verification</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#comprehensive-test-script">Comprehensive Test Script</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#troubleshooting">Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#common-issues-and-solutions">Common Issues and Solutions</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#performance-optimization">Performance Optimization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-tuning">Environment Tuning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#memory-management">Memory Management</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-environment">Development Environment</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#additional-tools-for-development">Additional Tools for Development</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#ide-configuration">IDE Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-maintenance">Environment Maintenance</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#regular-updates">Regular Updates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-backup">Environment Backup</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#workflow-architecture">Workflow Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#detailed-workflow-steps">Detailed Workflow Steps</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#configuration-and-initialization">1. Configuration and Initialization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#data-preprocessing-and-clustering">2. Data Preprocessing and Clustering</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#model-specific-processing">3. Model-Specific Processing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#osemosys-model-conversion-and-simulation">4. OSeMOSYS Model Conversion and Simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#results-collection-and-processing">5. Results Collection and Processing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#post-processing-and-visualization">6. Post-Processing and Visualization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#execution-commands">Execution Commands</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#basic-execution">Basic Execution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#batch-parametric-execution">Batch / Parametric Execution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#environment-management">Environment Management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#configuration-options">Configuration Options</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#output-structure">Output Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#troubleshooting">Troubleshooting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/workflow_guide.html#common-issues">Common Issues</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/configuration_guide.html">Configuration Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-file-structure">Configuration File Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#key-configuration-parameters">Key Configuration Parameters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#analysis-parameters">Analysis Parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#storage-parameters">Storage Parameters</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#model-specific-configuration">Model-Specific Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#model-cluster-configuration">Model_Cluster Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#model-kotzur-configuration">Model_Kotzur Configuration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#model-welsch-configuration">Model_Welsch Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#data-configuration">Data Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#input-data-paths">Input Data Paths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#results-configuration">Results Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#common-configuration-scenarios">Common Configuration Scenarios</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#high-resolution-analysis">High-Resolution Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#fast-prototyping">Fast Prototyping</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#seasonal-analysis">Seasonal Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#computational-efficiency">Computational Efficiency</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-validation">Configuration Validation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#parameter-relationships">Parameter Relationships</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#validation-checks">Validation Checks</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#advanced-configuration">Advanced Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#custom-data-sources">Custom Data Sources</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#multiple-scenarios">Multiple Scenarios</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#solver-configuration">Solver Configuration</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-best-practices">Configuration Best Practices</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#naming-conventions">1. Naming Conventions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#parameter-selection-guidelines">2. Parameter Selection Guidelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#storage-parameter-guidelines">3. Storage Parameter Guidelines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#computational-considerations">4. Computational Considerations</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-file-management">Configuration File Management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#version-control">Version Control</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#configuration-templates">Configuration Templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="notes/configuration_guide.html#environment-specific-configs">Environment-Specific Configs</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notes/api_reference.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#module-overview">Module Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#core-utilities-src-utilities">Core Utilities (<code class="docutils literal notranslate"><span class="pre">src.utilities</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#time-series-clustering-src-cluster">Time-Series Clustering (<code class="docutils literal notranslate"><span class="pre">src.cluster</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#simulation-management-src-simulation">Simulation Management (<code class="docutils literal notranslate"><span class="pre">src.simulation</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#data-processing-functions">Data Processing Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#temporal-mapping-functions">Temporal Mapping Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#visualization-src-graph-generator">Visualization (<code class="docutils literal notranslate"><span class="pre">src.graph_generator</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#results-analysis-src-table-generator">Results Analysis (<code class="docutils literal notranslate"><span class="pre">src.table_generator</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#configuration-updates-src-yaml-operations">Configuration Updates (<code class="docutils literal notranslate"><span class="pre">src.yaml_operations</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#file-operations">File Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#error-handling">Error Handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#usage-examples">Usage Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/model_specifications.html">Model Specifications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#osemosys-integration">OSeMOSYS Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#storage-technologies">Storage Technologies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#technical-implementation">Technical Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#future-development">Future Development</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/results_analysis.html">Results Analysis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#output-files">Output Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#analysis-techniques">Analysis Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#visualization">Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#performance-metrics">Performance Metrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#quality-assurance">Quality Assurance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/results_analysis.html#future-enhancements">Future Enhancements</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_usage.html">Basic Usage Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#getting-started-with-storage-in-osemosys">Getting Started with Storage-in-OSeMOSYS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#quick-start-example">Quick Start Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#step-by-step-workflow">Step-by-Step Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#common-use-cases">Common Use Cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#best-practices">Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#troubleshooting">Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/basic_usage.html#next-steps">Next Steps</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#temporal-clustering-methods-comparison">Temporal Clustering Methods Comparison</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#storage-technology-comparison">Storage Technology Comparison</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#accuracy-vs-efficiency-trade-offs">Accuracy vs. Efficiency Trade-offs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#sensitivity-analysis">Sensitivity Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#regional-comparison">Regional Comparison</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#economic-analysis">Economic Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#results-visualization">Results Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/comparative_analysis.html#key-insights-and-recommendations">Key Insights and Recommendations</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#advanced-configuration-options">Advanced Configuration Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#multi-objective-optimization">Multi-Objective Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#uncertainty-and-risk-analysis">Uncertainty and Risk Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#advanced-temporal-modeling">Advanced Temporal Modeling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#advanced-results-analysis">Advanced Results Analysis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/advanced_configuration.html#integration-with-external-tools">Integration with External Tools</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/src/index.html">src</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</section>
-<section id="quick-start">
-<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
-<section id="environment-setup">
-<h3>1. Environment Setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone repository</span>
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/DeltaE/storage-in-OSeMOSYS.git
+<section id="at-a-glance">
+<h2>At a glance<a class="headerlink" href="#at-a-glance" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/DeltaE/storage-in-OSeMOSYS.git
 <span class="nb">cd</span><span class="w"> </span>storage-in-OSeMOSYS
-
-<span class="c1"># Setup conda environment</span>
-make<span class="w"> </span>setup
-conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
-
-<span class="c1"># Verify installation</span>
-make<span class="w"> </span>test-env
-</pre></div>
-</div>
-</section>
-<section id="basic-usage">
-<h3>2. Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run analysis with default configuration</span>
+make<span class="w"> </span>setup<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
 python<span class="w"> </span>main.py
-
-<span class="c1"># Check results</span>
-ls<span class="w"> </span>Results/
 </pre></div>
 </div>
-</section>
-<section id="configuration">
-<h3>3. Configuration<a class="headerlink" href="#configuration" title="Link to this heading">#</a></h3>
-<p>Edit <code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code> to customize:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;k4h1WND&quot;</span>
-<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span>
-<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
-<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="project-team">
-<h2>Project Team<a class="headerlink" href="#project-team" title="Link to this heading">#</a></h2>
-<p><strong>Research Lead</strong>: Bruno Borba
-<strong>Development Support</strong>: Md Eliasinul Islam<br />
-<strong>Affiliation</strong>: Delta E+ Research Lab, Simon Fraser University<br />
-<strong>License</strong>: MIT License</p>
+<p>See <a class="reference internal" href="quickstart.html"><span class="doc">Quickstart</span></a> for what this does and where the results go.</p>
 </section>
 <section id="citation">
 <h2>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h2>
-<p>If you use Storage-in-OSeMOSYS in your research, please cite:</p>
-<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@software</span><span class="p">{</span><span class="nl">storage_osemosys_2025</span><span class="p">,</span>
-<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{Storage-in-OSeMOSYS: A Framework for Temporal Representation Methods in Energy Storage Modeling}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Islam, Md Eliasinul}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">organization</span><span class="p">=</span><span class="s">{Delta E+ Research Lab, Simon Fraser University}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2025}</span><span class="p">,</span>
-<span class="w">  </span><span class="na">url</span><span class="p">=</span><span class="s">{https://github.com/DeltaE/storage-in-OSeMOSYS}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<hr class="docutils" />
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>For technical support, please open an issue on <a class="reference external" href="https://github.com/DeltaE/storage-in-OSeMOSYS/issues">GitHub</a>.
-For research collaboration inquiries, contact the Delta E+ Research Lab.</p>
+<blockquote>
+<div><p>Borba, B., Islam, M. E., &amp; Niet, T. <em>Storage in Long-Term Energy Planning Models with Temporal
+Aggregation: Best Practices and Algorithms.</em> Environmental Research Communications (2026).</p>
+</div></blockquote>
+<p>Developed at the Delta E+ Research Lab, Simon Fraser University · MIT License</p>
+<div class="toctree-wrapper compound">
 </div>
 </section>
 </section>
@@ -832,7 +374,6 @@ For research collaboration inquiries, contact the Delta E+ Research Lab.</p>
 
                 </article>
               
-
               
               
               
@@ -841,11 +382,11 @@ For research collaboration inquiries, contact the Delta E+ Research Lab.</p>
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="notes/README_ENVIRONMENT.html"
+       href="concept.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Environment Setup Guide</p>
+        <p class="prev-next-title">Concept</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -856,65 +397,26 @@ For research collaboration inquiries, contact the Delta E+ Research Lab.</p>
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overview</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#research-context">Research Context</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-storage-modeling-challenge">The Storage Modeling Challenge</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#our-solution">Our Solution</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#about-storage-modelling">About Storage Modelling</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#niet-direct-link-continuous-diary">Niet (Direct Link) — “Continuous Diary”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-structure">Documentation Structure</a><ul class="visible nav section-nav flex-column">
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">1. Environment Setup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-usage">2. Basic Usage</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration">3. Configuration</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-team">Project Team</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
-</ul>
-</li>
-</ul>
-
-  </nav></div>
-
-</div></div>
-              
             
           </div>
           <footer class="bd-footer-content">
             
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Bruno Borba, Md Eliasinul Islam
-</p>
-
+          </footer>
+        
+      </main>
+    </div>
   </div>
   
-  <div class="footer-item">
-    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
 
   <p class="copyright">
     
@@ -922,30 +424,14 @@ By Bruno Borba, Md Eliasinul Islam
       <br/>
     
   </p>
-
-  </div>
+</div>
+      
+    </div>
   
-  <div class="footer-item">
-    
-  </div>
   
-  <div class="footer-item">
-    
-  </div>
   
 </div>
-          </footer>
-        
 
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
-
-  <footer class="bd-footer">
   </footer>
   </body>
 </html>

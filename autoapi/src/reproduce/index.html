@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>src.reproduce &#8212; Storage in OSeMOSYS</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=e28e70d7" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../../_static/documentation_options.js?v=6c6ff0de"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'autoapi/src/reproduce/index';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="src.simulation" href="../simulation/index.html" />
+    <link rel="prev" title="src.read_csv" href="../read_csv/index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="light">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="../../../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">Storage in OSeMOSYS</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../concept.html">
+    Concept
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../workflow.html">
+    Modelling workflow
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../results.html">
+    Results
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/DeltaE/storage-in-OSeMOSYS" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../concept.html">
+    Concept
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../workflow.html">
+    Modelling workflow
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../results.html">
+    Results
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/DeltaE/storage-in-OSeMOSYS" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">src</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Welsch_intraday/index.html">src.Welsch_intraday</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cluster/index.html">src.cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../copy_rename_csv/index.html">src.copy_rename_csv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../graph_generator/index.html">src.graph_generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../read_csv/index.html">src.read_csv</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">src.reproduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../simulation/index.html">src.simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../table_generator/index.html">src.table_generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../update_CFandSDP/index.html">src.update_CFandSDP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../update_conversionld/index.html">src.update_conversionld</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../update_conversionldc/index.html">src.update_conversionldc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../update_conversionlh/index.html">src.update_conversionlh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../update_conversionlts/index.html">src.update_conversionlts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../update_daysindaytype/index.html">src.update_daysindaytype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../update_list/index.html">src.update_list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../update_yearsplit/index.html">src.update_yearsplit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utilities/index.html">src.utilities</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../api.html" class="nav-link">API</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">src</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.reproduce</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-src.reproduce">
+<span id="src-reproduce"></span><h1>src.reproduce<a class="headerlink" href="#module-src.reproduce" title="Link to this heading">#</a></h1>
+<p>Helpers for reproducing Bruno, Islam &amp; Niet, “Storage in long-term energy planning models with
+temporal aggregation” (Environ. Res. Commun., ERC-105849) with this repository.</p>
+<p>Used by <code class="docutils literal notranslate"><span class="pre">reproduce_study.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">automation.py</span></code>. Every model run goes through <code class="docutils literal notranslate"><span class="pre">main.py</span></code>
+unchanged, so the notebook exercises exactly the code path that produced the published numbers.</p>
+<p>Naming: the formulation called <em>Novo</em> in the paper is implemented in <code class="docutils literal notranslate"><span class="pre">Model_Cluster</span></code>.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.REPO" title="src.reproduce.REPO"><code class="xref py py-obj docutils literal notranslate"><span class="pre">REPO</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.RESOURCES" title="src.reproduce.RESOURCES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RESOURCES</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.DEMAND_PROFILE" title="src.reproduce.DEMAND_PROFILE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DEMAND_PROFILE</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.K_VALUES" title="src.reproduce.K_VALUES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">K_VALUES</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.H_VALUES" title="src.reproduce.H_VALUES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">H_VALUES</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.MODELS" title="src.reproduce.MODELS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MODELS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.FORMULATION" title="src.reproduce.FORMULATION"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FORMULATION</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.UNCONSTRAINED_CAP" title="src.reproduce.UNCONSTRAINED_CAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UNCONSTRAINED_CAP</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.STRESS_CAP" title="src.reproduce.STRESS_CAP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">STRESS_CAP</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.RESIDUAL_STORAGE" title="src.reproduce.RESIDUAL_STORAGE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RESIDUAL_STORAGE</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.MANUSCRIPT_ENV" title="src.reproduce.MANUSCRIPT_ENV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MANUSCRIPT_ENV</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.TABLE4_CASES" title="src.reproduce.TABLE4_CASES"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TABLE4_CASES</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.check_environment" title="src.reproduce.check_environment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_environment</span></code></a>(→ pandas.DataFrame)</p></td>
+<td><p>Installed versions against the environment stated in Section 3.4.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.scenario_name" title="src.reproduce.scenario_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scenario_name</span></code></a>(→ str)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.run_case" title="src.reproduce.run_case"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_case</span></code></a>(→ pandas.DataFrame)</p></td>
+<td><p>Run one scenario (all four formulations unless <code class="docutils literal notranslate"><span class="pre">models</span></code> is given) via <code class="docutils literal notranslate"><span class="pre">main.py</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.run_grid" title="src.reproduce.run_grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_grid</span></code></a>(→ pandas.DataFrame)</p></td>
+<td><p>Run a grid of scenarios; already-completed scenarios are skipped.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.load_results" title="src.reproduce.load_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_results</span></code></a>(→ pandas.DataFrame)</p></td>
+<td><p>Tidy Simulation_Results.xlsx (one row per scenario x formulation, last run kept).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.add_errors" title="src.reproduce.add_errors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_errors</span></code></a>(→ pandas.DataFrame)</p></td>
+<td><p>Cost and storage-capacity error (%) against the k365h1 Novo benchmark of the same resource.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.table4" title="src.reproduce.table4"><code class="xref py py-obj docutils literal notranslate"><span class="pre">table4</span></code></a>(→ pandas.DataFrame)</p></td>
+<td><p>Rebuild manuscript Table 4 (h = 1, unconstrained).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.compare_to_archive" title="src.reproduce.compare_to_archive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_to_archive</span></code></a>() → pandas.DataFrame)</p></td>
+<td><p>Relative difference between fresh runs and the archived results (same Scenario x Model).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.clustering" title="src.reproduce.clustering"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clustering</span></code></a>(resource, k[, random_state])</p></td>
+<td><p>Representative days and chronological day-&gt;representative mapping, as used by main.py.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.seed_robustness" title="src.reproduce.seed_robustness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seed_robustness</span></code></a>([ks, seeds])</p></td>
+<td><p>Compare clusterings for alternative seeds against seed 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.run_soc_validation" title="src.reproduce.run_soc_validation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_soc_validation</span></code></a>(→ pandas.DataFrame)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.read_storage" title="src.reproduce.read_storage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_storage</span></code></a>(→ pandas.Series)</p></td>
+<td><p>Native or reconstructed storage level written by main.py.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.soc_violations" title="src.reproduce.soc_violations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">soc_violations</span></code></a>(→ dict)</p></td>
+<td><p>Count bound violations of a storage trajectory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.hourly_trajectory" title="src.reproduce.hourly_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hourly_trajectory</span></code></a>(→ numpy.ndarray)</p></td>
+<td><p>8760-h storage trajectory used for the fidelity metrics.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.rainflow_cycles" title="src.reproduce.rainflow_cycles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rainflow_cycles</span></code></a>(→ float)</p></td>
+<td><p>Equivalent full cycles by rainflow counting (ASTM E1049-85 three-point method).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.fidelity_metrics" title="src.reproduce.fidelity_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fidelity_metrics</span></code></a>(→ dict)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">#</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.REPO">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">REPO</span></span><a class="headerlink" href="#src.reproduce.REPO" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.RESOURCES">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">RESOURCES</span></span><a class="headerlink" href="#src.reproduce.RESOURCES" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.DEMAND_PROFILE">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">DEMAND_PROFILE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'SpecifiedDemandProfile.csv'</span></span><a class="headerlink" href="#src.reproduce.DEMAND_PROFILE" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.K_VALUES">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">K_VALUES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6,</span> <span class="pre">7,</span> <span class="pre">8,</span> <span class="pre">9,</span> <span class="pre">10,</span> <span class="pre">20,</span> <span class="pre">30,</span> <span class="pre">40,</span> <span class="pre">50,</span> <span class="pre">60,</span> <span class="pre">70,</span> <span class="pre">80,</span> <span class="pre">90,</span> <span class="pre">100]</span></span><a class="headerlink" href="#src.reproduce.K_VALUES" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.H_VALUES">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">H_VALUES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8,</span> <span class="pre">12]</span></span><a class="headerlink" href="#src.reproduce.H_VALUES" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.MODELS">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">MODELS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Model_Niet',</span> <span class="pre">'Model_Welsch',</span> <span class="pre">'Model_Kotzur',</span> <span class="pre">'Model_Cluster']</span></span><a class="headerlink" href="#src.reproduce.MODELS" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.FORMULATION">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">FORMULATION</span></span><a class="headerlink" href="#src.reproduce.FORMULATION" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.UNCONSTRAINED_CAP">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">UNCONSTRAINED_CAP</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1000.0</span></span><a class="headerlink" href="#src.reproduce.UNCONSTRAINED_CAP" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.STRESS_CAP">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">STRESS_CAP</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.2</span></span><a class="headerlink" href="#src.reproduce.STRESS_CAP" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.RESIDUAL_STORAGE">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">RESIDUAL_STORAGE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.05</span></span><a class="headerlink" href="#src.reproduce.RESIDUAL_STORAGE" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.MANUSCRIPT_ENV">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">MANUSCRIPT_ENV</span></span><a class="headerlink" href="#src.reproduce.MANUSCRIPT_ENV" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.check_environment">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">check_environment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#check_environment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.check_environment" title="Link to this definition">#</a></dt>
+<dd><p>Installed versions against the environment stated in Section 3.4.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.scenario_name">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">scenario_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limited</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#scenario_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.scenario_name" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.run_case">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">run_case</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">cap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">UNCONSTRAINED_CAP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Results'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limited</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#run_case"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.run_case" title="Link to this definition">#</a></dt>
+<dd><p>Run one scenario (all four formulations unless <code class="docutils literal notranslate"><span class="pre">models</span></code> is given) via <code class="docutils literal notranslate"><span class="pre">main.py</span></code>.</p>
+<p>The config file is restored afterwards. Returns the rows appended to Simulation_Results.xlsx.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.run_grid">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">run_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ks</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hs</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_existing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#run_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.run_grid" title="Link to this definition">#</a></dt>
+<dd><p>Run a grid of scenarios; already-completed scenarios are skipped.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.load_results">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">load_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xlsx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#load_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.load_results" title="Link to this definition">#</a></dt>
+<dd><p>Tidy Simulation_Results.xlsx (one row per scenario x formulation, last run kept).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.add_errors">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">add_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#add_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.add_errors" title="Link to this definition">#</a></dt>
+<dd><p>Cost and storage-capacity error (%) against the k365h1 Novo benchmark of the same resource.</p>
+<p>Errors use unrounded values. (Table 4 in the R2 draft divides by the benchmark rounded to two
+decimals, which shifts some capacity errors by up to ~3 percentage points.)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="src.reproduce.TABLE4_CASES">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">TABLE4_CASES</span></span><a class="headerlink" href="#src.reproduce.TABLE4_CASES" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.table4">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">table4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#table4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.table4" title="Link to this definition">#</a></dt>
+<dd><p>Rebuild manuscript Table 4 (h = 1, unconstrained).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.compare_to_archive">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">compare_to_archive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">archive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('Total</span> <span class="pre">cost',</span> <span class="pre">'Power</span> <span class="pre">Capacity',</span> <span class="pre">'Storage</span> <span class="pre">Capacity')</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#compare_to_archive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.compare_to_archive" title="Link to this definition">#</a></dt>
+<dd><p>Relative difference between fresh runs and the archived results (same Scenario x Model).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.clustering">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">clustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/reproduce.html#clustering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.clustering" title="Link to this definition">#</a></dt>
+<dd><p>Representative days and chronological day-&gt;representative mapping, as used by main.py.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.seed_robustness">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">seed_robustness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('WND',</span> <span class="pre">'SOL',</span> <span class="pre">'HYD')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">K_VALUES</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seeds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">range(10)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#seed_robustness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.seed_robustness" title="Link to this definition">#</a></dt>
+<dd><p>Compare clusterings for alternative seeds against seed 0.</p>
+<p>day_agreement: share of the 365 days mapped to the same representative day as with seed 0.
+ARI: adjusted Rand index of the day partition (label-permutation invariant).
+same_rep_days: whether the set of representative days is identical.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.run_soc_validation">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">run_soc_validation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#run_soc_validation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.run_soc_validation" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.read_storage">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">read_storage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.Series</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#read_storage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.read_storage" title="Link to this definition">#</a></dt>
+<dd><p>Native or reconstructed storage level written by main.py.</p>
+<p>model: ‘Niet’, ‘Cluster’ (Novo), ‘Kotzur’ (day starts), ‘Kotzur_intraday’, ‘Welsch’ (day-type
+starts) or ‘Welsch_intraday’.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.soc_violations">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">soc_violations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">soc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-09</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#soc_violations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.soc_violations" title="Link to this definition">#</a></dt>
+<dd><p>Count bound violations of a storage trajectory.</p>
+<p>strict: SoC &gt; upper + tol or SoC &lt; lower - tol (physically infeasible states).
+at_or_beyond: SoC &gt;= upper - tol or SoC &lt;= lower + tol (includes states exactly on a bound,
+which are feasible). The R2 draft’s ‘183 h above’ for wind equals the at_or_beyond count.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.hourly_trajectory">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">hourly_trajectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scenario</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">formulation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#hourly_trajectory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.hourly_trajectory" title="Link to this definition">#</a></dt>
+<dd><p>8760-h storage trajectory used for the fidelity metrics.</p>
+<p>Novo and Kotzur: chronological block series (Kotzur reconstructed), held over each block.
+Welsch: reconstructed series in its native grouped day-type order, as plotted by
+graph_generator.py. Niet: representative blocks held for their year-split duration.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.rainflow_cycles">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">rainflow_cycles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#rainflow_cycles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.rainflow_cycles" title="Link to this definition">#</a></dt>
+<dd><p>Equivalent full cycles by rainflow counting (ASTM E1049-85 three-point method).</p>
+<p>Half cycles count 0.5. Returns the total number of (equivalent full) cycles.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.fidelity_metrics">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">fidelity_metrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">benchmark</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#fidelity_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.fidelity_metrics" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../read_csv/index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">src.read_csv</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../simulation/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">src.simulation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes">Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-contents">Module Contents</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.REPO"><code class="docutils literal notranslate"><span class="pre">REPO</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.RESOURCES"><code class="docutils literal notranslate"><span class="pre">RESOURCES</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.DEMAND_PROFILE"><code class="docutils literal notranslate"><span class="pre">DEMAND_PROFILE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.K_VALUES"><code class="docutils literal notranslate"><span class="pre">K_VALUES</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.H_VALUES"><code class="docutils literal notranslate"><span class="pre">H_VALUES</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.MODELS"><code class="docutils literal notranslate"><span class="pre">MODELS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.FORMULATION"><code class="docutils literal notranslate"><span class="pre">FORMULATION</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.UNCONSTRAINED_CAP"><code class="docutils literal notranslate"><span class="pre">UNCONSTRAINED_CAP</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.STRESS_CAP"><code class="docutils literal notranslate"><span class="pre">STRESS_CAP</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.RESIDUAL_STORAGE"><code class="docutils literal notranslate"><span class="pre">RESIDUAL_STORAGE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.MANUSCRIPT_ENV"><code class="docutils literal notranslate"><span class="pre">MANUSCRIPT_ENV</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.check_environment"><code class="docutils literal notranslate"><span class="pre">check_environment()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.scenario_name"><code class="docutils literal notranslate"><span class="pre">scenario_name()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.run_case"><code class="docutils literal notranslate"><span class="pre">run_case()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.run_grid"><code class="docutils literal notranslate"><span class="pre">run_grid()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.load_results"><code class="docutils literal notranslate"><span class="pre">load_results()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.add_errors"><code class="docutils literal notranslate"><span class="pre">add_errors()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.TABLE4_CASES"><code class="docutils literal notranslate"><span class="pre">TABLE4_CASES</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.table4"><code class="docutils literal notranslate"><span class="pre">table4()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.compare_to_archive"><code class="docutils literal notranslate"><span class="pre">compare_to_archive()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.clustering"><code class="docutils literal notranslate"><span class="pre">clustering()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.seed_robustness"><code class="docutils literal notranslate"><span class="pre">seed_robustness()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.run_soc_validation"><code class="docutils literal notranslate"><span class="pre">run_soc_validation()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.read_storage"><code class="docutils literal notranslate"><span class="pre">read_storage()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.soc_violations"><code class="docutils literal notranslate"><span class="pre">soc_violations()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.hourly_trajectory"><code class="docutils literal notranslate"><span class="pre">hourly_trajectory()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.rainflow_cycles"><code class="docutils literal notranslate"><span class="pre">rainflow_cycles()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.fidelity_metrics"><code class="docutils literal notranslate"><span class="pre">fidelity_metrics()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Bruno Borba, Md Eliasinul Islam.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+  </body>
+</html>

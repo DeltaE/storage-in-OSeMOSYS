@@ -2,81 +2,438 @@
 <!DOCTYPE html>
 
 
-<html lang="Python" data-content_root="../" >
+<html lang="en" data-content_root="../" data-theme="light">
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Workflow Guide &#8212; Storage in OSEMoSYS 2025.07 documentation</title>
+    <title>Workflow Guide &#8212; Storage in OSeMOSYS</title>
   
   
   
   <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
   
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
 
-    <script src="../_static/documentation_options.js?v=e9b82cb4"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/documentation_options.js?v=6c6ff0de"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/workflow_guide';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Configuration Guide" href="configuration_guide.html" />
-    <link rel="prev" title="Environment Setup Guide" href="README_ENVIRONMENT.html" />
+    <link rel="prev" title="Quickstart" href="../quickstart.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="Python"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="light">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -84,44 +441,31 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
-         placeholder="Search..."
-         aria-label="Search..."
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-    </header>
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
   
-
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
-
   
-  <div class="sidebar-header-items sidebar-primary__section">
+  <div class=" navbar-header-items__start">
     
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
+      <div class="navbar-item">
 
   
     
@@ -135,81 +479,224 @@
   
     
     
-      
     
-    
-    <img src="../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-light" alt="Storage in OSEMoSYS 2025.07 documentation - Home"/>
-    <script>document.write(`<img src="../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-dark" alt="Storage in OSEMoSYS 2025.07 documentation - Home"/>`);</script>
+    <img src="../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/storage_in_osemosys_logo_202508.png" class="logo__image only-dark pst-js-only" alt=""/>
   
+  
+    <p class="title logo__title">Storage in OSeMOSYS</p>
   
 </a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../concept.html">
+    Concept
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../workflow.html">
+    Modelling workflow
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../results.html">
+    Results
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/DeltaE/storage-in-OSeMOSYS" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../concept.html">
+    Concept
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../workflow.html">
+    Modelling workflow
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../results.html">
+    Results
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/DeltaE/storage-in-OSeMOSYS" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
-<ul class="current nav bd-sidenav">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Get started</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="README_ENVIRONMENT.html">Environment Setup Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipeline</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Workflow Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration_guide.html">Configuration Guide</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Technical Reference:</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model_specifications.html">Model Specifications</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results_analysis.html">Results Analysis</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials:</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/index.html">API Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/cluster/index.html">src.cluster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/read_csv/index.html">src.read_csv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/simulation/index.html">src.simulation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/table_generator/index.html">src.table_generator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_CFandSDP/index.html">src.update_CFandSDP</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionld/index.html">src.update_conversionld</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionldc/index.html">src.update_conversionldc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlh/index.html">src.update_conversionlh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_conversionlts/index.html">src.update_conversionlts</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_daysindaytype/index.html">src.update_daysindaytype</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_list/index.html">src.update_list</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_params_yaml_otoole/index.html">src.update_params_yaml_otoole</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/update_yearsplit/index.html">src.update_yearsplit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../autoapi/src/utilities/index.html">src.utilities</a></li>
 </ul>
-</details></li>
-</ul>
-</details></li>
-</ul>
-
-    </div>
+</div>
 </nav></div>
     </div>
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -217,9 +704,6 @@
       <main id="main-content" class="bd-main" role="main">
         
         
-
-<div class="sbt-scroll-pixel-helper"></div>
-
           <div class="bd-content">
             <div class="bd-article-container">
               
@@ -228,176 +712,31 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</button></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
         <div class="header-article-item">
 
-<div class="article-header-buttons">
-
-
-<a href="https://github.com/DeltaE/storage-in-OSeMOSYS" target="_blank"
-   class="btn btn-sm btn-source-repository-button"
-   title="Source repository"
-   data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/notes/workflow_guide.md" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.md</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../workflow.html" class="nav-link">Modelling workflow</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Workflow Guide</span></li>
   </ul>
+</nav>
 </div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
-
-
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
-</div></div>
       
     </div>
   
+  
 </div>
 </div>
               
               
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Workflow Guide</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-architecture">Workflow Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-workflow-steps">Detailed Workflow Steps</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-and-initialization">1. Configuration and Initialization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing-and-clustering">2. Data Preprocessing and Clustering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-specific-processing">3. Model-Specific Processing</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-cluster-time-series-clustering">Model_Cluster (Time-Series Clustering)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-kotzur-daily-mapping-method">Model_Kotzur (Daily Mapping Method)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-welsch-fixed-pattern-method">Model_Welsch (Fixed Pattern Method)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-niet-direct-chronological-method">Model_Niet (Direct Chronological Method)</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osemosys-model-conversion-and-simulation">4. OSeMOSYS Model Conversion and Simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-collection-and-processing">5. Results Collection and Processing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-and-visualization">6. Post-Processing and Visualization</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-commands">Execution Commands</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-execution">Basic Execution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-parametric-execution">Batch / Parametric Execution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-structure">Output Structure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-considerations">Performance Considerations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
-        </div>
-    </div>
-</div>
-
               
                 
 <div id="searchbox"></div>
@@ -418,7 +757,8 @@ document.write(`
 </section>
 <section id="workflow-architecture">
 <h2>Workflow Architecture<a class="headerlink" href="#workflow-architecture" title="Link to this heading">#</a></h2>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>graph TD
+<pre  class="mermaid">
+        graph TD
     A[Configuration Loading] --&gt; B[Data Preprocessing]
     B --&gt; C[Time-Series Clustering]
     C --&gt; D[Model-Specific Processing]
@@ -430,22 +770,20 @@ document.write(`
     D --&gt; D2[Model_Kotzur] 
     D --&gt; D3[Model_Welsch]
     D --&gt; D4[Model_Niet]
-</pre></div>
-</div>
-</section>
+    </pre></section>
 <section id="detailed-workflow-steps">
 <h2>Detailed Workflow Steps<a class="headerlink" href="#detailed-workflow-steps" title="Link to this heading">#</a></h2>
 <section id="configuration-and-initialization">
 <h3>1. Configuration and Initialization<a class="headerlink" href="#configuration-and-initialization" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load configuration</span>
-<span class="n">config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;config/config.yaml&#39;</span><span class="p">)</span>
+<span class="n">config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'config/config.yaml'</span><span class="p">)</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
 
 <span class="c1"># Extract key parameters</span>
-<span class="n">scenario_name</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;scenario_name&#39;</span><span class="p">]</span>           <span class="c1"># e.g., &quot;k4h1WND&quot;</span>
-<span class="n">days_in_year</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;days_in_year&#39;</span><span class="p">]</span>            <span class="c1"># e.g., 365</span>
-<span class="n">n_clusters</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;n_clusters&#39;</span><span class="p">]</span>                <span class="c1"># e.g., 4</span>
-<span class="n">hour_grouping</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;hour_grouping&#39;</span><span class="p">]</span>          <span class="c1"># e.g., 1 (hourly)</span>
+<span class="n">scenario_name</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">'scenario_name'</span><span class="p">]</span>           <span class="c1"># e.g., "k4h1WND"</span>
+<span class="n">days_in_year</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">'days_in_year'</span><span class="p">]</span>            <span class="c1"># e.g., 365</span>
+<span class="n">n_clusters</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">'n_clusters'</span><span class="p">]</span>                <span class="c1"># e.g., 4</span>
+<span class="n">hour_grouping</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">'hour_grouping'</span><span class="p">]</span>          <span class="c1"># e.g., 1 (hourly)</span>
 </pre></div>
 </div>
 <p><strong>Key Configuration Parameters:</strong></p>
@@ -461,8 +799,8 @@ document.write(`
 <section id="data-preprocessing-and-clustering">
 <h3>2. Data Preprocessing and Clustering<a class="headerlink" href="#data-preprocessing-and-clustering" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load input time-series data</span>
-<span class="n">input_CF_csv_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_8760&#39;</span><span class="p">][</span><span class="s1">&#39;directory&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_8760&#39;</span><span class="p">][</span><span class="s1">&#39;CF&#39;</span><span class="p">]</span>
-<span class="n">input_SDP_csv_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_8760&#39;</span><span class="p">][</span><span class="s1">&#39;directory&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_8760&#39;</span><span class="p">][</span><span class="s1">&#39;SDP&#39;</span><span class="p">]</span>
+<span class="n">input_CF_csv_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">'data_8760'</span><span class="p">][</span><span class="s1">'directory'</span><span class="p">])</span> <span class="o">/</span> <span class="n">config</span><span class="p">[</span><span class="s1">'data_8760'</span><span class="p">][</span><span class="s1">'CF'</span><span class="p">]</span>
+<span class="n">input_SDP_csv_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">'data_8760'</span><span class="p">][</span><span class="s1">'directory'</span><span class="p">])</span> <span class="o">/</span> <span class="n">config</span><span class="p">[</span><span class="s1">'data_8760'</span><span class="p">][</span><span class="s1">'SDP'</span><span class="p">]</span>
 
 <span class="c1"># Perform time-series clustering</span>
 <span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">cluster_data</span><span class="p">(</span>
@@ -489,7 +827,7 @@ document.write(`
 <p>Each temporal representation method requires specific data transformations:</p>
 <section id="model-cluster-time-series-clustering">
 <h4>Model_Cluster (Time-Series Clustering)<a class="headerlink" href="#model-cluster-time-series-clustering" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">&#39;Model_Cluster&#39;</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">'Model_Cluster'</span><span class="p">:</span>
     <span class="c1"># Update chronological timeslice mapping</span>
     <span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">chronological_timeslices</span><span class="p">,</span> <span class="n">output_timeslicecro_csv_file</span><span class="p">)</span>
     
@@ -498,13 +836,13 @@ document.write(`
                      <span class="n">chronological_sequence</span><span class="p">,</span> <span class="n">representative_days</span><span class="p">,</span> <span class="n">output_conversionlts_csv_file</span><span class="p">)</span>
     
     <span class="c1"># Update time splitting parameters</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">new_yaml_param</span><span class="p">(</span><span class="n">otoole_yaml_file</span><span class="p">,</span> <span class="s1">&#39;DaySplit&#39;</span><span class="p">,</span> <span class="n">day_split</span><span class="p">)</span>
+    <span class="n">src</span><span class="o">.</span><span class="n">new_yaml_param</span><span class="p">(</span><span class="n">otoole_yaml_file</span><span class="p">,</span> <span class="s1">'DaySplit'</span><span class="p">,</span> <span class="n">day_split</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="model-kotzur-daily-mapping-method">
 <h4>Model_Kotzur (Daily Mapping Method)<a class="headerlink" href="#model-kotzur-daily-mapping-method" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">&#39;Model_Kotzur&#39;</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">'Model_Kotzur'</span><span class="p">:</span>
     <span class="c1"># Create chronological day sequence</span>
     <span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">days_in_year</span><span class="p">,</span> <span class="n">output_dayscro_csv_file</span><span class="p">)</span>
     
@@ -519,14 +857,14 @@ document.write(`
 </section>
 <section id="model-welsch-fixed-pattern-method">
 <h4>Model_Welsch (Fixed Pattern Method)<a class="headerlink" href="#model-welsch-fixed-pattern-method" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">&#39;Model_Welsch&#39;</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">'Model_Welsch'</span><span class="p">:</span>
     <span class="c1"># Define daily time brackets</span>
     <span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">blocks_per_day</span><span class="p">,</span> <span class="n">output_dailytimebracket_csv_file</span><span class="p">)</span>
     
     <span class="c1"># Create multiple conversion mappings</span>
     <span class="n">src</span><span class="o">.</span><span class="n">conversionld</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">representative_days</span><span class="p">),</span> <span class="n">output_conversionld_csv_file</span><span class="p">)</span>
     <span class="n">src</span><span class="o">.</span><span class="n">conversionlh</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="n">blocks_per_day</span><span class="p">,</span> <span class="n">output_conversionlh_csv_file</span><span class="p">)</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">conversionld</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="n">seasons</span><span class="p">,</span> <span class="n">output_conversionls_csv_file</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SEASON&#39;</span><span class="p">)</span>
+    <span class="n">src</span><span class="o">.</span><span class="n">conversionld</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="n">seasons</span><span class="p">,</span> <span class="n">output_conversionls_csv_file</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'SEASON'</span><span class="p">)</span>
     
     <span class="c1"># Update day type mapping</span>
     <span class="n">src</span><span class="o">.</span><span class="n">daysindaytype</span><span class="p">(</span><span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span><span class="p">,</span> <span class="n">output_daysindaytype_csv_file</span><span class="p">)</span>
@@ -536,10 +874,10 @@ document.write(`
 <section id="model-niet-direct-chronological-method">
 <h4>Model_Niet (Direct Chronological Method)<a class="headerlink" href="#model-niet-direct-chronological-method" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Common processing for all models including Model_Niet</span>
-<span class="k">if</span> <span class="n">case_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Model_Niet&#39;</span><span class="p">,</span> <span class="s1">&#39;Model_Cluster&#39;</span><span class="p">,</span> <span class="s1">&#39;Model_Kotzur&#39;</span><span class="p">,</span> <span class="s1">&#39;Model_Welsch&#39;</span><span class="p">]:</span>
+<span class="k">if</span> <span class="n">case_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'Model_Niet'</span><span class="p">,</span> <span class="s1">'Model_Cluster'</span><span class="p">,</span> <span class="s1">'Model_Kotzur'</span><span class="p">,</span> <span class="s1">'Model_Welsch'</span><span class="p">]:</span>
     <span class="c1"># Copy base input files</span>
     <span class="k">for</span> <span class="n">csv_file</span> <span class="ow">in</span> <span class="n">csv_files</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">stem</span> <span class="ow">in</span> <span class="n">excepted_file_names</span><span class="p">:</span>  <span class="c1"># note: variable is named &#39;excepted_file_names&#39; in code</span>
+        <span class="k">if</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">stem</span> <span class="ow">in</span> <span class="n">expected_file_names</span><span class="p">:</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">input_csv_dir</span> <span class="o">/</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     
     <span class="c1"># Update core timeslice structure</span>
@@ -552,11 +890,11 @@ document.write(`
     
     <span class="c1"># Process renewable profiles (averaging for capacity factors)</span>
     <span class="n">src</span><span class="o">.</span><span class="n">CFandSDP</span><span class="p">(</span><span class="n">input_CF_csv_file</span><span class="p">,</span> <span class="n">representative_days</span><span class="p">,</span> <span class="n">hour_grouping</span><span class="p">,</span> 
-                <span class="n">output_CF_csv_file</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+                <span class="n">output_CF_csv_file</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s1">'mean'</span><span class="p">)</span>
     
     <span class="c1"># Process demand profiles (summing for demand)</span>
     <span class="n">src</span><span class="o">.</span><span class="n">CFandSDP</span><span class="p">(</span><span class="n">input_SDP_csv_file</span><span class="p">,</span> <span class="n">representative_days</span><span class="p">,</span> <span class="n">hour_grouping</span><span class="p">,</span> 
-                <span class="n">output_SDP_csv_file</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+                <span class="n">output_SDP_csv_file</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -564,12 +902,12 @@ document.write(`
 <section id="osemosys-model-conversion-and-simulation">
 <h3>4. OSeMOSYS Model Conversion and Simulation<a class="headerlink" href="#osemosys-model-conversion-and-simulation" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert CSV files to OSeMOSYS datafile format</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">otoole</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">template_config</span><span class="p">,</span> <span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="s1">&#39;datafile&#39;</span><span class="p">,</span> <span class="n">input_csv_dir</span><span class="p">,</span> <span class="n">output_txt_file</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">otoole</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">template_config</span><span class="p">,</span> <span class="s1">'csv'</span><span class="p">,</span> <span class="s1">'datafile'</span><span class="p">,</span> <span class="n">input_csv_dir</span><span class="p">,</span> <span class="n">output_txt_file</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;✔️ Otoole conversion executed successfully.&quot;</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">"✔️ Otoole conversion executed successfully."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;❌ Otoole conversion failed.&quot;</span><span class="p">)</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">"❌ Otoole conversion failed."</span><span class="p">)</span>
 
 <span class="c1"># Run OSeMOSYS simulation</span>
 <span class="n">src</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">case_info</span><span class="p">)</span>
@@ -585,13 +923,13 @@ document.write(`
 <section id="results-collection-and-processing">
 <h3>5. Results Collection and Processing<a class="headerlink" href="#results-collection-and-processing" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save simulation results</span>
-<span class="n">results_case</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">case_info</span><span class="p">[</span><span class="s1">&#39;root_directory&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">case_info</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="s1">&#39;directory&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">case_info</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="s1">&#39;storage_level&#39;</span><span class="p">]</span>
-<span class="n">new_results_filename</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">scenario_name</span><span class="p">,</span> <span class="n">results_copied_filename</span><span class="p">,</span> <span class="n">case_name</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+<span class="n">results_case</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">case_info</span><span class="p">[</span><span class="s1">'root_directory'</span><span class="p">])</span> <span class="o">/</span> <span class="n">case_info</span><span class="p">[</span><span class="s1">'results'</span><span class="p">][</span><span class="s1">'directory'</span><span class="p">]</span> <span class="o">/</span> <span class="n">case_info</span><span class="p">[</span><span class="s1">'results'</span><span class="p">][</span><span class="s1">'storage_level'</span><span class="p">]</span>
+<span class="n">new_results_filename</span> <span class="o">=</span> <span class="s1">'_'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">scenario_name</span><span class="p">,</span> <span class="n">results_copied_filename</span><span class="p">,</span> <span class="n">case_name</span><span class="p">])</span> <span class="o">+</span> <span class="s1">'.csv'</span>
 <span class="n">src</span><span class="o">.</span><span class="n">copy_and_rename</span><span class="p">(</span><span class="n">results_case</span><span class="p">,</span> <span class="n">results_destination_folder</span><span class="p">,</span> <span class="n">new_results_filename</span><span class="p">)</span>
 
 <span class="c1"># Generate summary tables</span>
 <span class="n">src</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">simulation_results</span><span class="p">,</span> <span class="n">data_sol_results</span><span class="p">,</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">case_name</span><span class="p">,</span> 
-         <span class="n">capacity_path</span><span class="p">,</span> <span class="n">storage_capacity_path</span><span class="p">,</span> <span class="s1">&#39;WINDPOWER&#39;</span><span class="p">,</span> <span class="s1">&#39;BATTERY&#39;</span><span class="p">,</span> <span class="n">results_file</span><span class="p">)</span>
+         <span class="n">capacity_path</span><span class="p">,</span> <span class="n">storage_capacity_path</span><span class="p">,</span> <span class="s1">'WINDPOWER'</span><span class="p">,</span> <span class="s1">'BATTERY'</span><span class="p">,</span> <span class="n">results_file</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Results Structure:</strong></p>
@@ -618,9 +956,9 @@ document.write(`
                            <span class="n">representative_days</span><span class="p">,</span> <span class="n">blocks_per_day</span><span class="p">,</span> <span class="n">output_yearsplit_csv_file</span><span class="p">)</span>
 
 <span class="c1"># Save figures</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">results_destination_folder</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_Figure.png&quot;</span><span class="p">)</span>
-<span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">results_destination_folder</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_Figure_Hourly.png&quot;</span><span class="p">)</span>  
-<span class="n">fig3</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">results_destination_folder</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_Figure_Hourly_2Weeks.png&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">results_destination_folder</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_Figure.png"</span><span class="p">)</span>
+<span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">results_destination_folder</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_Figure_Hourly.png"</span><span class="p">)</span>  
+<span class="n">fig3</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">results_destination_folder</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_Figure_Hourly_2Weeks.png"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -629,20 +967,8 @@ document.write(`
 <h2>Execution Commands<a class="headerlink" href="#execution-commands" title="Link to this heading">#</a></h2>
 <section id="basic-execution">
 <h3>Basic Execution<a class="headerlink" href="#basic-execution" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run complete workflow for the scenario defined in config/config.yaml</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run complete workflow</span>
 python<span class="w"> </span>main.py
-</pre></div>
-</div>
-</section>
-<section id="batch-parametric-execution">
-<h3>Batch / Parametric Execution<a class="headerlink" href="#batch-parametric-execution" title="Link to this heading">#</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">automation.py</span></code> provides batch execution over multiple <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">hour_grouping</span></code> values. It updates <code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code> automatically for each combination and calls <code class="docutils literal notranslate"><span class="pre">main.py</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>automation.py
-</pre></div>
-</div>
-<p>Edit the lists at the top of <code class="docutils literal notranslate"><span class="pre">automation.py</span></code> to control which combinations are run:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_clusters</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span>          <span class="c1"># e.g. [2, 4, 8, 12]</span>
-<span class="n">hour_grouping</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>          <span class="c1"># e.g. [1, 2, 4, 6, 12]</span>
 </pre></div>
 </div>
 </section>
@@ -666,52 +992,49 @@ make<span class="w"> </span>update-env
 <h3>Configuration Options<a class="headerlink" href="#configuration-options" title="Link to this heading">#</a></h3>
 <p>Edit <code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code> before running:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analysis parameters</span>
-<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;k4h1WND_limited&quot;</span><span class="w">  </span><span class="c1"># Scenario identifier</span>
-<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span><span class="w">                  </span><span class="c1"># Total days to model</span>
-<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">                      </span><span class="c1"># Representative days</span>
-<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">                   </span><span class="c1"># Time resolution (1=hourly)</span>
-<span class="nt">seasons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">                         </span><span class="c1"># Seasonal divisions</span>
+<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">"k4h1WND"</span><span class="w">      </span><span class="c1"># Scenario identifier</span>
+<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span><span class="w">             </span><span class="c1"># Total days to model</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">                 </span><span class="c1"># Representative days</span>
+<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">              </span><span class="c1"># Time resolution (1=hourly)</span>
+<span class="nt">seasons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">                    </span><span class="c1"># Seasonal divisions</span>
 
 <span class="c1"># Storage parameters</span>
-<span class="nt">StorageLevelStart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.10</span><span class="w">            </span><span class="c1"># Initial state of charge</span>
-<span class="nt">StorageMaxCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w">            </span><span class="c1"># Maximum storage capacity (GW)</span>
-<span class="nt">ResidualStorageCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span><span class="w">      </span><span class="c1"># Pre-existing storage</span>
+<span class="nt">StorageLevelStart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w">        </span><span class="c1"># Initial state of charge</span>
+<span class="nt">StorageMaxCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">       </span><span class="c1"># Maximum storage capacity</span>
+<span class="nt">ResidualStorageCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w">    </span><span class="c1"># Pre-existing storage</span>
 
 <span class="c1"># Data paths</span>
 <span class="nt">data_8760</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Data_8760&quot;</span>
-<span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CapacityFactor_Wind.csv&quot;</span><span class="w">    </span><span class="c1"># Renewable profiles</span>
-<span class="w">  </span><span class="nt">SDP</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SpecifiedDemandProfile.csv&quot;</span><span class="w">  </span><span class="c1"># Demand profiles</span>
+<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">"Data_8760"</span>
+<span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="s">"CapacityFactor.csv"</span><span class="w">    </span><span class="c1"># Renewable profiles</span>
+<span class="w">  </span><span class="nt">SDP</span><span class="p">:</span><span class="w"> </span><span class="s">"SpecifiedDemandProfile.csv"</span><span class="w">  </span><span class="c1"># Demand profiles</span>
 
 <span class="c1"># Results configuration</span>
 <span class="nt">results</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Results_Limited&quot;</span>
-<span class="w">  </span><span class="nt">directory_GUI</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Results_Limited/GUI_WND_Limited&quot;</span>
-<span class="w">  </span><span class="nt">results_copied_filename</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Storage_Level&quot;</span>
-<span class="w">  </span><span class="nt">results_excel_file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Simulation_Results.xlsx&quot;</span>
+<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">"Results"</span>
+<span class="w">  </span><span class="nt">directory_GUI</span><span class="p">:</span><span class="w"> </span><span class="s">"Results_GUI"</span>
+<span class="w">  </span><span class="nt">results_copied_filename</span><span class="p">:</span><span class="w"> </span><span class="s">"Storage_Level"</span>
+<span class="w">  </span><span class="nt">results_excel_file</span><span class="p">:</span><span class="w"> </span><span class="s">"results.xlsx"</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="output-structure">
 <h2>Output Structure<a class="headerlink" href="#output-structure" title="Link to this heading">#</a></h2>
-<p>After execution, the workflow generates (using the default <code class="docutils literal notranslate"><span class="pre">scenario_name:</span> <span class="pre">k4h1WND_limited</span></code>):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Results_Limited/
-├── k4h1WND_limited_Storage_Level_Model_Cluster.csv
-├── k4h1WND_limited_Storage_Level_Model_Kotzur.csv
-├── k4h1WND_limited_Storage_Level_Model_Welsch.csv
-├── k4h1WND_limited_Storage_Level_Model_Niet.csv
-├── k4h1WND_limited_Storage_Level_Model_Kotzur_intraday.csv
-├── k4h1WND_limited_Storage_Level_Model_Welsch_intraday.csv
-├── k4h1WND_limited_Figure.png                # Overview comparison
-├── k4h1WND_limited_Figure_Hourly.png         # Detailed hourly view
-├── k4h1WND_limited_Figure_Hourly_2Weeks.png  # Two-week detail
-└── Simulation_Results.xlsx                    # Summary tables
+<p>After execution, the workflow generates:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Results/
+├── k4h1WND_Storage_Level_Model_Cluster.csv
+├── k4h1WND_Storage_Level_Model_Kotzur.csv  
+├── k4h1WND_Storage_Level_Model_Welsch.csv
+├── k4h1WND_Storage_Level_Model_Niet.csv
+├── k4h1WND_Storage_Level_Model_Kotzur_intraday.csv
+├── k4h1WND_Storage_Level_Model_Welsch_intraday.csv
+├── k4h1WND_Figure.png                    # Overview comparison
+├── k4h1WND_Figure_Hourly.png            # Detailed hourly view  
+├── k4h1WND_Figure_Hourly_2Weeks.png     # Two-week detail
+└── results.xlsx                          # Summary tables
 </pre></div>
 </div>
-<blockquote>
-<div><p><strong>Note:</strong> The base reference file used for graph comparison (<code class="docutils literal notranslate"><span class="pre">file_base</span></code>) is currently hardcoded in <code class="docutils literal notranslate"><span class="pre">main.py</span></code> as <code class="docutils literal notranslate"><span class="pre">k365h1WND_Storage_Level_Model_Niet.csv</span></code>. This file must exist in the results folder before running a scenario with a different <code class="docutils literal notranslate"><span class="pre">scenario_name</span></code>.</p>
-</div></blockquote>
 </section>
 <section id="performance-considerations">
 <h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">#</a></h2>
@@ -764,7 +1087,6 @@ ls<span class="w"> </span>Model_*/Results/
 
                 </article>
               
-
               
               
               
@@ -773,12 +1095,12 @@ ls<span class="w"> </span>Model_*/Results/
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="README_ENVIRONMENT.html"
+       href="../quickstart.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Environment Setup Guide</p>
+        <p class="prev-next-title">Quickstart</p>
       </div>
     </a>
     <a class="right-next"
@@ -797,18 +1119,21 @@ ls<span class="w"> </span>Model_*/Results/
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-architecture">Workflow Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-workflow-steps">Detailed Workflow Steps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-workflow-steps">Detailed Workflow Steps</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-and-initialization">1. Configuration and Initialization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing-and-clustering">2. Data Preprocessing and Clustering</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-specific-processing">3. Model-Specific Processing</a><ul class="nav section-nav flex-column">
@@ -823,16 +1148,15 @@ ls<span class="w"> </span>Model_*/Results/
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-and-visualization">6. Post-Processing and Visualization</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-commands">Execution Commands</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-commands">Execution Commands</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-execution">Basic Execution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-parametric-execution">Batch / Parametric Execution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-structure">Output Structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-considerations">Performance Considerations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
 </ul>
 </li>
@@ -845,18 +1169,22 @@ ls<span class="w"> </span>Model_*/Results/
           </div>
           <footer class="bd-footer-content">
             
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Bruno Borba, Md Eliasinul Islam
-</p>
-
+          </footer>
+        
+      </main>
+    </div>
   </div>
   
-  <div class="footer-item">
-    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
 
   <p class="copyright">
     
@@ -864,30 +1192,14 @@ By Bruno Borba, Md Eliasinul Islam
       <br/>
     
   </p>
-
-  </div>
+</div>
+      
+    </div>
   
-  <div class="footer-item">
-    
-  </div>
   
-  <div class="footer-item">
-    
-  </div>
   
 </div>
-          </footer>
-        
 
-      </main>
-    </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
-
-  <footer class="bd-footer">
   </footer>
   </body>
 </html>

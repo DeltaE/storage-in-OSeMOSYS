@@ -1,0 +1,13 @@
+# Concept
+
+Storage moves energy across time. Under temporal aggregation (representative days, grouped
+hours) the model loses part of that chronology, and the choice of storage formulation decides how
+much of it is recovered. This section explains the problem and the formulations compared in this
+project.
+
+```{toctree}
+:maxdepth: 2
+
+notes/about_storage_algorithms
+notes/model_specifications
+```

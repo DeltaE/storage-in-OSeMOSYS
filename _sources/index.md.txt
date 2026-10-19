@@ -1,0 +1,57 @@
+# Storage in OSeMOSYS
+
+<p class="lead">
+Storage formulations for long-term energy planning models with temporal aggregation —
+four ways to represent energy storage in OSeMOSYS, compared side by side.
+</p>
+
+<div class="section-cards">
+  <a class="section-card" href="concept.html">
+    <span class="section-card__step">01</span>
+    <span class="section-card__title">Concept</span>
+    <span class="section-card__text">Why storage is hard to model under temporal aggregation, and the four formulations compared.</span>
+  </a>
+  <a class="section-card" href="workflow.html">
+    <span class="section-card__step">02</span>
+    <span class="section-card__title">Modelling workflow</span>
+    <span class="section-card__text">Installation, quickstart, pipeline steps, configuration and assumptions.</span>
+  </a>
+  <a class="section-card" href="results.html">
+    <span class="section-card__step">03</span>
+    <span class="section-card__title">Results</span>
+    <span class="section-card__text">Reproduce the published study, output files and how to analyse them.</span>
+  </a>
+  <a class="section-card" href="api.html">
+    <span class="section-card__step">04</span>
+    <span class="section-card__title">API</span>
+    <span class="section-card__text">Reference for the <code>src</code> package, generated from the source code.</span>
+  </a>
+</div>
+
+## At a glance
+
+```bash
+git clone https://github.com/DeltaE/storage-in-OSeMOSYS.git
+cd storage-in-OSeMOSYS
+make setup && conda activate storage_osemosys
+python main.py
+```
+
+See {doc}`quickstart` for what this does and where the results go.
+
+## Citation
+
+> Borba, B., Islam, M. E., & Niet, T. *Storage in Long-Term Energy Planning Models with Temporal
+> Aggregation: Best Practices and Algorithms.* Environmental Research Communications (2026).
+
+Developed at the Delta E+ Research Lab, Simon Fraser University · MIT License
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+
+concept
+workflow
+results
+api
+```
