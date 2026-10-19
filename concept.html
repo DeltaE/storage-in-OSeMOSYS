@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -204,6 +204,10 @@
   
 
   
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
 </div>
 
     </header>
@@ -367,27 +371,61 @@
                   
   <section id="concept">
 <h1>Concept<a class="headerlink" href="#concept" title="Link to this heading">#</a></h1>
-<p>Storage moves energy across time. Under temporal aggregation (representative days, grouped
-hours) the model loses part of that chronology, and the choice of storage formulation decides how
-much of it is recovered. This section explains the problem and the formulations compared in this
-project.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notes/about_storage_algorithms.html">About Storage Modelling</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/about_storage_algorithms.html#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/about_storage_algorithms.html#quick-summary-on-storage-algorithms-in-modelling">Quick Summary on Storage Algorithms in Modelling :</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/model_specifications.html">Model Specifications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#osemosys-integration">OSeMOSYS Integration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#storage-technologies">Storage Technologies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#technical-implementation">Technical Implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/model_specifications.html#future-development">Future Development</a></li>
-</ul>
-</li>
-</ul>
+<p class="page-intro">
+A battery or a reservoir is only useful because of what happened before: what it can give
+tonight depends on how much it stored this afternoon. Energy planning models save time by
+simulating a few typical days instead of the whole year, and in doing so they can lose that link
+between hours and days. This section explains the problem in plain terms and introduces the
+four ways of modelling storage that the study compares.
+</p>
+<div class="section-cards">
+  <a class="section-card section-card--concept" href="notes/about_storage_algorithms.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Start here</span>
+    </span>
+    <span class="section-card__title">Why storage is hard to model</span>
+    <span class="section-card__text">Storage moves energy across time, needs continuity and interacts with the rest of the system. Explained with everyday analogies.</span>
+    <span class="section-card__more">Read the explainer →</span>
+  </a>
+  <a class="section-card section-card--layers" href="notes/model_specifications.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Details</span>
+    </span>
+    <span class="section-card__title">Model specifications</span>
+    <span class="section-card__text">How the models sit on top of OSeMOSYS: storage parameters, constraints and model files.</span>
+    <span class="section-card__more">See the specifications →</span>
+  </a>
 </div>
+<section id="the-four-formulations-at-a-glance">
+<h2>The four formulations at a glance<a class="headerlink" href="#the-four-formulations-at-a-glance" title="Link to this heading">#</a></h2>
+<p>Each card opens the full description with its analogy.</p>
+<div class="section-cards section-cards--four">
+  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#niet-direct-link-continuous-diary">
+    <span class="section-card__step">Niet</span>
+    <span class="section-card__tag">"Continuous diary"</span>
+    <span class="section-card__text">Each day picks up exactly where the last one ended. Most faithful, most data.</span>
+  </a>
+  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#welsch-fixed-pattern-photocopied-day">
+    <span class="section-card__step">Welsch</span>
+    <span class="section-card__tag">"Photocopied day"</span>
+    <span class="section-card__text">One typical day repeated. Fast and simple, but every day looks the same.</span>
+  </a>
+  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#kotzur-unverified-cluster-alternating-diaries">
+    <span class="section-card__step">Kotzur</span>
+    <span class="section-card__tag">"Alternating diaries"</span>
+    <span class="section-card__text">Several typical days capture variety, but days are not linked to each other.</span>
+  </a>
+  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#novo-hourly-verified-linked-journaling">
+    <span class="section-card__step">Novo</span>
+    <span class="section-card__tag">"Linked journaling"</span>
+    <span class="section-card__text">Typical days, with each one starting where the previous one ended. The middle ground.</span>
+  </a>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
 </section>
 
 
@@ -424,6 +462,24 @@ project.</p>
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-four-formulations-at-a-glance">The four formulations at a glance</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

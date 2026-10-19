@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=674d5774" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -394,9 +394,46 @@
                   
   <section id="api">
 <h1>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h1>
-<p>The pipeline lives in the <code class="docutils literal notranslate"><span class="pre">src</span></code> package. You do not need to read it to run the study:
-<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">main.py</span></code> calls everything for you. This page is for when you want to reuse a piece of the
-method, or understand how a step in the paper turns into code.</p>
+<p class="page-intro">
+All the modelling code lives in the <code>src</code> package. You do not need it to run the
+study, because <code>python main.py</code> calls everything for you. Come here when you want to
+reuse one step of the method in your own work, or see exactly how a step in the paper is written
+in code. The cards lead to the reference; the guide below shows how to put it to use.
+</p>
+<div class="section-cards">
+  <a class="section-card section-card--map" href="notes/api_reference.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Overview</span>
+    </span>
+    <span class="section-card__title">Module overview</span>
+    <span class="section-card__text">What each module does, with examples and the full workflow in one script.</span>
+  </a>
+  <a class="section-card section-card--battery" href="autoapi/src/cluster/index.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Method</span>
+    </span>
+    <span class="section-card__title">Representative days</span>
+    <span class="section-card__text"><code>src.cluster</code>: k-means clustering that picks the typical days.</span>
+  </a>
+  <a class="section-card section-card--repeat" href="autoapi/src/reproduce/index.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Study</span>
+    </span>
+    <span class="section-card__title">Reproduce helpers</span>
+    <span class="section-card__text"><code>src.reproduce</code>: run scenarios, load results and rebuild the paper's tables.</span>
+  </a>
+  <a class="section-card section-card--api" href="autoapi/src/index.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Reference</span>
+    </span>
+    <span class="section-card__title">Full reference</span>
+    <span class="section-card__text">Every module and function in <code>src</code>, generated from the source code.</span>
+  </a>
+</div>
 <section id="how-to-use-this-section">
 <h2>How to use this section<a class="headerlink" href="#how-to-use-this-section" title="Link to this heading">#</a></h2>
 <p><strong>1. Find the step you care about.</strong> Each module does one step of the method, so the reference
@@ -458,33 +495,7 @@ are a compact recipe: how many representative days to use, how to weight them, a
 formulation links storage across days. Reading <code class="docutils literal notranslate"><span class="pre">src.update_yearsplit</span></code> and the <code class="docutils literal notranslate"><span class="pre">update_conversion*</span></code>
 modules next to <a class="reference internal" href="notes/about_storage_algorithms.html"><span class="doc">About Storage Modelling</span></a> shows exactly what each formulation adds to a
 model, which you can port to your own tool.</p>
-</section>
-<section id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notes/api_reference.html">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#module-overview">Module Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#core-utilities-src-utilities">Core Utilities (<code class="docutils literal notranslate"><span class="pre">src.utilities</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#time-series-clustering-src-cluster">Time-Series Clustering (<code class="docutils literal notranslate"><span class="pre">src.cluster</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#simulation-management-src-simulation">Simulation Management (<code class="docutils literal notranslate"><span class="pre">src.simulation</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#data-processing-functions">Data Processing Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#temporal-mapping-functions">Temporal Mapping Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#visualization-src-graph-generator">Visualization (<code class="docutils literal notranslate"><span class="pre">src.graph_generator</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#results-analysis-src-table-generator">Results Analysis (<code class="docutils literal notranslate"><span class="pre">src.table_generator</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#configuration-updates-src-yaml-operations">Configuration Updates (<code class="docutils literal notranslate"><span class="pre">src.yaml_operations</span></code>)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#file-operations">File Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#error-handling">Error Handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/api_reference.html#usage-examples">Usage Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="autoapi/src/index.html">src</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/src/index.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/src/index.html#functions">Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/src/index.html#package-contents">Package Contents</a></li>
-</ul>
-</li>
-</ul>
 </div>
 </section>
 </section>
@@ -537,7 +548,6 @@ model, which you can port to your own tool.</p>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-this-section">How to use this section</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">Reference</a></li>
 </ul>
   </nav></div>
 

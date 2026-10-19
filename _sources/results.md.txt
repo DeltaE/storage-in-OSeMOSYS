@@ -1,9 +1,13 @@
 # Results
 
-How to regenerate the results of the published study, what each output file contains, and how to
-analyse them. Pick a card to open the detailed steps.
+<p class="page-intro">
+Every number in the paper can be regenerated from this repository. This section shows how to
+rerun the study, either with a quick check or in full, what files the runs produce, and how to
+compare the four storage formulations once you have them. Pick a card to open the detailed
+steps.
+</p>
 
-<div class="section-cards section-cards--results">
+<div class="section-cards">
   <a class="section-card section-card--steps" href="notes/reproducibility.html">
     <span class="section-card__head">
       <span class="section-card__icon" aria-hidden="true"></span>

@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=db6b70bc" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -203,6 +203,10 @@
   
   
 
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
   
 </div>
 
@@ -379,69 +383,82 @@
                   
   <section id="modelling-workflow">
 <h1>Modelling workflow<a class="headerlink" href="#modelling-workflow" title="Link to this heading">#</a></h1>
-<p>From a fresh clone to a solved model: set up the environment, run the pipeline, then adjust the
-configuration and assumptions for your own scenarios.</p>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Get started</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#quick-setup">Quick Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#manual-environment-setup">Manual Environment Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-file-management">Environment File Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#makefile-commands">Makefile Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#package-details">Package Details</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-verification">Environment Verification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#troubleshooting">Troubleshooting</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#performance-optimization">Performance Optimization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#development-environment">Development Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/README_ENVIRONMENT.html#environment-maintenance">Environment Maintenance</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#set-up-the-environment">1. Set up the environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#choose-a-scenario">2. Choose a scenario</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#run">3. Run</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#look-at-the-results">4. Look at the results</a></li>
-</ul>
-</li>
-</ul>
+<p class="page-intro">
+This section takes you from a fresh copy of the code to solved models. You set up the software
+once, run one command, and the pipeline picks representative days, builds an OSeMOSYS model for
+each storage formulation, solves them and saves the results. After that, you change a single
+configuration file to try your own scenarios. Follow the cards in order the first time.
+</p>
+<div class="section-cards">
+  <a class="section-card section-card--terminal" href="notes/README_ENVIRONMENT.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">01</span>
+    </span>
+    <span class="section-card__title">Set up the environment</span>
+    <span class="section-card__text">Install Python, the GLPK solver and the packages with one <code>make setup</code>, then check everything works.</span>
+  </a>
+  <a class="section-card section-card--play" href="quickstart.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">02</span>
+    </span>
+    <span class="section-card__title">Quickstart</span>
+    <span class="section-card__text">Choose a scenario, run <code>python main.py</code> and find the results, in four short steps.</span>
+  </a>
+  <a class="section-card section-card--workflow" href="notes/workflow_guide.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">03</span>
+    </span>
+    <span class="section-card__title">How the pipeline works</span>
+    <span class="section-card__text">What <code>main.py</code> does at each stage, from loading data to clustering, solving and plotting.</span>
+  </a>
+  <a class="section-card section-card--sliders" href="notes/configuration_guide.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">04</span>
+    </span>
+    <span class="section-card__title">Configuration</span>
+    <span class="section-card__text">Every setting in <code>config.yaml</code>: number of days, hour grouping, storage limits and models to run.</span>
+  </a>
+</div>
+<section id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h2>
+<p>Worked examples once the basics run.</p>
+<div class="section-cards section-cards--three">
+  <a class="section-card section-card--learn" href="notebooks/basic_usage.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Beginner</span>
+    </span>
+    <span class="section-card__title">Basic usage</span>
+    <span class="section-card__text">Run a model, load the storage results and plot them, with common use cases.</span>
+  </a>
+  <a class="section-card section-card--results" href="notebooks/comparative_analysis.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Intermediate</span>
+    </span>
+    <span class="section-card__title">Comparative analysis</span>
+    <span class="section-card__text">Compare formulations on runtime, accuracy against the full year, cost and sensitivity.</span>
+  </a>
+  <a class="section-card section-card--sliders" href="notebooks/advanced_configuration.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Advanced</span>
+    </span>
+    <span class="section-card__title">Advanced configuration</span>
+    <span class="section-card__text">Custom clustering, uncertainty analysis and links to external tools.</span>
+  </a>
 </div>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipeline</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#workflow-architecture">Workflow Architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#detailed-workflow-steps">Detailed Workflow Steps</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#execution-commands">Execution Commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#output-structure">Output Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#performance-considerations">Performance Considerations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/workflow_guide.html#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notes/configuration_guide.html">Configuration Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-file-structure">Configuration File Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#key-configuration-parameters">Key Configuration Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#model-specific-configuration">Model-Specific Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#data-configuration">Data Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#common-configuration-scenarios">Common Configuration Scenarios</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-validation">Configuration Validation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#advanced-configuration">Advanced Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-best-practices">Configuration Best Practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notes/configuration_guide.html#configuration-file-management">Configuration File Management</a></li>
-</ul>
-</li>
-</ul>
 </div>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
-</ul>
 </div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
 </section>
 
 
@@ -478,6 +495,26 @@ configuration and assumptions for your own scenarios.</p>
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorials">Tutorials</a><ul class="pst-show_toc_level nav section-nav flex-column">
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

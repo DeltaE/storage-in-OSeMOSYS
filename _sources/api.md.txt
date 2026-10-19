@@ -1,8 +1,46 @@
 # API
 
-The pipeline lives in the `src` package. You do not need to read it to run the study:
-`python main.py` calls everything for you. This page is for when you want to reuse a piece of the
-method, or understand how a step in the paper turns into code.
+<p class="page-intro">
+All the modelling code lives in the <code>src</code> package. You do not need it to run the
+study, because <code>python main.py</code> calls everything for you. Come here when you want to
+reuse one step of the method in your own work, or see exactly how a step in the paper is written
+in code. The cards lead to the reference; the guide below shows how to put it to use.
+</p>
+
+<div class="section-cards">
+  <a class="section-card section-card--map" href="notes/api_reference.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Overview</span>
+    </span>
+    <span class="section-card__title">Module overview</span>
+    <span class="section-card__text">What each module does, with examples and the full workflow in one script.</span>
+  </a>
+  <a class="section-card section-card--battery" href="autoapi/src/cluster/index.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Method</span>
+    </span>
+    <span class="section-card__title">Representative days</span>
+    <span class="section-card__text"><code>src.cluster</code>: k-means clustering that picks the typical days.</span>
+  </a>
+  <a class="section-card section-card--repeat" href="autoapi/src/reproduce/index.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Study</span>
+    </span>
+    <span class="section-card__title">Reproduce helpers</span>
+    <span class="section-card__text"><code>src.reproduce</code>: run scenarios, load results and rebuild the paper's tables.</span>
+  </a>
+  <a class="section-card section-card--api" href="autoapi/src/index.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Reference</span>
+    </span>
+    <span class="section-card__title">Full reference</span>
+    <span class="section-card__text">Every module and function in <code>src</code>, generated from the source code.</span>
+  </a>
+</div>
 
 ## How to use this section
 
@@ -45,9 +83,8 @@ formulation links storage across days. Reading `src.update_yearsplit` and the `u
 modules next to {doc}`notes/about_storage_algorithms` shows exactly what each formulation adds to a
 model, which you can port to your own tool.
 
-## Reference
-
 ```{toctree}
+:hidden:
 :maxdepth: 2
 
 notes/api_reference

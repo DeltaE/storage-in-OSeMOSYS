@@ -9,7 +9,7 @@ to rerun it. The four cards below follow the order you would read it in: the ide
 the models, what the study found, and the code behind it.
 </p>
 
-<div class="section-cards">
+<div class="section-cards section-cards--four">
   <a class="section-card section-card--concept" href="concept.html">
     <span class="section-card__head">
       <span class="section-card__icon" aria-hidden="true"></span>
