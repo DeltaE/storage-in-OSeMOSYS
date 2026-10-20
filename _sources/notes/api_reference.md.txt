@@ -100,8 +100,8 @@ Performs K-means clustering on combined capacity factor and demand profile data.
 import src
 
 representative_days, chronological_sequence = src.cluster_data(
-    cf_file=Path("data/timeseries/CapacityFactor_Wind.csv"),
-    sdp_file=Path("data/timeseries/SpecifiedDemandProfile.csv"),
+    cf_file=Path("Data_8760/CapacityFactor.csv"),
+    sdp_file=Path("Data_8760/SpecifiedDemandProfile.csv"),
     n_clusters=4
 )
 
@@ -167,7 +167,7 @@ Generates sequential numbered lists for OSeMOSYS set definitions.
 **Example:**
 ```python
 # Generate timeslice list
-src.new_list(count=96, output_file=Path("models/Model_Cluster/data/TIMESLICE.csv"))
+src.new_list(count=96, output_file=Path("Model_Cluster/data/TIMESLICE.csv"))
 
 # Generated content:
 # TIMESLICE
@@ -199,19 +199,19 @@ Processes capacity factor and demand profiles for representative days.
 ```python
 # Process capacity factors (averaging within time blocks)
 src.CFandSDP(
-    input_file=Path("data/timeseries/CapacityFactor_Wind.csv"),
+    input_file=Path("Data_8760/CapacityFactor.csv"),
     representative_days=[15, 89, 156, 278],
     hour_grouping=2,  # 2-hour blocks
-    output_file=Path("models/Model_Cluster/data/CapacityFactor.csv"),
+    output_file=Path("Model_Cluster/data/CapacityFactor.csv"),
     operation='mean'
 )
 
 # Process demand profiles (summing within time blocks)  
 src.CFandSDP(
-    input_file=Path("data/timeseries/SpecifiedDemandProfile.csv"),
+    input_file=Path("Data_8760/SpecifiedDemandProfile.csv"),
     representative_days=[15, 89, 156, 278],
     hour_grouping=2,
-    output_file=Path("models/Model_Cluster/data/SpecifiedDemandProfile.csv"),
+    output_file=Path("Model_Cluster/data/SpecifiedDemandProfile.csv"),
     operation='sum'
 )
 ```
@@ -311,13 +311,13 @@ Updates specific parameters in OSeMOSYS configuration YAML files.
 **Example:**
 ```python
 src.new_yaml_param(
-    yaml_file=Path("models/Model_Cluster/config_fast_Cluster.yaml"),
+    yaml_file=Path("Model_Cluster/config_fast_Cluster.yaml"),
     parameter='DaySplit',
     value=0.000114  # 1 hour / (24 hours * 365 days)
 )
 
 src.new_yaml_param(
-    yaml_file=Path("models/Model_Cluster/config_fast_Cluster.yaml"),
+    yaml_file=Path("Model_Cluster/config_fast_Cluster.yaml"),
     parameter='StorageMaxCapacity',
     value=100.0
 )
@@ -381,8 +381,8 @@ config = utils.load_config(Path('config/config.yaml'))
 
 # 2. Perform clustering
 representative_days, chronological_sequence = src.cluster_data(
-    cf_file=Path("data/timeseries/CapacityFactor_Wind.csv"),
-    sdp_file=Path("data/timeseries/SpecifiedDemandProfile.csv"),
+    cf_file=Path("Data_8760/CapacityFactor.csv"),
+    sdp_file=Path("Data_8760/SpecifiedDemandProfile.csv"),
     n_clusters=config['n_clusters']
 )
 
@@ -411,18 +411,18 @@ for case_name, case_info in config['cases'].items():
 
 # 4. Generate visualizations
 fig1, fig2, fig3 = src.graph(
-    file_base=Path("results/base_Storage_Level_Model_Niet.csv"),
-    file_kotzur=Path("results/k4h1WND_Storage_Level_Model_Kotzur.csv"),
+    file_base=Path("Results/base_Storage_Level_Model_Niet.csv"),
+    file_kotzur=Path("Results/k4h1WND_Storage_Level_Model_Kotzur.csv"),
     # ... other file paths
     representative_days=representative_days,
     blocks_per_day=24//config['hour_grouping'],
-    yearsplit_file=Path("models/Model_Cluster/data/YearSplit.csv")
+    yearsplit_file=Path("Model_Cluster/data/YearSplit.csv")
 )
 
 # 5. Save results
-fig1.savefig("results/comparison_overview.png")
-fig2.savefig("results/comparison_detailed.png")
-fig3.savefig("results/comparison_2weeks.png")
+fig1.savefig("Results/comparison_overview.png")
+fig2.savefig("Results/comparison_detailed.png")
+fig3.savefig("Results/comparison_2weeks.png")
 ```
 
 This API reference provides comprehensive documentation for all functions and modules in the Storage-in-OSeMOSYS framework, enabling users to understand and extend the codebase effectively.

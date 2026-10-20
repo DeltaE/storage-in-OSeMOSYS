@@ -31,7 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a8539842" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e28e70d7" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -712,12 +712,7 @@ window.runMermaid = runMermaid;</script>
 
 <div class="viewcode-block" id="cluster_data">
 <a class="viewcode-back" href="../../autoapi/src/index.html#src.cluster.cluster_data">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">cluster_data</span><span class="p">(</span><span class="n">capacity_factor_path</span><span class="p">,</span> <span class="n">demand_profile_path</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""k-means (k-means++ init) on daily [CF | demand] vectors (min-max scaled).</span>
-
-<span class="sd">    random_state=0 and n_init=1 reproduce the manuscript (scikit-learn 1.7.1, where n_init='auto'</span>
-<span class="sd">    equals 1 for k-means++). n_init is now explicit because scikit-learn &lt; 1.4 defaulted to 10.</span>
-<span class="sd">    """</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cluster_data</span><span class="p">(</span><span class="n">capacity_factor_path</span><span class="p">,</span> <span class="n">demand_profile_path</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">,</span> <span class="n">random_state</span><span class="p">):</span>
 
     <span class="n">capacity_factor_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">capacity_factor_path</span><span class="p">)</span>
     <span class="n">demand_profile_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">demand_profile_path</span><span class="p">)</span>
@@ -756,7 +751,7 @@ window.runMermaid = runMermaid;</script>
     <span class="c1">#print(final_data.head())</span>
 
     <span class="c1"># Aplicar K-means</span>
-    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">'k-means++'</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="n">n_init</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_clusters</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
     <span class="n">clusters</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">final_data</span><span class="p">)</span>
     
     <span class="c1"># Encontrar o dia mais próximo do centro de cada cluster</span>

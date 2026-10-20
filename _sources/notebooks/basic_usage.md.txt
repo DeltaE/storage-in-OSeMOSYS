@@ -35,7 +35,7 @@ from src.utilities import *
 # Set up paths
 project_root = Path.cwd()
 config_path = project_root / "config" / "config.yaml"
-input_path = project_root / "data" / "system"
+input_path = project_root / "inputs_csv"
 output_path = project_root / "Results"
 
 # Load configuration
@@ -73,7 +73,7 @@ plt.show()
 Prepare your input data in CSV format:
 
 ```
-data/system/
+inputs_csv/
 ├── TECHNOLOGY.csv          # Technology definitions
 ├── FUEL.csv                # Fuel types
 ├── STORAGE.csv             # Storage technologies
@@ -116,14 +116,14 @@ input_excel = "path/to/input.xlsx"
 output_dir = "Results"
 
 # Convert Excel to CSV
-convert_excel_to_csv(input_excel, "data/system")
+convert_excel_to_csv(input_excel, "inputs_csv")
 
 # Run clustering (if needed)
 if method != "8760":
-    run_temporal_clustering(method, "data/system")
+    run_temporal_clustering(method, "inputs_csv")
 
 # Generate data file
-generate_datafile("data/system", f"model_{method}.dat")
+generate_datafile("inputs_csv", f"model_{method}.dat")
 
 # Solve model
 solve_model(f"model_{method}.dat", f"solution_{method}.sol")
@@ -141,9 +141,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load results
-capacity = pd.read_csv("results/TotalCapacityAnnual.csv")
-storage_level = pd.read_csv("results/StorageLevelStart.csv")
-production = pd.read_csv("results/ProductionByTechnology.csv")
+capacity = pd.read_csv("Results/TotalCapacityAnnual.csv")
+storage_level = pd.read_csv("Results/StorageLevelStart.csv")
+production = pd.read_csv("Results/ProductionByTechnology.csv")
 
 # Plot capacity expansion
 storage_capacity = capacity[capacity['TECHNOLOGY'].str.contains('STORAGE')]

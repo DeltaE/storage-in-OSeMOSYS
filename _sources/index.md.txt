@@ -50,7 +50,7 @@ the models, what the study found, and the code behind it.
 git clone https://github.com/DeltaE/storage-in-OSeMOSYS.git
 cd storage-in-OSeMOSYS
 make setup && conda activate storage_osemosys
-python workflow/main.py
+python main.py
 ```
 
 See {doc}`quickstart` for what this does and where the results go.

@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a8539842" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -744,7 +744,7 @@ window.runMermaid = runMermaid;</script>
                   
   <section id="workflow-guide">
 <h1>Workflow Guide<a class="headerlink" href="#workflow-guide" title="Link to this heading">#</a></h1>
-<p>This guide explains the complete workflow implemented in <code class="docutils literal notranslate"><span class="pre">workflow/main.py</span></code> for running Storage-in-OSeMOSYS analysis.</p>
+<p>This guide explains the complete workflow implemented in <code class="docutils literal notranslate"><span class="pre">main.py</span></code> for running Storage-in-OSeMOSYS analysis.</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>The Storage-in-OSeMOSYS workflow processes energy system data through four different temporal representation methods, comparing their approaches to modeling energy storage systems. The workflow is designed to be:</p>
@@ -968,7 +968,7 @@ window.runMermaid = runMermaid;</script>
 <section id="basic-execution">
 <h3>Basic Execution<a class="headerlink" href="#basic-execution" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run complete workflow</span>
-python<span class="w"> </span>workflow/main.py
+python<span class="w"> </span>main.py
 </pre></div>
 </div>
 </section>
@@ -1005,7 +1005,7 @@ make<span class="w"> </span>update-env
 
 <span class="c1"># Data paths</span>
 <span class="nt">data_8760</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">"data/timeseries"</span>
+<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">"Data_8760"</span>
 <span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="s">"CapacityFactor.csv"</span><span class="w">    </span><span class="c1"># Renewable profiles</span>
 <span class="w">  </span><span class="nt">SDP</span><span class="p">:</span><span class="w"> </span><span class="s">"SpecifiedDemandProfile.csv"</span><span class="w">  </span><span class="c1"># Demand profiles</span>
 
@@ -1022,7 +1022,7 @@ make<span class="w"> </span>update-env
 <section id="output-structure">
 <h2>Output Structure<a class="headerlink" href="#output-structure" title="Link to this heading">#</a></h2>
 <p>After execution, the workflow generates:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>results/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Results/
 ├── k4h1WND_Storage_Level_Model_Cluster.csv
 ├── k4h1WND_Storage_Level_Model_Kotzur.csv  
 ├── k4h1WND_Storage_Level_Model_Welsch.csv
@@ -1052,7 +1052,7 @@ make<span class="w"> </span>update-env
 <ol class="arabic">
 <li><p><strong>OtoOle Conversion Failure</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check file formats and paths</span>
-ls<span class="w"> </span>data/system/
+ls<span class="w"> </span>inputs_csv/
 <span class="c1"># Verify configuration matches file names</span>
 </pre></div>
 </div>
@@ -1073,7 +1073,7 @@ n_clusters:<span class="w"> </span><span class="m">3</span><span class="w">     
 </li>
 <li><p><strong>Missing Results</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check simulation status in model directories</span>
-ls<span class="w"> </span>models/Model_*/results/
+ls<span class="w"> </span>Model_*/Results/
 <span class="c1"># Verify solver completed successfully</span>
 </pre></div>
 </div>

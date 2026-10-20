@@ -30,7 +30,7 @@ All parameters are described in {doc}`notes/configuration_guide`.
 ## 3. Run
 
 ```bash
-python workflow/main.py      # or: make run-main
+python main.py               # or: make run-main
 ```
 
 The pipeline clusters the hourly data into representative days, writes the inputs for each
@@ -39,5 +39,5 @@ explained in {doc}`notes/workflow_guide`.
 
 ## 4. Look at the results
 
-Results are written to `results/`. See {doc}`notes/outputs` for the file layout, or
+Results are written to `Results/`. See {doc}`notes/outputs` for the file layout, or
 {doc}`notes/reproducibility` to regenerate the published study.

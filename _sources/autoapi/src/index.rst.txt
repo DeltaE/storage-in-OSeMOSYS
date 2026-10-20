@@ -11,10 +11,12 @@ Submodules
    :maxdepth: 1
 
    /autoapi/src/Kotzur_intraday/index
+   /autoapi/src/Welsch_intraday/index
    /autoapi/src/Welsch_intraday2/index
    /autoapi/src/cluster/index
    /autoapi/src/copy_rename_csv/index
    /autoapi/src/graph_generator/index
+   /autoapi/src/graph_generator_3graphs/index
    /autoapi/src/read_csv/index
    /autoapi/src/reproduce/index
    /autoapi/src/simulation/index
@@ -49,6 +51,7 @@ Functions
    src.run_simulation
    src.copy_and_rename
    src.intraday_kotzur
+   src.intraday_welsch
    src.intraday_welsch2
    src.read_csvfile
    src.graph
@@ -58,13 +61,7 @@ Functions
 Package Contents
 ----------------
 
-.. py:function:: cluster_data(capacity_factor_path, demand_profile_path, n_clusters, random_state=0, n_init=1)
-
-   k-means (k-means++ init) on daily [CF | demand] vectors (min-max scaled).
-
-   random_state=0 and n_init=1 reproduce the manuscript (scikit-learn 1.7.1, where n_init='auto'
-   equals 1 for k-means++). n_init is now explicit because scikit-learn < 1.4 defaulted to 10.
-
+.. py:function:: cluster_data(capacity_factor_path, demand_profile_path, n_clusters, random_state)
 
 .. py:function:: new_list(length: int, output_file: str | pathlib.Path)
 
@@ -103,6 +100,8 @@ Package Contents
 .. py:function:: copy_and_rename(results_case, results_destination_folder, new_results_filename)
 
 .. py:function:: intraday_kotzur(conversion_path, storage_path, storage_level_start, output_path)
+
+.. py:function:: intraday_welsch(storage_path, blocksperday, timeslices, representative_days, output_path)
 
 .. py:function:: intraday_welsch2(storage_path, blocksperday, timeslices, representative_days, chronological_sequence, storage_level_start, output_path)
 

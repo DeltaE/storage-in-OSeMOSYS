@@ -4,14 +4,6 @@ src.simulation
 .. py:module:: src.simulation
 
 
-Attributes
-----------
-
-.. autoapisummary::
-
-   src.simulation.FALLBACK_OPTIONS
-
-
 Functions
 ---------
 
@@ -22,10 +14,6 @@ Functions
 
 Module Contents
 ---------------
-
-.. py:data:: FALLBACK_OPTIONS
-   :value: ['', '--nopresol', '--dual', '--exact']
-
 
 .. py:function:: run_simulation(case_info)
 

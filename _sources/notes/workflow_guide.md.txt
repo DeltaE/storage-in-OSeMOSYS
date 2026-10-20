@@ -1,6 +1,6 @@
 # Workflow Guide
 
-This guide explains the complete workflow implemented in `workflow/main.py` for running Storage-in-OSeMOSYS analysis.
+This guide explains the complete workflow implemented in `main.py` for running Storage-in-OSeMOSYS analysis.
 
 ## Overview
 
@@ -217,7 +217,7 @@ fig3.savefig(Path(results_destination_folder) / f"{scenario_name}_Figure_Hourly_
 ### Basic Execution
 ```bash
 # Run complete workflow
-python workflow/main.py
+python main.py
 ```
 
 ### Environment Management
@@ -254,7 +254,7 @@ ResidualStorageCapacity: 0    # Pre-existing storage
 
 # Data paths
 data_8760:
-  directory: "data/timeseries"
+  directory: "Data_8760"
   CF: "CapacityFactor.csv"    # Renewable profiles
   SDP: "SpecifiedDemandProfile.csv"  # Demand profiles
 
@@ -271,7 +271,7 @@ results:
 After execution, the workflow generates:
 
 ```
-results/
+Results/
 ├── k4h1WND_Storage_Level_Model_Cluster.csv
 ├── k4h1WND_Storage_Level_Model_Kotzur.csv  
 ├── k4h1WND_Storage_Level_Model_Welsch.csv
@@ -298,7 +298,7 @@ results/
 1. **OtoOle Conversion Failure**
    ```bash
    # Check file formats and paths
-   ls data/system/
+   ls inputs_csv/
    # Verify configuration matches file names
    ```
 
@@ -319,7 +319,7 @@ results/
 4. **Missing Results**
    ```bash
    # Check simulation status in model directories
-   ls models/Model_*/results/
+   ls Model_*/Results/
    # Verify solver completed successfully
    ```
 

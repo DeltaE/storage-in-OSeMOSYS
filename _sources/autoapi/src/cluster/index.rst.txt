@@ -15,11 +15,5 @@ Functions
 Module Contents
 ---------------
 
-.. py:function:: cluster_data(capacity_factor_path, demand_profile_path, n_clusters, random_state=0, n_init=1)
-
-   k-means (k-means++ init) on daily [CF | demand] vectors (min-max scaled).
-
-   random_state=0 and n_init=1 reproduce the manuscript (scikit-learn 1.7.1, where n_init='auto'
-   equals 1 for k-means++). n_init is now explicit because scikit-learn < 1.4 defaulted to 10.
-
+.. py:function:: cluster_data(capacity_factor_path, demand_profile_path, n_clusters, random_state)
 
