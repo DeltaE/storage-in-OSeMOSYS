@@ -21,7 +21,7 @@ ResidualStorageCapacity: 0
 
 # Data Sources
 data_8760:
-  directory: "Data_8760"
+  directory: "data/timeseries"
   CF: "CapacityFactor.csv"
   SDP: "SpecifiedDemandProfile.csv"
 
@@ -144,7 +144,7 @@ Model_Welsch:
 ### Input Data Paths
 ```yaml
 data_8760:
-  directory: "Data_8760"
+  directory: "data/timeseries"
   CF: "CapacityFactor.csv"     # Renewable generation profiles
   SDP: "SpecifiedDemandProfile.csv"  # Electricity demand profiles
 ```

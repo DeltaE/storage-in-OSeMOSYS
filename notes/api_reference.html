@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -313,12 +313,10 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">API Reference</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/src/cluster/index.html">src.cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/src/read_csv/index.html">src.read_csv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/src/reproduce/index.html">src.reproduce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../autoapi/src/simulation/index.html">src.simulation</a></li>
@@ -508,8 +506,8 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">src</span>
 
 <span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">cluster_data</span><span class="p">(</span>
-    <span class="n">cf_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/CapacityFactor.csv"</span><span class="p">),</span>
-    <span class="n">sdp_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
+    <span class="n">cf_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"data/timeseries/CapacityFactor_Wind.csv"</span><span class="p">),</span>
+    <span class="n">sdp_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"data/timeseries/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
     <span class="n">n_clusters</span><span class="o">=</span><span class="mi">4</span>
 <span class="p">)</span>
 
@@ -584,7 +582,7 @@
 </ul>
 <p><strong>Example:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate timeslice list</span>
-<span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/data/TIMESLICE.csv"</span><span class="p">))</span>
+<span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">96</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"models/Model_Cluster/data/TIMESLICE.csv"</span><span class="p">))</span>
 
 <span class="c1"># Generated content:</span>
 <span class="c1"># TIMESLICE</span>
@@ -619,19 +617,19 @@
 <p><strong>Example:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Process capacity factors (averaging within time blocks)</span>
 <span class="n">src</span><span class="o">.</span><span class="n">CFandSDP</span><span class="p">(</span>
-    <span class="n">input_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/CapacityFactor.csv"</span><span class="p">),</span>
+    <span class="n">input_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"data/timeseries/CapacityFactor_Wind.csv"</span><span class="p">),</span>
     <span class="n">representative_days</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">278</span><span class="p">],</span>
     <span class="n">hour_grouping</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># 2-hour blocks</span>
-    <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/data/CapacityFactor.csv"</span><span class="p">),</span>
+    <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"models/Model_Cluster/data/CapacityFactor.csv"</span><span class="p">),</span>
     <span class="n">operation</span><span class="o">=</span><span class="s1">'mean'</span>
 <span class="p">)</span>
 
 <span class="c1"># Process demand profiles (summing within time blocks)  </span>
 <span class="n">src</span><span class="o">.</span><span class="n">CFandSDP</span><span class="p">(</span>
-    <span class="n">input_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
+    <span class="n">input_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"data/timeseries/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
     <span class="n">representative_days</span><span class="o">=</span><span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">278</span><span class="p">],</span>
     <span class="n">hour_grouping</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/data/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
+    <span class="n">output_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"models/Model_Cluster/data/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
     <span class="n">operation</span><span class="o">=</span><span class="s1">'sum'</span>
 <span class="p">)</span>
 </pre></div>
@@ -752,13 +750,13 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 <p>Updates specific parameters in OSeMOSYS configuration YAML files.</p>
 <p><strong>Example:</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">.</span><span class="n">new_yaml_param</span><span class="p">(</span>
-    <span class="n">yaml_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/config_fast_Cluster.yaml"</span><span class="p">),</span>
+    <span class="n">yaml_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"models/Model_Cluster/config_fast_Cluster.yaml"</span><span class="p">),</span>
     <span class="n">parameter</span><span class="o">=</span><span class="s1">'DaySplit'</span><span class="p">,</span>
     <span class="n">value</span><span class="o">=</span><span class="mf">0.000114</span>  <span class="c1"># 1 hour / (24 hours * 365 days)</span>
 <span class="p">)</span>
 
 <span class="n">src</span><span class="o">.</span><span class="n">new_yaml_param</span><span class="p">(</span>
-    <span class="n">yaml_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/config_fast_Cluster.yaml"</span><span class="p">),</span>
+    <span class="n">yaml_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"models/Model_Cluster/config_fast_Cluster.yaml"</span><span class="p">),</span>
     <span class="n">parameter</span><span class="o">=</span><span class="s1">'StorageMaxCapacity'</span><span class="p">,</span>
     <span class="n">value</span><span class="o">=</span><span class="mf">100.0</span>
 <span class="p">)</span>
@@ -829,8 +827,8 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 
 <span class="c1"># 2. Perform clustering</span>
 <span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">cluster_data</span><span class="p">(</span>
-    <span class="n">cf_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/CapacityFactor.csv"</span><span class="p">),</span>
-    <span class="n">sdp_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Data_8760/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
+    <span class="n">cf_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"data/timeseries/CapacityFactor_Wind.csv"</span><span class="p">),</span>
+    <span class="n">sdp_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"data/timeseries/SpecifiedDemandProfile.csv"</span><span class="p">),</span>
     <span class="n">n_clusters</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">'n_clusters'</span><span class="p">]</span>
 <span class="p">)</span>
 
@@ -859,18 +857,18 @@ If cluster 1 represents 90 days out of 365, and we have hourly resolution:</p>
 
 <span class="c1"># 4. Generate visualizations</span>
 <span class="n">fig1</span><span class="p">,</span> <span class="n">fig2</span><span class="p">,</span> <span class="n">fig3</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">graph</span><span class="p">(</span>
-    <span class="n">file_base</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Results/base_Storage_Level_Model_Niet.csv"</span><span class="p">),</span>
-    <span class="n">file_kotzur</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Results/k4h1WND_Storage_Level_Model_Kotzur.csv"</span><span class="p">),</span>
+    <span class="n">file_base</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"results/base_Storage_Level_Model_Niet.csv"</span><span class="p">),</span>
+    <span class="n">file_kotzur</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"results/k4h1WND_Storage_Level_Model_Kotzur.csv"</span><span class="p">),</span>
     <span class="c1"># ... other file paths</span>
     <span class="n">representative_days</span><span class="o">=</span><span class="n">representative_days</span><span class="p">,</span>
     <span class="n">blocks_per_day</span><span class="o">=</span><span class="mi">24</span><span class="o">//</span><span class="n">config</span><span class="p">[</span><span class="s1">'hour_grouping'</span><span class="p">],</span>
-    <span class="n">yearsplit_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"Model_Cluster/data/YearSplit.csv"</span><span class="p">)</span>
+    <span class="n">yearsplit_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">"models/Model_Cluster/data/YearSplit.csv"</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1"># 5. Save results</span>
-<span class="n">fig1</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"Results/comparison_overview.png"</span><span class="p">)</span>
-<span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"Results/comparison_detailed.png"</span><span class="p">)</span>
-<span class="n">fig3</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"Results/comparison_2weeks.png"</span><span class="p">)</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"results/comparison_overview.png"</span><span class="p">)</span>
+<span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"results/comparison_detailed.png"</span><span class="p">)</span>
+<span class="n">fig3</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"results/comparison_2weeks.png"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This API reference provides comprehensive documentation for all functions and modules in the Storage-in-OSeMOSYS framework, enabling users to understand and extend the codebase effectively.</p>

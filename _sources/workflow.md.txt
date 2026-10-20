@@ -22,7 +22,7 @@ configuration file to try your own scenarios. Follow the cards in order the firs
       <span class="section-card__step">02</span>
     </span>
     <span class="section-card__title">Quickstart</span>
-    <span class="section-card__text">Choose a scenario, run <code>python main.py</code> and find the results, in four short steps.</span>
+    <span class="section-card__text">Choose a scenario, run <code>python workflow/main.py</code> and find the results, in four short steps.</span>
   </a>
   <a class="section-card section-card--workflow" href="notes/workflow_guide.html">
     <span class="section-card__head">
@@ -30,7 +30,7 @@ configuration file to try your own scenarios. Follow the cards in order the firs
       <span class="section-card__step">03</span>
     </span>
     <span class="section-card__title">How the pipeline works</span>
-    <span class="section-card__text">What <code>main.py</code> does at each stage, from loading data to clustering, solving and plotting.</span>
+    <span class="section-card__text">What <code>workflow/main.py</code> does at each stage, from loading data to clustering, solving and plotting.</span>
   </a>
   <a class="section-card section-card--sliders" href="notes/configuration_guide.html">
     <span class="section-card__head">

@@ -2,7 +2,7 @@
 
 <p class="page-intro">
 All the modelling code lives in the <code>src</code> package. You do not need it to run the
-study, because <code>python main.py</code> calls everything for you. Come here when you want to
+study, because <code>python workflow/main.py</code> calls everything for you. Come here when you want to
 reuse one step of the method in your own work, or see exactly how a step in the paper is written
 in code. The cards lead to the reference; the guide below shows how to put it to use.
 </p>

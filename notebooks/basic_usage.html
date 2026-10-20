@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -421,7 +421,7 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import
 <span class="c1"># Set up paths</span>
 <span class="n">project_root</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
 <span class="n">config_path</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">"config"</span> <span class="o">/</span> <span class="s2">"config.yaml"</span>
-<span class="n">input_path</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">"inputs_csv"</span>
+<span class="n">input_path</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">"data"</span> <span class="o">/</span> <span class="s2">"system"</span>
 <span class="n">output_path</span> <span class="o">=</span> <span class="n">project_root</span> <span class="o">/</span> <span class="s2">"Results"</span>
 
 <span class="c1"># Load configuration</span>
@@ -459,7 +459,7 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import
 <section id="step-1-data-preparation">
 <h3>Step 1: Data Preparation<a class="headerlink" href="#step-1-data-preparation" title="Link to this heading">#</a></h3>
 <p>Prepare your input data in CSV format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>inputs_csv/
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>data/system/
 ├── TECHNOLOGY.csv          # Technology definitions
 ├── FUEL.csv                # Fuel types
 ├── STORAGE.csv             # Storage technologies
@@ -500,14 +500,14 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import
 <span class="n">output_dir</span> <span class="o">=</span> <span class="s2">"Results"</span>
 
 <span class="c1"># Convert Excel to CSV</span>
-<span class="n">convert_excel_to_csv</span><span class="p">(</span><span class="n">input_excel</span><span class="p">,</span> <span class="s2">"inputs_csv"</span><span class="p">)</span>
+<span class="n">convert_excel_to_csv</span><span class="p">(</span><span class="n">input_excel</span><span class="p">,</span> <span class="s2">"data/system"</span><span class="p">)</span>
 
 <span class="c1"># Run clustering (if needed)</span>
 <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">"8760"</span><span class="p">:</span>
-    <span class="n">run_temporal_clustering</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="s2">"inputs_csv"</span><span class="p">)</span>
+    <span class="n">run_temporal_clustering</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="s2">"data/system"</span><span class="p">)</span>
 
 <span class="c1"># Generate data file</span>
-<span class="n">generate_datafile</span><span class="p">(</span><span class="s2">"inputs_csv"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"model_</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">.dat"</span><span class="p">)</span>
+<span class="n">generate_datafile</span><span class="p">(</span><span class="s2">"data/system"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"model_</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">.dat"</span><span class="p">)</span>
 
 <span class="c1"># Solve model</span>
 <span class="n">solve_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">"model_</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">.dat"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"solution_</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">.sol"</span><span class="p">)</span>
@@ -524,9 +524,9 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="c1"># Load results</span>
-<span class="n">capacity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"Results/TotalCapacityAnnual.csv"</span><span class="p">)</span>
-<span class="n">storage_level</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"Results/StorageLevelStart.csv"</span><span class="p">)</span>
-<span class="n">production</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"Results/ProductionByTechnology.csv"</span><span class="p">)</span>
+<span class="n">capacity</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"results/TotalCapacityAnnual.csv"</span><span class="p">)</span>
+<span class="n">storage_level</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"results/StorageLevelStart.csv"</span><span class="p">)</span>
+<span class="n">production</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"results/ProductionByTechnology.csv"</span><span class="p">)</span>
 
 <span class="c1"># Plot capacity expansion</span>
 <span class="n">storage_capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="p">[</span><span class="n">capacity</span><span class="p">[</span><span class="s1">'TECHNOLOGY'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">'STORAGE'</span><span class="p">)]</span>

@@ -313,12 +313,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../notes/api_reference.html">API Reference</a></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">src</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Welsch_intraday/index.html">src.Welsch_intraday</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cluster/index.html">src.cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="copy_rename_csv/index.html">src.copy_rename_csv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="graph_generator/index.html">src.graph_generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="read_csv/index.html">src.read_csv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reproduce/index.html">src.reproduce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="simulation/index.html">src.simulation</a></li>
@@ -402,12 +400,10 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Welsch_intraday/index.html">src.Welsch_intraday</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cluster/index.html">src.cluster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="copy_rename_csv/index.html">src.copy_rename_csv</a></li>
 <li class="toctree-l1"><a class="reference internal" href="graph_generator/index.html">src.graph_generator</a></li>
-<li class="toctree-l1"><a class="reference internal" href="graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="read_csv/index.html">src.read_csv</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reproduce/index.html">src.reproduce</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation/index.html">src.simulation</a></li>
@@ -429,8 +425,8 @@
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#src.cluster_data" title="src.cluster_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cluster_data</span></code></a>(capacity_factor_path, ...)</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.cluster_data" title="src.cluster_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cluster_data</span></code></a>(capacity_factor_path, ...[, ...])</p></td>
+<td><p>k-means (k-means++ init) on daily [CF | demand] vectors (min-max scaled).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#src.new_list" title="src.new_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">new_list</span></code></a>(length, output_file)</p></td>
 <td><p>Generates a list of integers from 1 to the specified length, saves it as a CSV file, and returns the output file path. Used to update timeslice and daytype.</p></td>
@@ -468,19 +464,16 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#src.intraday_kotzur" title="src.intraday_kotzur"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intraday_kotzur</span></code></a>(conversion_path, storage_path, ...)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#src.intraday_welsch" title="src.intraday_welsch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intraday_welsch</span></code></a>(storage_path, blocksperday, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.intraday_welsch2" title="src.intraday_welsch2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intraday_welsch2</span></code></a>(storage_path, blocksperday, ...)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#src.intraday_welsch2" title="src.intraday_welsch2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intraday_welsch2</span></code></a>(storage_path, blocksperday, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.read_csvfile" title="src.read_csvfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_csvfile</span></code></a>(path)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#src.read_csvfile" title="src.read_csvfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_csvfile</span></code></a>(path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.graph" title="src.graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">graph</span></code></a>(file_base, file_kotzur, file_kotzur_intraday, ...)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#src.graph" title="src.graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">graph</span></code></a>(file_base, file_kotzur, file_kotzur_intraday, ...)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#src.table" title="src.table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">table</span></code></a>(→ None)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.table" title="src.table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">table</span></code></a>(→ None)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -491,8 +484,11 @@
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="src.cluster_data">
-<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">cluster_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capacity_factor_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">demand_profile_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/cluster.html#cluster_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.cluster_data" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">cluster_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capacity_factor_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">demand_profile_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_clusters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/cluster.html#cluster_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.cluster_data" title="Link to this definition">#</a></dt>
+<dd><p>k-means (k-means++ init) on daily [CF | demand] vectors (min-max scaled).</p>
+<p>random_state=0 and n_init=1 reproduce the manuscript (scikit-learn 1.7.1, where n_init=’auto’
+equals 1 for k-means++). n_init is now explicit because scikit-learn &lt; 1.4 defaulted to 10.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.new_list">
@@ -568,11 +564,6 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.intraday_kotzur">
 <span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">intraday_kotzur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">conversion_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_level_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/Kotzur_intraday.html#intraday_kotzur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.intraday_kotzur" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.intraday_welsch">
-<span class="sig-prename descclassname"><span class="pre">src.</span></span><span class="sig-name descname"><span class="pre">intraday_welsch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocksperday</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/src/Welsch_intraday.html#intraday_welsch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.intraday_welsch" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -661,7 +652,6 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.run_simulation"><code class="docutils literal notranslate"><span class="pre">run_simulation()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.copy_and_rename"><code class="docutils literal notranslate"><span class="pre">copy_and_rename()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.intraday_kotzur"><code class="docutils literal notranslate"><span class="pre">intraday_kotzur()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.intraday_welsch"><code class="docutils literal notranslate"><span class="pre">intraday_welsch()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.intraday_welsch2"><code class="docutils literal notranslate"><span class="pre">intraday_welsch2()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.read_csvfile"><code class="docutils literal notranslate"><span class="pre">read_csvfile()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.graph"><code class="docutils literal notranslate"><span class="pre">graph()</span></code></a></li>

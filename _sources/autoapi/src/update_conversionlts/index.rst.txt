@@ -10,10 +10,20 @@ Functions
 .. autoapisummary::
 
    src.update_conversionlts.conversionlts
+   src.update_conversionlts.conversionlts_sparse
 
 
 Module Contents
 ---------------
 
 .. py:function:: conversionlts(blocks_per_day, chronological_timeslices, timeslices, chronological_sequence, representative_days, output_file)
+
+.. py:function:: conversionlts_sparse(blocks_per_day, chronological_sequence, representative_days, output_file)
+
+   Write only the non-zero entries (VALUE == 1) of the Conversionlts mapping.
+
+   Equivalent input for intraday_kotzur(), which keeps only VALUE == 1 rows, but avoids the
+   dense (365*b) x (k*b) table (about 77 million rows at k365h1). This also removes the
+   dependency of the Kotzur reconstruction on running Model_Cluster first.
+
 

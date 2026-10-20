@@ -7,7 +7,7 @@ This page explains how to regenerate the results of
 
 from this repository, which result comes from which step, how long each step takes, and what was
 verified. The executable version of this guide is the notebook {doc}`../notebooks/reproduce_study`
-(`reproduce_study.ipynb` in the repository root).
+(`notebooks/reproduce_study.ipynb` in the repository).
 
 ## 1. What you need
 
@@ -26,19 +26,21 @@ All of these are installed by `env/environment-crossplatform.yml` ({doc}`README_
 
 | Path | Content |
 |---|---|
-| `Data_8760/` | Hourly capacity factors (`CapacityFactor_Wind.csv`, `_Solar.csv`, `_Hydro.csv`) and demand profile (`SpecifiedDemandProfile.csv`) |
-| `inputs_csv/` | System parameters (Table 3 of the paper) |
-| `Model_*/` | OSeMOSYS model file and otoole configuration of each formulation |
-| `main.py`, `src/` | Pipeline: clustering, input generation, solve, post-processing |
-| `automation.py` | Command-line batch runner |
+| `config/config.yaml` | Scenario settings and paths |
+| `data/timeseries/` | Hourly capacity factors (`CapacityFactor_Wind.csv`, `_Solar.csv`, `_Hydro.csv`) and demand profile (`SpecifiedDemandProfile.csv`) |
+| `data/system/` | System parameters (Table 3 of the paper) |
+| `models/Model_*/` | OSeMOSYS model file and otoole configuration of each formulation |
+| `workflow/main.py`, `src/` | Pipeline: clustering, input generation, solve, post-processing |
+| `workflow/automation.py` | Command-line batch runner |
 | `src/reproduce.py` | Helpers used by the notebook (runs, tables, metrics) |
-| `validation_soc/` | Independent hand-calculated SoC verification |
+| `validation/soc/` | Independent hand-calculated SoC verification |
 | `data/published_results/` | Result tables of the paper and the trajectories behind Table 4 and Section 4.4 |
-| `reproduce_study.ipynb` | Step-by-step reproduction |
+| `notebooks/reproduce_study.ipynb` | Step-by-step reproduction |
+| `archive/` | Superseded scripts and data, not used by the workflow |
 
 The complete set of result files (all trajectories and figures, about 185 MB) is archived on Zenodo
-(DOI in the Data Availability Statement). Unpack it as `Results_Demand_Variation/` in the repository
-root; the notebook detects it automatically and otherwise uses `data/published_results/`.
+(DOI in the Data Availability Statement). Unpack it as `data/full_archive/`
+(containing `Results_Demand_Variation/` and `Results_Limited/`); the notebook detects it automatically and otherwise uses `data/published_results/`.
 
 ## 3. Step by step
 
@@ -54,7 +56,7 @@ conda activate storage_osemosys
 ### 3.2 Quick verification (about 2 minutes)
 
 ```bash
-jupyter lab reproduce_study.ipynb      # run all cells with the default switches
+jupyter lab notebooks/reproduce_study.ipynb   # run all cells with the default switches
 ```
 
 With the default switches the notebook:
@@ -74,16 +76,16 @@ Set the switches at the top of the notebook, or use the command line:
 
 | Step | Command | Solves | Time* | Peak RAM |
 |---|---|---|---|---|
-| Full-year benchmarks (Section 4.1) | `python automation.py --resources WND SOL HYD --k 365 --h 1` | 12 | ~50 min | ~12 GB |
-| Aggregated configurations (Sections 4.2–4.3) | `python automation.py --resources WND SOL HYD --k all --h all` | 1296 | 2–4 h | ~3 GB |
-| Stress test (Section 4.4) | `python automation.py --resources WND SOL --k 365 --h 1 --cap 0.2` | 8 | ~30 min | ~12 GB |
-| Seed sensitivity | `python automation.py --resources WND SOL HYD --k 4 8 20 --h 1 --seed 1` (and `--seed 2`) | 72 | ~10 min | < 1 GB |
-| SoC verification (Section 4.1) | `python validation_soc/run.py` | 4 | < 1 min | < 0.1 GB |
+| Full-year benchmarks (Section 4.1) | `python workflow/automation.py --resources WND SOL HYD --k 365 --h 1` | 12 | ~50 min | ~12 GB |
+| Aggregated configurations (Sections 4.2–4.3) | `python workflow/automation.py --resources WND SOL HYD --k all --h all` | 1296 | 2–4 h | ~3 GB |
+| Stress test (Section 4.4) | `python workflow/automation.py --resources WND SOL --k 365 --h 1 --cap 0.2` | 8 | ~30 min | ~12 GB |
+| Seed sensitivity | `python workflow/automation.py --resources WND SOL HYD --k 4 8 20 --h 1 --seed 1` (and `--seed 2`) | 72 | ~10 min | < 1 GB |
+| SoC verification (Section 4.1) | `python validation/soc/run.py` | 4 | < 1 min | < 0.1 GB |
 
 \*GLPK 5.0, Intel Core i7, 16 GB RAM. The sweep needs about 0.8 h of solver time; the rest is input
 generation and file conversion.
 
-Results go to `Results/`. Rerun the notebook afterwards: every table and figure uses fresh results where
+Results go to `results/`. Rerun the notebook afterwards: every table and figure uses fresh results where
 they exist and archived results otherwise.
 
 ## 4. Where each result comes from
@@ -92,9 +94,9 @@ they exist and archived results otherwise.
 |---|---|---|---|
 | Figure 1, Table 2 | Classification of storage formulations | Conceptual | — |
 | Figure 2, Table 1 | Formulations on a synthetic one-week series | Illustrative example, not produced by this pipeline | — |
-| Table 3, Figures 3–5 | System parameters, VRE and demand profiles | `inputs_csv/`, `Data_8760/` | 2 |
+| Table 3, Figures 3–5 | System parameters, VRE and demand profiles | `data/system/`, `data/timeseries/` | 2 |
 | Section 3.2 | Clustering settings | `src/cluster.py` | 3 |
-| Section 4.1, verification | Hand-calculated SoC check | `validation_soc/` | 4 |
+| Section 4.1, verification | Hand-calculated SoC check | `validation/soc/` | 4 |
 | Figure 6, Table S1 | Full-year hourly benchmarks | k365h1 runs | 6 |
 | Table 4, Figure 7, Tables S2–S4 | Cost and capacity errors, runtimes | Aggregated runs + benchmarks | 7–8 |
 | Figure 8 | MAE, RMSE, Pearson r, rainflow cycles | SoC trajectories | 10 |
@@ -146,7 +148,7 @@ None of the corrections changes the model equations.
 | Change | Reason |
 |---|---|
 | Template CSVs are copied before the formulation-specific files are generated | The previous order overwrote the Kotzur and Welsch mapping files with empty templates |
-| `inputs_csv/` holds the values used in the paper (demand 20, VRE capital cost 1200, VRE variable cost 20) | The repository previously contained placeholder values |
+| `data/system/` (formerly `inputs_csv/`) holds the values used in the paper (demand 20, VRE capital cost 1200, VRE variable cost 20) | The repository previously contained placeholder values |
 | Model result folders are created at run time; stale results are cleared | Fresh clones failed; failed solves could report results of the previous run |
 | Solver status check and automatic retry | See section 6 |
 | Explicit `n_init`, `random_state` and clustering record per run | Clustering is reproducible across scikit-learn versions and traceable |
