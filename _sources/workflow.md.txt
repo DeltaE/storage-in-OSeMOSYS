@@ -1,10 +1,11 @@
 # Modelling workflow
 
 <p class="page-intro">
-This section takes you from a fresh copy of the code to solved models. You set up the software
-once, run one command, and the pipeline picks representative days, builds an OSeMOSYS model for
-each storage formulation, solves them and saves the results. After that, you change a single
-configuration file to try your own scenarios. Follow the cards in order the first time.
+This section covers the path from a fresh copy of the code to solved models. The software is
+set up once; a single command then runs the pipeline, which picks representative days, builds an
+OSeMOSYS model for each storage formulation, solves them and saves the results. New scenarios
+only need changes to one configuration file. On a first run, the cards are best followed in
+order.
 </p>
 
 <div class="section-cards">
@@ -14,7 +15,7 @@ configuration file to try your own scenarios. Follow the cards in order the firs
       <span class="section-card__step">01</span>
     </span>
     <span class="section-card__title">Set up the environment</span>
-    <span class="section-card__text">Install Python, the GLPK solver and the packages with one <code>make setup</code>, then check everything works.</span>
+    <span class="section-card__text">Python, the GLPK solver and all packages are installed with one <code>make setup</code>, then checked.</span>
   </a>
   <a class="section-card section-card--play" href="quickstart.html">
     <span class="section-card__head">
@@ -22,7 +23,7 @@ configuration file to try your own scenarios. Follow the cards in order the firs
       <span class="section-card__step">02</span>
     </span>
     <span class="section-card__title">Quickstart</span>
-    <span class="section-card__text">Choose a scenario, run <code>python workflow/main.py</code> and find the results, in four short steps.</span>
+    <span class="section-card__text">Choosing a scenario, running <code>python workflow/main.py</code> and locating the results, in four short steps.</span>
   </a>
   <a class="section-card section-card--workflow" href="notes/workflow_guide.html">
     <span class="section-card__head">

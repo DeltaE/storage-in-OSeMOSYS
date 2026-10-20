@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8539842" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=90f48533" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -46,6 +46,8 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'workflow';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="_static/header-buttons.js?v=a6abead0"></script>
+    <link rel="icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Environment Setup Guide" href="notes/README_ENVIRONMENT.html" />
@@ -122,12 +124,16 @@
     
     
     
-    <img src="_static/storage_in_osemosys_logo_202508.png" class="logo__image only-light" alt=""/>
-    <img src="_static/storage_in_osemosys_logo_202508.png" class="logo__image only-dark pst-js-only" alt=""/>
+    <img src="_static/storage_in_osemosys_icon.png" class="logo__image only-light" alt=""/>
+    <img src="_static/storage_in_osemosys_icon.png" class="logo__image only-dark pst-js-only" alt=""/>
   
   
     <p class="title logo__title">Storage in OSeMOSYS</p>
   
+</a></div>
+    
+      <div class="navbar-item"><a class="header-icon-btn home-btn" href="index.html" title="Home" aria-label="Home">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
 </a></div>
     
   </div>
@@ -182,6 +188,17 @@
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button></div>
       
+        <div class="navbar-item">
+<button class="header-icon-btn mode-btn pst-js-only" type="button" title="Switch light / dark mode" aria-label="Switch light / dark mode">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+</button></div>
+      
+        <div class="navbar-item"><button class="header-icon-btn fullscreen-btn pst-js-only" type="button" title="Toggle full screen" aria-label="Toggle full screen">
+  <svg class="icon-maximize" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  <svg class="icon-minimize" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>
+</button></div>
+      
         <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
@@ -215,7 +232,7 @@
       
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -273,6 +290,17 @@
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button></div>
         
+          <div class="navbar-item">
+<button class="header-icon-btn mode-btn pst-js-only" type="button" title="Switch light / dark mode" aria-label="Switch light / dark mode">
+  <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+</button></div>
+        
+          <div class="navbar-item"><button class="header-icon-btn fullscreen-btn pst-js-only" type="button" title="Toggle full screen" aria-label="Toggle full screen">
+  <svg class="icon-maximize" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+  <svg class="icon-minimize" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>
+</button></div>
+        
           <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Icon Links">
         <li class="nav-item">
@@ -291,33 +319,6 @@
       </div>
     
   </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
-  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
-  </svg>
-  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
-  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
-</button></div>
-        <div class="sidebar-primary-item">
-
-<nav class="bd-docs-nav bd-links"
-     aria-label="Section Navigation">
-  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Get started</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notes/README_ENVIRONMENT.html">Environment Setup Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pipeline</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notes/configuration_guide.html">Configuration Guide</a></li>
-</ul>
-</div>
-</nav></div>
-    </div>
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
@@ -374,10 +375,11 @@
   <section id="modelling-workflow">
 <h1>Modelling workflow<a class="headerlink" href="#modelling-workflow" title="Link to this heading">#</a></h1>
 <p class="page-intro">
-This section takes you from a fresh copy of the code to solved models. You set up the software
-once, run one command, and the pipeline picks representative days, builds an OSeMOSYS model for
-each storage formulation, solves them and saves the results. After that, you change a single
-configuration file to try your own scenarios. Follow the cards in order the first time.
+This section covers the path from a fresh copy of the code to solved models. The software is
+set up once; a single command then runs the pipeline, which picks representative days, builds an
+OSeMOSYS model for each storage formulation, solves them and saves the results. New scenarios
+only need changes to one configuration file. On a first run, the cards are best followed in
+order.
 </p>
 <div class="section-cards">
   <a class="section-card section-card--terminal" href="notes/README_ENVIRONMENT.html">
@@ -386,7 +388,7 @@ configuration file to try your own scenarios. Follow the cards in order the firs
       <span class="section-card__step">01</span>
     </span>
     <span class="section-card__title">Set up the environment</span>
-    <span class="section-card__text">Install Python, the GLPK solver and the packages with one <code>make setup</code>, then check everything works.</span>
+    <span class="section-card__text">Python, the GLPK solver and all packages are installed with one <code>make setup</code>, then checked.</span>
   </a>
   <a class="section-card section-card--play" href="quickstart.html">
     <span class="section-card__head">
@@ -394,7 +396,7 @@ configuration file to try your own scenarios. Follow the cards in order the firs
       <span class="section-card__step">02</span>
     </span>
     <span class="section-card__title">Quickstart</span>
-    <span class="section-card__text">Choose a scenario, run <code>python workflow/main.py</code> and find the results, in four short steps.</span>
+    <span class="section-card__text">Choosing a scenario, running <code>python workflow/main.py</code> and locating the results, in four short steps.</span>
   </a>
   <a class="section-card section-card--workflow" href="notes/workflow_guide.html">
     <span class="section-card__head">

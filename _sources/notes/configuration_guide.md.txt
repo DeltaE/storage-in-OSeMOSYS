@@ -5,8 +5,8 @@ it needs is read from `config/config.yaml`; all paths in that file are relative 
 root.
 
 The reproduction tools (`notebooks/reproduce_study.ipynb`, `workflow/automation.py`) rewrite the
-scenario settings for each run and restore the file afterwards, so you only edit it by hand for
-single runs.
+scenario settings for each run and restore the file afterwards, so it only needs editing by hand
+for single runs.
 
 ## Scenario
 
@@ -57,7 +57,7 @@ data_8760:
 ```
 
 `CF` and `SDP` are the 8760-hour profiles that are clustered and aggregated. To study another
-system, add your own profiles to `data/timeseries/` (same CSV layout) and point `CF`/`SDP` at them.
+system, add the new profiles to `data/timeseries/` (same CSV layout) and point `CF`/`SDP` at them.
 
 ## Outputs
 

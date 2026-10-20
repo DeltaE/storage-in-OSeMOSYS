@@ -4,19 +4,19 @@ Storage modeling is complex because storage systems behave differently than gene
 __🔁 1. Storage shifts energy in time__
 
 Unlike solar panels (generate) or homes (consume), storage stores energy when it’s abundant and releases it when needed. That means:
-  - You can't look at one hour in isolation — what happened before matters.
+  - One hour cannot be looked at in isolation — what happened before matters.
   - The state of charge (SOC) today depends on all previous hours.
 
-    > Analogy: It's like a savings account — what you can spend today depends on how much you saved earlier.
+    > Analogy: It's like a savings account — what can be spent today depends on how much was saved earlier.
 
 __⏳ 2. Time resolution matters__
 
-Should you model every single hour? Every day? A few representative days? Each choice impacts:
+Should a model cover every single hour? Every day? A few representative days? Each choice impacts:
 
  - Accuracy (high resolution = realistic, but slow to compute)
  - Computational effort (simplified models lose detail)
 
-    > If you model storage with only a few sample days, you risk missing important patterns, like a long wind lull or weekend charging habits.
+    > Modelling storage with only a few sample days risks missing important patterns, like a long wind lull or weekend charging habits.
 
 __🔗 3. Storage needs continuity__
 

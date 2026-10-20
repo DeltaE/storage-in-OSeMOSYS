@@ -20,7 +20,7 @@ make setup                       # create the environment and check it
 conda activate storage_osemosys
 ```
 
-`make setup` runs three steps, which you can also run on their own:
+`make setup` runs three steps, which can also be run on their own:
 
 | Command | What it does |
 |---|---|

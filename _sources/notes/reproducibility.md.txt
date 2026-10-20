@@ -9,7 +9,7 @@ from this repository, which result comes from which step, how long each step tak
 verified. The executable version of this guide is the notebook {doc}`../notebooks/reproduce_study`
 (`notebooks/reproduce_study.ipynb` in the repository).
 
-## 1. What you need
+## 1. Requirements
 
 | Item | Version used in the paper | Notes |
 |---|---|---|

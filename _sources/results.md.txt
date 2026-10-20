@@ -13,7 +13,7 @@ card to open the detailed steps.
       <span class="section-card__step">Guide</span>
     </span>
     <span class="section-card__title">Reproducibility guide</span>
-    <span class="section-card__text">What you need, a 2-minute check, the full regeneration, and which run produced each published number.</span>
+    <span class="section-card__text">Requirements, a 2-minute check, the full regeneration, and which run produced each published number.</span>
     <span class="section-card__more">Open the steps →</span>
   </a>
   <a class="section-card section-card--notebook" href="notebooks/reproduce_study.html">
