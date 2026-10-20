@@ -16,7 +16,7 @@ are run, what the study found, and the code behind it.
       <span class="section-card__step">01</span>
     </span>
     <span class="section-card__title">Concept</span>
-    <span class="section-card__text">Why storage is hard to model with representative days, and the four formulations compared.</span>
+    <span class="section-card__text">Why storage is hard to model with representative days, how the study is put together, and the four formulations.</span>
   </a>
   <a class="section-card section-card--workflow" href="workflow.html">
     <span class="section-card__head">
@@ -43,6 +43,10 @@ are run, what the study found, and the code behind it.
     <span class="section-card__text">What each module in <code>src</code> does and how it can be reused in other work.</span>
   </a>
 </div>
+
+<p class="landing-pointer">New to the study? Start with
+<a href="concept.html#how-the-study-is-put-together">how the study is put together</a>: an
+interactive map of the test system, model, solve and recommendations.</p>
 
 ## At a glance
 

@@ -1,0 +1,502 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Storage Memory Animation</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: one framed stage (canvas) with a scene stepper above and a caption below, sized to the docs content column. */
+:root {
+  --bg: #ffffff;
+  --surface: #f3f5f7;
+  --border: #e5e8eb;
+  --ink: #1f2328;
+  --muted: #59636e;
+  --accent: #1f6f8b;          /* docs primary teal */
+  --accent-soft: rgba(31, 111, 139, 0.12);
+  --surplus: #1f8fae;         /* more renewable power than demand */
+  --deficit: #b5523b;         /* less renewable power than demand */
+  --neutral: #eef1f4;
+  --alert: #c2410c;
+  --c-sunny: #d9a21b;
+  --c-windy: #4b5fc2;
+  --c-calm: #8a8f99;
+  --c-mixed: #4f9a5f;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14181d; --surface: #1c2229; --border: #2d353f; --ink: #e6edf3; --muted: #9aa6b2;
+    --accent: #5cb8d6; --accent-soft: rgba(92, 184, 214, 0.14);
+    --surplus: #4fb3d6; --deficit: #e07a5f; --neutral: #232a32; --alert: #f2804a;
+    --c-sunny: #e8b740; --c-windy: #8c9bf0; --c-calm: #a3a9b3; --c-mixed: #6fbf80;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14181d; --surface: #1c2229; --border: #2d353f; --ink: #e6edf3; --muted: #9aa6b2;
+  --accent: #5cb8d6; --accent-soft: rgba(92, 184, 214, 0.14);
+  --surplus: #4fb3d6; --deficit: #e07a5f; --neutral: #232a32; --alert: #f2804a;
+  --c-sunny: #e8b740; --c-windy: #8c9bf0; --c-calm: #a3a9b3; --c-mixed: #6fbf80;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 48px;
+}
+.sample-note {
+  max-width: 960px;
+  margin: 0 auto 16px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---- Component (portable into the docs landing page) ---- */
+.soc-anim {
+  max-width: 960px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 16px 18px 18px;
+  display: grid;
+  gap: 12px;
+}
+.soc-anim__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.soc-anim__steps {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+.soc-anim__step {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--muted);
+  font: 500 0.82rem/1 var(--font);
+  padding: 7px 12px;
+  cursor: pointer;
+}
+.soc-anim__step b { color: var(--accent); font-weight: 700; margin-right: 4px; }
+.soc-anim__step[aria-current="step"] { border-color: var(--accent); color: var(--ink); }
+.soc-anim__step .soc-anim__progress {
+  position: absolute; left: 0; bottom: 0; height: 2px; width: 0;
+  background: var(--accent);
+}
+.soc-anim__step:focus-visible, .soc-anim__play:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.soc-anim__play {
+  width: 32px; height: 32px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg); color: var(--muted);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.soc-anim__play:hover { color: var(--accent); border-color: var(--accent); }
+.soc-anim__play svg { width: 14px; height: 14px; }
+.soc-anim__play .icon-play { display: none; }
+.soc-anim.is-paused .soc-anim__play .icon-play { display: block; }
+.soc-anim.is-paused .soc-anim__play .icon-pause { display: none; }
+.soc-anim__stage {
+  width: 100%;
+  aspect-ratio: 960 / 340;
+  max-width: 100%;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.soc-anim__stage canvas { width: 100%; height: 100%; display: block; }
+.soc-anim__caption { margin: 0; min-height: 3.2em; line-height: 1.55; font-size: 0.98rem; max-width: 68ch; text-wrap: pretty; }
+.soc-anim__caption strong { color: var(--accent); }
+@media (max-width: 560px) {
+  .soc-anim { padding: 12px; }
+  .soc-anim__step { padding: 6px 9px; font-size: 0.76rem; }
+  .soc-anim__stage { aspect-ratio: 960 / 420; }
+}
+</style>
+
+<p class="sample-note">Sample for the landing page of the Storage in OSeMOSYS docs. Illustrative data, not model output.</p>
+
+<figure class="soc-anim" id="soc-anim" aria-label="Animated explainer: why storage needs memory between representative days">
+  <div class="soc-anim__bar">
+    <div class="soc-anim__steps" role="group" aria-label="Scenes">
+      <button class="soc-anim__step" id="soc-step-0" type="button" data-scene="0"><b>1</b>A year, hour by hour<span class="soc-anim__progress"></span></button>
+      <button class="soc-anim__step" id="soc-step-1" type="button" data-scene="1"><b>2</b>Typical days<span class="soc-anim__progress"></span></button>
+      <button class="soc-anim__step" id="soc-step-2" type="button" data-scene="2"><b>3</b>Storage needs memory<span class="soc-anim__progress"></span></button>
+      <button class="soc-anim__step" id="soc-step-3" type="button" data-scene="3"><b>4</b>Four formulations<span class="soc-anim__progress"></span></button>
+    </div>
+    <button class="soc-anim__play" id="soc-play" type="button" aria-label="Pause animation">
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5Z"/></svg>
+    </button>
+  </div>
+  <div class="soc-anim__stage"><canvas id="soc-canvas" role="img" aria-label=""></canvas></div>
+  <figcaption class="soc-anim__caption" id="soc-caption" aria-live="polite"></figcaption>
+</figure>
+
+<script>
+(() => {
+  const root = document.getElementById("soc-anim");
+  const canvas = document.getElementById("soc-canvas");
+  const ctx = canvas.getContext("2d");
+  const captionEl = document.getElementById("soc-caption");
+  const steps = [...root.querySelectorAll(".soc-anim__step")];
+  const playBtn = document.getElementById("soc-play");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const W = 960;
+  let H = 340;
+  const SCENE_MS = [6500, 8000, 9000, 7500];
+
+  const CAPTIONS = [
+    "Wind, sun and demand change every hour. A full year is <strong>8,760 hours</strong>, and solving all of them for decades of planning makes models slow.",
+    "So models group similar days and keep a few <strong>typical days</strong>, each standing in for many real ones. Here 365 days become 4.",
+    "A battery carries energy from one day to the next. If each typical day <strong>starts fresh</strong>, a calm week looks harmless. Linked in <strong>calendar order</strong>, the battery runs empty.",
+    "The study compares <strong>four ways</strong> to handle storage with typical days, from the most compact to the most faithful, on cost, accuracy and run time.",
+  ];
+  const ALT = [
+    "Heat map of 365 days by 24 hours, coloured by renewable surplus or shortfall.",
+    "The 365 day columns are coloured by day type, sorted, and collapsed into four typical days.",
+    "Two battery charge lines over two weeks: one resets every morning, the other drains to empty during a calm spell.",
+    "Four formulations on a scale from compact to faithful: Niet, Welsch, Kotzur and Novo.",
+  ];
+
+  // ---------- Illustrative data ----------
+  function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const rand = rng(7);
+  const TYPES = ["sunny", "windy", "mixed", "calm"];
+  const LABEL = { sunny: "Sunny", windy: "Windy", mixed: "Mixed", calm: "Calm" };
+  const bell = h => (h >= 6 && h <= 19) ? Math.sin(Math.PI * (h - 6) / 13) : 0;
+  const PROFILE = {
+    sunny: h => -0.3 + 1.2 * bell(h),
+    windy: h => 0.2 + 0.15 * Math.sin(h / 3),
+    mixed: h => -0.3 + 0.6 * bell(h),
+    calm: h => -0.35 + 0.05 * bell(h),
+  };
+  // Year of day types: weather spells (persistence) with a seasonal bias
+  const days = [];
+  let cur = "windy";
+  for (let d = 0; d < 365; d++) {
+    const summer = 0.5 - 0.5 * Math.cos(2 * Math.PI * (d - 10) / 365); // 0 in Jan, 1 in Jul
+    if (rand() > 0.62) {
+      const w = { sunny: 0.15 + 0.5 * summer, windy: 0.45 - 0.3 * summer, mixed: 0.25, calm: 0.15 + 0.05 * (1 - summer) };
+      let r = rand() * (w.sunny + w.windy + w.mixed + w.calm);
+      for (const t of TYPES) { r -= w[t]; if (r <= 0) { cur = t; break; } }
+    }
+    const amp = 0.75 + 0.4 * summer;
+    const hours = [];
+    for (let h = 0; h < 24; h++) hours.push(PROFILE[cur](h) * amp + (rand() - 0.5) * 0.25);
+    days.push({ type: cur, hours });
+  }
+  const counts = Object.fromEntries(TYPES.map(t => [t, days.filter(d => d.type === t).length]));
+  // Calendar index -> sorted position (grouped by type, keeping calendar order within a group)
+  const sortedIdx = [];
+  { let pos = 0; for (const t of TYPES) days.forEach((d, i) => { if (d.type === t) sortedIdx[i] = pos++; }); }
+
+  // Two-week window for scene 3
+  const WEEK = ["sunny", "sunny", "mixed", "calm", "calm", "calm", "calm", "calm", "mixed", "windy", "windy", "sunny", "sunny", "mixed"];
+  const CAP = 12;
+  function simulate(fresh) {
+    const soc = [], empty = [], resets = [];
+    let s = 8;
+    WEEK.forEach((t, d) => {
+      if (fresh && d > 0) { resets.push({ i: d * 24, from: s, to: CAP * 0.9 }); s = CAP * 0.9; }
+      for (let h = 0; h < 24; h++) {
+        const n = PROFILE[t](h);
+        s = n > 0 ? Math.min(CAP, s + 0.9 * n) : s + n;
+        const out = s < 0; if (out) s = 0;
+        soc.push(s); empty.push(out);
+      }
+    });
+    return { soc, empty, resets };
+  }
+  const freshRun = simulate(true), linkedRun = simulate(false);
+
+  // ---------- Drawing helpers ----------
+  let C = {};
+  function readTokens() {
+    const cs = getComputedStyle(root);
+    for (const k of ["bg", "surface", "border", "ink", "muted", "accent", "accent-soft", "surplus", "deficit", "neutral", "alert", "c-sunny", "c-windy", "c-calm", "c-mixed", "font"])
+      C[k] = cs.getPropertyValue("--" + k).trim();
+  }
+  const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const clamp01 = t => Math.max(0, Math.min(1, t));
+  const seg = (p, a, b) => clamp01((p - a) / (b - a));
+  function hexToRgb(h) { h = h.replace("#", ""); if (h.length === 3) h = [...h].map(c => c + c).join(""); const n = parseInt(h, 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+  function mix(a, b, t) { const A = hexToRgb(a), B = hexToRgb(b); return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",")})`; }
+  function heat(v) { const t = Math.min(1, Math.abs(v) / 0.9); return mix(C.neutral, v >= 0 ? C.surplus : C.deficit, Math.pow(t, 0.8)); }
+  const typeColor = t => C["c-" + t];
+  function text(str, x, y, { size = 12, color = C.muted, weight = 400, align = "left", base = "alphabetic", alpha = 1 } = {}) {
+    ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = color; ctx.font = `${weight} ${size}px ${C.font}`;
+    ctx.textAlign = align; ctx.textBaseline = base; ctx.fillText(str, x, y); ctx.restore();
+  }
+  function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x, y, w, h, r) : ctx.rect(x, y, w, h); }
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    H = Math.round(W * rect.height / rect.width);
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+  }
+
+  // ---------- Scenes (p runs 0 -> 1) ----------
+  const GX = 56, GW = W - GX - 28;
+
+  function heatFrame(top, hgt, months = true, alpha = 1) {
+    if (months) ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+      .forEach((m, i) => text(m, GX + (i + 0.5) * GW / 12, top + hgt + 18, { align: "center", size: 11, alpha }));
+    text("00:00", GX - 8, top + 4, { align: "right", base: "middle", size: 10 });
+    text("12:00", GX - 8, top + hgt / 2, { align: "right", base: "middle", size: 10 });
+    text("24:00", GX - 8, top + hgt - 2, { align: "right", base: "middle", size: 10 });
+  }
+
+  function scene0(p) {
+    const top = 46, hgt = H - 110, colW = GW / 365, cellH = hgt / 24;
+    const shown = Math.floor(ease(seg(p, 0.05, 0.75)) * 365);
+    text("Renewable output minus demand, every hour of one year", GX, 26, { size: 13, color: C.ink, weight: 600 });
+    for (let d = 0; d < shown; d++) for (let h = 0; h < 24; h++) {
+      ctx.fillStyle = heat(days[d].hours[h]);
+      ctx.fillRect(GX + d * colW, top + h * cellH, colW + 0.6, cellH + 0.6);
+    }
+    heatFrame(top, hgt);
+    // legend
+    const a = seg(p, 0.7, 0.9), lx = W - 28;
+    text("surplus", lx, 26, { align: "right", size: 11, color: C.surplus, weight: 600, alpha: a });
+    text("shortfall", lx - 62, 26, { align: "right", size: 11, color: C.deficit, weight: 600, alpha: a });
+    if (shown < 365 && shown > 0) { ctx.fillStyle = C.accent; ctx.fillRect(GX + shown * colW, top - 4, 2, hgt + 8); }
+    text("8,760 hours", GX + GW, top + hgt + 40, { align: "right", size: 12, color: C.accent, weight: 700, alpha: seg(p, 0.75, 0.9) });
+  }
+
+  function scene1(p) {
+    const top = 46, hgt = H - 110, colW = GW / 365, cellH = hgt / 24;
+    const tint = ease(seg(p, 0.05, 0.25));
+    const sortT = ease(seg(p, 0.3, 0.6));
+    const collapse = ease(seg(p, 0.66, 0.9));
+    text(collapse > 0.5 ? "Four typical days stand in for the whole year" : "Days grouped by type", GX, 26, { size: 13, color: C.ink, weight: 600 });
+    // group ranges in sorted layout
+    const groups = []; let start = 0;
+    for (const t of TYPES) { groups.push({ t, start, n: counts[t] }); start += counts[t]; }
+    const tileW = 92, gap = (GW - 4 * tileW) / 3;
+    groups.forEach((g, gi) => { g.tileX = GX + gi * (tileW + gap); });
+    days.forEach((d, i) => {
+      const g = groups[TYPES.indexOf(d.type)];
+      const k = sortedIdx[i] - g.start;
+      const xCal = GX + i * colW, xSort = GX + sortedIdx[i] * colW;
+      let x = xCal + (xSort - xCal) * sortT, w = colW + 0.6;
+      const xTile = g.tileX + (k / g.n) * tileW;
+      x = x + (xTile - x) * collapse; w = w + (tileW / g.n + 0.6 - w) * collapse;
+      ctx.globalAlpha = 1 - 0.85 * seg(p, 0.86, 0.95);
+      for (let h = 0; h < 24; h++) {
+        const base = heat(d.hours[h]);
+        ctx.fillStyle = tint > 0 ? mixCss(base, typeColor(d.type), tint * 0.75) : base;
+        ctx.fillRect(x, top + h * cellH, w, cellH + 0.6);
+      }
+      ctx.globalAlpha = 1;
+    });
+    // typical-day tiles (representative profile)
+    const ta = seg(p, 0.84, 0.96);
+    if (ta > 0) groups.forEach(g => {
+      ctx.globalAlpha = ta;
+      for (let h = 0; h < 24; h++) { ctx.fillStyle = heat(PROFILE[g.t](h)); ctx.fillRect(g.tileX, top + h * cellH, tileW, cellH + 0.6); }
+      ctx.strokeStyle = typeColor(g.t); ctx.lineWidth = 3; ctx.strokeRect(g.tileX, top, tileW, hgt);
+      ctx.globalAlpha = 1;
+    });
+    // labels
+    const la = Math.max(seg(p, 0.3, 0.5) * (1 - collapse), 0);
+    groups.forEach(g => {
+      const cx = GX + (g.start + g.n / 2) * colW;
+      text(LABEL[g.t], cx, top + hgt + 18, { align: "center", size: 11, color: typeColor(g.t), weight: 700, alpha: la });
+      const tx = g.tileX + tileW / 2;
+      text(`${LABEL[g.t]}  ×${g.n} days`, tx, top + hgt + 18, { align: "center", size: 12, color: typeColor(g.t), weight: 700, alpha: collapse });
+    });
+    heatFrame(top, hgt, true, 1 - seg(p, 0.25, 0.32));   // months fade once days leave calendar order
+    text("365 days  →  4 typical days", GX + GW, top + hgt + 40, { align: "right", size: 12, color: C.accent, weight: 700, alpha: collapse });
+  }
+  function mixCss(rgbStr, hex, t) {
+    const A = rgbStr.match(/\d+/g).map(Number), B = hexToRgb(hex);
+    return `rgb(${A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",")})`;
+  }
+
+  function lane(run, top, hgt, title, p, mode) {
+    const N = run.soc.length, dx = GW / N, shown = Math.floor(ease(seg(p, 0.12, 0.85)) * N);
+    const y = s => top + hgt - (s / CAP) * hgt;
+    text(title, GX, top - 8, { size: 12, color: C.ink, weight: 600 });
+    ctx.strokeStyle = C.border; ctx.lineWidth = 1;
+    ctx.strokeRect(GX, top, GW, hgt);
+    text("full", GX - 8, top + 4, { align: "right", base: "middle", size: 10 });
+    text("empty", GX - 8, top + hgt, { align: "right", base: "middle", size: 10 });
+    // empty spans
+    ctx.fillStyle = C.alert; ctx.globalAlpha = 0.18;
+    for (let i = 0; i < shown; i++) if (run.empty[i] && (i === 0 || !run.empty[i - 1])) {
+      let j = i; while (j < shown && run.empty[j]) j++;      // one rectangle per empty span
+      ctx.fillRect(GX + i * dx, top, (j - i) * dx, hgt);
+    }
+    ctx.globalAlpha = 1;
+    // charge line + fill
+    ctx.beginPath();
+    for (let i = 0; i < shown; i++) { const X = GX + i * dx, Y = y(run.soc[i]); i ? ctx.lineTo(X, Y) : ctx.moveTo(X, Y); }
+    ctx.strokeStyle = C.accent; ctx.lineWidth = 2; ctx.stroke();
+    if (shown > 1) { ctx.lineTo(GX + (shown - 1) * dx, top + hgt); ctx.lineTo(GX, top + hgt); ctx.closePath(); ctx.fillStyle = C["accent-soft"]; ctx.fill(); }
+    // resets
+    if (mode === "fresh") {
+      ctx.strokeStyle = C.alert; ctx.setLineDash([3, 3]); ctx.lineWidth = 1.5;
+      run.resets.forEach(r => { if (r.i < shown && r.to > r.from + 0.3) { const X = GX + r.i * dx; ctx.beginPath(); ctx.moveTo(X, y(r.from)); ctx.lineTo(X, y(r.to)); ctx.stroke(); } });
+      ctx.setLineDash([]);
+      const r = run.resets[4];
+      if (r && shown > r.i + 30) text("refilled every morning for free", GX + r.i * dx + 6, y(r.to) - 8, { size: 11, color: C.alert, weight: 600, alpha: seg(p, 0.45, 0.6) });
+    } else {
+      const firstEmpty = run.empty.indexOf(true);
+      if (firstEmpty >= 0 && shown > firstEmpty + 20)
+        text("battery empty: demand not met", GX + firstEmpty * dx + 6, top + 16, { size: 11, color: C.alert, weight: 600, alpha: seg(p, 0.5, 0.65) });
+    }
+  }
+
+  function scene2(p) {
+    const N = WEEK.length * 24, dx = GW / N;
+    text("Battery charge over two weeks", GX, 22, { size: 13, color: C.ink, weight: 600 });
+    // legend: day-type colours and line meanings
+    {
+      const parts = TYPES.map(t => ({ kind: "sw", color: typeColor(t), label: LABEL[t] + " day" }));
+      parts.push({ kind: "line", label: "battery charge" }, { kind: "empty", label: "battery empty" }, { kind: "dash", label: "reset each morning" });
+      ctx.save(); ctx.font = `400 11px ${C.font}`;
+      let tot = 0; parts.forEach(q => { q.sw = q.kind === "sw" ? 12 : 18; q.w = q.sw + 5 + ctx.measureText(q.label).width + 12; tot += q.w; });
+      ctx.restore();
+      let x = W - 28 - tot + 12; const y = 20;
+      parts.forEach(q => {
+        ctx.save();
+        if (q.kind === "sw") { ctx.fillStyle = q.color; roundRect(x, y - 9, 12, 9, 2); ctx.fill(); }
+        else if (q.kind === "line") { ctx.strokeStyle = C.accent; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x + 18, y - 4); ctx.stroke(); }
+        else if (q.kind === "empty") { ctx.fillStyle = C.alert; ctx.globalAlpha = 0.25; ctx.fillRect(x, y - 10, 18, 11); }
+        else { ctx.strokeStyle = C.alert; ctx.lineWidth = 1.5; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(x + 9, y - 11); ctx.lineTo(x + 9, y + 1); ctx.stroke(); }
+        ctx.restore();
+        text(q.label, x + q.sw + 5, y, { size: 11 });
+        x += q.w;
+      });
+    }
+    // day-type strip
+    WEEK.forEach((t, d) => {
+      ctx.fillStyle = typeColor(t); ctx.globalAlpha = 0.85;
+      roundRect(GX + d * 24 * dx + 1, 32, 24 * dx - 2, 8, 3); ctx.fill(); ctx.globalAlpha = 1;
+    });
+    const calmStart = WEEK.indexOf("calm"), calmEnd = WEEK.lastIndexOf("calm") + 1;
+    text("calm spell", GX + (calmStart + calmEnd) / 2 * 24 * dx, 54, { align: "center", size: 11, color: typeColor("calm"), weight: 700 });
+    const laneH = (H - 140) / 2;
+    lane(freshRun, 78, laneH, "Each typical day starts fresh", p, "fresh");
+    lane(linkedRun, 78 + laneH + 34, laneH, "Typical days linked in calendar order", seg(p, 0.08, 1), "linked");
+    for (let d = 0; d <= WEEK.length; d += 7) text(d === 0 ? "day 1" : `day ${d + 1}`, GX + d * 24 * dx, H - 8, { size: 10, align: d === WEEK.length ? "right" : "left" });
+  }
+
+  function glyph(kind, x, y, w, a) {
+    ctx.save(); ctx.globalAlpha = a;
+    const seq = ["sunny", "windy", "windy", "calm", "mixed", "sunny", "calm", "calm"];
+    if (kind === "niet") {
+      // one slice per typical day, width = how many days it stands for
+      let cx = x; const tot = TYPES.reduce((s, t) => s + counts[t], 0);
+      TYPES.forEach(t => { const ww = w * counts[t] / tot; ctx.fillStyle = typeColor(t); roundRect(cx, y, ww - 2, 26, 3); ctx.fill(); cx += ww; });
+    } else if (kind === "welsch") {
+      // each type repeated as a block
+      const bw = w / 8; let i = 0;
+      [["sunny", 2], ["windy", 2], ["mixed", 1], ["calm", 3]].forEach(([t, n]) => { for (let k = 0; k < n; k++, i++) { ctx.fillStyle = typeColor(t); roundRect(x + i * bw, y, bw - 2, 26, 3); ctx.fill(); } });
+    } else {
+      const bw = w / seq.length;
+      seq.forEach((t, i) => { ctx.fillStyle = typeColor(t); roundRect(x + i * bw, y, bw - 2, 26, 3); ctx.fill(); });
+      ctx.fillStyle = C.ink;
+      if (kind === "kotzur") for (let i = 0; i <= seq.length; i++) { ctx.beginPath(); ctx.arc(x + i * bw - 1, y + 34, 2.4, 0, 7); ctx.fill(); }
+      else for (let i = 0; i <= seq.length * 4; i++) { ctx.beginPath(); ctx.arc(x + i * bw / 4 - 1, y + 34, 1.4, 0, 7); ctx.fill(); }
+    }
+    ctx.restore();
+  }
+
+  function scene3(p) {
+    text("Four ways to handle storage with typical days", GX, 26, { size: 13, color: C.ink, weight: 600 });
+    const items = [
+      ["niet", "Niet", "Stacked diary", "Typical days in a row,", "weighted by days they cover"],
+      ["welsch", "Welsch", "Photocopied day", "Each day type repeated", "as a block; order lost"],
+      ["kotzur", "Kotzur", "Daily ledger", "Calendar order; limits", "checked at day boundaries"],
+      ["novo", "Novo", "Hourly ledger", "Calendar order; limits", "checked at every time block"],
+    ];
+    const colW = GW / 4, axisY = Math.min(H - 34, 250);
+    // compact -> faithful axis
+    const aa = seg(p, 0, 0.15);
+    ctx.save(); ctx.globalAlpha = aa; ctx.strokeStyle = C.muted; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(GX + 10, axisY); ctx.lineTo(GX + GW - 10, axisY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(GX + GW - 18, axisY - 5); ctx.lineTo(GX + GW - 10, axisY); ctx.lineTo(GX + GW - 18, axisY + 5); ctx.stroke();
+    ctx.restore();
+    text("smaller, faster model", GX + 10, axisY + 18, { size: 11, alpha: aa });
+    text("closer to the real year", GX + GW - 10, axisY + 18, { size: 11, align: "right", alpha: aa });
+    items.forEach(([k, name, nick, l1, l2], i) => {
+      const a = ease(seg(p, 0.12 + i * 0.17, 0.27 + i * 0.17));
+      const x = GX + i * colW + 14, w = colW - 36, yOff = (1 - a) * 12;
+      text(name, x, 70 + yOff, { size: 18, color: C.ink, weight: 700, alpha: a });
+      text(nick, x, 90 + yOff, { size: 12, color: C.accent, weight: 600, alpha: a });
+      glyph(k, x, 110 + yOff, w, a);
+      text(l1, x, 176 + yOff, { size: 11.5, alpha: a });
+      text(l2, x, 192 + yOff, { size: 11.5, alpha: a });
+      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = C.accent;
+      ctx.beginPath(); ctx.arc(GX + 10 + (i + 0.5) * (GW - 20) / 4, axisY, 4.5, 0, 7); ctx.fill(); ctx.restore();
+    });
+  }
+
+  const SCENES = [scene0, scene1, scene2, scene3];
+
+  // ---------- Player ----------
+  let scene = 0, t0 = performance.now(), elapsed = 0, playing = !reduceMotion, raf = 0;
+
+  function render(p) {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = C.bg; ctx.fillRect(0, 0, W, H);
+    SCENES[scene](p);
+  }
+  function setScene(i, { keepPlaying = playing } = {}) {
+    scene = (i + SCENES.length) % SCENES.length; elapsed = 0; t0 = performance.now();
+    steps.forEach((b, k) => { b.setAttribute("aria-current", k === scene ? "step" : "false"); b.querySelector(".soc-anim__progress").style.width = k < scene ? "100%" : "0"; });
+    captionEl.innerHTML = CAPTIONS[scene];
+    canvas.setAttribute("aria-label", ALT[scene]);
+    playing = keepPlaying;
+    if (!playing) render(1);
+  }
+  function tick(now) {
+    if (playing) {
+      elapsed = now - t0;
+      const p = Math.min(1, elapsed / SCENE_MS[scene]);
+      steps[scene].querySelector(".soc-anim__progress").style.width = (p * 100) + "%";
+      render(Math.min(1, p * 1.12));      // finish drawing a little early, then hold
+      if (p >= 1) setScene(scene + 1);
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  function setPlaying(on) {
+    playing = on;
+    root.classList.toggle("is-paused", !on);
+    playBtn.setAttribute("aria-label", on ? "Pause animation" : "Play animation");
+    if (on) { t0 = performance.now() - elapsed; } else { render(Math.min(1, (elapsed / SCENE_MS[scene]) * 1.12) || 1); }
+  }
+  steps.forEach(b => b.addEventListener("click", () => { setScene(+b.dataset.scene); if (!playing) render(1); }));
+  playBtn.addEventListener("click", () => setPlaying(!playing));
+
+  function refresh() { readTokens(); resize(); render(playing ? Math.min(1, elapsed / SCENE_MS[scene] * 1.12) : 1); }
+  new ResizeObserver(refresh).observe(canvas);
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", refresh);
+  new MutationObserver(refresh).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  document.addEventListener("visibilitychange", () => { if (document.hidden && playing) setPlaying(false); });
+
+  readTokens(); resize();
+  setScene(0, { keepPlaying: playing });
+  root.classList.toggle("is-paused", !playing);
+  if (!playing) render(1);
+  raf = requestAnimationFrame(tick);
+})();
+</script>
+
+
+</body></html>

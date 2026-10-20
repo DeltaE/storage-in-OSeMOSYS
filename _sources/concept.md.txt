@@ -29,32 +29,16 @@ four ways of modelling storage that the study compares.
   </a>
 </div>
 
-## The four formulations at a glance
+## How the study is put together
 
-Each card opens the full description with its analogy.
+The study runs one small test system through OSeMOSYS with each of the four storage methods and
+compares the results with a full-year hourly benchmark. Each block below opens with the details
+and the limitations stated in the paper; **Storage method** opens the four formulations side by
+side.
 
-<div class="section-cards section-cards--four">
-  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#niet-direct-link-stacked-diary">
-    <span class="section-card__step">Niet</span>
-    <span class="section-card__tag">"Stacked diary"</span>
-    <span class="section-card__text">Representative slices in a row, each weighted by the days it stands for. Small, but can overstate storage.</span>
-  </a>
-  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#welsch-fixed-pattern-photocopied-day">
-    <span class="section-card__step">Welsch</span>
-    <span class="section-card__tag">"Photocopied day"</span>
-    <span class="section-card__text">Each day type repeated as a block. Compact, but the day order is lost.</span>
-  </a>
-  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#kotzur-day-boundary-verified-daily-ledger">
-    <span class="section-card__step">Kotzur</span>
-    <span class="section-card__tag">"Daily ledger"</span>
-    <span class="section-card__text">Days linked in calendar order; limits checked only at day boundaries.</span>
-  </a>
-  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#novo-time-step-verified-hourly-ledger">
-    <span class="section-card__step">Novo</span>
-    <span class="section-card__tag">"Hourly ledger"</span>
-    <span class="section-card__text">Every time block of the year in calendar order, limits checked at each one. Most faithful, largest model.</span>
-  </a>
-</div>
+```{raw} html
+:file: _static/study-workflow.html
+```
 
 ```{toctree}
 :hidden:

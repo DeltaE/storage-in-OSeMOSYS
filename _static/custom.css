@@ -166,6 +166,11 @@ html {
 }
 .header-icon-btn svg { width: 1.05rem; height: 1.05rem; }
 .navbar-item:has(> .home-btn) { margin-left: 0.25rem; }
+/* On phones the header is full; the logo already links home */
+@media (max-width: 480px) {
+  .navbar-item:has(> .home-btn) { display: none; }
+  .navbar-brand .logo__title { font-size: 1rem; }
+}
 
 /* Show the icon for the mode a click switches to, and the matching full-screen icon */
 html[data-theme="dark"] .mode-btn .icon-moon,
@@ -328,3 +333,9 @@ div.highlight pre {
 /* Sidebar: no "Section Navigation" heading or collapse button */
 .bd-links__title,
 .pst-sidebar-collapse { display: none !important; }
+
+/* Landing page: one-line pointer to the study workflow diagram */
+.landing-pointer {
+  margin: -1rem 0 2rem;
+  color: var(--pst-color-text-muted);
+}
