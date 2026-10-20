@@ -22,7 +22,7 @@ configuration file to try your own scenarios. Follow the cards in order the firs
       <span class="section-card__step">02</span>
     </span>
     <span class="section-card__title">Quickstart</span>
-    <span class="section-card__text">Choose a scenario, run <code>python main.py</code> and find the results, in four short steps.</span>
+    <span class="section-card__text">Choose a scenario, run <code>python workflow/main.py</code> and find the results, in four short steps.</span>
   </a>
   <a class="section-card section-card--workflow" href="notes/workflow_guide.html">
     <span class="section-card__head">
@@ -30,7 +30,7 @@ configuration file to try your own scenarios. Follow the cards in order the firs
       <span class="section-card__step">03</span>
     </span>
     <span class="section-card__title">How the pipeline works</span>
-    <span class="section-card__text">What <code>main.py</code> does at each stage, from loading data to clustering, solving and plotting.</span>
+    <span class="section-card__text">What <code>workflow/main.py</code> does at each stage, from loading data to clustering, solving and plotting.</span>
   </a>
   <a class="section-card section-card--sliders" href="notes/configuration_guide.html">
     <span class="section-card__head">
@@ -39,37 +39,6 @@ configuration file to try your own scenarios. Follow the cards in order the firs
     </span>
     <span class="section-card__title">Configuration</span>
     <span class="section-card__text">Every setting in <code>config.yaml</code>: number of days, hour grouping, storage limits and models to run.</span>
-  </a>
-</div>
-
-## Tutorials
-
-Worked examples once the basics run.
-
-<div class="section-cards section-cards--three">
-  <a class="section-card section-card--learn" href="notebooks/basic_usage.html">
-    <span class="section-card__head">
-      <span class="section-card__icon" aria-hidden="true"></span>
-      <span class="section-card__step">Beginner</span>
-    </span>
-    <span class="section-card__title">Basic usage</span>
-    <span class="section-card__text">Run a model, load the storage results and plot them, with common use cases.</span>
-  </a>
-  <a class="section-card section-card--results" href="notebooks/comparative_analysis.html">
-    <span class="section-card__head">
-      <span class="section-card__icon" aria-hidden="true"></span>
-      <span class="section-card__step">Intermediate</span>
-    </span>
-    <span class="section-card__title">Comparative analysis</span>
-    <span class="section-card__text">Compare formulations on runtime, accuracy against the full year, cost and sensitivity.</span>
-  </a>
-  <a class="section-card section-card--sliders" href="notebooks/advanced_configuration.html">
-    <span class="section-card__head">
-      <span class="section-card__icon" aria-hidden="true"></span>
-      <span class="section-card__step">Advanced</span>
-    </span>
-    <span class="section-card__title">Advanced configuration</span>
-    <span class="section-card__text">Custom clustering, uncertainty analysis and links to external tools.</span>
   </a>
 </div>
 
@@ -89,14 +58,4 @@ quickstart
 
 notes/workflow_guide
 notes/configuration_guide
-```
-
-```{toctree}
-:hidden:
-:caption: Tutorials
-:maxdepth: 1
-
-notebooks/basic_usage
-notebooks/comparative_analysis
-notebooks/advanced_configuration
 ```

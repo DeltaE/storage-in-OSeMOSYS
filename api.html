@@ -48,8 +48,8 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Reference" href="notes/api_reference.html" />
-    <link rel="prev" title="Results Analysis" href="notes/results_analysis.html" />
+    <link rel="next" title="Module Overview" href="notes/api_reference.html" />
+    <link rel="prev" title="Outputs" href="notes/outputs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -310,15 +310,13 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/api_reference.html">Module Overview</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="autoapi/src/index.html">src</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/src/Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/src/Welsch_intraday/index.html">src.Welsch_intraday</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/src/Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/src/cluster/index.html">src.cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/src/copy_rename_csv/index.html">src.copy_rename_csv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/src/graph_generator/index.html">src.graph_generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/src/graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/src/read_csv/index.html">src.read_csv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/src/reproduce/index.html">src.reproduce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/src/simulation/index.html">src.simulation</a></li>
@@ -396,7 +394,7 @@
 <h1>API<a class="headerlink" href="#api" title="Link to this heading">#</a></h1>
 <p class="page-intro">
 All the modelling code lives in the <code>src</code> package. You do not need it to run the
-study, because <code>python main.py</code> calls everything for you. Come here when you want to
+study, because <code>python workflow/main.py</code> calls everything for you. Come here when you want to
 reuse one step of the method in your own work, or see exactly how a step in the paper is written
 in code. The cards lead to the reference; the guide below shows how to put it to use.
 </p>
@@ -458,9 +456,9 @@ reads like the method section of the paper:</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">src.update_yearsplit</span></code>, <code class="docutils literal notranslate"><span class="pre">src.update_conversion*</span></code>, <code class="docutils literal notranslate"><span class="pre">src.update_daysindaytype</span></code></p></td>
 <td><p>The OSeMOSYS time-slice sets and weights each storage formulation needs</p></td>
 </tr>
-<tr class="row-odd"><td><p>Rebuild the full year</p></td>
+<tr class="row-odd"><td><p>Rebuild the intra-day SoC</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">src.Kotzur_intraday</span></code>, <code class="docutils literal notranslate"><span class="pre">src.Welsch_intraday2</span></code></p></td>
-<td><p>Turns the solved storage levels back into an 8760-hour state-of-charge series</p></td>
+<td><p>Turns the solved Kotzur and Welsch storage levels into a SoC series for every time block of the year</p></td>
 </tr>
 <tr class="row-even"><td><p>Solve and collect</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">src.simulation</span></code>, <code class="docutils literal notranslate"><span class="pre">src.table_generator</span></code></p></td>
@@ -511,12 +509,12 @@ model, which you can port to your own tool.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="notes/results_analysis.html"
+       href="notes/outputs.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Results Analysis</p>
+        <p class="prev-next-title">Outputs</p>
       </div>
     </a>
     <a class="right-next"
@@ -524,7 +522,7 @@ model, which you can port to your own tool.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">API Reference</p>
+        <p class="prev-next-title">Module Overview</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

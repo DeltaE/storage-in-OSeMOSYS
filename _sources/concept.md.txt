@@ -34,25 +34,25 @@ four ways of modelling storage that the study compares.
 Each card opens the full description with its analogy.
 
 <div class="section-cards section-cards--four">
-  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#niet-direct-link-continuous-diary">
+  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#niet-direct-link-stacked-diary">
     <span class="section-card__step">Niet</span>
-    <span class="section-card__tag">"Continuous diary"</span>
-    <span class="section-card__text">Each day picks up exactly where the last one ended. Most faithful, most data.</span>
+    <span class="section-card__tag">"Stacked diary"</span>
+    <span class="section-card__text">Representative slices in a row, each weighted by the days it stands for. Small, but can overstate storage.</span>
   </a>
   <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#welsch-fixed-pattern-photocopied-day">
     <span class="section-card__step">Welsch</span>
     <span class="section-card__tag">"Photocopied day"</span>
-    <span class="section-card__text">One typical day repeated. Fast and simple, but every day looks the same.</span>
+    <span class="section-card__text">Each day type repeated as a block. Compact, but the day order is lost.</span>
   </a>
-  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#kotzur-unverified-cluster-alternating-diaries">
+  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#kotzur-day-boundary-verified-daily-ledger">
     <span class="section-card__step">Kotzur</span>
-    <span class="section-card__tag">"Alternating diaries"</span>
-    <span class="section-card__text">Several typical days capture variety, but days are not linked to each other.</span>
+    <span class="section-card__tag">"Daily ledger"</span>
+    <span class="section-card__text">Days linked in calendar order; limits checked only at day boundaries.</span>
   </a>
-  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#novo-hourly-verified-linked-journaling">
+  <a class="section-card section-card--mini" href="notes/about_storage_algorithms.html#novo-time-step-verified-hourly-ledger">
     <span class="section-card__step">Novo</span>
-    <span class="section-card__tag">"Linked journaling"</span>
-    <span class="section-card__text">Typical days, with each one starting where the previous one ended. The middle ground.</span>
+    <span class="section-card__tag">"Hourly ledger"</span>
+    <span class="section-card__text">Every time block of the year in calendar order, limits checked at each one. Most faithful, largest model.</span>
   </a>
 </div>
 

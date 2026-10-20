@@ -8,8 +8,9 @@ src.reproduce
    Helpers for reproducing Bruno, Islam & Niet, "Storage in long-term energy planning models with
    temporal aggregation" (Environ. Res. Commun., ERC-105849) with this repository.
 
-   Used by ``reproduce_study.ipynb`` and ``automation.py``. Every model run goes through ``main.py``
-   unchanged, so the notebook exercises exactly the code path that produced the published numbers.
+   Used by ``notebooks/reproduce_study.ipynb`` and ``workflow/automation.py``. Every model run goes
+   through ``workflow/main.py`` unchanged, so the notebook exercises exactly the code path that
+   produced the published numbers.
 
    Naming: the formulation called *Novo* in the paper is implemented in ``Model_Cluster``.
 
@@ -21,6 +22,9 @@ Attributes
 .. autoapisummary::
 
    src.reproduce.REPO
+   src.reproduce.TIMESERIES
+   src.reproduce.MAIN
+   src.reproduce.SOC_VALIDATION
    src.reproduce.RESOURCES
    src.reproduce.DEMAND_PROFILE
    src.reproduce.K_VALUES
@@ -61,6 +65,12 @@ Module Contents
 ---------------
 
 .. py:data:: REPO
+
+.. py:data:: TIMESERIES
+
+.. py:data:: MAIN
+
+.. py:data:: SOC_VALIDATION
 
 .. py:data:: RESOURCES
 
@@ -103,7 +113,7 @@ Module Contents
 
 .. py:function:: scenario_name(resource: str, k: int, h: int, limited: bool = False, suffix: str = '') -> str
 
-.. py:function:: run_case(resource: str, k: int, h: int, *, cap: float = UNCONSTRAINED_CAP, random_state: int = 0, results_dir: str | pathlib.Path = 'Results', models: list | None = None, limited: bool | None = None, suffix: str = '', timeout: float | None = None, verbose: bool = False) -> pandas.DataFrame
+.. py:function:: run_case(resource: str, k: int, h: int, *, cap: float = UNCONSTRAINED_CAP, random_state: int = 0, results_dir: str | pathlib.Path = 'results', models: list | None = None, limited: bool | None = None, suffix: str = '', timeout: float | None = None, verbose: bool = False) -> pandas.DataFrame
 
    Run one scenario (all four formulations unless ``models`` is given) via ``main.py``.
 

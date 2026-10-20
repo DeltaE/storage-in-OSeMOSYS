@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -319,12 +319,6 @@
 <li class="toctree-l1"><a class="reference internal" href="workflow_guide.html">Workflow Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration_guide.html">Configuration Guide</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
-</ul>
 </div>
 </nav></div>
     </div>
@@ -386,483 +380,174 @@
                   
   <section id="environment-setup-guide">
 <h1>Environment Setup Guide<a class="headerlink" href="#environment-setup-guide" title="Link to this heading">#</a></h1>
-<p>This guide provides detailed instructions for setting up the Storage-in-OSeMOSYS development and execution environment.</p>
+<p>The project runs in one conda environment, <code class="docutils literal notranslate"><span class="pre">storage_osemosys</span></code>, with the package versions used in the
+paper. It works on Windows, macOS and Linux.</p>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
-<section id="system-requirements">
-<h3>System Requirements<a class="headerlink" href="#system-requirements" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Operating System</strong>: Linux, macOS, or Windows with WSL2</p></li>
-<li><p><strong>Memory</strong>: Minimum 8GB RAM (16GB recommended for large datasets)</p></li>
-<li><p><strong>Storage</strong>: 5GB free space for dependencies and results</p></li>
-<li><p><strong>Python</strong>: 3.11+ (3.13 recommended)</p></li>
+<li><p><a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> or Anaconda</p></li>
+<li><p>Git</p></li>
+<li><p>About 2 GB of disk space. The full-year benchmark runs (k = 365) need about 12 GB of RAM; all
+other runs need less than 3 GB.</p></li>
 </ul>
 </section>
-<section id="required-software">
-<h3>Required Software<a class="headerlink" href="#required-software" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Conda/Miniconda</strong>: For environment management</p></li>
-<li><p><strong>Git</strong>: For version control and repository cloning</p></li>
-<li><p><strong>GLPK</strong>: Linear programming solver (installed via conda)</p></li>
-</ul>
-</section>
-</section>
-<section id="quick-setup">
-<h2>Quick Setup<a class="headerlink" href="#quick-setup" title="Link to this heading">#</a></h2>
-<section id="clone-repository">
-<h3>1. Clone Repository<a class="headerlink" href="#clone-repository" title="Link to this heading">#</a></h3>
+<section id="set-up-with-make">
+<h2>Set up with make<a class="headerlink" href="#set-up-with-make" title="Link to this heading">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/DeltaE/storage-in-OSeMOSYS.git
 <span class="nb">cd</span><span class="w"> </span>storage-in-OSeMOSYS
-</pre></div>
-</div>
-</section>
-<section id="automated-environment-setup">
-<h3>2. Automated Environment Setup<a class="headerlink" href="#automated-environment-setup" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create environment and install all dependencies</span>
-make<span class="w"> </span>setup
 
-<span class="c1"># Activate environment</span>
-conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
-
-<span class="c1"># Verify installation</span>
-make<span class="w"> </span>test-env
-</pre></div>
-</div>
-</section>
-<section id="test-installation">
-<h3>3. Test Installation<a class="headerlink" href="#test-installation" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run basic functionality test</span>
-python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import src.utilities as utils; print('✓ Imports working')"</span>
-
-<span class="c1"># Test GLPK solver</span>
-glpsol<span class="w"> </span>--version
-
-<span class="c1"># Check key packages</span>
-python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import otoole, pandas, numpy, matplotlib; print('✓ Core packages loaded')"</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="manual-environment-setup">
-<h2>Manual Environment Setup<a class="headerlink" href="#manual-environment-setup" title="Link to this heading">#</a></h2>
-<p>If you prefer manual setup or encounter issues with the automated approach:</p>
-<section id="create-conda-environment">
-<h3>1. Create Conda Environment<a class="headerlink" href="#create-conda-environment" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create environment with Python 3.13</span>
-conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>storage_osemosys<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.13<span class="w"> </span>-y
-
-<span class="c1"># Activate environment</span>
+make<span class="w"> </span>setup<span class="w">                       </span><span class="c1"># create the environment and check it</span>
 conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">setup</span></code> runs three steps, which you can also run on their own:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>What it does</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">env-create</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">env/environment-crossplatform.yml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install-deps</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">otoole</span> <span class="pre">colorama</span></code> (already in the environment file; kept as a safety net)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test-env</span></code></p></td>
+<td><p>Imports every package and <code class="docutils literal notranslate"><span class="pre">src</span></code>, and checks that <code class="docutils literal notranslate"><span class="pre">glpsol</span></code> is on the path</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
-<section id="install-core-dependencies">
-<h3>2. Install Core Dependencies<a class="headerlink" href="#install-core-dependencies" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scientific computing stack</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">numpy</span><span class="o">=</span><span class="m">2</span>.3.1<span class="w"> </span><span class="nv">pandas</span><span class="o">=</span><span class="m">2</span>.2.3<span class="w"> </span><span class="nv">matplotlib</span><span class="o">=</span><span class="m">3</span>.10.0<span class="w"> </span>-y
-
-<span class="c1"># Machine learning for clustering</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>scikit-learn<span class="o">=</span><span class="m">1</span>.7.1<span class="w"> </span>-y
-
-<span class="c1"># File I/O and configuration</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">pyyaml</span><span class="o">=</span><span class="m">6</span>.0.2<span class="w"> </span><span class="nv">openpyxl</span><span class="o">=</span><span class="m">3</span>.1.5<span class="w"> </span>-y
-
-<span class="c1"># OSeMOSYS integration</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">glpk</span><span class="o">=</span><span class="m">5</span>.0<span class="w"> </span>-y
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">otoole</span><span class="o">==</span><span class="m">1</span>.1.5
-
-<span class="c1"># Utilities</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>colorama<span class="w"> </span>-y
+<section id="set-up-without-make">
+<h2>Set up without make<a class="headerlink" href="#set-up-without-make" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>env/environment-crossplatform.yml
+conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
+glpsol<span class="w"> </span>--version<span class="w">                 </span><span class="c1"># GLPK 5.0</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import src, otoole; print('ok')"</span>
+</pre></div>
+</div>
+<p>Without conda, install GLPK 5.0 so that <code class="docutils literal notranslate"><span class="pre">glpsol</span></code> is on the path, then
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code>.</p>
+</section>
+<section id="what-is-installed">
+<h2>What is installed<a class="headerlink" href="#what-is-installed" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">env/environment-crossplatform.yml</span></code> pins the versions reported in the paper:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Package</p></th>
+<th class="head"><p>Version</p></th>
+<th class="head"><p>Used for</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Python</p></td>
+<td><p>3.13.5</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>GLPK (<code class="docutils literal notranslate"><span class="pre">glpsol</span></code>)</p></td>
+<td><p>5.0</p></td>
+<td><p>LP solver</p></td>
+</tr>
+<tr class="row-even"><td><p>otoole</p></td>
+<td><p>1.1.5</p></td>
+<td><p>CSV → GLPK data file conversion</p></td>
+</tr>
+<tr class="row-odd"><td><p>scikit-learn</p></td>
+<td><p>1.7.1</p></td>
+<td><p>k-means clustering of days</p></td>
+</tr>
+<tr class="row-even"><td><p>pandas, NumPy, SciPy</p></td>
+<td><p>2.2.3, 2.3.1, 1.16.0</p></td>
+<td><p>data handling</p></td>
+</tr>
+<tr class="row-odd"><td><p>matplotlib</p></td>
+<td><p>3.10.0</p></td>
+<td><p>figures</p></td>
+</tr>
+<tr class="row-even"><td><p>openpyxl, PyYAML, colorama</p></td>
+<td><p>3.1.5, 6.0.2, 0.4.6</p></td>
+<td><p>Excel output, configuration, console output</p></td>
+</tr>
+<tr class="row-odd"><td><p>JupyterLab, ipykernel</p></td>
+<td><p>latest</p></td>
+<td><p>the reproduction notebook</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">env/environment.yml</span></code> is the exact Linux export of the environment used for the study (with build
+strings). It is kept for provenance; <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">env-export</span></code> refreshes it.</p>
+<p>The first step of the reproduction notebook compares the installed versions with these.</p>
+</section>
+<section id="documentation-tools">
+<h2>Documentation tools<a class="headerlink" href="#documentation-tools" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs-setup<span class="w">                  </span><span class="c1"># installs docs/requirements.txt into the environment</span>
+make<span class="w"> </span>docs-build<span class="w">                  </span><span class="c1"># builds docs/build/html</span>
+make<span class="w"> </span>docs-serve<span class="w">                  </span><span class="c1"># serves it at http://localhost:8000</span>
 </pre></div>
 </div>
 </section>
-<section id="install-additional-dependencies">
-<h3>3. Install Additional Dependencies<a class="headerlink" href="#install-additional-dependencies" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Development tools</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>black<span class="w"> </span>flake8<span class="w"> </span>pytest<span class="w"> </span>-y
-
-<span class="c1"># Documentation tools</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>sphinx<span class="w"> </span>pydata-sphinx-theme<span class="w"> </span>myst-parser<span class="w"> </span>-y
-
-<span class="c1"># Jupyter for notebooks</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>jupyter<span class="w"> </span>notebook<span class="w"> </span>ipykernel<span class="w"> </span>-y
-</pre></div>
+<section id="other-make-commands">
+<h2>Other make commands<a class="headerlink" href="#other-make-commands" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">env-update</span></code></p></td>
+<td><p>Update the environment from <code class="docutils literal notranslate"><span class="pre">env/environment-crossplatform.yml</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">env-remove</span></code>, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">recreate</span></code></p></td>
+<td><p>Remove, or remove and rebuild, the environment</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">env-info</span></code>, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">env-list</span></code>, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">env-size</span></code></p></td>
+<td><p>Inspect environments</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">backup</span></code></p></td>
+<td><p>Export the environment to <code class="docutils literal notranslate"><span class="pre">backups/</span></code> with a timestamp</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span></code></p></td>
+<td><p>Delete <code class="docutils literal notranslate"><span class="pre">__pycache__</span></code> folders and <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> files</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">help</span></code></p></td>
+<td><p>List all commands</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-</section>
-</section>
-<section id="environment-file-management">
-<h2>Environment File Management<a class="headerlink" href="#environment-file-management" title="Link to this heading">#</a></h2>
-<section id="using-environment-yml">
-<h3>Using environment.yml<a class="headerlink" href="#using-environment-yml" title="Link to this heading">#</a></h3>
-<p>The project includes a comprehensive <code class="docutils literal notranslate"><span class="pre">env/environment.yml</span></code> file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create environment from file</span>
-conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>env/environment.yml
-
-<span class="c1"># Update existing environment</span>
-conda<span class="w"> </span>env<span class="w"> </span>update<span class="w"> </span>-f<span class="w"> </span>env/environment.yml<span class="w"> </span>--prune
-</pre></div>
-</div>
-</section>
-<section id="environment-export">
-<h3>Environment Export<a class="headerlink" href="#environment-export" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Export current environment</span>
-conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&gt;<span class="w"> </span>env/environment_backup.yml
-
-<span class="c1"># Export only explicitly installed packages</span>
-conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--from-history<span class="w"> </span>&gt;<span class="w"> </span>env/environment_minimal.yml
-</pre></div>
-</div>
-</section>
-</section>
-<section id="makefile-commands">
-<h2>Makefile Commands<a class="headerlink" href="#makefile-commands" title="Link to this heading">#</a></h2>
-<p>The project includes a comprehensive Makefile for environment management:</p>
-<section id="environment-management">
-<h3>Environment Management<a class="headerlink" href="#environment-management" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>setup<span class="w">          </span><span class="c1"># Complete environment setup</span>
-make<span class="w"> </span>test-env<span class="w">       </span><span class="c1"># Test environment and dependencies</span>
-make<span class="w"> </span>clean<span class="w">          </span><span class="c1"># Remove environment</span>
-make<span class="w"> </span>update-env<span class="w">     </span><span class="c1"># Update all packages</span>
-make<span class="w"> </span>freeze<span class="w">         </span><span class="c1"># Export current environment</span>
-</pre></div>
-</div>
-</section>
-<section id="development-workflow">
-<h3>Development Workflow<a class="headerlink" href="#development-workflow" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>dev-setup<span class="w">      </span><span class="c1"># Setup with development tools</span>
-make<span class="w"> </span>format<span class="w">         </span><span class="c1"># Format code with black</span>
-make<span class="w"> </span>lint<span class="w">          </span><span class="c1"># Check code style with flake8</span>
-make<span class="w"> </span><span class="nb">test</span><span class="w">          </span><span class="c1"># Run test suite</span>
-</pre></div>
-</div>
-</section>
-<section id="documentation">
-<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>docs<span class="w">          </span><span class="c1"># Build documentation</span>
-make<span class="w"> </span>docs-serve<span class="w">    </span><span class="c1"># Serve documentation locally</span>
-make<span class="w"> </span>docs-clean<span class="w">    </span><span class="c1"># Clean documentation build</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="package-details">
-<h2>Package Details<a class="headerlink" href="#package-details" title="Link to this heading">#</a></h2>
-<section id="core-scientific-stack">
-<h3>Core Scientific Stack<a class="headerlink" href="#core-scientific-stack" title="Link to this heading">#</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data processing and analysis</span>
-<span class="nt">numpy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.3.1</span><span class="w">         </span><span class="c1"># Numerical computing</span>
-<span class="nt">pandas</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.2.3</span><span class="w">        </span><span class="c1"># Data manipulation</span>
-<span class="nt">matplotlib</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.10.0</span><span class="w">   </span><span class="c1"># Plotting and visualization</span>
-<span class="nt">scikit-learn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.7.1</span><span class="w">  </span><span class="c1"># Machine learning (clustering)</span>
-
-<span class="c1"># File I/O and configuration  </span>
-<span class="nt">pyyaml</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.0.2</span><span class="w">        </span><span class="c1"># YAML configuration files</span>
-<span class="nt">openpyxl</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.1.5</span><span class="w">      </span><span class="c1"># Excel file handling</span>
-</pre></div>
-</div>
-</section>
-<section id="energy-system-modeling">
-<h3>Energy System Modeling<a class="headerlink" href="#energy-system-modeling" title="Link to this heading">#</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># OSeMOSYS integration</span>
-<span class="nt">otoole</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.1.5</span><span class="w">        </span><span class="c1"># OSeMOSYS data processing</span>
-<span class="nt">glpk</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5.0</span><span class="w">           </span><span class="c1"># Linear programming solver</span>
-
-<span class="c1"># Additional solvers (optional)</span>
-<span class="c1"># cbc: 2.10.5        # Alternative LP solver</span>
-<span class="c1"># cplex: 22.1.1      # Commercial solver (license required)</span>
-</pre></div>
-</div>
-</section>
-<section id="development-and-documentation">
-<h3>Development and Documentation<a class="headerlink" href="#development-and-documentation" title="Link to this heading">#</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code quality</span>
-<span class="nt">black</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">24.3.0</span><span class="w">        </span><span class="c1"># Code formatting</span>
-<span class="nt">flake8</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.0.0</span><span class="w">       </span><span class="c1"># Style checking</span>
-<span class="nt">pytest</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.1.1</span><span class="w">       </span><span class="c1"># Testing framework</span>
-
-<span class="c1"># Documentation</span>
-<span class="nt">sphinx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.2.6</span><span class="w">       </span><span class="c1"># Documentation generator</span>
-<span class="nt">pydata-sphinx-theme</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.20.0</span><span class="w">  </span><span class="c1"># Documentation theme</span>
-<span class="nt">myst-parser</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0.0</span><span class="w">  </span><span class="c1"># Markdown support in Sphinx</span>
-
-<span class="c1"># Jupyter ecosystem</span>
-<span class="nt">jupyter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0.0</span><span class="w">      </span><span class="c1"># Jupyter notebook</span>
-<span class="nt">ipykernel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6.29.3</span><span class="w">   </span><span class="c1"># Jupyter kernel</span>
-<span class="nt">nbsphinx</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.9.3</span><span class="w">     </span><span class="c1"># Notebook integration in docs</span>
-</pre></div>
-</div>
-</section>
-<section id="utilities">
-<h3>Utilities<a class="headerlink" href="#utilities" title="Link to this heading">#</a></h3>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Terminal and system</span>
-<span class="nt">colorama</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.4.6</span><span class="w">     </span><span class="c1"># Colored terminal output</span>
-<span class="nt">pathlib</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">built-in</span><span class="w">   </span><span class="c1"># Modern path handling (Python 3.4+)</span>
-<span class="nt">shutil</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">built-in</span><span class="w">    </span><span class="c1"># File operations</span>
-<span class="nt">typing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">built-in</span><span class="w">    </span><span class="c1"># Type hints (Python 3.5+)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="environment-verification">
-<h2>Environment Verification<a class="headerlink" href="#environment-verification" title="Link to this heading">#</a></h2>
-<section id="comprehensive-test-script">
-<h3>Comprehensive Test Script<a class="headerlink" href="#comprehensive-test-script" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the complete verification</span>
-make<span class="w"> </span>test-env
-</pre></div>
-</div>
-<p>Or manually verify components:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># test_environment.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_python_version</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">"""Test Python version compatibility."""</span>
-    <span class="n">version</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span>
-    <span class="k">assert</span> <span class="n">version</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Python 3 required, got </span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">major</span><span class="si">}</span><span class="s2">"</span>
-    <span class="k">assert</span> <span class="n">version</span><span class="o">.</span><span class="n">minor</span> <span class="o">&gt;=</span> <span class="mi">11</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Python 3.11+ required, got </span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">major</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">minor</span><span class="si">}</span><span class="s2">"</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Python </span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">major</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">minor</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">version</span><span class="o">.</span><span class="n">micro</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_core_packages</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">"""Test core package imports."""</span>
-    <span class="n">packages</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">'numpy'</span><span class="p">,</span> <span class="s1">'pandas'</span><span class="p">,</span> <span class="s1">'matplotlib'</span><span class="p">,</span> <span class="s1">'sklearn'</span><span class="p">,</span> 
-        <span class="s1">'yaml'</span><span class="p">,</span> <span class="s1">'openpyxl'</span><span class="p">,</span> <span class="s1">'otoole'</span><span class="p">,</span> <span class="s1">'colorama'</span>
-    <span class="p">]</span>
-    
-    <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
-            <span class="n">version</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s1">'__version__'</span><span class="p">,</span> <span class="s1">'unknown'</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✗ </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-            <span class="k">raise</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_solver</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">"""Test GLPK solver availability."""</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">'glpsol'</span><span class="p">,</span> <span class="s1">'--version'</span><span class="p">],</span> 
-                              <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">version</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ GLPK: </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"GLPK not responding"</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"GLPK not found in PATH"</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">test_project_imports</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">"""Test project-specific imports."""</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">src.utilities</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">utils</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">src</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"✓ Project modules importable"</span><span class="p">)</span>
-        
-        <span class="c1"># Test utility functions</span>
-        <span class="n">config_path</span> <span class="o">=</span> <span class="s1">'config/config.yaml'</span>
-        <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-            <span class="n">config</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">config_path</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">"✓ Configuration loading works"</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">"⚠ Configuration file not found (optional for testing)"</span><span class="p">)</span>
-            
-    <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✗ Project imports failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="k">raise</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
-    <span class="n">test_python_version</span><span class="p">()</span>
-    <span class="n">test_core_packages</span><span class="p">()</span>
-    <span class="n">test_solver</span><span class="p">()</span>
-    <span class="n">test_project_imports</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🎉 Environment verification successful!"</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
-<section id="common-issues-and-solutions">
-<h3>Common Issues and Solutions<a class="headerlink" href="#common-issues-and-solutions" title="Link to this heading">#</a></h3>
-<section id="conda-environment-creation-fails">
-<h4>1. Conda Environment Creation Fails<a class="headerlink" href="#conda-environment-creation-fails" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update conda</span>
-conda<span class="w"> </span>update<span class="w"> </span>conda
-
-<span class="c1"># Clear package cache</span>
-conda<span class="w"> </span>clean<span class="w"> </span>--all
-
-<span class="c1"># Create environment with explicit channel</span>
-conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>storage_osemosys<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.13
-</pre></div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem</p></th>
+<th class="head"><p>Fix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">glpsol:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code></p></td>
+<td><p>Activate the environment; if it is still missing: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">glpk=5.0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">src</span></code></p></td>
+<td><p>Run scripts as <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">workflow/main.py</span></code> (from any folder), or start Jupyter in the repository root or in <code class="docutils literal notranslate"><span class="pre">notebooks/</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">make:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code></p></td>
+<td><p>Install make (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">make</span></code>) or use the commands in <em>Set up without make</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>Environment solve is slow or fails</p></td>
+<td><p>Update conda (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">update</span> <span class="pre">-n</span> <span class="pre">base</span> <span class="pre">conda</span></code>) and retry; the file only uses conda-forge</p></td>
+</tr>
+<tr class="row-even"><td><p>Different numbers from the paper</p></td>
+<td><p>Check the versions in step 1 of the reproduction notebook; scikit-learn &lt; 1.4 changed the k-means default</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-</section>
-<section id="glpk-installation-issues">
-<h4>2. GLPK Installation Issues<a class="headerlink" href="#glpk-installation-issues" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For Ubuntu/Debian</span>
-sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>glpk-utils
-
-<span class="c1"># For macOS with Homebrew</span>
-brew<span class="w"> </span>install<span class="w"> </span>glpk
-
-<span class="c1"># Verify installation</span>
-which<span class="w"> </span>glpsol
-glpsol<span class="w"> </span>--version
-</pre></div>
-</div>
-</section>
-<section id="otoole-installation-problems">
-<h4>3. OtoOle Installation Problems<a class="headerlink" href="#otoole-installation-problems" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install from PyPI with specific version</span>
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">otoole</span><span class="o">==</span><span class="m">1</span>.1.5
-
-<span class="c1"># If compilation issues, try conda-forge</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>otoole
-
-<span class="c1"># Alternative: install from source</span>
-pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/OSeMOSYS/otoole.git
-</pre></div>
-</div>
-</section>
-<section id="import-errors">
-<h4>4. Import Errors<a class="headerlink" href="#import-errors" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if environment is activated</span>
-conda<span class="w"> </span>info<span class="w"> </span>--envs
-conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
-
-<span class="c1"># Verify Python path</span>
-python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import sys; print(sys.path)"</span>
-
-<span class="c1"># Check installed packages</span>
-conda<span class="w"> </span>list
-pip<span class="w"> </span>list
-</pre></div>
-</div>
-</section>
-<section id="memory-issues-during-installation">
-<h4>5. Memory Issues During Installation<a class="headerlink" href="#memory-issues-during-installation" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install packages one by one</span>
-conda<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>-y
-conda<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>-y
-<span class="c1"># ... continue individually</span>
-
-<span class="c1"># Or use pip with no-cache</span>
-pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>otoole
-</pre></div>
-</div>
-</section>
-<section id="path-issues-on-windows">
-<h4>6. Path Issues on Windows<a class="headerlink" href="#path-issues-on-windows" title="Link to this heading">#</a></h4>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use forward slashes or raw strings</span>
-<span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Path<span class="o">(</span><span class="s1">'config/config.yaml'</span><span class="o">)</span><span class="w">  </span><span class="c1"># Good</span>
-<span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>r<span class="s1">'config\config.yaml'</span><span class="w">       </span><span class="c1"># Also works</span>
-
-<span class="c1"># Avoid mixing path separators</span>
-<span class="nv">config_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'config\\config.yaml'</span><span class="w">       </span><span class="c1"># Avoid if possible</span>
-</pre></div>
-</div>
-</section>
-</section>
-</section>
-<section id="performance-optimization">
-<h2>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">#</a></h2>
-<section id="environment-tuning">
-<h3>Environment Tuning<a class="headerlink" href="#environment-tuning" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set environment variables for better performance</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">OPENBLAS_NUM_THREADS</span><span class="o">=</span><span class="m">4</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">MKL_NUM_THREADS</span><span class="o">=</span><span class="m">4</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">NUMEXPR_MAX_THREADS</span><span class="o">=</span><span class="m">4</span>
-
-<span class="c1"># For development</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">PYTHONPATH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">PYTHONPATH</span><span class="si">}</span><span class="s2">:</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/src"</span>
-</pre></div>
-</div>
-</section>
-<section id="memory-management">
-<h3>Memory Management<a class="headerlink" href="#memory-management" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># In config.yaml, adjust for available memory</span>
-<span class="n">n_clusters</span><span class="p">:</span> <span class="mi">4</span>          <span class="c1"># Reduce for less memory usage</span>
-<span class="n">hour_grouping</span><span class="p">:</span> <span class="mi">2</span>       <span class="c1"># Increase to reduce time resolution</span>
-<span class="n">days_in_year</span><span class="p">:</span> <span class="mi">365</span>      <span class="c1"># Reduce for testing (e.g., 30 days)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="development-environment">
-<h2>Development Environment<a class="headerlink" href="#development-environment" title="Link to this heading">#</a></h2>
-<section id="additional-tools-for-development">
-<h3>Additional Tools for Development<a class="headerlink" href="#additional-tools-for-development" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install development extras</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>jupyter<span class="w"> </span>jupyterlab<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>ipython<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>pre-commit<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>git-lfs
-
-<span class="c1"># Setup pre-commit hooks</span>
-pre-commit<span class="w"> </span>install
-
-<span class="c1"># Configure Jupyter for project</span>
-python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="w"> </span>storage_osemosys<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">"Storage OSeMOSYS"</span>
-</pre></div>
-</div>
-</section>
-<section id="ide-configuration">
-<h3>IDE Configuration<a class="headerlink" href="#ide-configuration" title="Link to this heading">#</a></h3>
-<section id="vs-code">
-<h4>VS Code<a class="headerlink" href="#vs-code" title="Link to this heading">#</a></h4>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="c1">// .vscode/settings.json</span>
-<span class="p">{</span>
-<span class="w">    </span><span class="nt">"python.defaultInterpreterPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"~/miniconda3/envs/storage_osemosys/bin/python"</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"python.formatting.provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"black"</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"python.linting.enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"python.linting.flake8Enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">"files.associations"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">"*.yml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yaml"</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">"*.yaml"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yaml"</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="pycharm">
-<h4>PyCharm<a class="headerlink" href="#pycharm" title="Link to this heading">#</a></h4>
-<ol class="arabic simple">
-<li><p>File → Settings → Project → Python Interpreter</p></li>
-<li><p>Add → Conda Environment → Existing Environment</p></li>
-<li><p>Select: <code class="docutils literal notranslate"><span class="pre">~/miniconda3/envs/storage_osemosys/bin/python</span></code></p></li>
-</ol>
-</section>
-</section>
-</section>
-<section id="environment-maintenance">
-<h2>Environment Maintenance<a class="headerlink" href="#environment-maintenance" title="Link to this heading">#</a></h2>
-<section id="regular-updates">
-<h3>Regular Updates<a class="headerlink" href="#regular-updates" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Monthly environment update</span>
-make<span class="w"> </span>update-env
-
-<span class="c1"># Security updates</span>
-conda<span class="w"> </span>update<span class="w"> </span>--all
-
-<span class="c1"># Check for outdated packages</span>
-conda<span class="w"> </span>list<span class="w"> </span>--outdated
-</pre></div>
-</div>
-</section>
-<section id="environment-backup">
-<h3>Environment Backup<a class="headerlink" href="#environment-backup" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Backup current working environment</span>
-conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&gt;<span class="w"> </span>env/environment_<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>.yml
-
-<span class="c1"># Create minimal reproducible environment</span>
-conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--from-history<span class="w"> </span>&gt;<span class="w"> </span>env/environment_minimal.yml
-</pre></div>
-</div>
-<p>This comprehensive environment setup ensures a robust, reproducible development and execution environment for Storage-in-OSeMOSYS analysis.</p>
-</section>
 </section>
 </section>
 
@@ -913,76 +598,13 @@ conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export<
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-requirements">System Requirements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-software">Required Software</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-setup">Quick Setup</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-repository">1. Clone Repository</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automated-environment-setup">2. Automated Environment Setup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-installation">3. Test Installation</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-environment-setup">Manual Environment Setup</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-conda-environment">1. Create Conda Environment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-core-dependencies">2. Install Core Dependencies</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-additional-dependencies">3. Install Additional Dependencies</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-file-management">Environment File Management</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-environment-yml">Using environment.yml</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-export">Environment Export</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#makefile-commands">Makefile Commands</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development-workflow">Development Workflow</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#package-details">Package Details</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#core-scientific-stack">Core Scientific Stack</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-system-modeling">Energy System Modeling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#development-and-documentation">Development and Documentation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utilities">Utilities</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-verification">Environment Verification</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comprehensive-test-script">Comprehensive Test Script</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues-and-solutions">Common Issues and Solutions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environment-creation-fails">1. Conda Environment Creation Fails</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#glpk-installation-issues">2. GLPK Installation Issues</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#otoole-installation-problems">3. OtoOle Installation Problems</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#import-errors">4. Import Errors</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-issues-during-installation">5. Memory Issues During Installation</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#path-issues-on-windows">6. Path Issues on Windows</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization">Performance Optimization</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-tuning">Environment Tuning</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-management">Memory Management</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-environment">Development Environment</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-tools-for-development">Additional Tools for Development</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ide-configuration">IDE Configuration</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vs-code">VS Code</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pycharm">PyCharm</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-maintenance">Environment Maintenance</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-updates">Regular Updates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-backup">Environment Backup</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-with-make">Set up with make</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-without-make">Set up without make</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-installed">What is installed</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-tools">Documentation tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-make-commands">Other make commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
   </nav></div>
 

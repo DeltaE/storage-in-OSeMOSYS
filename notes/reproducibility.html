@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -313,7 +313,6 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Reproducibility guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/reproduce_study.html">Reproducing the study step by step</a></li>
 <li class="toctree-l1"><a class="reference internal" href="outputs.html">Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results_analysis.html">Results Analysis</a></li>
 </ul>
 </div>
 </nav></div>
@@ -383,7 +382,7 @@ Aggregation: Best Practices and Algorithms.</em> Environmental Research Communic
 </div></blockquote>
 <p>from this repository, which result comes from which step, how long each step takes, and what was
 verified. The executable version of this guide is the notebook <a class="reference internal" href="../notebooks/reproduce_study.html"><span class="doc">Reproducing the study step by step</span></a>
-(<code class="docutils literal notranslate"><span class="pre">reproduce_study.ipynb</span></code> in the repository root).</p>
+(<code class="docutils literal notranslate"><span class="pre">notebooks/reproduce_study.ipynb</span></code> in the repository).</p>
 <section id="what-you-need">
 <h2>1. What you need<a class="headerlink" href="#what-you-need" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -432,39 +431,45 @@ verified. The executable version of this guide is the notebook <a class="referen
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Data_8760/</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code></p></td>
+<td><p>Scenario settings and paths</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">data/timeseries/</span></code></p></td>
 <td><p>Hourly capacity factors (<code class="docutils literal notranslate"><span class="pre">CapacityFactor_Wind.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">_Solar.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">_Hydro.csv</span></code>) and demand profile (<code class="docutils literal notranslate"><span class="pre">SpecifiedDemandProfile.csv</span></code>)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">inputs_csv/</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data/system/</span></code></p></td>
 <td><p>System parameters (Table 3 of the paper)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Model_*/</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">models/Model_*/</span></code></p></td>
 <td><p>OSeMOSYS model file and otoole configuration of each formulation</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">main.py</span></code>, <code class="docutils literal notranslate"><span class="pre">src/</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">workflow/main.py</span></code>, <code class="docutils literal notranslate"><span class="pre">src/</span></code></p></td>
 <td><p>Pipeline: clustering, input generation, solve, post-processing</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">automation.py</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">workflow/automation.py</span></code></p></td>
 <td><p>Command-line batch runner</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">src/reproduce.py</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">src/reproduce.py</span></code></p></td>
 <td><p>Helpers used by the notebook (runs, tables, metrics)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">validation_soc/</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">validation/soc/</span></code></p></td>
 <td><p>Independent hand-calculated SoC verification</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">data/published_results/</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data/published_results/</span></code></p></td>
 <td><p>Result tables of the paper and the trajectories behind Table 4 and Section 4.4</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reproduce_study.ipynb</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notebooks/reproduce_study.ipynb</span></code></p></td>
 <td><p>Step-by-step reproduction</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">archive/</span></code></p></td>
+<td><p>Superseded scripts and data, not used by the workflow</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <p>The complete set of result files (all trajectories and figures, about 185 MB) is archived on Zenodo
-(DOI in the Data Availability Statement). Unpack it as <code class="docutils literal notranslate"><span class="pre">Results_Demand_Variation/</span></code> in the repository
-root; the notebook detects it automatically and otherwise uses <code class="docutils literal notranslate"><span class="pre">data/published_results/</span></code>.</p>
+(DOI in the Data Availability Statement). Unpack it as <code class="docutils literal notranslate"><span class="pre">data/full_archive/</span></code>
+(containing <code class="docutils literal notranslate"><span class="pre">Results_Demand_Variation/</span></code> and <code class="docutils literal notranslate"><span class="pre">Results_Limited/</span></code>); the notebook detects it automatically and otherwise uses <code class="docutils literal notranslate"><span class="pre">data/published_results/</span></code>.</p>
 </section>
 <section id="step-by-step">
 <h2>3. Step by step<a class="headerlink" href="#step-by-step" title="Link to this heading">#</a></h2>
@@ -479,7 +484,7 @@ conda<span class="w"> </span>activate<span class="w"> </span>storage_osemosys
 </section>
 <section id="quick-verification-about-2-minutes">
 <h3>3.2 Quick verification (about 2 minutes)<a class="headerlink" href="#quick-verification-about-2-minutes" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>lab<span class="w"> </span>reproduce_study.ipynb<span class="w">      </span><span class="c1"># run all cells with the default switches</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>lab<span class="w"> </span>notebooks/reproduce_study.ipynb<span class="w">   </span><span class="c1"># run all cells with the default switches</span>
 </pre></div>
 </div>
 <p>With the default switches the notebook:</p>
@@ -508,31 +513,31 @@ archived results.</p></li>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Full-year benchmarks (Section 4.1)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">automation.py</span> <span class="pre">--resources</span> <span class="pre">WND</span> <span class="pre">SOL</span> <span class="pre">HYD</span> <span class="pre">--k</span> <span class="pre">365</span> <span class="pre">--h</span> <span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">workflow/automation.py</span> <span class="pre">--resources</span> <span class="pre">WND</span> <span class="pre">SOL</span> <span class="pre">HYD</span> <span class="pre">--k</span> <span class="pre">365</span> <span class="pre">--h</span> <span class="pre">1</span></code></p></td>
 <td><p>12</p></td>
 <td><p>~50 min</p></td>
 <td><p>~12 GB</p></td>
 </tr>
 <tr class="row-odd"><td><p>Aggregated configurations (Sections 4.2–4.3)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">automation.py</span> <span class="pre">--resources</span> <span class="pre">WND</span> <span class="pre">SOL</span> <span class="pre">HYD</span> <span class="pre">--k</span> <span class="pre">all</span> <span class="pre">--h</span> <span class="pre">all</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">workflow/automation.py</span> <span class="pre">--resources</span> <span class="pre">WND</span> <span class="pre">SOL</span> <span class="pre">HYD</span> <span class="pre">--k</span> <span class="pre">all</span> <span class="pre">--h</span> <span class="pre">all</span></code></p></td>
 <td><p>1296</p></td>
 <td><p>2–4 h</p></td>
 <td><p>~3 GB</p></td>
 </tr>
 <tr class="row-even"><td><p>Stress test (Section 4.4)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">automation.py</span> <span class="pre">--resources</span> <span class="pre">WND</span> <span class="pre">SOL</span> <span class="pre">--k</span> <span class="pre">365</span> <span class="pre">--h</span> <span class="pre">1</span> <span class="pre">--cap</span> <span class="pre">0.2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">workflow/automation.py</span> <span class="pre">--resources</span> <span class="pre">WND</span> <span class="pre">SOL</span> <span class="pre">--k</span> <span class="pre">365</span> <span class="pre">--h</span> <span class="pre">1</span> <span class="pre">--cap</span> <span class="pre">0.2</span></code></p></td>
 <td><p>8</p></td>
 <td><p>~30 min</p></td>
 <td><p>~12 GB</p></td>
 </tr>
 <tr class="row-odd"><td><p>Seed sensitivity</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">automation.py</span> <span class="pre">--resources</span> <span class="pre">WND</span> <span class="pre">SOL</span> <span class="pre">HYD</span> <span class="pre">--k</span> <span class="pre">4</span> <span class="pre">8</span> <span class="pre">20</span> <span class="pre">--h</span> <span class="pre">1</span> <span class="pre">--seed</span> <span class="pre">1</span></code> (and <code class="docutils literal notranslate"><span class="pre">--seed</span> <span class="pre">2</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">workflow/automation.py</span> <span class="pre">--resources</span> <span class="pre">WND</span> <span class="pre">SOL</span> <span class="pre">HYD</span> <span class="pre">--k</span> <span class="pre">4</span> <span class="pre">8</span> <span class="pre">20</span> <span class="pre">--h</span> <span class="pre">1</span> <span class="pre">--seed</span> <span class="pre">1</span></code> (and <code class="docutils literal notranslate"><span class="pre">--seed</span> <span class="pre">2</span></code>)</p></td>
 <td><p>72</p></td>
 <td><p>~10 min</p></td>
 <td><p>&lt; 1 GB</p></td>
 </tr>
 <tr class="row-even"><td><p>SoC verification (Section 4.1)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">validation_soc/run.py</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">validation/soc/run.py</span></code></p></td>
 <td><p>4</p></td>
 <td><p>&lt; 1 min</p></td>
 <td><p>&lt; 0.1 GB</p></td>
@@ -542,7 +547,7 @@ archived results.</p></li>
 </div>
 <p>*GLPK 5.0, Intel Core i7, 16 GB RAM. The sweep needs about 0.8 h of solver time; the rest is input
 generation and file conversion.</p>
-<p>Results go to <code class="docutils literal notranslate"><span class="pre">Results/</span></code>. Rerun the notebook afterwards: every table and figure uses fresh results where
+<p>Results go to <code class="docutils literal notranslate"><span class="pre">results/</span></code>. Rerun the notebook afterwards: every table and figure uses fresh results where
 they exist and archived results otherwise.</p>
 </section>
 </section>
@@ -569,7 +574,7 @@ they exist and archived results otherwise.</p>
 </tr>
 <tr class="row-even"><td><p>Table 3, Figures 3–5</p></td>
 <td><p>System parameters, VRE and demand profiles</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">inputs_csv/</span></code>, <code class="docutils literal notranslate"><span class="pre">Data_8760/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">data/system/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/timeseries/</span></code></p></td>
 <td><p>2</p></td>
 </tr>
 <tr class="row-odd"><td><p>Section 3.2</p></td>
@@ -579,7 +584,7 @@ they exist and archived results otherwise.</p>
 </tr>
 <tr class="row-even"><td><p>Section 4.1, verification</p></td>
 <td><p>Hand-calculated SoC check</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">validation_soc/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">validation/soc/</span></code></p></td>
 <td><p>4</p></td>
 </tr>
 <tr class="row-odd"><td><p>Figure 6, Table S1</p></td>
@@ -682,7 +687,7 @@ None of the corrections changes the model equations.</p>
 <tr class="row-even"><td><p>Template CSVs are copied before the formulation-specific files are generated</p></td>
 <td><p>The previous order overwrote the Kotzur and Welsch mapping files with empty templates</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">inputs_csv/</span></code> holds the values used in the paper (demand 20, VRE capital cost 1200, VRE variable cost 20)</p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">data/system/</span></code> (formerly <code class="docutils literal notranslate"><span class="pre">inputs_csv/</span></code>) holds the values used in the paper (demand 20, VRE capital cost 1200, VRE variable cost 20)</p></td>
 <td><p>The repository previously contained placeholder values</p></td>
 </tr>
 <tr class="row-even"><td><p>Model result folders are created at run time; stale results are cleared</p></td>
@@ -706,8 +711,10 @@ None of the corrections changes the model equations.</p>
 <section id="documentation-changes">
 <h3>Documentation changes<a class="headerlink" href="#documentation-changes" title="Link to this heading">#</a></h3>
 <p>The tutorial pages <em>Basic usage</em>, <em>Comparative analysis</em> and <em>Advanced configuration</em>, and the
-hand-written API reference, described functions and features that the code does not provide. They are no
-longer published. The API reference is now generated from the source code (<a class="reference internal" href="../autoapi/src/index.html"><span class="doc">src</span></a>).</p>
+<em>Results analysis</em> page, described functions and features that the code does not provide. They are no
+longer published (copies are in <code class="docutils literal notranslate"><span class="pre">archive/docs/</span></code>). The module overview, configuration, workflow,
+environment and model-specification pages were rewritten to match the code, and the full API
+reference is generated from the source (<a class="reference internal" href="../autoapi/src/index.html"><span class="doc">src</span></a>).</p>
 </section>
 </section>
 </section>

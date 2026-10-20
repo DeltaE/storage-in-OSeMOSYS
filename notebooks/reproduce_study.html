@@ -33,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -316,7 +316,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../notes/reproducibility.html">Reproducibility guide</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Reproducing the study step by step</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/outputs.html">Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notes/results_analysis.html">Results Analysis</a></li>
 </ul>
 </div>
 </nav></div>
@@ -380,7 +379,7 @@
   <section id="Reproducing-the-study-step-by-step">
 <h1>Reproducing the study step by step<a class="headerlink" href="#Reproducing-the-study-step-by-step" title="Link to this heading">#</a></h1>
 <p><strong>Storage in Long-Term Energy Planning Models with Temporal Aggregation: Best Practices and Algorithms</strong> Bruno Borba, Md Eliasinul Islam, Taco Niet — <em>Environmental Research Communications</em> (manuscript ERC-105849)</p>
-<p>This notebook regenerates every quantitative result of the paper from the inputs in this repository. Each model run calls <code class="docutils literal notranslate"><span class="pre">main.py</span></code> unchanged, so the notebook exercises the same code path that produced the published numbers.</p>
+<p>This notebook regenerates every quantitative result of the paper from the inputs in this repository. Each model run calls <code class="docutils literal notranslate"><span class="pre">workflow/main.py</span></code> unchanged, so the notebook exercises the same code path that produced the published numbers.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Step</p></th>
@@ -465,9 +464,9 @@
 <p><strong>Scenario labels.</strong> <code class="docutils literal notranslate"><span class="pre">k20h1HYD</span></code> = 20 representative days, 1-hour intra-day blocks, hydro-dominated system. The suffix <code class="docutils literal notranslate"><span class="pre">_limited</span></code> marks the stress test.</p>
 <section id="0.-Setup">
 <h2>0. Setup<a class="headerlink" href="#0.-Setup" title="Link to this heading">#</a></h2>
-<p>Set the switches below to run the heavy steps. Everything else reads either fresh results (folder <code class="docutils literal notranslate"><span class="pre">Results/</span></code>) or the archived results that accompany the paper.</p>
+<p>Set the switches below to run the heavy steps. Everything else reads either fresh results (folder <code class="docutils literal notranslate"><span class="pre">results/</span></code>) or the archived results that accompany the paper.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -475,8 +474,8 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="n">REPO</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
-<span class="k">assert</span> <span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s1">'main.py'</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">(),</span> <span class="s1">'Start Jupyter from the repository root.'</span>
+<span class="n">REPO</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="k">if</span> <span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s1">'workflow'</span><span class="p">)</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="k">else</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span>   <span class="c1"># repository root or notebooks/</span>
+<span class="k">assert</span> <span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s1">'workflow'</span> <span class="o">/</span> <span class="s1">'main.py'</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">(),</span> <span class="s1">'Start Jupyter from the repository root or from notebooks/.'</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">REPO</span><span class="p">))</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">src.reproduce</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rp</span>
 
@@ -490,11 +489,11 @@
 <span class="n">SWEEP_RESOURCES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'WND'</span><span class="p">,</span> <span class="s1">'SOL'</span><span class="p">,</span> <span class="s1">'HYD'</span><span class="p">]</span>
 <span class="n">SWEEP_K</span>         <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">K_VALUES</span>          <span class="c1"># [2..10, 20..100]</span>
 <span class="n">SWEEP_H</span>         <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">H_VALUES</span>          <span class="c1"># [1, 2, 4, 6, 8, 12]</span>
-<span class="n">FRESH</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s1">'Results'</span>               <span class="c1"># fresh runs are written here</span>
+<span class="n">FRESH</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s1">'results'</span>               <span class="c1"># fresh runs are written here</span>
 
 <span class="c1"># ---- archived results of the published study --------------------------------------------</span>
 <span class="n">PUBLISHED</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s1">'data'</span> <span class="o">/</span> <span class="s1">'published_results'</span>           <span class="c1"># tracked subset (tables + key trajectories)</span>
-<span class="n">FULL_ARCHIVE</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s1">'Results_Demand_Variation'</span>          <span class="c1"># optional: full archive (Zenodo), all CSVs</span>
+<span class="n">FULL_ARCHIVE</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s1">'data'</span> <span class="o">/</span> <span class="s1">'full_archive'</span>             <span class="c1"># optional: full archive (Zenodo), all CSVs</span>
 <span class="n">ARCH_MAIN</span> <span class="o">=</span> <span class="n">FULL_ARCHIVE</span> <span class="o">/</span> <span class="s1">'Results_Demand_Variation'</span> <span class="k">if</span> <span class="n">FULL_ARCHIVE</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="n">PUBLISHED</span> <span class="o">/</span> <span class="s1">'main'</span>
 <span class="n">ARCH_LIM</span>  <span class="o">=</span> <span class="n">FULL_ARCHIVE</span> <span class="o">/</span> <span class="s1">'Results_Limited'</span> <span class="k">if</span> <span class="n">FULL_ARCHIVE</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="n">PUBLISHED</span> <span class="o">/</span> <span class="s1">'limited'</span>
 <span class="n">archive</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="n">ARCH_MAIN</span> <span class="o">/</span> <span class="s1">'Simulation_Results.xlsx'</span><span class="p">)</span>
@@ -510,7 +509,7 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Variation)
+Archive: 1308 rows, 327 scenarios  (data/full_archive/Results_Demand_Variation)
 </pre></div></div>
 </div>
 </section>
@@ -518,7 +517,7 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
 <h2>1. Computational environment (Section 3.4)<a class="headerlink" href="#1.-Computational-environment-(Section-3.4)" title="Link to this heading">#</a></h2>
 <p>Set up with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">-f</span> <span class="pre">env/environment-crossplatform.yml</span></code> (GLPK 5.0 from conda-forge, also on Windows). The paper reports GLPK 5.0, Python 3.13.5, otoole 1.1.5 and scikit-learn 1.7.1. Solver version affects runtimes; scikit-learn version affects clustering (before 1.4, <code class="docutils literal notranslate"><span class="pre">KMeans</span></code> defaulted to <code class="docutils literal notranslate"><span class="pre">n_init=10</span></code>; the code now sets <code class="docutils literal notranslate"><span class="pre">n_init=1</span></code> explicitly).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">check_environment</span><span class="p">()</span>
@@ -527,7 +526,7 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -605,30 +604,30 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
 </section>
 <section id="2.-Model-inputs-(Section-3.3,-Table-3;-Figures-4–5)">
 <h2>2. Model inputs (Section 3.3, Table 3; Figures 4–5)<a class="headerlink" href="#2.-Model-inputs-(Section-3.3,-Table-3;-Figures-4–5)" title="Link to this heading">#</a></h2>
-<p>A single-node system: one VRE technology (label <code class="docutils literal notranslate"><span class="pre">WINDPOWER</span></code> for all three resources; only its capacity-factor profile changes), one battery and an electricity demand. The values below are read directly from <code class="docutils literal notranslate"><span class="pre">inputs_csv/</span></code> and the otoole defaults, i.e. what the solver actually sees.</p>
+<p>A single-node system: one VRE technology (label <code class="docutils literal notranslate"><span class="pre">WINDPOWER</span></code> for all three resources; only its capacity-factor profile changes), one battery and an electricity demand. The values below are read directly from <code class="docutils literal notranslate"><span class="pre">data/system/</span></code> and the otoole defaults, i.e. what the solver actually sees.</p>
 <blockquote>
 <div><p><strong>Note.</strong> Annual demand (20) and the VRE variable cost (20) are not listed in Table 3 of the R2 draft, but both change total cost.</p>
 </div></blockquote>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">csv_val</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">**</span><span class="n">flt</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s1">'inputs_csv'</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.csv'</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s1">'data'</span> <span class="o">/</span> <span class="s1">'system'</span> <span class="o">/</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">.csv'</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">flt</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">v</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="s1">'VALUE'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
-<span class="n">otc</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s1">'Model_Niet'</span> <span class="o">/</span> <span class="s1">'otoole_config_Niet.yaml'</span><span class="p">))</span>
+<span class="n">otc</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s1">'models'</span> <span class="o">/</span> <span class="s1">'Model_Niet'</span> <span class="o">/</span> <span class="s1">'otoole_config_Niet.yaml'</span><span class="p">))</span>
 <span class="n">cfg</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">REPO</span> <span class="o">/</span> <span class="s1">'config'</span> <span class="o">/</span> <span class="s1">'config.yaml'</span><span class="p">))</span>
 <span class="n">default</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">otc</span><span class="p">[</span><span class="n">p</span><span class="p">][</span><span class="s1">'default'</span><span class="p">]</span>
 <span class="n">table3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
-    <span class="p">(</span><span class="s1">'VRE capital cost'</span><span class="p">,</span> <span class="n">csv_val</span><span class="p">(</span><span class="s1">'CapitalCost'</span><span class="p">,</span> <span class="n">TECHNOLOGY</span><span class="o">=</span><span class="s1">'WINDPOWER'</span><span class="p">),</span> <span class="s1">'inputs_csv/CapitalCost.csv'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'VRE variable cost'</span><span class="p">,</span> <span class="n">csv_val</span><span class="p">(</span><span class="s1">'VariableCost'</span><span class="p">,</span> <span class="n">TECHNOLOGY</span><span class="o">=</span><span class="s1">'WINDPOWER'</span><span class="p">),</span> <span class="s1">'inputs_csv/VariableCost.csv'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'VRE capital cost'</span><span class="p">,</span> <span class="n">csv_val</span><span class="p">(</span><span class="s1">'CapitalCost'</span><span class="p">,</span> <span class="n">TECHNOLOGY</span><span class="o">=</span><span class="s1">'WINDPOWER'</span><span class="p">),</span> <span class="s1">'data/system/CapitalCost.csv'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'VRE variable cost'</span><span class="p">,</span> <span class="n">csv_val</span><span class="p">(</span><span class="s1">'VariableCost'</span><span class="p">,</span> <span class="n">TECHNOLOGY</span><span class="o">=</span><span class="s1">'WINDPOWER'</span><span class="p">),</span> <span class="s1">'data/system/VariableCost.csv'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'Storage capital cost (per kW.yr)'</span><span class="p">,</span> <span class="n">default</span><span class="p">(</span><span class="s1">'CapitalCostStorage'</span><span class="p">),</span> <span class="s1">'otoole default'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'Storage charge input ratio (1/round-trip eff.)'</span><span class="p">,</span> <span class="n">csv_val</span><span class="p">(</span><span class="s1">'InputActivityRatio'</span><span class="p">,</span> <span class="n">TECHNOLOGY</span><span class="o">=</span><span class="s1">'BATTERY_STORAGE'</span><span class="p">),</span> <span class="s1">'inputs_csv/InputActivityRatio.csv'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'Storage charge input ratio (1/round-trip eff.)'</span><span class="p">,</span> <span class="n">csv_val</span><span class="p">(</span><span class="s1">'InputActivityRatio'</span><span class="p">,</span> <span class="n">TECHNOLOGY</span><span class="o">=</span><span class="s1">'BATTERY_STORAGE'</span><span class="p">),</span> <span class="s1">'data/system/InputActivityRatio.csv'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'Storage variable cost'</span><span class="p">,</span> <span class="n">default</span><span class="p">(</span><span class="s1">'VariableCost'</span><span class="p">),</span> <span class="s1">'otoole default (battery not listed in VariableCost.csv)'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'Annual electricity demand'</span><span class="p">,</span> <span class="n">csv_val</span><span class="p">(</span><span class="s1">'SpecifiedAnnualDemand'</span><span class="p">),</span> <span class="s1">'inputs_csv/SpecifiedAnnualDemand.csv'</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'Residual storage capacity (kW.yr)'</span><span class="p">,</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">'ResidualStorageCapacity'</span><span class="p">],</span> <span class="s1">'config.yaml'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'Annual electricity demand'</span><span class="p">,</span> <span class="n">csv_val</span><span class="p">(</span><span class="s1">'SpecifiedAnnualDemand'</span><span class="p">),</span> <span class="s1">'data/system/SpecifiedAnnualDemand.csv'</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">'Residual storage capacity (kW.yr)'</span><span class="p">,</span> <span class="n">cfg</span><span class="p">[</span><span class="s1">'ResidualStorageCapacity'</span><span class="p">],</span> <span class="s1">'config/config.yaml'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'Minimum storage charge'</span><span class="p">,</span> <span class="n">default</span><span class="p">(</span><span class="s1">'MinStorageCharge'</span><span class="p">),</span> <span class="s1">'otoole default'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'Discount rate'</span><span class="p">,</span> <span class="n">default</span><span class="p">(</span><span class="s1">'DiscountRate'</span><span class="p">),</span> <span class="s1">'otoole default'</span><span class="p">),</span>
     <span class="p">(</span><span class="s1">'Operational life (years)'</span><span class="p">,</span> <span class="n">default</span><span class="p">(</span><span class="s1">'OperationalLife'</span><span class="p">),</span> <span class="s1">'otoole default'</span><span class="p">),</span>
@@ -640,7 +639,7 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -671,73 +670,73 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
     <tr>
       <th>0</th>
       <td>VRE capital cost</td>
-      <td>999999.000</td>
-      <td>inputs_csv/CapitalCost.csv</td>
+      <td>1200.00</td>
+      <td>data/system/CapitalCost.csv</td>
     </tr>
     <tr>
       <th>1</th>
       <td>VRE variable cost</td>
-      <td>4.167</td>
-      <td>inputs_csv/VariableCost.csv</td>
+      <td>20.00</td>
+      <td>data/system/VariableCost.csv</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Storage capital cost (per kW.yr)</td>
-      <td>1000.000</td>
+      <td>1000.00</td>
       <td>otoole default</td>
     </tr>
     <tr>
       <th>3</th>
       <td>Storage charge input ratio (1/round-trip eff.)</td>
-      <td>1.250</td>
-      <td>inputs_csv/InputActivityRatio.csv</td>
+      <td>1.25</td>
+      <td>data/system/InputActivityRatio.csv</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Storage variable cost</td>
-      <td>20.000</td>
+      <td>20.00</td>
       <td>otoole default (battery not listed in Variable...</td>
     </tr>
     <tr>
       <th>5</th>
       <td>Annual electricity demand</td>
-      <td>2.000</td>
-      <td>inputs_csv/SpecifiedAnnualDemand.csv</td>
+      <td>20.00</td>
+      <td>data/system/SpecifiedAnnualDemand.csv</td>
     </tr>
     <tr>
       <th>6</th>
       <td>Residual storage capacity (kW.yr)</td>
-      <td>0.050</td>
-      <td>config.yaml</td>
+      <td>0.05</td>
+      <td>config/config.yaml</td>
     </tr>
     <tr>
       <th>7</th>
       <td>Minimum storage charge</td>
-      <td>0.000</td>
+      <td>0.00</td>
       <td>otoole default</td>
     </tr>
     <tr>
       <th>8</th>
       <td>Discount rate</td>
-      <td>0.050</td>
+      <td>0.05</td>
       <td>otoole default</td>
     </tr>
     <tr>
       <th>9</th>
       <td>Operational life (years)</td>
-      <td>1.000</td>
+      <td>1.00</td>
       <td>otoole default</td>
     </tr>
     <tr>
       <th>10</th>
       <td>Storage energy cap, unconstrained runs (kW.yr)</td>
-      <td>1000.000</td>
+      <td>1000.00</td>
       <td>reproduce.py</td>
     </tr>
     <tr>
       <th>11</th>
       <td>Storage energy cap, stress test (kW.yr)</td>
-      <td>0.200</td>
+      <td>0.20</td>
       <td>reproduce.py</td>
     </tr>
   </tbody>
@@ -745,10 +744,10 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s1">'Data_8760'</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s1">'data'</span> <span class="o">/</span> <span class="s1">'timeseries'</span>
 <span class="n">cf</span> <span class="o">=</span> <span class="p">{</span><span class="n">r</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">D</span> <span class="o">/</span> <span class="n">f</span><span class="p">)[</span><span class="s1">'VALUE'</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">rp</span><span class="o">.</span><span class="n">RESOURCES</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 <span class="n">dem</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">D</span> <span class="o">/</span> <span class="n">rp</span><span class="o">.</span><span class="n">DEMAND_PROFILE</span><span class="p">)[</span><span class="s1">'VALUE'</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">))</span>
@@ -794,7 +793,7 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
 <h2>3. Representative days (Section 3.2)<a class="headerlink" href="#3.-Representative-days-(Section-3.2)" title="Link to this heading">#</a></h2>
 <p>Each day is a 48-dimensional vector (24 min–max-scaled capacity factors and 24 scaled demand values). k-means (scikit-learn, k-means++ initialisation, <code class="docutils literal notranslate"><span class="pre">n_init</span> <span class="pre">=</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">random_state</span> <span class="pre">=</span> <span class="pre">0</span></code>) partitions the 365 days, and the day closest to each centroid becomes the representative day. All four formulations receive the same clustering.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rep</span><span class="p">,</span> <span class="n">seq</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">clustering</span><span class="p">(</span><span class="s1">'WND'</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -810,21 +809,9 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[10]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> rep, seq = rp.clustering(<span class="ansi-yellow-fg">&#39;WND&#39;</span>, <span class="ansi-green-fg">4</span>)
-<span class="ansi-green-fg">      2</span> rep2, seq2 = rp.clustering(<span class="ansi-yellow-fg">&#39;WND&#39;</span>, <span class="ansi-green-fg">4</span>)
-<span class="ansi-green-fg">      3</span> print(<span class="ansi-yellow-fg">&#39;Representative days (WND, k=4):&#39;</span>, rep)
-<span class="ansi-green-fg">      4</span> print(<span class="ansi-yellow-fg">&#39;Days represented by each:&#39;</span>, {d: seq.count(d) <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> d <span class="ansi-bold" style="color: rgb(0,135,0)">in</span> rep})
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/work/storage-in-OSeMOSYS/src/reproduce.py:241</span>, in <span class="ansi-cyan-fg">clustering</span><span class="ansi-blue-fg">(resource, k, random_state)</span>
-<span class="ansi-green-fg">    239</span> <span class="ansi-yellow-fg">&#34;&#34;&#34;Representative days and chronological day-&gt;representative mapping, as used by main.py.&#34;&#34;&#34;</span>
-<span class="ansi-green-fg">    240</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">src</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">cluster</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> cluster_data
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">241</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-black-fg ansi-yellow-bg">cluster_data</span><span class="ansi-black-fg ansi-yellow-bg">(</span><span class="ansi-black-fg ansi-yellow-bg">REPO</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">/</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">&#34;</span><span class="ansi-black-fg ansi-yellow-bg">Data_8760</span><span class="ansi-black-fg ansi-yellow-bg">&#34;</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">/</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">RESOURCES</span><span class="ansi-black-fg ansi-yellow-bg">[</span><span class="ansi-black-fg ansi-yellow-bg">resource</span><span class="ansi-black-fg ansi-yellow-bg">]</span><span class="ansi-black-fg ansi-yellow-bg">,</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">REPO</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">/</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">&#34;</span><span class="ansi-black-fg ansi-yellow-bg">Data_8760</span><span class="ansi-black-fg ansi-yellow-bg">&#34;</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">/</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">DEMAND_PROFILE</span><span class="ansi-black-fg ansi-yellow-bg">,</span>
-<span class="ansi-green-fg">    242</span> <span class="ansi-black-fg ansi-yellow-bg">                    </span><span class="ansi-black-fg ansi-yellow-bg">k</span><span class="ansi-black-fg ansi-yellow-bg">,</span><span class="ansi-black-fg ansi-yellow-bg"> </span><span class="ansi-black-fg ansi-yellow-bg">random_state</span><span class="ansi-black-fg ansi-yellow-bg">=</span><span class="ansi-black-fg ansi-yellow-bg">random_state</span><span class="ansi-black-fg ansi-yellow-bg">)</span>
-
-<span class="ansi-red-fg">TypeError</span>: cluster_data() got an unexpected keyword argument &#39;random_state&#39;
+Representative days (WND, k=4): [66, 190, 257, 296]
+Days represented by each: {66: 44, 190: 84, 257: 128, 296: 109}
+Deterministic for a fixed seed: True
 </pre></div></div>
 </div>
 <section id="3.1-Multi-seed-robustness-(reviewer-comment-C2)">
@@ -836,7 +823,7 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
 <li><p><strong>same representative days</strong>: whether the selected set of days is identical.</p></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seeds</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">seed_robustness</span><span class="p">()</span>
@@ -938,7 +925,7 @@ Archive: 1308 rows, 327 scenarios  (Results_Demand_Variation/Results_Demand_Vari
       <td>0.306</td>
       <td>0.341</td>
       <td>0.360</td>
-      <td>0.401</td>
+      <td>0.402</td>
     </tr>
     <tr>
       <th>share identical rep-day sets</th>
@@ -985,9 +972,9 @@ Over all resources, k and seeds: mean ARI = 0.621 (min 0.344); mean day agreemen
 </section>
 <section id="4.-Independent-SoC-verification-(Section-4.1;-reviewer-comment-C4)">
 <h2>4. Independent SoC verification (Section 4.1; reviewer comment C4)<a class="headerlink" href="#4.-Independent-SoC-verification-(Section-4.1;-reviewer-comment-C4)" title="Link to this heading">#</a></h2>
-<p>Four days A–B–A–B, four 6-h blocks per day, no losses, fixed capacities. Each occurrence of A adds 6 MWh and each B removes 6 MWh. The hand-calculated SoC sequence of each formulation (<code class="docutils literal notranslate"><span class="pre">validation_soc/independent_reference.csv</span></code>) is compared with the model output; for Kotzur and Welsch the existing intraday reconstructions are also checked.</p>
+<p>Four days A–B–A–B, four 6-h blocks per day, no losses, fixed capacities. Each occurrence of A adds 6 MWh and each B removes 6 MWh. The hand-calculated SoC sequence of each formulation (<code class="docutils literal notranslate"><span class="pre">validation/soc/independent_reference.csv</span></code>) is compared with the model output; for Kotzur and Welsch the existing intraday reconstructions are also checked.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soc_val</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">run_soc_validation</span><span class="p">()</span>
@@ -1071,7 +1058,7 @@ All native and reconstructed SoC values match the hand calculation.
 <h2>5. Reproduction check against the archived results<a class="headerlink" href="#5.-Reproduction-check-against-the-archived-results" title="Link to this heading">#</a></h2>
 <p>Runs k4h1 for the three resources (12 model solves) and compares cost, VRE capacity and storage capacity with the archived study results. Agreement to solver precision confirms that the inputs and code in this repository are those behind the paper.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">RUN_REPRODUCTION_CHECK</span><span class="p">:</span>
@@ -1090,9 +1077,9 @@ All native and reconstructed SoC values match the hand calculation.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-k4h1WND: done in 12.1 s
-k4h1SOL: done in 12.6 s
-k4h1HYD: done in 12.7 s
+k4h1WND: done in 17.9 s
+k4h1SOL: done in 26.4 s
+k4h1HYD: done in 21.3 s
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1264,7 +1251,7 @@ Largest relative difference: 4.43e-14
 <h2>6. Full-year hourly benchmarks (Section 4.1, Figure 6, Table S1)<a class="headerlink" href="#6.-Full-year-hourly-benchmarks-(Section-4.1,-Figure-6,-Table-S1)" title="Link to this heading">#</a></h2>
 <p>k = 365, h = 1 for each resource. At full resolution the mapping is the identity and all four formulations reduce to the same recursion, so their SoC curves coincide; this is a consistency check, not an independent validation. <strong>Novo needs about 12 GB of RAM at k365h1.</strong></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">RUN_BENCHMARK</span><span class="p">:</span>
@@ -1334,7 +1321,7 @@ Largest relative difference: 4.43e-14
   </thead>
   <tbody>
     <tr>
-      <th>422</th>
+      <th>430</th>
       <td>HYD</td>
       <td>Kotzur</td>
       <td>90836.46212</td>
@@ -1345,7 +1332,7 @@ Largest relative difference: 4.43e-14
       <td>archive</td>
     </tr>
     <tr>
-      <th>423</th>
+      <th>431</th>
       <td>HYD</td>
       <td>Niet</td>
       <td>90840.54802</td>
@@ -1356,7 +1343,7 @@ Largest relative difference: 4.43e-14
       <td>archive</td>
     </tr>
     <tr>
-      <th>421</th>
+      <th>429</th>
       <td>HYD</td>
       <td>Novo</td>
       <td>90840.56147</td>
@@ -1367,7 +1354,7 @@ Largest relative difference: 4.43e-14
       <td>archive</td>
     </tr>
     <tr>
-      <th>424</th>
+      <th>432</th>
       <td>HYD</td>
       <td>Welsch</td>
       <td>90852.86695</td>
@@ -1422,7 +1409,7 @@ Largest relative difference: 4.43e-14
       <td>archive</td>
     </tr>
     <tr>
-      <th>843</th>
+      <th>859</th>
       <td>WND</td>
       <td>Kotzur</td>
       <td>51014.00809</td>
@@ -1433,7 +1420,7 @@ Largest relative difference: 4.43e-14
       <td>archive</td>
     </tr>
     <tr>
-      <th>844</th>
+      <th>860</th>
       <td>WND</td>
       <td>Niet</td>
       <td>51015.84985</td>
@@ -1444,7 +1431,7 @@ Largest relative difference: 4.43e-14
       <td>archive</td>
     </tr>
     <tr>
-      <th>842</th>
+      <th>858</th>
       <td>WND</td>
       <td>Novo</td>
       <td>51015.85207</td>
@@ -1455,7 +1442,7 @@ Largest relative difference: 4.43e-14
       <td>archive</td>
     </tr>
     <tr>
-      <th>845</th>
+      <th>861</th>
       <td>WND</td>
       <td>Welsch</td>
       <td>51053.51364</td>
@@ -1522,7 +1509,7 @@ Largest relative difference: 4.43e-14
 </div>
 <p>The R2 Table 4 note states that at full resolution the formulations agree within 0.08 % on cost and 0.03 kW·yr on capacity. The spread table above is the direct check of that sentence.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">src_dir</span> <span class="o">=</span> <span class="n">FRESH</span> <span class="k">if</span> <span class="p">(</span><span class="n">FRESH</span> <span class="o">/</span> <span class="s1">'k365h1WND_Storage_Level_Model_Niet.csv'</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="n">ARCH_MAIN</span>
@@ -1549,7 +1536,7 @@ Largest relative difference: 4.43e-14
 <h2>7. Aggregated configurations (Sections 4.2–4.3)<a class="headerlink" href="#7.-Aggregated-configurations-(Sections-4.2–4.3)" title="Link to this heading">#</a></h2>
 <p>18 values of k × 6 block lengths h = 108 configurations per resource, each solved with all four formulations. Completed scenarios are skipped, so the cell can be interrupted and resumed. The runtime estimate below is taken from the archived logs.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">archive</span><span class="p">[(</span><span class="n">archive</span><span class="o">.</span><span class="n">k</span> <span class="o">!=</span> <span class="mi">365</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">archive</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">SWEEP_RESOURCES</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">archive</span><span class="o">.</span><span class="n">k</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">SWEEP_K</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">archive</span><span class="o">.</span><span class="n">h</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">SWEEP_H</span><span class="p">)]</span>
@@ -1573,7 +1560,7 @@ Selected grid: 324 scenarios, 1296 solves; archived wall time 0.8 h, peak memory
 <p>Eight archived Welsch solves report a total cost of exactly 0. GLPK’s primal simplex stopped with <em>“unable to recover undefined or non-optimal solution”</em>, and the original pipeline then read the result CSVs left over from the previous scenario, so the capacities in these rows are stale. <code class="docutils literal notranslate"><span class="pre">src/simulation.py</span></code> now detects non-optimal termination, retries with <code class="docutils literal notranslate"><span class="pre">--nopresol</span></code>, <code class="docutils literal notranslate"><span class="pre">--dual</span></code> and <code class="docutils literal notranslate"><span class="pre">--exact</span></code> (identical optima where tested) and never reports capacities from a failed solve. The re-solved
 values are in <code class="docutils literal notranslate"><span class="pre">data/published_results/corrections/welsch_reruns.xlsx</span></code> and replace the failed rows in all tables below.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">failed</span> <span class="o">=</span> <span class="n">archive</span><span class="p">[</span><span class="n">archive</span><span class="p">[</span><span class="s1">'Total cost'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span>
@@ -1805,7 +1792,7 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 <h2>8. Table 4 and cost-error curves (Section 4.2; Figure 7)<a class="headerlink" href="#8.-Table-4-and-cost-error-curves-(Section-4.2;-Figure-7)" title="Link to this heading">#</a></h2>
 <p>Errors are relative to the k365h1 Novo benchmark of the same resource and are computed from <strong>unrounded</strong> values.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">results_source</span><span class="p">()</span>
@@ -1821,460 +1808,460 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 <div class="output_area rendered_html docutils container">
 <style type="text/css">
 </style>
-<table id="T_665bd">
+<table id="T_e4d42">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_665bd_level0_col0" class="col_heading level0 col0" >Scenario</th>
-      <th id="T_665bd_level0_col1" class="col_heading level0 col1" >Case</th>
-      <th id="T_665bd_level0_col2" class="col_heading level0 col2" >Formulation</th>
-      <th id="T_665bd_level0_col3" class="col_heading level0 col3" >Total cost</th>
-      <th id="T_665bd_level0_col4" class="col_heading level0 col4" >Cost error (%)</th>
-      <th id="T_665bd_level0_col5" class="col_heading level0 col5" >Storage capacity (kW·yr)</th>
-      <th id="T_665bd_level0_col6" class="col_heading level0 col6" >Capacity error (%)</th>
-      <th id="T_665bd_level0_col7" class="col_heading level0 col7" >Runtime (s)</th>
-      <th id="T_665bd_level0_col8" class="col_heading level0 col8" >Memory (MB)</th>
+      <th id="T_e4d42_level0_col0" class="col_heading level0 col0" >Scenario</th>
+      <th id="T_e4d42_level0_col1" class="col_heading level0 col1" >Case</th>
+      <th id="T_e4d42_level0_col2" class="col_heading level0 col2" >Formulation</th>
+      <th id="T_e4d42_level0_col3" class="col_heading level0 col3" >Total cost</th>
+      <th id="T_e4d42_level0_col4" class="col_heading level0 col4" >Cost error (%)</th>
+      <th id="T_e4d42_level0_col5" class="col_heading level0 col5" >Storage capacity (kW·yr)</th>
+      <th id="T_e4d42_level0_col6" class="col_heading level0 col6" >Capacity error (%)</th>
+      <th id="T_e4d42_level0_col7" class="col_heading level0 col7" >Runtime (s)</th>
+      <th id="T_e4d42_level0_col8" class="col_heading level0 col8" >Memory (MB)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_665bd_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_665bd_row0_col0" class="data row0 col0" >WND</td>
-      <td id="T_665bd_row0_col1" class="data row0 col1" >k365h1</td>
-      <td id="T_665bd_row0_col2" class="data row0 col2" >Niet</td>
-      <td id="T_665bd_row0_col3" class="data row0 col3" >51,016</td>
-      <td id="T_665bd_row0_col4" class="data row0 col4" >-0.0</td>
-      <td id="T_665bd_row0_col5" class="data row0 col5" >0.96</td>
-      <td id="T_665bd_row0_col6" class="data row0 col6" >-0.0</td>
-      <td id="T_665bd_row0_col7" class="data row0 col7" >134.68</td>
-      <td id="T_665bd_row0_col8" class="data row0 col8" >193.0</td>
+      <th id="T_e4d42_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_e4d42_row0_col0" class="data row0 col0" >WND</td>
+      <td id="T_e4d42_row0_col1" class="data row0 col1" >k365h1</td>
+      <td id="T_e4d42_row0_col2" class="data row0 col2" >Niet</td>
+      <td id="T_e4d42_row0_col3" class="data row0 col3" >51,016</td>
+      <td id="T_e4d42_row0_col4" class="data row0 col4" >-0.0</td>
+      <td id="T_e4d42_row0_col5" class="data row0 col5" >0.96</td>
+      <td id="T_e4d42_row0_col6" class="data row0 col6" >-0.0</td>
+      <td id="T_e4d42_row0_col7" class="data row0 col7" >134.68</td>
+      <td id="T_e4d42_row0_col8" class="data row0 col8" >193.0</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_665bd_row1_col0" class="data row1 col0" >WND</td>
-      <td id="T_665bd_row1_col1" class="data row1 col1" >k365h1</td>
-      <td id="T_665bd_row1_col2" class="data row1 col2" >Welsch</td>
-      <td id="T_665bd_row1_col3" class="data row1 col3" >51,054</td>
-      <td id="T_665bd_row1_col4" class="data row1 col4" >+0.1</td>
-      <td id="T_665bd_row1_col5" class="data row1 col5" >0.99</td>
-      <td id="T_665bd_row1_col6" class="data row1 col6" >+3.9</td>
-      <td id="T_665bd_row1_col7" class="data row1 col7" >256.97</td>
-      <td id="T_665bd_row1_col8" class="data row1 col8" >1051.7</td>
+      <th id="T_e4d42_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_e4d42_row1_col0" class="data row1 col0" >WND</td>
+      <td id="T_e4d42_row1_col1" class="data row1 col1" >k365h1</td>
+      <td id="T_e4d42_row1_col2" class="data row1 col2" >Welsch</td>
+      <td id="T_e4d42_row1_col3" class="data row1 col3" >51,054</td>
+      <td id="T_e4d42_row1_col4" class="data row1 col4" >+0.1</td>
+      <td id="T_e4d42_row1_col5" class="data row1 col5" >0.99</td>
+      <td id="T_e4d42_row1_col6" class="data row1 col6" >+3.9</td>
+      <td id="T_e4d42_row1_col7" class="data row1 col7" >256.97</td>
+      <td id="T_e4d42_row1_col8" class="data row1 col8" >1051.7</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_665bd_row2_col0" class="data row2 col0" >WND</td>
-      <td id="T_665bd_row2_col1" class="data row2 col1" >k365h1</td>
-      <td id="T_665bd_row2_col2" class="data row2 col2" >Kotzur</td>
-      <td id="T_665bd_row2_col3" class="data row2 col3" >51,014</td>
-      <td id="T_665bd_row2_col4" class="data row2 col4" >-0.0</td>
-      <td id="T_665bd_row2_col5" class="data row2 col5" >0.96</td>
-      <td id="T_665bd_row2_col6" class="data row2 col6" >-0.2</td>
-      <td id="T_665bd_row2_col7" class="data row2 col7" >156.29</td>
-      <td id="T_665bd_row2_col8" class="data row2 col8" >613.4</td>
+      <th id="T_e4d42_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_e4d42_row2_col0" class="data row2 col0" >WND</td>
+      <td id="T_e4d42_row2_col1" class="data row2 col1" >k365h1</td>
+      <td id="T_e4d42_row2_col2" class="data row2 col2" >Kotzur</td>
+      <td id="T_e4d42_row2_col3" class="data row2 col3" >51,014</td>
+      <td id="T_e4d42_row2_col4" class="data row2 col4" >-0.0</td>
+      <td id="T_e4d42_row2_col5" class="data row2 col5" >0.96</td>
+      <td id="T_e4d42_row2_col6" class="data row2 col6" >-0.2</td>
+      <td id="T_e4d42_row2_col7" class="data row2 col7" >156.29</td>
+      <td id="T_e4d42_row2_col8" class="data row2 col8" >613.4</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_665bd_row3_col0" class="data row3 col0" >WND</td>
-      <td id="T_665bd_row3_col1" class="data row3 col1" >k365h1</td>
-      <td id="T_665bd_row3_col2" class="data row3 col2" >Novo</td>
-      <td id="T_665bd_row3_col3" class="data row3 col3" >51,016</td>
-      <td id="T_665bd_row3_col4" class="data row3 col4" >+0.0</td>
-      <td id="T_665bd_row3_col5" class="data row3 col5" >0.96</td>
-      <td id="T_665bd_row3_col6" class="data row3 col6" >+0.0</td>
-      <td id="T_665bd_row3_col7" class="data row3 col7" >427.28</td>
-      <td id="T_665bd_row3_col8" class="data row3 col8" >10814.0</td>
+      <th id="T_e4d42_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_e4d42_row3_col0" class="data row3 col0" >WND</td>
+      <td id="T_e4d42_row3_col1" class="data row3 col1" >k365h1</td>
+      <td id="T_e4d42_row3_col2" class="data row3 col2" >Novo</td>
+      <td id="T_e4d42_row3_col3" class="data row3 col3" >51,016</td>
+      <td id="T_e4d42_row3_col4" class="data row3 col4" >+0.0</td>
+      <td id="T_e4d42_row3_col5" class="data row3 col5" >0.96</td>
+      <td id="T_e4d42_row3_col6" class="data row3 col6" >+0.0</td>
+      <td id="T_e4d42_row3_col7" class="data row3 col7" >427.28</td>
+      <td id="T_e4d42_row3_col8" class="data row3 col8" >10814.0</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_665bd_row4_col0" class="data row4 col0" >WND</td>
-      <td id="T_665bd_row4_col1" class="data row4 col1" >k8h1</td>
-      <td id="T_665bd_row4_col2" class="data row4 col2" >Niet</td>
-      <td id="T_665bd_row4_col3" class="data row4 col3" >57,305</td>
-      <td id="T_665bd_row4_col4" class="data row4 col4" >+12.3</td>
-      <td id="T_665bd_row4_col5" class="data row4 col5" >7.45</td>
-      <td id="T_665bd_row4_col6" class="data row4 col6" >+678.9</td>
-      <td id="T_665bd_row4_col7" class="data row4 col7" >0.35</td>
-      <td id="T_665bd_row4_col8" class="data row4 col8" >4.2</td>
+      <th id="T_e4d42_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_e4d42_row4_col0" class="data row4 col0" >WND</td>
+      <td id="T_e4d42_row4_col1" class="data row4 col1" >k8h1</td>
+      <td id="T_e4d42_row4_col2" class="data row4 col2" >Niet</td>
+      <td id="T_e4d42_row4_col3" class="data row4 col3" >57,305</td>
+      <td id="T_e4d42_row4_col4" class="data row4 col4" >+12.3</td>
+      <td id="T_e4d42_row4_col5" class="data row4 col5" >7.45</td>
+      <td id="T_e4d42_row4_col6" class="data row4 col6" >+678.9</td>
+      <td id="T_e4d42_row4_col7" class="data row4 col7" >0.30</td>
+      <td id="T_e4d42_row4_col8" class="data row4 col8" >4.9</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_665bd_row5_col0" class="data row5 col0" >WND</td>
-      <td id="T_665bd_row5_col1" class="data row5 col1" >k8h1</td>
-      <td id="T_665bd_row5_col2" class="data row5 col2" >Welsch</td>
-      <td id="T_665bd_row5_col3" class="data row5 col3" >57,380</td>
-      <td id="T_665bd_row5_col4" class="data row5 col4" >+12.5</td>
-      <td id="T_665bd_row5_col5" class="data row5 col5" >7.53</td>
-      <td id="T_665bd_row5_col6" class="data row5 col6" >+686.7</td>
-      <td id="T_665bd_row5_col7" class="data row5 col7" >0.63</td>
-      <td id="T_665bd_row5_col8" class="data row5 col8" >13.1</td>
+      <th id="T_e4d42_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_e4d42_row5_col0" class="data row5 col0" >WND</td>
+      <td id="T_e4d42_row5_col1" class="data row5 col1" >k8h1</td>
+      <td id="T_e4d42_row5_col2" class="data row5 col2" >Welsch</td>
+      <td id="T_e4d42_row5_col3" class="data row5 col3" >57,380</td>
+      <td id="T_e4d42_row5_col4" class="data row5 col4" >+12.5</td>
+      <td id="T_e4d42_row5_col5" class="data row5 col5" >7.53</td>
+      <td id="T_e4d42_row5_col6" class="data row5 col6" >+686.7</td>
+      <td id="T_e4d42_row5_col7" class="data row5 col7" >0.67</td>
+      <td id="T_e4d42_row5_col8" class="data row5 col8" >13.9</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_665bd_row6_col0" class="data row6 col0" >WND</td>
-      <td id="T_665bd_row6_col1" class="data row6 col1" >k8h1</td>
-      <td id="T_665bd_row6_col2" class="data row6 col2" >Kotzur</td>
-      <td id="T_665bd_row6_col3" class="data row6 col3" >51,419</td>
-      <td id="T_665bd_row6_col4" class="data row6 col4" >+0.8</td>
-      <td id="T_665bd_row6_col5" class="data row6 col5" >1.57</td>
-      <td id="T_665bd_row6_col6" class="data row6 col6" >+63.9</td>
-      <td id="T_665bd_row6_col7" class="data row6 col7" >0.34</td>
-      <td id="T_665bd_row6_col8" class="data row6 col8" >5.9</td>
+      <th id="T_e4d42_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_e4d42_row6_col0" class="data row6 col0" >WND</td>
+      <td id="T_e4d42_row6_col1" class="data row6 col1" >k8h1</td>
+      <td id="T_e4d42_row6_col2" class="data row6 col2" >Kotzur</td>
+      <td id="T_e4d42_row6_col3" class="data row6 col3" >51,419</td>
+      <td id="T_e4d42_row6_col4" class="data row6 col4" >+0.8</td>
+      <td id="T_e4d42_row6_col5" class="data row6 col5" >1.57</td>
+      <td id="T_e4d42_row6_col6" class="data row6 col6" >+63.9</td>
+      <td id="T_e4d42_row6_col7" class="data row6 col7" >0.53</td>
+      <td id="T_e4d42_row6_col8" class="data row6 col8" >6.5</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_665bd_row7_col0" class="data row7 col0" >WND</td>
-      <td id="T_665bd_row7_col1" class="data row7 col1" >k8h1</td>
-      <td id="T_665bd_row7_col2" class="data row7 col2" >Novo</td>
-      <td id="T_665bd_row7_col3" class="data row7 col3" >51,424</td>
-      <td id="T_665bd_row7_col4" class="data row7 col4" >+0.8</td>
-      <td id="T_665bd_row7_col5" class="data row7 col5" >1.57</td>
-      <td id="T_665bd_row7_col6" class="data row7 col6" >+64.4</td>
-      <td id="T_665bd_row7_col7" class="data row7 col7" >8.30</td>
-      <td id="T_665bd_row7_col8" class="data row7 col8" >279.0</td>
+      <th id="T_e4d42_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_e4d42_row7_col0" class="data row7 col0" >WND</td>
+      <td id="T_e4d42_row7_col1" class="data row7 col1" >k8h1</td>
+      <td id="T_e4d42_row7_col2" class="data row7 col2" >Novo</td>
+      <td id="T_e4d42_row7_col3" class="data row7 col3" >51,424</td>
+      <td id="T_e4d42_row7_col4" class="data row7 col4" >+0.8</td>
+      <td id="T_e4d42_row7_col5" class="data row7 col5" >1.57</td>
+      <td id="T_e4d42_row7_col6" class="data row7 col6" >+64.4</td>
+      <td id="T_e4d42_row7_col7" class="data row7 col7" >6.17</td>
+      <td id="T_e4d42_row7_col8" class="data row7 col8" >281.7</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_665bd_row8_col0" class="data row8 col0" >WND</td>
-      <td id="T_665bd_row8_col1" class="data row8 col1" >k20h1</td>
-      <td id="T_665bd_row8_col2" class="data row8 col2" >Niet</td>
-      <td id="T_665bd_row8_col3" class="data row8 col3" >53,945</td>
-      <td id="T_665bd_row8_col4" class="data row8 col4" >+5.7</td>
-      <td id="T_665bd_row8_col5" class="data row8 col5" >4.28</td>
-      <td id="T_665bd_row8_col6" class="data row8 col6" >+347.0</td>
-      <td id="T_665bd_row8_col7" class="data row8 col7" >0.82</td>
-      <td id="T_665bd_row8_col8" class="data row8 col8" >9.5</td>
+      <th id="T_e4d42_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_e4d42_row8_col0" class="data row8 col0" >WND</td>
+      <td id="T_e4d42_row8_col1" class="data row8 col1" >k20h1</td>
+      <td id="T_e4d42_row8_col2" class="data row8 col2" >Niet</td>
+      <td id="T_e4d42_row8_col3" class="data row8 col3" >53,945</td>
+      <td id="T_e4d42_row8_col4" class="data row8 col4" >+5.7</td>
+      <td id="T_e4d42_row8_col5" class="data row8 col5" >4.28</td>
+      <td id="T_e4d42_row8_col6" class="data row8 col6" >+347.0</td>
+      <td id="T_e4d42_row8_col7" class="data row8 col7" >0.73</td>
+      <td id="T_e4d42_row8_col8" class="data row8 col8" >11.2</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_665bd_row9_col0" class="data row9 col0" >WND</td>
-      <td id="T_665bd_row9_col1" class="data row9 col1" >k20h1</td>
-      <td id="T_665bd_row9_col2" class="data row9 col2" >Welsch</td>
-      <td id="T_665bd_row9_col3" class="data row9 col3" >53,942</td>
-      <td id="T_665bd_row9_col4" class="data row9 col4" >+5.7</td>
-      <td id="T_665bd_row9_col5" class="data row9 col5" >4.27</td>
-      <td id="T_665bd_row9_col6" class="data row9 col6" >+346.7</td>
-      <td id="T_665bd_row9_col7" class="data row9 col7" >2.13</td>
-      <td id="T_665bd_row9_col8" class="data row9 col8" >30.7</td>
+      <th id="T_e4d42_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_e4d42_row9_col0" class="data row9 col0" >WND</td>
+      <td id="T_e4d42_row9_col1" class="data row9 col1" >k20h1</td>
+      <td id="T_e4d42_row9_col2" class="data row9 col2" >Welsch</td>
+      <td id="T_e4d42_row9_col3" class="data row9 col3" >53,942</td>
+      <td id="T_e4d42_row9_col4" class="data row9 col4" >+5.7</td>
+      <td id="T_e4d42_row9_col5" class="data row9 col5" >4.27</td>
+      <td id="T_e4d42_row9_col6" class="data row9 col6" >+346.7</td>
+      <td id="T_e4d42_row9_col7" class="data row9 col7" >1.36</td>
+      <td id="T_e4d42_row9_col8" class="data row9 col8" >35.0</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row10" class="row_heading level0 row10" >10</th>
-      <td id="T_665bd_row10_col0" class="data row10 col0" >WND</td>
-      <td id="T_665bd_row10_col1" class="data row10 col1" >k20h1</td>
-      <td id="T_665bd_row10_col2" class="data row10 col2" >Kotzur</td>
-      <td id="T_665bd_row10_col3" class="data row10 col3" >50,811</td>
-      <td id="T_665bd_row10_col4" class="data row10 col4" >-0.4</td>
-      <td id="T_665bd_row10_col5" class="data row10 col5" >1.14</td>
-      <td id="T_665bd_row10_col6" class="data row10 col6" >+19.5</td>
-      <td id="T_665bd_row10_col7" class="data row10 col7" >0.68</td>
-      <td id="T_665bd_row10_col8" class="data row10 col8" >11.5</td>
+      <th id="T_e4d42_level0_row10" class="row_heading level0 row10" >10</th>
+      <td id="T_e4d42_row10_col0" class="data row10 col0" >WND</td>
+      <td id="T_e4d42_row10_col1" class="data row10 col1" >k20h1</td>
+      <td id="T_e4d42_row10_col2" class="data row10 col2" >Kotzur</td>
+      <td id="T_e4d42_row10_col3" class="data row10 col3" >50,811</td>
+      <td id="T_e4d42_row10_col4" class="data row10 col4" >-0.4</td>
+      <td id="T_e4d42_row10_col5" class="data row10 col5" >1.14</td>
+      <td id="T_e4d42_row10_col6" class="data row10 col6" >+19.5</td>
+      <td id="T_e4d42_row10_col7" class="data row10 col7" >0.67</td>
+      <td id="T_e4d42_row10_col8" class="data row10 col8" >13.2</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row11" class="row_heading level0 row11" >11</th>
-      <td id="T_665bd_row11_col0" class="data row11 col0" >WND</td>
-      <td id="T_665bd_row11_col1" class="data row11 col1" >k20h1</td>
-      <td id="T_665bd_row11_col2" class="data row11 col2" >Novo</td>
-      <td id="T_665bd_row11_col3" class="data row11 col3" >50,821</td>
-      <td id="T_665bd_row11_col4" class="data row11 col4" >-0.4</td>
-      <td id="T_665bd_row11_col5" class="data row11 col5" >1.15</td>
-      <td id="T_665bd_row11_col6" class="data row11 col6" >+20.5</td>
-      <td id="T_665bd_row11_col7" class="data row11 col7" >31.20</td>
-      <td id="T_665bd_row11_col8" class="data row11 col8" >631.4</td>
+      <th id="T_e4d42_level0_row11" class="row_heading level0 row11" >11</th>
+      <td id="T_e4d42_row11_col0" class="data row11 col0" >WND</td>
+      <td id="T_e4d42_row11_col1" class="data row11 col1" >k20h1</td>
+      <td id="T_e4d42_row11_col2" class="data row11 col2" >Novo</td>
+      <td id="T_e4d42_row11_col3" class="data row11 col3" >50,821</td>
+      <td id="T_e4d42_row11_col4" class="data row11 col4" >-0.4</td>
+      <td id="T_e4d42_row11_col5" class="data row11 col5" >1.15</td>
+      <td id="T_e4d42_row11_col6" class="data row11 col6" >+20.5</td>
+      <td id="T_e4d42_row11_col7" class="data row11 col7" >12.84</td>
+      <td id="T_e4d42_row11_col8" class="data row11 col8" >635.2</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row12" class="row_heading level0 row12" >12</th>
-      <td id="T_665bd_row12_col0" class="data row12 col0" >SOL</td>
-      <td id="T_665bd_row12_col1" class="data row12 col1" >k365h1</td>
-      <td id="T_665bd_row12_col2" class="data row12 col2" >Niet</td>
-      <td id="T_665bd_row12_col3" class="data row12 col3" >153,330</td>
-      <td id="T_665bd_row12_col4" class="data row12 col4" >-0.0</td>
-      <td id="T_665bd_row12_col5" class="data row12 col5" >3.42</td>
-      <td id="T_665bd_row12_col6" class="data row12 col6" >-0.0</td>
-      <td id="T_665bd_row12_col7" class="data row12 col7" >115.51</td>
-      <td id="T_665bd_row12_col8" class="data row12 col8" >185.8</td>
+      <th id="T_e4d42_level0_row12" class="row_heading level0 row12" >12</th>
+      <td id="T_e4d42_row12_col0" class="data row12 col0" >SOL</td>
+      <td id="T_e4d42_row12_col1" class="data row12 col1" >k365h1</td>
+      <td id="T_e4d42_row12_col2" class="data row12 col2" >Niet</td>
+      <td id="T_e4d42_row12_col3" class="data row12 col3" >153,330</td>
+      <td id="T_e4d42_row12_col4" class="data row12 col4" >-0.0</td>
+      <td id="T_e4d42_row12_col5" class="data row12 col5" >3.42</td>
+      <td id="T_e4d42_row12_col6" class="data row12 col6" >-0.0</td>
+      <td id="T_e4d42_row12_col7" class="data row12 col7" >115.51</td>
+      <td id="T_e4d42_row12_col8" class="data row12 col8" >185.8</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row13" class="row_heading level0 row13" >13</th>
-      <td id="T_665bd_row13_col0" class="data row13 col0" >SOL</td>
-      <td id="T_665bd_row13_col1" class="data row13 col1" >k365h1</td>
-      <td id="T_665bd_row13_col2" class="data row13 col2" >Welsch</td>
-      <td id="T_665bd_row13_col3" class="data row13 col3" >153,353</td>
-      <td id="T_665bd_row13_col4" class="data row13 col4" >+0.0</td>
-      <td id="T_665bd_row13_col5" class="data row13 col5" >3.44</td>
-      <td id="T_665bd_row13_col6" class="data row13 col6" >+0.7</td>
-      <td id="T_665bd_row13_col7" class="data row13 col7" >242.08</td>
-      <td id="T_665bd_row13_col8" class="data row13 col8" >1042.0</td>
+      <th id="T_e4d42_level0_row13" class="row_heading level0 row13" >13</th>
+      <td id="T_e4d42_row13_col0" class="data row13 col0" >SOL</td>
+      <td id="T_e4d42_row13_col1" class="data row13 col1" >k365h1</td>
+      <td id="T_e4d42_row13_col2" class="data row13 col2" >Welsch</td>
+      <td id="T_e4d42_row13_col3" class="data row13 col3" >153,353</td>
+      <td id="T_e4d42_row13_col4" class="data row13 col4" >+0.0</td>
+      <td id="T_e4d42_row13_col5" class="data row13 col5" >3.44</td>
+      <td id="T_e4d42_row13_col6" class="data row13 col6" >+0.7</td>
+      <td id="T_e4d42_row13_col7" class="data row13 col7" >242.08</td>
+      <td id="T_e4d42_row13_col8" class="data row13 col8" >1042.0</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row14" class="row_heading level0 row14" >14</th>
-      <td id="T_665bd_row14_col0" class="data row14 col0" >SOL</td>
-      <td id="T_665bd_row14_col1" class="data row14 col1" >k365h1</td>
-      <td id="T_665bd_row14_col2" class="data row14 col2" >Kotzur</td>
-      <td id="T_665bd_row14_col3" class="data row14 col3" >153,298</td>
-      <td id="T_665bd_row14_col4" class="data row14 col4" >-0.0</td>
-      <td id="T_665bd_row14_col5" class="data row14 col5" >3.39</td>
-      <td id="T_665bd_row14_col6" class="data row14 col6" >-1.0</td>
-      <td id="T_665bd_row14_col7" class="data row14 col7" >61.94</td>
-      <td id="T_665bd_row14_col8" class="data row14 col8" >621.3</td>
+      <th id="T_e4d42_level0_row14" class="row_heading level0 row14" >14</th>
+      <td id="T_e4d42_row14_col0" class="data row14 col0" >SOL</td>
+      <td id="T_e4d42_row14_col1" class="data row14 col1" >k365h1</td>
+      <td id="T_e4d42_row14_col2" class="data row14 col2" >Kotzur</td>
+      <td id="T_e4d42_row14_col3" class="data row14 col3" >153,298</td>
+      <td id="T_e4d42_row14_col4" class="data row14 col4" >-0.0</td>
+      <td id="T_e4d42_row14_col5" class="data row14 col5" >3.39</td>
+      <td id="T_e4d42_row14_col6" class="data row14 col6" >-1.0</td>
+      <td id="T_e4d42_row14_col7" class="data row14 col7" >61.94</td>
+      <td id="T_e4d42_row14_col8" class="data row14 col8" >621.3</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row15" class="row_heading level0 row15" >15</th>
-      <td id="T_665bd_row15_col0" class="data row15 col0" >SOL</td>
-      <td id="T_665bd_row15_col1" class="data row15 col1" >k365h1</td>
-      <td id="T_665bd_row15_col2" class="data row15 col2" >Novo</td>
-      <td id="T_665bd_row15_col3" class="data row15 col3" >153,330</td>
-      <td id="T_665bd_row15_col4" class="data row15 col4" >+0.0</td>
-      <td id="T_665bd_row15_col5" class="data row15 col5" >3.42</td>
-      <td id="T_665bd_row15_col6" class="data row15 col6" >+0.0</td>
-      <td id="T_665bd_row15_col7" class="data row15 col7" >421.55</td>
-      <td id="T_665bd_row15_col8" class="data row15 col8" >12195.1</td>
+      <th id="T_e4d42_level0_row15" class="row_heading level0 row15" >15</th>
+      <td id="T_e4d42_row15_col0" class="data row15 col0" >SOL</td>
+      <td id="T_e4d42_row15_col1" class="data row15 col1" >k365h1</td>
+      <td id="T_e4d42_row15_col2" class="data row15 col2" >Novo</td>
+      <td id="T_e4d42_row15_col3" class="data row15 col3" >153,330</td>
+      <td id="T_e4d42_row15_col4" class="data row15 col4" >+0.0</td>
+      <td id="T_e4d42_row15_col5" class="data row15 col5" >3.42</td>
+      <td id="T_e4d42_row15_col6" class="data row15 col6" >+0.0</td>
+      <td id="T_e4d42_row15_col7" class="data row15 col7" >421.55</td>
+      <td id="T_e4d42_row15_col8" class="data row15 col8" >12195.1</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row16" class="row_heading level0 row16" >16</th>
-      <td id="T_665bd_row16_col0" class="data row16 col0" >SOL</td>
-      <td id="T_665bd_row16_col1" class="data row16 col1" >k9h1</td>
-      <td id="T_665bd_row16_col2" class="data row16 col2" >Niet</td>
-      <td id="T_665bd_row16_col3" class="data row16 col3" >153,697</td>
-      <td id="T_665bd_row16_col4" class="data row16 col4" >+0.2</td>
-      <td id="T_665bd_row16_col5" class="data row16 col5" >6.21</td>
-      <td id="T_665bd_row16_col6" class="data row16 col6" >+81.6</td>
-      <td id="T_665bd_row16_col7" class="data row16 col7" >0.22</td>
-      <td id="T_665bd_row16_col8" class="data row16 col8" >4.9</td>
+      <th id="T_e4d42_level0_row16" class="row_heading level0 row16" >16</th>
+      <td id="T_e4d42_row16_col0" class="data row16 col0" >SOL</td>
+      <td id="T_e4d42_row16_col1" class="data row16 col1" >k9h1</td>
+      <td id="T_e4d42_row16_col2" class="data row16 col2" >Niet</td>
+      <td id="T_e4d42_row16_col3" class="data row16 col3" >153,697</td>
+      <td id="T_e4d42_row16_col4" class="data row16 col4" >+0.2</td>
+      <td id="T_e4d42_row16_col5" class="data row16 col5" >6.21</td>
+      <td id="T_e4d42_row16_col6" class="data row16 col6" >+81.6</td>
+      <td id="T_e4d42_row16_col7" class="data row16 col7" >0.31</td>
+      <td id="T_e4d42_row16_col8" class="data row16 col8" >5.2</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row17" class="row_heading level0 row17" >17</th>
-      <td id="T_665bd_row17_col0" class="data row17 col0" >SOL</td>
-      <td id="T_665bd_row17_col1" class="data row17 col1" >k9h1</td>
-      <td id="T_665bd_row17_col2" class="data row17 col2" >Welsch</td>
-      <td id="T_665bd_row17_col3" class="data row17 col3" >152,467</td>
-      <td id="T_665bd_row17_col4" class="data row17 col4" >-0.6</td>
-      <td id="T_665bd_row17_col5" class="data row17 col5" >4.98</td>
-      <td id="T_665bd_row17_col6" class="data row17 col6" >+45.6</td>
-      <td id="T_665bd_row17_col7" class="data row17 col7" >0.69</td>
-      <td id="T_665bd_row17_col8" class="data row17 col8" >14.5</td>
+      <th id="T_e4d42_level0_row17" class="row_heading level0 row17" >17</th>
+      <td id="T_e4d42_row17_col0" class="data row17 col0" >SOL</td>
+      <td id="T_e4d42_row17_col1" class="data row17 col1" >k9h1</td>
+      <td id="T_e4d42_row17_col2" class="data row17 col2" >Welsch</td>
+      <td id="T_e4d42_row17_col3" class="data row17 col3" >152,467</td>
+      <td id="T_e4d42_row17_col4" class="data row17 col4" >-0.6</td>
+      <td id="T_e4d42_row17_col5" class="data row17 col5" >4.98</td>
+      <td id="T_e4d42_row17_col6" class="data row17 col6" >+45.6</td>
+      <td id="T_e4d42_row17_col7" class="data row17 col7" >0.71</td>
+      <td id="T_e4d42_row17_col8" class="data row17 col8" >15.4</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row18" class="row_heading level0 row18" >18</th>
-      <td id="T_665bd_row18_col0" class="data row18 col0" >SOL</td>
-      <td id="T_665bd_row18_col1" class="data row18 col1" >k9h1</td>
-      <td id="T_665bd_row18_col2" class="data row18 col2" >Kotzur</td>
-      <td id="T_665bd_row18_col3" class="data row18 col3" >150,998</td>
-      <td id="T_665bd_row18_col4" class="data row18 col4" >-1.5</td>
-      <td id="T_665bd_row18_col5" class="data row18 col5" >3.51</td>
-      <td id="T_665bd_row18_col6" class="data row18 col6" >+2.6</td>
-      <td id="T_665bd_row18_col7" class="data row18 col7" >0.27</td>
-      <td id="T_665bd_row18_col8" class="data row18 col8" >6.1</td>
+      <th id="T_e4d42_level0_row18" class="row_heading level0 row18" >18</th>
+      <td id="T_e4d42_row18_col0" class="data row18 col0" >SOL</td>
+      <td id="T_e4d42_row18_col1" class="data row18 col1" >k9h1</td>
+      <td id="T_e4d42_row18_col2" class="data row18 col2" >Kotzur</td>
+      <td id="T_e4d42_row18_col3" class="data row18 col3" >150,998</td>
+      <td id="T_e4d42_row18_col4" class="data row18 col4" >-1.5</td>
+      <td id="T_e4d42_row18_col5" class="data row18 col5" >3.51</td>
+      <td id="T_e4d42_row18_col6" class="data row18 col6" >+2.6</td>
+      <td id="T_e4d42_row18_col7" class="data row18 col7" >0.38</td>
+      <td id="T_e4d42_row18_col8" class="data row18 col8" >6.9</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row19" class="row_heading level0 row19" >19</th>
-      <td id="T_665bd_row19_col0" class="data row19 col0" >SOL</td>
-      <td id="T_665bd_row19_col1" class="data row19 col1" >k9h1</td>
-      <td id="T_665bd_row19_col2" class="data row19 col2" >Novo</td>
-      <td id="T_665bd_row19_col3" class="data row19 col3" >151,023</td>
-      <td id="T_665bd_row19_col4" class="data row19 col4" >-1.5</td>
-      <td id="T_665bd_row19_col5" class="data row19 col5" >3.53</td>
-      <td id="T_665bd_row19_col6" class="data row19 col6" >+3.3</td>
-      <td id="T_665bd_row19_col7" class="data row19 col7" >10.38</td>
-      <td id="T_665bd_row19_col8" class="data row19 col8" >308.3</td>
+      <th id="T_e4d42_level0_row19" class="row_heading level0 row19" >19</th>
+      <td id="T_e4d42_row19_col0" class="data row19 col0" >SOL</td>
+      <td id="T_e4d42_row19_col1" class="data row19 col1" >k9h1</td>
+      <td id="T_e4d42_row19_col2" class="data row19 col2" >Novo</td>
+      <td id="T_e4d42_row19_col3" class="data row19 col3" >151,023</td>
+      <td id="T_e4d42_row19_col4" class="data row19 col4" >-1.5</td>
+      <td id="T_e4d42_row19_col5" class="data row19 col5" >3.53</td>
+      <td id="T_e4d42_row19_col6" class="data row19 col6" >+3.3</td>
+      <td id="T_e4d42_row19_col7" class="data row19 col7" >7.00</td>
+      <td id="T_e4d42_row19_col8" class="data row19 col8" >308.9</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row20" class="row_heading level0 row20" >20</th>
-      <td id="T_665bd_row20_col0" class="data row20 col0" >SOL</td>
-      <td id="T_665bd_row20_col1" class="data row20 col1" >k20h1</td>
-      <td id="T_665bd_row20_col2" class="data row20 col2" >Niet</td>
-      <td id="T_665bd_row20_col3" class="data row20 col3" >157,988</td>
-      <td id="T_665bd_row20_col4" class="data row20 col4" >+3.0</td>
-      <td id="T_665bd_row20_col5" class="data row20 col5" >5.44</td>
-      <td id="T_665bd_row20_col6" class="data row20 col6" >+59.1</td>
-      <td id="T_665bd_row20_col7" class="data row20 col7" >0.68</td>
-      <td id="T_665bd_row20_col8" class="data row20 col8" >9.1</td>
+      <th id="T_e4d42_level0_row20" class="row_heading level0 row20" >20</th>
+      <td id="T_e4d42_row20_col0" class="data row20 col0" >SOL</td>
+      <td id="T_e4d42_row20_col1" class="data row20 col1" >k20h1</td>
+      <td id="T_e4d42_row20_col2" class="data row20 col2" >Niet</td>
+      <td id="T_e4d42_row20_col3" class="data row20 col3" >157,988</td>
+      <td id="T_e4d42_row20_col4" class="data row20 col4" >+3.0</td>
+      <td id="T_e4d42_row20_col5" class="data row20 col5" >5.44</td>
+      <td id="T_e4d42_row20_col6" class="data row20 col6" >+59.1</td>
+      <td id="T_e4d42_row20_col7" class="data row20 col7" >0.83</td>
+      <td id="T_e4d42_row20_col8" class="data row20 col8" >12.0</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row21" class="row_heading level0 row21" >21</th>
-      <td id="T_665bd_row21_col0" class="data row21 col0" >SOL</td>
-      <td id="T_665bd_row21_col1" class="data row21 col1" >k20h1</td>
-      <td id="T_665bd_row21_col2" class="data row21 col2" >Welsch</td>
-      <td id="T_665bd_row21_col3" class="data row21 col3" >157,591</td>
-      <td id="T_665bd_row21_col4" class="data row21 col4" >+2.8</td>
-      <td id="T_665bd_row21_col5" class="data row21 col5" >5.04</td>
-      <td id="T_665bd_row21_col6" class="data row21 col6" >+47.5</td>
-      <td id="T_665bd_row21_col7" class="data row21 col7" >2.54</td>
-      <td id="T_665bd_row21_col8" class="data row21 col8" >32.5</td>
+      <th id="T_e4d42_level0_row21" class="row_heading level0 row21" >21</th>
+      <td id="T_e4d42_row21_col0" class="data row21 col0" >SOL</td>
+      <td id="T_e4d42_row21_col1" class="data row21 col1" >k20h1</td>
+      <td id="T_e4d42_row21_col2" class="data row21 col2" >Welsch</td>
+      <td id="T_e4d42_row21_col3" class="data row21 col3" >157,591</td>
+      <td id="T_e4d42_row21_col4" class="data row21 col4" >+2.8</td>
+      <td id="T_e4d42_row21_col5" class="data row21 col5" >5.04</td>
+      <td id="T_e4d42_row21_col6" class="data row21 col6" >+47.5</td>
+      <td id="T_e4d42_row21_col7" class="data row21 col7" >3.28</td>
+      <td id="T_e4d42_row21_col8" class="data row21 col8" >34.5</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row22" class="row_heading level0 row22" >22</th>
-      <td id="T_665bd_row22_col0" class="data row22 col0" >SOL</td>
-      <td id="T_665bd_row22_col1" class="data row22 col1" >k20h1</td>
-      <td id="T_665bd_row22_col2" class="data row22 col2" >Kotzur</td>
-      <td id="T_665bd_row22_col3" class="data row22 col3" >156,927</td>
-      <td id="T_665bd_row22_col4" class="data row22 col4" >+2.3</td>
-      <td id="T_665bd_row22_col5" class="data row22 col5" >4.38</td>
-      <td id="T_665bd_row22_col6" class="data row22 col6" >+28.1</td>
-      <td id="T_665bd_row22_col7" class="data row22 col7" >0.79</td>
-      <td id="T_665bd_row22_col8" class="data row22 col8" >12.0</td>
+      <th id="T_e4d42_level0_row22" class="row_heading level0 row22" >22</th>
+      <td id="T_e4d42_row22_col0" class="data row22 col0" >SOL</td>
+      <td id="T_e4d42_row22_col1" class="data row22 col1" >k20h1</td>
+      <td id="T_e4d42_row22_col2" class="data row22 col2" >Kotzur</td>
+      <td id="T_e4d42_row22_col3" class="data row22 col3" >156,927</td>
+      <td id="T_e4d42_row22_col4" class="data row22 col4" >+2.3</td>
+      <td id="T_e4d42_row22_col5" class="data row22 col5" >4.38</td>
+      <td id="T_e4d42_row22_col6" class="data row22 col6" >+28.1</td>
+      <td id="T_e4d42_row22_col7" class="data row22 col7" >1.03</td>
+      <td id="T_e4d42_row22_col8" class="data row22 col8" >13.9</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row23" class="row_heading level0 row23" >23</th>
-      <td id="T_665bd_row23_col0" class="data row23 col0" >SOL</td>
-      <td id="T_665bd_row23_col1" class="data row23 col1" >k20h1</td>
-      <td id="T_665bd_row23_col2" class="data row23 col2" >Novo</td>
-      <td id="T_665bd_row23_col3" class="data row23 col3" >156,960</td>
-      <td id="T_665bd_row23_col4" class="data row23 col4" >+2.4</td>
-      <td id="T_665bd_row23_col5" class="data row23 col5" >4.41</td>
-      <td id="T_665bd_row23_col6" class="data row23 col6" >+29.1</td>
-      <td id="T_665bd_row23_col7" class="data row23 col7" >27.41</td>
-      <td id="T_665bd_row23_col8" class="data row23 col8" >633.3</td>
+      <th id="T_e4d42_level0_row23" class="row_heading level0 row23" >23</th>
+      <td id="T_e4d42_row23_col0" class="data row23 col0" >SOL</td>
+      <td id="T_e4d42_row23_col1" class="data row23 col1" >k20h1</td>
+      <td id="T_e4d42_row23_col2" class="data row23 col2" >Novo</td>
+      <td id="T_e4d42_row23_col3" class="data row23 col3" >156,960</td>
+      <td id="T_e4d42_row23_col4" class="data row23 col4" >+2.4</td>
+      <td id="T_e4d42_row23_col5" class="data row23 col5" >4.41</td>
+      <td id="T_e4d42_row23_col6" class="data row23 col6" >+29.1</td>
+      <td id="T_e4d42_row23_col7" class="data row23 col7" >13.30</td>
+      <td id="T_e4d42_row23_col8" class="data row23 col8" >634.9</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row24" class="row_heading level0 row24" >24</th>
-      <td id="T_665bd_row24_col0" class="data row24 col0" >HYD</td>
-      <td id="T_665bd_row24_col1" class="data row24 col1" >k365h1</td>
-      <td id="T_665bd_row24_col2" class="data row24 col2" >Niet</td>
-      <td id="T_665bd_row24_col3" class="data row24 col3" >90,841</td>
-      <td id="T_665bd_row24_col4" class="data row24 col4" >-0.0</td>
-      <td id="T_665bd_row24_col5" class="data row24 col5" >6.06</td>
-      <td id="T_665bd_row24_col6" class="data row24 col6" >-0.0</td>
-      <td id="T_665bd_row24_col7" class="data row24 col7" >319.63</td>
-      <td id="T_665bd_row24_col8" class="data row24 col8" >193.0</td>
+      <th id="T_e4d42_level0_row24" class="row_heading level0 row24" >24</th>
+      <td id="T_e4d42_row24_col0" class="data row24 col0" >HYD</td>
+      <td id="T_e4d42_row24_col1" class="data row24 col1" >k365h1</td>
+      <td id="T_e4d42_row24_col2" class="data row24 col2" >Niet</td>
+      <td id="T_e4d42_row24_col3" class="data row24 col3" >90,841</td>
+      <td id="T_e4d42_row24_col4" class="data row24 col4" >-0.0</td>
+      <td id="T_e4d42_row24_col5" class="data row24 col5" >6.06</td>
+      <td id="T_e4d42_row24_col6" class="data row24 col6" >-0.0</td>
+      <td id="T_e4d42_row24_col7" class="data row24 col7" >319.63</td>
+      <td id="T_e4d42_row24_col8" class="data row24 col8" >193.0</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row25" class="row_heading level0 row25" >25</th>
-      <td id="T_665bd_row25_col0" class="data row25 col0" >HYD</td>
-      <td id="T_665bd_row25_col1" class="data row25 col1" >k365h1</td>
-      <td id="T_665bd_row25_col2" class="data row25 col2" >Welsch</td>
-      <td id="T_665bd_row25_col3" class="data row25 col3" >90,853</td>
-      <td id="T_665bd_row25_col4" class="data row25 col4" >+0.0</td>
-      <td id="T_665bd_row25_col5" class="data row25 col5" >6.07</td>
-      <td id="T_665bd_row25_col6" class="data row25 col6" >+0.2</td>
-      <td id="T_665bd_row25_col7" class="data row25 col7" >294.54</td>
-      <td id="T_665bd_row25_col8" class="data row25 col8" >1051.7</td>
+      <th id="T_e4d42_level0_row25" class="row_heading level0 row25" >25</th>
+      <td id="T_e4d42_row25_col0" class="data row25 col0" >HYD</td>
+      <td id="T_e4d42_row25_col1" class="data row25 col1" >k365h1</td>
+      <td id="T_e4d42_row25_col2" class="data row25 col2" >Welsch</td>
+      <td id="T_e4d42_row25_col3" class="data row25 col3" >90,853</td>
+      <td id="T_e4d42_row25_col4" class="data row25 col4" >+0.0</td>
+      <td id="T_e4d42_row25_col5" class="data row25 col5" >6.07</td>
+      <td id="T_e4d42_row25_col6" class="data row25 col6" >+0.2</td>
+      <td id="T_e4d42_row25_col7" class="data row25 col7" >294.54</td>
+      <td id="T_e4d42_row25_col8" class="data row25 col8" >1051.7</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row26" class="row_heading level0 row26" >26</th>
-      <td id="T_665bd_row26_col0" class="data row26 col0" >HYD</td>
-      <td id="T_665bd_row26_col1" class="data row26 col1" >k365h1</td>
-      <td id="T_665bd_row26_col2" class="data row26 col2" >Kotzur</td>
-      <td id="T_665bd_row26_col3" class="data row26 col3" >90,836</td>
-      <td id="T_665bd_row26_col4" class="data row26 col4" >-0.0</td>
-      <td id="T_665bd_row26_col5" class="data row26 col5" >6.06</td>
-      <td id="T_665bd_row26_col6" class="data row26 col6" >-0.1</td>
-      <td id="T_665bd_row26_col7" class="data row26 col7" >82.98</td>
-      <td id="T_665bd_row26_col8" class="data row26 col8" >613.4</td>
+      <th id="T_e4d42_level0_row26" class="row_heading level0 row26" >26</th>
+      <td id="T_e4d42_row26_col0" class="data row26 col0" >HYD</td>
+      <td id="T_e4d42_row26_col1" class="data row26 col1" >k365h1</td>
+      <td id="T_e4d42_row26_col2" class="data row26 col2" >Kotzur</td>
+      <td id="T_e4d42_row26_col3" class="data row26 col3" >90,836</td>
+      <td id="T_e4d42_row26_col4" class="data row26 col4" >-0.0</td>
+      <td id="T_e4d42_row26_col5" class="data row26 col5" >6.06</td>
+      <td id="T_e4d42_row26_col6" class="data row26 col6" >-0.1</td>
+      <td id="T_e4d42_row26_col7" class="data row26 col7" >82.98</td>
+      <td id="T_e4d42_row26_col8" class="data row26 col8" >613.4</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row27" class="row_heading level0 row27" >27</th>
-      <td id="T_665bd_row27_col0" class="data row27 col0" >HYD</td>
-      <td id="T_665bd_row27_col1" class="data row27 col1" >k365h1</td>
-      <td id="T_665bd_row27_col2" class="data row27 col2" >Novo</td>
-      <td id="T_665bd_row27_col3" class="data row27 col3" >90,841</td>
-      <td id="T_665bd_row27_col4" class="data row27 col4" >+0.0</td>
-      <td id="T_665bd_row27_col5" class="data row27 col5" >6.06</td>
-      <td id="T_665bd_row27_col6" class="data row27 col6" >+0.0</td>
-      <td id="T_665bd_row27_col7" class="data row27 col7" >491.14</td>
-      <td id="T_665bd_row27_col8" class="data row27 col8" >10814.0</td>
+      <th id="T_e4d42_level0_row27" class="row_heading level0 row27" >27</th>
+      <td id="T_e4d42_row27_col0" class="data row27 col0" >HYD</td>
+      <td id="T_e4d42_row27_col1" class="data row27 col1" >k365h1</td>
+      <td id="T_e4d42_row27_col2" class="data row27 col2" >Novo</td>
+      <td id="T_e4d42_row27_col3" class="data row27 col3" >90,841</td>
+      <td id="T_e4d42_row27_col4" class="data row27 col4" >+0.0</td>
+      <td id="T_e4d42_row27_col5" class="data row27 col5" >6.06</td>
+      <td id="T_e4d42_row27_col6" class="data row27 col6" >+0.0</td>
+      <td id="T_e4d42_row27_col7" class="data row27 col7" >491.14</td>
+      <td id="T_e4d42_row27_col8" class="data row27 col8" >10814.0</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row28" class="row_heading level0 row28" >28</th>
-      <td id="T_665bd_row28_col0" class="data row28 col0" >HYD</td>
-      <td id="T_665bd_row28_col1" class="data row28 col1" >k7h1</td>
-      <td id="T_665bd_row28_col2" class="data row28 col2" >Niet</td>
-      <td id="T_665bd_row28_col3" class="data row28 col3" >87,513</td>
-      <td id="T_665bd_row28_col4" class="data row28 col4" >-3.7</td>
-      <td id="T_665bd_row28_col5" class="data row28 col5" >3.76</td>
-      <td id="T_665bd_row28_col6" class="data row28 col6" >-37.9</td>
-      <td id="T_665bd_row28_col7" class="data row28 col7" >0.29</td>
-      <td id="T_665bd_row28_col8" class="data row28 col8" >3.7</td>
+      <th id="T_e4d42_level0_row28" class="row_heading level0 row28" >28</th>
+      <td id="T_e4d42_row28_col0" class="data row28 col0" >HYD</td>
+      <td id="T_e4d42_row28_col1" class="data row28 col1" >k7h1</td>
+      <td id="T_e4d42_row28_col2" class="data row28 col2" >Niet</td>
+      <td id="T_e4d42_row28_col3" class="data row28 col3" >87,513</td>
+      <td id="T_e4d42_row28_col4" class="data row28 col4" >-3.7</td>
+      <td id="T_e4d42_row28_col5" class="data row28 col5" >3.76</td>
+      <td id="T_e4d42_row28_col6" class="data row28 col6" >-37.9</td>
+      <td id="T_e4d42_row28_col7" class="data row28 col7" >0.36</td>
+      <td id="T_e4d42_row28_col8" class="data row28 col8" >4.4</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row29" class="row_heading level0 row29" >29</th>
-      <td id="T_665bd_row29_col0" class="data row29 col0" >HYD</td>
-      <td id="T_665bd_row29_col1" class="data row29 col1" >k7h1</td>
-      <td id="T_665bd_row29_col2" class="data row29 col2" >Welsch</td>
-      <td id="T_665bd_row29_col3" class="data row29 col3" >87,659</td>
-      <td id="T_665bd_row29_col4" class="data row29 col4" >-3.5</td>
-      <td id="T_665bd_row29_col5" class="data row29 col5" >3.91</td>
-      <td id="T_665bd_row29_col6" class="data row29 col6" >-35.5</td>
-      <td id="T_665bd_row29_col7" class="data row29 col7" >0.52</td>
-      <td id="T_665bd_row29_col8" class="data row29 col8" >11.5</td>
+      <th id="T_e4d42_level0_row29" class="row_heading level0 row29" >29</th>
+      <td id="T_e4d42_row29_col0" class="data row29 col0" >HYD</td>
+      <td id="T_e4d42_row29_col1" class="data row29 col1" >k7h1</td>
+      <td id="T_e4d42_row29_col2" class="data row29 col2" >Welsch</td>
+      <td id="T_e4d42_row29_col3" class="data row29 col3" >87,659</td>
+      <td id="T_e4d42_row29_col4" class="data row29 col4" >-3.5</td>
+      <td id="T_e4d42_row29_col5" class="data row29 col5" >3.91</td>
+      <td id="T_e4d42_row29_col6" class="data row29 col6" >-35.5</td>
+      <td id="T_e4d42_row29_col7" class="data row29 col7" >0.56</td>
+      <td id="T_e4d42_row29_col8" class="data row29 col8" >12.2</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row30" class="row_heading level0 row30" >30</th>
-      <td id="T_665bd_row30_col0" class="data row30 col0" >HYD</td>
-      <td id="T_665bd_row30_col1" class="data row30 col1" >k7h1</td>
-      <td id="T_665bd_row30_col2" class="data row30 col2" >Kotzur</td>
-      <td id="T_665bd_row30_col3" class="data row30 col3" >87,473</td>
-      <td id="T_665bd_row30_col4" class="data row30 col4" >-3.7</td>
-      <td id="T_665bd_row30_col5" class="data row30 col5" >3.72</td>
-      <td id="T_665bd_row30_col6" class="data row30 col6" >-38.6</td>
-      <td id="T_665bd_row30_col7" class="data row30 col7" >0.34</td>
-      <td id="T_665bd_row30_col8" class="data row30 col8" >5.4</td>
+      <th id="T_e4d42_level0_row30" class="row_heading level0 row30" >30</th>
+      <td id="T_e4d42_row30_col0" class="data row30 col0" >HYD</td>
+      <td id="T_e4d42_row30_col1" class="data row30 col1" >k7h1</td>
+      <td id="T_e4d42_row30_col2" class="data row30 col2" >Kotzur</td>
+      <td id="T_e4d42_row30_col3" class="data row30 col3" >87,473</td>
+      <td id="T_e4d42_row30_col4" class="data row30 col4" >-3.7</td>
+      <td id="T_e4d42_row30_col5" class="data row30 col5" >3.72</td>
+      <td id="T_e4d42_row30_col6" class="data row30 col6" >-38.6</td>
+      <td id="T_e4d42_row30_col7" class="data row30 col7" >0.32</td>
+      <td id="T_e4d42_row30_col8" class="data row30 col8" >6.0</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row31" class="row_heading level0 row31" >31</th>
-      <td id="T_665bd_row31_col0" class="data row31 col0" >HYD</td>
-      <td id="T_665bd_row31_col1" class="data row31 col1" >k7h1</td>
-      <td id="T_665bd_row31_col2" class="data row31 col2" >Novo</td>
-      <td id="T_665bd_row31_col3" class="data row31 col3" >87,473</td>
-      <td id="T_665bd_row31_col4" class="data row31 col4" >-3.7</td>
-      <td id="T_665bd_row31_col5" class="data row31 col5" >3.72</td>
-      <td id="T_665bd_row31_col6" class="data row31 col6" >-38.6</td>
-      <td id="T_665bd_row31_col7" class="data row31 col7" >8.41</td>
-      <td id="T_665bd_row31_col8" class="data row31 col8" >249.7</td>
+      <th id="T_e4d42_level0_row31" class="row_heading level0 row31" >31</th>
+      <td id="T_e4d42_row31_col0" class="data row31 col0" >HYD</td>
+      <td id="T_e4d42_row31_col1" class="data row31 col1" >k7h1</td>
+      <td id="T_e4d42_row31_col2" class="data row31 col2" >Novo</td>
+      <td id="T_e4d42_row31_col3" class="data row31 col3" >87,473</td>
+      <td id="T_e4d42_row31_col4" class="data row31 col4" >-3.7</td>
+      <td id="T_e4d42_row31_col5" class="data row31 col5" >3.72</td>
+      <td id="T_e4d42_row31_col6" class="data row31 col6" >-38.6</td>
+      <td id="T_e4d42_row31_col7" class="data row31 col7" >5.25</td>
+      <td id="T_e4d42_row31_col8" class="data row31 col8" >252.3</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row32" class="row_heading level0 row32" >32</th>
-      <td id="T_665bd_row32_col0" class="data row32 col0" >HYD</td>
-      <td id="T_665bd_row32_col1" class="data row32 col1" >k20h1</td>
-      <td id="T_665bd_row32_col2" class="data row32 col2" >Niet</td>
-      <td id="T_665bd_row32_col3" class="data row32 col3" >89,921</td>
-      <td id="T_665bd_row32_col4" class="data row32 col4" >-1.0</td>
-      <td id="T_665bd_row32_col5" class="data row32 col5" >5.09</td>
-      <td id="T_665bd_row32_col6" class="data row32 col6" >-16.0</td>
-      <td id="T_665bd_row32_col7" class="data row32 col7" >0.63</td>
-      <td id="T_665bd_row32_col8" class="data row32 col8" >9.5</td>
+      <th id="T_e4d42_level0_row32" class="row_heading level0 row32" >32</th>
+      <td id="T_e4d42_row32_col0" class="data row32 col0" >HYD</td>
+      <td id="T_e4d42_row32_col1" class="data row32 col1" >k20h1</td>
+      <td id="T_e4d42_row32_col2" class="data row32 col2" >Niet</td>
+      <td id="T_e4d42_row32_col3" class="data row32 col3" >89,921</td>
+      <td id="T_e4d42_row32_col4" class="data row32 col4" >-1.0</td>
+      <td id="T_e4d42_row32_col5" class="data row32 col5" >5.09</td>
+      <td id="T_e4d42_row32_col6" class="data row32 col6" >-16.0</td>
+      <td id="T_e4d42_row32_col7" class="data row32 col7" >1.03</td>
+      <td id="T_e4d42_row32_col8" class="data row32 col8" >11.2</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row33" class="row_heading level0 row33" >33</th>
-      <td id="T_665bd_row33_col0" class="data row33 col0" >HYD</td>
-      <td id="T_665bd_row33_col1" class="data row33 col1" >k20h1</td>
-      <td id="T_665bd_row33_col2" class="data row33 col2" >Welsch</td>
-      <td id="T_665bd_row33_col3" class="data row33 col3" >90,016</td>
-      <td id="T_665bd_row33_col4" class="data row33 col4" >-0.9</td>
-      <td id="T_665bd_row33_col5" class="data row33 col5" >5.19</td>
-      <td id="T_665bd_row33_col6" class="data row33 col6" >-14.4</td>
-      <td id="T_665bd_row33_col7" class="data row33 col7" >1.86</td>
-      <td id="T_665bd_row33_col8" class="data row33 col8" >30.7</td>
+      <th id="T_e4d42_level0_row33" class="row_heading level0 row33" >33</th>
+      <td id="T_e4d42_row33_col0" class="data row33 col0" >HYD</td>
+      <td id="T_e4d42_row33_col1" class="data row33 col1" >k20h1</td>
+      <td id="T_e4d42_row33_col2" class="data row33 col2" >Welsch</td>
+      <td id="T_e4d42_row33_col3" class="data row33 col3" >90,016</td>
+      <td id="T_e4d42_row33_col4" class="data row33 col4" >-0.9</td>
+      <td id="T_e4d42_row33_col5" class="data row33 col5" >5.19</td>
+      <td id="T_e4d42_row33_col6" class="data row33 col6" >-14.4</td>
+      <td id="T_e4d42_row33_col7" class="data row33 col7" >2.15</td>
+      <td id="T_e4d42_row33_col8" class="data row33 col8" >35.0</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row34" class="row_heading level0 row34" >34</th>
-      <td id="T_665bd_row34_col0" class="data row34 col0" >HYD</td>
-      <td id="T_665bd_row34_col1" class="data row34 col1" >k20h1</td>
-      <td id="T_665bd_row34_col2" class="data row34 col2" >Kotzur</td>
-      <td id="T_665bd_row34_col3" class="data row34 col3" >89,831</td>
-      <td id="T_665bd_row34_col4" class="data row34 col4" >-1.1</td>
-      <td id="T_665bd_row34_col5" class="data row34 col5" >5.00</td>
-      <td id="T_665bd_row34_col6" class="data row34 col6" >-17.5</td>
-      <td id="T_665bd_row34_col7" class="data row34 col7" >0.83</td>
-      <td id="T_665bd_row34_col8" class="data row34 col8" >11.5</td>
+      <th id="T_e4d42_level0_row34" class="row_heading level0 row34" >34</th>
+      <td id="T_e4d42_row34_col0" class="data row34 col0" >HYD</td>
+      <td id="T_e4d42_row34_col1" class="data row34 col1" >k20h1</td>
+      <td id="T_e4d42_row34_col2" class="data row34 col2" >Kotzur</td>
+      <td id="T_e4d42_row34_col3" class="data row34 col3" >89,831</td>
+      <td id="T_e4d42_row34_col4" class="data row34 col4" >-1.1</td>
+      <td id="T_e4d42_row34_col5" class="data row34 col5" >5.00</td>
+      <td id="T_e4d42_row34_col6" class="data row34 col6" >-17.5</td>
+      <td id="T_e4d42_row34_col7" class="data row34 col7" >0.88</td>
+      <td id="T_e4d42_row34_col8" class="data row34 col8" >14.4</td>
     </tr>
     <tr>
-      <th id="T_665bd_level0_row35" class="row_heading level0 row35" >35</th>
-      <td id="T_665bd_row35_col0" class="data row35 col0" >HYD</td>
-      <td id="T_665bd_row35_col1" class="data row35 col1" >k20h1</td>
-      <td id="T_665bd_row35_col2" class="data row35 col2" >Novo</td>
-      <td id="T_665bd_row35_col3" class="data row35 col3" >89,832</td>
-      <td id="T_665bd_row35_col4" class="data row35 col4" >-1.1</td>
-      <td id="T_665bd_row35_col5" class="data row35 col5" >5.00</td>
-      <td id="T_665bd_row35_col6" class="data row35 col6" >-17.5</td>
-      <td id="T_665bd_row35_col7" class="data row35 col7" >25.85</td>
-      <td id="T_665bd_row35_col8" class="data row35 col8" >633.6</td>
+      <th id="T_e4d42_level0_row35" class="row_heading level0 row35" >35</th>
+      <td id="T_e4d42_row35_col0" class="data row35 col0" >HYD</td>
+      <td id="T_e4d42_row35_col1" class="data row35 col1" >k20h1</td>
+      <td id="T_e4d42_row35_col2" class="data row35 col2" >Novo</td>
+      <td id="T_e4d42_row35_col3" class="data row35 col3" >89,832</td>
+      <td id="T_e4d42_row35_col4" class="data row35 col4" >-1.1</td>
+      <td id="T_e4d42_row35_col5" class="data row35 col5" >5.00</td>
+      <td id="T_e4d42_row35_col6" class="data row35 col6" >-17.5</td>
+      <td id="T_e4d42_row35_col7" class="data row35 col7" >11.36</td>
+      <td id="T_e4d42_row35_col8" class="data row35 col8" >635.2</td>
     </tr>
   </tbody>
 </table></div>
 </div>
 <p><strong>Traceability check.</strong> The R2 draft’s Table 4 values are entered below and compared with the recomputed values. Costs and capacities agree exactly. Some capacity errors differ by up to ~3 percentage points because the draft divides by the benchmark rounded to two decimals (e.g. WND k8h1 Niet: 7.45/0.96 − 1 = +676.0 % versus +678.9 % unrounded).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draft</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>  <span class="c1"># Table 4 of the R2 draft (cost error %, capacity error %)</span>
@@ -2571,7 +2558,7 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">add_errors</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="o">~</span><span class="n">res</span><span class="o">.</span><span class="n">limited</span><span class="p">])</span>      <span class="c1"># benchmark must be present when errors are computed</span>
@@ -2605,18 +2592,18 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 <div class="output_area rendered_html docutils container">
 <style type="text/css">
 </style>
-<table id="T_acce6">
+<table id="T_13b28">
   <caption>Median |cost error| (%) across k, by block length h</caption>
   <thead>
     <tr>
       <th class="blank" >&nbsp;</th>
       <th class="index_name level0" >h</th>
-      <th id="T_acce6_level0_col0" class="col_heading level0 col0" >1</th>
-      <th id="T_acce6_level0_col1" class="col_heading level0 col1" >2</th>
-      <th id="T_acce6_level0_col2" class="col_heading level0 col2" >4</th>
-      <th id="T_acce6_level0_col3" class="col_heading level0 col3" >6</th>
-      <th id="T_acce6_level0_col4" class="col_heading level0 col4" >8</th>
-      <th id="T_acce6_level0_col5" class="col_heading level0 col5" >12</th>
+      <th id="T_13b28_level0_col0" class="col_heading level0 col0" >1</th>
+      <th id="T_13b28_level0_col1" class="col_heading level0 col1" >2</th>
+      <th id="T_13b28_level0_col2" class="col_heading level0 col2" >4</th>
+      <th id="T_13b28_level0_col3" class="col_heading level0 col3" >6</th>
+      <th id="T_13b28_level0_col4" class="col_heading level0 col4" >8</th>
+      <th id="T_13b28_level0_col5" class="col_heading level0 col5" >12</th>
     </tr>
     <tr>
       <th class="index_name level0" >resource</th>
@@ -2631,121 +2618,121 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
   </thead>
   <tbody>
     <tr>
-      <th id="T_acce6_level0_row0" class="row_heading level0 row0" rowspan="4">HYD</th>
-      <th id="T_acce6_level1_row0" class="row_heading level1 row0" >Kotzur</th>
-      <td id="T_acce6_row0_col0" class="data row0 col0" >4.600000</td>
-      <td id="T_acce6_row0_col1" class="data row0 col1" >4.600000</td>
-      <td id="T_acce6_row0_col2" class="data row0 col2" >4.620000</td>
-      <td id="T_acce6_row0_col3" class="data row0 col3" >4.620000</td>
-      <td id="T_acce6_row0_col4" class="data row0 col4" >4.630000</td>
-      <td id="T_acce6_row0_col5" class="data row0 col5" >4.650000</td>
+      <th id="T_13b28_level0_row0" class="row_heading level0 row0" rowspan="4">HYD</th>
+      <th id="T_13b28_level1_row0" class="row_heading level1 row0" >Kotzur</th>
+      <td id="T_13b28_row0_col0" class="data row0 col0" >4.600000</td>
+      <td id="T_13b28_row0_col1" class="data row0 col1" >4.600000</td>
+      <td id="T_13b28_row0_col2" class="data row0 col2" >4.620000</td>
+      <td id="T_13b28_row0_col3" class="data row0 col3" >4.620000</td>
+      <td id="T_13b28_row0_col4" class="data row0 col4" >4.630000</td>
+      <td id="T_13b28_row0_col5" class="data row0 col5" >4.650000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level1_row1" class="row_heading level1 row1" >Niet</th>
-      <td id="T_acce6_row1_col0" class="data row1 col0" >4.470000</td>
-      <td id="T_acce6_row1_col1" class="data row1 col1" >4.470000</td>
-      <td id="T_acce6_row1_col2" class="data row1 col2" >4.480000</td>
-      <td id="T_acce6_row1_col3" class="data row1 col3" >4.480000</td>
-      <td id="T_acce6_row1_col4" class="data row1 col4" >4.490000</td>
-      <td id="T_acce6_row1_col5" class="data row1 col5" >4.510000</td>
+      <th id="T_13b28_level1_row1" class="row_heading level1 row1" >Niet</th>
+      <td id="T_13b28_row1_col0" class="data row1 col0" >4.470000</td>
+      <td id="T_13b28_row1_col1" class="data row1 col1" >4.470000</td>
+      <td id="T_13b28_row1_col2" class="data row1 col2" >4.480000</td>
+      <td id="T_13b28_row1_col3" class="data row1 col3" >4.480000</td>
+      <td id="T_13b28_row1_col4" class="data row1 col4" >4.490000</td>
+      <td id="T_13b28_row1_col5" class="data row1 col5" >4.510000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level1_row2" class="row_heading level1 row2" >Novo</th>
-      <td id="T_acce6_row2_col0" class="data row2 col0" >4.600000</td>
-      <td id="T_acce6_row2_col1" class="data row2 col1" >4.600000</td>
-      <td id="T_acce6_row2_col2" class="data row2 col2" >4.620000</td>
-      <td id="T_acce6_row2_col3" class="data row2 col3" >4.620000</td>
-      <td id="T_acce6_row2_col4" class="data row2 col4" >4.630000</td>
-      <td id="T_acce6_row2_col5" class="data row2 col5" >4.650000</td>
+      <th id="T_13b28_level1_row2" class="row_heading level1 row2" >Novo</th>
+      <td id="T_13b28_row2_col0" class="data row2 col0" >4.600000</td>
+      <td id="T_13b28_row2_col1" class="data row2 col1" >4.600000</td>
+      <td id="T_13b28_row2_col2" class="data row2 col2" >4.620000</td>
+      <td id="T_13b28_row2_col3" class="data row2 col3" >4.620000</td>
+      <td id="T_13b28_row2_col4" class="data row2 col4" >4.630000</td>
+      <td id="T_13b28_row2_col5" class="data row2 col5" >4.650000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level1_row3" class="row_heading level1 row3" >Welsch</th>
-      <td id="T_acce6_row3_col0" class="data row3 col0" >4.310000</td>
-      <td id="T_acce6_row3_col1" class="data row3 col1" >4.320000</td>
-      <td id="T_acce6_row3_col2" class="data row3 col2" >4.340000</td>
-      <td id="T_acce6_row3_col3" class="data row3 col3" >4.360000</td>
-      <td id="T_acce6_row3_col4" class="data row3 col4" >4.380000</td>
-      <td id="T_acce6_row3_col5" class="data row3 col5" >4.430000</td>
+      <th id="T_13b28_level1_row3" class="row_heading level1 row3" >Welsch</th>
+      <td id="T_13b28_row3_col0" class="data row3 col0" >4.310000</td>
+      <td id="T_13b28_row3_col1" class="data row3 col1" >4.320000</td>
+      <td id="T_13b28_row3_col2" class="data row3 col2" >4.340000</td>
+      <td id="T_13b28_row3_col3" class="data row3 col3" >4.360000</td>
+      <td id="T_13b28_row3_col4" class="data row3 col4" >4.380000</td>
+      <td id="T_13b28_row3_col5" class="data row3 col5" >4.430000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level0_row4" class="row_heading level0 row4" rowspan="4">SOL</th>
-      <th id="T_acce6_level1_row4" class="row_heading level1 row4" >Kotzur</th>
-      <td id="T_acce6_row4_col0" class="data row4 col0" >2.050000</td>
-      <td id="T_acce6_row4_col1" class="data row4 col1" >1.940000</td>
-      <td id="T_acce6_row4_col2" class="data row4 col2" >1.670000</td>
-      <td id="T_acce6_row4_col3" class="data row4 col3" >1.640000</td>
-      <td id="T_acce6_row4_col4" class="data row4 col4" >1.650000</td>
-      <td id="T_acce6_row4_col5" class="data row4 col5" >5.670000</td>
+      <th id="T_13b28_level0_row4" class="row_heading level0 row4" rowspan="4">SOL</th>
+      <th id="T_13b28_level1_row4" class="row_heading level1 row4" >Kotzur</th>
+      <td id="T_13b28_row4_col0" class="data row4 col0" >2.050000</td>
+      <td id="T_13b28_row4_col1" class="data row4 col1" >1.940000</td>
+      <td id="T_13b28_row4_col2" class="data row4 col2" >1.670000</td>
+      <td id="T_13b28_row4_col3" class="data row4 col3" >1.640000</td>
+      <td id="T_13b28_row4_col4" class="data row4 col4" >1.650000</td>
+      <td id="T_13b28_row4_col5" class="data row4 col5" >5.670000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level1_row5" class="row_heading level1 row5" >Niet</th>
-      <td id="T_acce6_row5_col0" class="data row5 col0" >1.900000</td>
-      <td id="T_acce6_row5_col1" class="data row5 col1" >1.970000</td>
-      <td id="T_acce6_row5_col2" class="data row5 col2" >1.580000</td>
-      <td id="T_acce6_row5_col3" class="data row5 col3" >1.220000</td>
-      <td id="T_acce6_row5_col4" class="data row5 col4" >1.110000</td>
-      <td id="T_acce6_row5_col5" class="data row5 col5" >4.850000</td>
+      <th id="T_13b28_level1_row5" class="row_heading level1 row5" >Niet</th>
+      <td id="T_13b28_row5_col0" class="data row5 col0" >1.900000</td>
+      <td id="T_13b28_row5_col1" class="data row5 col1" >1.970000</td>
+      <td id="T_13b28_row5_col2" class="data row5 col2" >1.580000</td>
+      <td id="T_13b28_row5_col3" class="data row5 col3" >1.220000</td>
+      <td id="T_13b28_row5_col4" class="data row5 col4" >1.110000</td>
+      <td id="T_13b28_row5_col5" class="data row5 col5" >4.850000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level1_row6" class="row_heading level1 row6" >Novo</th>
-      <td id="T_acce6_row6_col0" class="data row6 col0" >2.060000</td>
-      <td id="T_acce6_row6_col1" class="data row6 col1" >1.940000</td>
-      <td id="T_acce6_row6_col2" class="data row6 col2" >1.670000</td>
-      <td id="T_acce6_row6_col3" class="data row6 col3" >1.640000</td>
-      <td id="T_acce6_row6_col4" class="data row6 col4" >1.650000</td>
-      <td id="T_acce6_row6_col5" class="data row6 col5" >5.670000</td>
+      <th id="T_13b28_level1_row6" class="row_heading level1 row6" >Novo</th>
+      <td id="T_13b28_row6_col0" class="data row6 col0" >2.060000</td>
+      <td id="T_13b28_row6_col1" class="data row6 col1" >1.940000</td>
+      <td id="T_13b28_row6_col2" class="data row6 col2" >1.670000</td>
+      <td id="T_13b28_row6_col3" class="data row6 col3" >1.640000</td>
+      <td id="T_13b28_row6_col4" class="data row6 col4" >1.650000</td>
+      <td id="T_13b28_row6_col5" class="data row6 col5" >5.670000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level1_row7" class="row_heading level1 row7" >Welsch</th>
-      <td id="T_acce6_row7_col0" class="data row7 col0" >2.260000</td>
-      <td id="T_acce6_row7_col1" class="data row7 col1" >2.130000</td>
-      <td id="T_acce6_row7_col2" class="data row7 col2" >1.700000</td>
-      <td id="T_acce6_row7_col3" class="data row7 col3" >1.400000</td>
-      <td id="T_acce6_row7_col4" class="data row7 col4" >1.520000</td>
-      <td id="T_acce6_row7_col5" class="data row7 col5" >4.820000</td>
+      <th id="T_13b28_level1_row7" class="row_heading level1 row7" >Welsch</th>
+      <td id="T_13b28_row7_col0" class="data row7 col0" >2.260000</td>
+      <td id="T_13b28_row7_col1" class="data row7 col1" >2.130000</td>
+      <td id="T_13b28_row7_col2" class="data row7 col2" >1.700000</td>
+      <td id="T_13b28_row7_col3" class="data row7 col3" >1.400000</td>
+      <td id="T_13b28_row7_col4" class="data row7 col4" >1.520000</td>
+      <td id="T_13b28_row7_col5" class="data row7 col5" >4.820000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level0_row8" class="row_heading level0 row8" rowspan="4">WND</th>
-      <th id="T_acce6_level1_row8" class="row_heading level1 row8" >Kotzur</th>
-      <td id="T_acce6_row8_col0" class="data row8 col0" >3.790000</td>
-      <td id="T_acce6_row8_col1" class="data row8 col1" >3.760000</td>
-      <td id="T_acce6_row8_col2" class="data row8 col2" >3.690000</td>
-      <td id="T_acce6_row8_col3" class="data row8 col3" >3.640000</td>
-      <td id="T_acce6_row8_col4" class="data row8 col4" >3.440000</td>
-      <td id="T_acce6_row8_col5" class="data row8 col5" >3.110000</td>
+      <th id="T_13b28_level0_row8" class="row_heading level0 row8" rowspan="4">WND</th>
+      <th id="T_13b28_level1_row8" class="row_heading level1 row8" >Kotzur</th>
+      <td id="T_13b28_row8_col0" class="data row8 col0" >3.790000</td>
+      <td id="T_13b28_row8_col1" class="data row8 col1" >3.760000</td>
+      <td id="T_13b28_row8_col2" class="data row8 col2" >3.690000</td>
+      <td id="T_13b28_row8_col3" class="data row8 col3" >3.640000</td>
+      <td id="T_13b28_row8_col4" class="data row8 col4" >3.440000</td>
+      <td id="T_13b28_row8_col5" class="data row8 col5" >3.110000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level1_row9" class="row_heading level1 row9" >Niet</th>
-      <td id="T_acce6_row9_col0" class="data row9 col0" >10.380000</td>
-      <td id="T_acce6_row9_col1" class="data row9 col1" >10.280000</td>
-      <td id="T_acce6_row9_col2" class="data row9 col2" >10.170000</td>
-      <td id="T_acce6_row9_col3" class="data row9 col3" >10.210000</td>
-      <td id="T_acce6_row9_col4" class="data row9 col4" >10.170000</td>
-      <td id="T_acce6_row9_col5" class="data row9 col5" >9.790000</td>
+      <th id="T_13b28_level1_row9" class="row_heading level1 row9" >Niet</th>
+      <td id="T_13b28_row9_col0" class="data row9 col0" >10.380000</td>
+      <td id="T_13b28_row9_col1" class="data row9 col1" >10.280000</td>
+      <td id="T_13b28_row9_col2" class="data row9 col2" >10.170000</td>
+      <td id="T_13b28_row9_col3" class="data row9 col3" >10.210000</td>
+      <td id="T_13b28_row9_col4" class="data row9 col4" >10.170000</td>
+      <td id="T_13b28_row9_col5" class="data row9 col5" >9.790000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level1_row10" class="row_heading level1 row10" >Novo</th>
-      <td id="T_acce6_row10_col0" class="data row10 col0" >3.800000</td>
-      <td id="T_acce6_row10_col1" class="data row10 col1" >3.780000</td>
-      <td id="T_acce6_row10_col2" class="data row10 col2" >3.710000</td>
-      <td id="T_acce6_row10_col3" class="data row10 col3" >3.660000</td>
-      <td id="T_acce6_row10_col4" class="data row10 col4" >3.460000</td>
-      <td id="T_acce6_row10_col5" class="data row10 col5" >3.120000</td>
+      <th id="T_13b28_level1_row10" class="row_heading level1 row10" >Novo</th>
+      <td id="T_13b28_row10_col0" class="data row10 col0" >3.800000</td>
+      <td id="T_13b28_row10_col1" class="data row10 col1" >3.780000</td>
+      <td id="T_13b28_row10_col2" class="data row10 col2" >3.710000</td>
+      <td id="T_13b28_row10_col3" class="data row10 col3" >3.660000</td>
+      <td id="T_13b28_row10_col4" class="data row10 col4" >3.460000</td>
+      <td id="T_13b28_row10_col5" class="data row10 col5" >3.120000</td>
     </tr>
     <tr>
-      <th id="T_acce6_level1_row11" class="row_heading level1 row11" >Welsch</th>
-      <td id="T_acce6_row11_col0" class="data row11 col0" >10.130000</td>
-      <td id="T_acce6_row11_col1" class="data row11 col1" >10.050000</td>
-      <td id="T_acce6_row11_col2" class="data row11 col2" >9.920000</td>
-      <td id="T_acce6_row11_col3" class="data row11 col3" >9.910000</td>
-      <td id="T_acce6_row11_col4" class="data row11 col4" >9.880000</td>
-      <td id="T_acce6_row11_col5" class="data row11 col5" >9.680000</td>
+      <th id="T_13b28_level1_row11" class="row_heading level1 row11" >Welsch</th>
+      <td id="T_13b28_row11_col0" class="data row11 col0" >10.130000</td>
+      <td id="T_13b28_row11_col1" class="data row11 col1" >10.050000</td>
+      <td id="T_13b28_row11_col2" class="data row11 col2" >9.920000</td>
+      <td id="T_13b28_row11_col3" class="data row11 col3" >9.910000</td>
+      <td id="T_13b28_row11_col4" class="data row11 col4" >9.880000</td>
+      <td id="T_13b28_row11_col5" class="data row11 col5" >9.680000</td>
     </tr>
   </tbody>
 </table></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Computational burden (all aggregated configurations)</span>
@@ -2760,24 +2747,24 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 <div class="output_area rendered_html docutils container">
 <style type="text/css">
 </style>
-<table id="T_0e7e3">
+<table id="T_291ec">
   <caption>Median matrix-generation + solve time (s) and memory (MB)</caption>
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_0e7e3_level0_col0" class="col_heading level0 col0" colspan="4">total_time_s</th>
-      <th id="T_0e7e3_level0_col4" class="col_heading level0 col4" colspan="4">memory_MB</th>
+      <th id="T_291ec_level0_col0" class="col_heading level0 col0" colspan="4">total_time_s</th>
+      <th id="T_291ec_level0_col4" class="col_heading level0 col4" colspan="4">memory_MB</th>
     </tr>
     <tr>
       <th class="index_name level1" >formulation</th>
-      <th id="T_0e7e3_level1_col0" class="col_heading level1 col0" >Kotzur</th>
-      <th id="T_0e7e3_level1_col1" class="col_heading level1 col1" >Niet</th>
-      <th id="T_0e7e3_level1_col2" class="col_heading level1 col2" >Novo</th>
-      <th id="T_0e7e3_level1_col3" class="col_heading level1 col3" >Welsch</th>
-      <th id="T_0e7e3_level1_col4" class="col_heading level1 col4" >Kotzur</th>
-      <th id="T_0e7e3_level1_col5" class="col_heading level1 col5" >Niet</th>
-      <th id="T_0e7e3_level1_col6" class="col_heading level1 col6" >Novo</th>
-      <th id="T_0e7e3_level1_col7" class="col_heading level1 col7" >Welsch</th>
+      <th id="T_291ec_level1_col0" class="col_heading level1 col0" >Kotzur</th>
+      <th id="T_291ec_level1_col1" class="col_heading level1 col1" >Niet</th>
+      <th id="T_291ec_level1_col2" class="col_heading level1 col2" >Novo</th>
+      <th id="T_291ec_level1_col3" class="col_heading level1 col3" >Welsch</th>
+      <th id="T_291ec_level1_col4" class="col_heading level1 col4" >Kotzur</th>
+      <th id="T_291ec_level1_col5" class="col_heading level1 col5" >Niet</th>
+      <th id="T_291ec_level1_col6" class="col_heading level1 col6" >Novo</th>
+      <th id="T_291ec_level1_col7" class="col_heading level1 col7" >Welsch</th>
     </tr>
     <tr>
       <th class="index_name level0" >resource</th>
@@ -2793,37 +2780,37 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
   </thead>
   <tbody>
     <tr>
-      <th id="T_0e7e3_level0_row0" class="row_heading level0 row0" >HYD</th>
-      <td id="T_0e7e3_row0_col0" class="data row0 col0" >0.280000</td>
-      <td id="T_0e7e3_row0_col1" class="data row0 col1" >0.210000</td>
-      <td id="T_0e7e3_row0_col2" class="data row0 col2" >0.940000</td>
-      <td id="T_0e7e3_row0_col3" class="data row0 col3" >0.290000</td>
-      <td id="T_0e7e3_row0_col4" class="data row0 col4" >5.600000</td>
-      <td id="T_0e7e3_row0_col5" class="data row0 col5" >3.200000</td>
-      <td id="T_0e7e3_row0_col6" class="data row0 col6" >43.100000</td>
-      <td id="T_0e7e3_row0_col7" class="data row0 col7" >5.800000</td>
+      <th id="T_291ec_level0_row0" class="row_heading level0 row0" >HYD</th>
+      <td id="T_291ec_row0_col0" class="data row0 col0" >0.280000</td>
+      <td id="T_291ec_row0_col1" class="data row0 col1" >0.210000</td>
+      <td id="T_291ec_row0_col2" class="data row0 col2" >0.940000</td>
+      <td id="T_291ec_row0_col3" class="data row0 col3" >0.290000</td>
+      <td id="T_291ec_row0_col4" class="data row0 col4" >6.000000</td>
+      <td id="T_291ec_row0_col5" class="data row0 col5" >3.200000</td>
+      <td id="T_291ec_row0_col6" class="data row0 col6" >43.100000</td>
+      <td id="T_291ec_row0_col7" class="data row0 col7" >5.800000</td>
     </tr>
     <tr>
-      <th id="T_0e7e3_level0_row1" class="row_heading level0 row1" >SOL</th>
-      <td id="T_0e7e3_row1_col0" class="data row1 col0" >0.320000</td>
-      <td id="T_0e7e3_row1_col1" class="data row1 col1" >0.240000</td>
-      <td id="T_0e7e3_row1_col2" class="data row1 col2" >1.040000</td>
-      <td id="T_0e7e3_row1_col3" class="data row1 col3" >0.320000</td>
-      <td id="T_0e7e3_row1_col4" class="data row1 col4" >5.900000</td>
-      <td id="T_0e7e3_row1_col5" class="data row1 col5" >3.200000</td>
-      <td id="T_0e7e3_row1_col6" class="data row1 col6" >43.000000</td>
-      <td id="T_0e7e3_row1_col7" class="data row1 col7" >5.800000</td>
+      <th id="T_291ec_level0_row1" class="row_heading level0 row1" >SOL</th>
+      <td id="T_291ec_row1_col0" class="data row1 col0" >0.330000</td>
+      <td id="T_291ec_row1_col1" class="data row1 col1" >0.250000</td>
+      <td id="T_291ec_row1_col2" class="data row1 col2" >1.040000</td>
+      <td id="T_291ec_row1_col3" class="data row1 col3" >0.320000</td>
+      <td id="T_291ec_row1_col4" class="data row1 col4" >5.900000</td>
+      <td id="T_291ec_row1_col5" class="data row1 col5" >3.200000</td>
+      <td id="T_291ec_row1_col6" class="data row1 col6" >43.000000</td>
+      <td id="T_291ec_row1_col7" class="data row1 col7" >5.800000</td>
     </tr>
     <tr>
-      <th id="T_0e7e3_level0_row2" class="row_heading level0 row2" >WND</th>
-      <td id="T_0e7e3_row2_col0" class="data row2 col0" >0.270000</td>
-      <td id="T_0e7e3_row2_col1" class="data row2 col1" >0.210000</td>
-      <td id="T_0e7e3_row2_col2" class="data row2 col2" >0.960000</td>
-      <td id="T_0e7e3_row2_col3" class="data row2 col3" >0.250000</td>
-      <td id="T_0e7e3_row2_col4" class="data row2 col4" >5.900000</td>
-      <td id="T_0e7e3_row2_col5" class="data row2 col5" >3.200000</td>
-      <td id="T_0e7e3_row2_col6" class="data row2 col6" >43.100000</td>
-      <td id="T_0e7e3_row2_col7" class="data row2 col7" >5.800000</td>
+      <th id="T_291ec_level0_row2" class="row_heading level0 row2" >WND</th>
+      <td id="T_291ec_row2_col0" class="data row2 col0" >0.270000</td>
+      <td id="T_291ec_row2_col1" class="data row2 col1" >0.210000</td>
+      <td id="T_291ec_row2_col2" class="data row2 col2" >0.960000</td>
+      <td id="T_291ec_row2_col3" class="data row2 col3" >0.250000</td>
+      <td id="T_291ec_row2_col4" class="data row2 col4" >6.000000</td>
+      <td id="T_291ec_row2_col5" class="data row2 col5" >3.200000</td>
+      <td id="T_291ec_row2_col6" class="data row2 col6" >43.100000</td>
+      <td id="T_291ec_row2_col7" class="data row2 col7" >5.800000</td>
     </tr>
   </tbody>
 </table></div>
@@ -2834,7 +2821,7 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 <p>Full-year hourly runs with total storage energy capacity capped at 0.2 kW·yr (<code class="docutils literal notranslate"><span class="pre">StorageMaxCapacity</span> <span class="pre">=</span> <span class="pre">0.2</span></code>; reported <em>new</em> capacity is then 0.15 because 0.05 is residual). Kotzur verifies SoC only at day boundaries, so its reconstructed hourly trajectory can leave the bounds.</p>
 <p>Two counting conventions are reported. <em>Strict</em> counts physically infeasible states (SoC &gt; 0.2 or &lt; 0). <em>At or beyond</em> also counts hours exactly at the upper bound, which are feasible; the R2 draft’s wind figure (224 h; 183 above) corresponds to this second convention.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">RUN_STRESS</span><span class="p">:</span>
@@ -3165,7 +3152,7 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 <li><p>Cost column: under the binding cap, Kotzur’s total cost is clearly lower than that of the formulations that keep SoC within bounds. The claim that the violations do not materially alter cost should be revisited.</p></li>
 </ul>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'WND'</span><span class="p">,</span> <span class="s1">'SOL'</span><span class="p">]:</span>
@@ -3210,7 +3197,7 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 </ul>
 <p>Values may differ from the published Figure 8 if the original script used other alignment conventions; the definitions above should be stated in the paper.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CASES</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'WND'</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">'WND'</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">'SOL'</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">'SOL'</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">'HYD'</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">'HYD'</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
@@ -3230,7 +3217,7 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
             <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="n">fid</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">fid</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">'No trajectories found: place the full archive as Results_Demand_Variation/ or run the cases.'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'No trajectories found: place the full archive in data/full_archive/ or run the cases.'</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">fid</span><span class="p">[</span><span class="s1">'cycle error (%)'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">fid</span><span class="o">.</span><span class="n">rainflow_cycles</span> <span class="o">/</span> <span class="n">fid</span><span class="o">.</span><span class="n">rainflow_cycles_benchmark</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">display</span><span class="p">(</span><span class="n">fid</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
@@ -3543,10 +3530,10 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 <h2>11. Seed sensitivity of system cost (reviewer comment C2)<a class="headerlink" href="#11.-Seed-sensitivity-of-system-cost-(reviewer-comment-C2)" title="Link to this heading">#</a></h2>
 <p>Re-solves selected configurations with seeds 1 and 2 and compares total-cost error with seed 0. The question is whether the seed-induced spread is small compared with the differences between formulations.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SEED_DIR</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s1">'Results_seeds'</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SEED_DIR</span> <span class="o">=</span> <span class="n">REPO</span> <span class="o">/</span> <span class="s1">'results'</span> <span class="o">/</span> <span class="s1">'seeds'</span>
 <span class="k">if</span> <span class="n">RUN_SEED_COSTS</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
         <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'WND'</span><span class="p">,</span> <span class="s1">'SOL'</span><span class="p">,</span> <span class="s1">'HYD'</span><span class="p">]:</span>
@@ -3580,17 +3567,6 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
     <span class="n">display</span><span class="p">(</span><span class="n">cap_piv</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span><span class="s1">'Storage capacity (kW·yr) by seed'</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/tmp/ipykernel_1024/1970680421.py:21: Pandas4Warning: Starting with pandas version 4.0 all arguments of max will be keyword-only.
-  piv[&#39;seed spread (pp)&#39;] = piv.max(1) - piv.min(1)
-/tmp/ipykernel_1024/1970680421.py:21: Pandas4Warning: Starting with pandas version 4.0 all arguments of min will be keyword-only.
-  piv[&#39;seed spread (pp)&#39;] = piv.max(1) - piv.min(1)
-</pre></div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
@@ -3992,15 +3968,15 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 <div class="output_area rendered_html docutils container">
 <style type="text/css">
 </style>
-<table id="T_8c44f">
+<table id="T_b8dbb">
   <caption>Formulation with the smallest |cost error|</caption>
   <thead>
     <tr>
       <th class="blank" >&nbsp;</th>
       <th class="index_name level0" >seed</th>
-      <th id="T_8c44f_level0_col0" class="col_heading level0 col0" >0</th>
-      <th id="T_8c44f_level0_col1" class="col_heading level0 col1" >1</th>
-      <th id="T_8c44f_level0_col2" class="col_heading level0 col2" >2</th>
+      <th id="T_b8dbb_level0_col0" class="col_heading level0 col0" >0</th>
+      <th id="T_b8dbb_level0_col1" class="col_heading level0 col1" >1</th>
+      <th id="T_b8dbb_level0_col2" class="col_heading level0 col2" >2</th>
     </tr>
     <tr>
       <th class="index_name level0" >resource</th>
@@ -4012,61 +3988,61 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
   </thead>
   <tbody>
     <tr>
-      <th id="T_8c44f_level0_row0" class="row_heading level0 row0" rowspan="3">HYD</th>
-      <th id="T_8c44f_level1_row0" class="row_heading level1 row0" >4</th>
-      <td id="T_8c44f_row0_col0" class="data row0 col0" >Novo</td>
-      <td id="T_8c44f_row0_col1" class="data row0 col1" >Welsch</td>
-      <td id="T_8c44f_row0_col2" class="data row0 col2" >Niet</td>
+      <th id="T_b8dbb_level0_row0" class="row_heading level0 row0" rowspan="3">HYD</th>
+      <th id="T_b8dbb_level1_row0" class="row_heading level1 row0" >4</th>
+      <td id="T_b8dbb_row0_col0" class="data row0 col0" >Novo</td>
+      <td id="T_b8dbb_row0_col1" class="data row0 col1" >Welsch</td>
+      <td id="T_b8dbb_row0_col2" class="data row0 col2" >Niet</td>
     </tr>
     <tr>
-      <th id="T_8c44f_level1_row1" class="row_heading level1 row1" >8</th>
-      <td id="T_8c44f_row1_col0" class="data row1 col0" >Welsch</td>
-      <td id="T_8c44f_row1_col1" class="data row1 col1" >Welsch</td>
-      <td id="T_8c44f_row1_col2" class="data row1 col2" >Niet</td>
+      <th id="T_b8dbb_level1_row1" class="row_heading level1 row1" >8</th>
+      <td id="T_b8dbb_row1_col0" class="data row1 col0" >Welsch</td>
+      <td id="T_b8dbb_row1_col1" class="data row1 col1" >Welsch</td>
+      <td id="T_b8dbb_row1_col2" class="data row1 col2" >Niet</td>
     </tr>
     <tr>
-      <th id="T_8c44f_level1_row2" class="row_heading level1 row2" >20</th>
-      <td id="T_8c44f_row2_col0" class="data row2 col0" >Welsch</td>
-      <td id="T_8c44f_row2_col1" class="data row2 col1" >Welsch</td>
-      <td id="T_8c44f_row2_col2" class="data row2 col2" >Welsch</td>
+      <th id="T_b8dbb_level1_row2" class="row_heading level1 row2" >20</th>
+      <td id="T_b8dbb_row2_col0" class="data row2 col0" >Welsch</td>
+      <td id="T_b8dbb_row2_col1" class="data row2 col1" >Welsch</td>
+      <td id="T_b8dbb_row2_col2" class="data row2 col2" >Welsch</td>
     </tr>
     <tr>
-      <th id="T_8c44f_level0_row3" class="row_heading level0 row3" rowspan="3">SOL</th>
-      <th id="T_8c44f_level1_row3" class="row_heading level1 row3" >4</th>
-      <td id="T_8c44f_row3_col0" class="data row3 col0" >Novo</td>
-      <td id="T_8c44f_row3_col1" class="data row3 col1" >Novo</td>
-      <td id="T_8c44f_row3_col2" class="data row3 col2" >Welsch</td>
+      <th id="T_b8dbb_level0_row3" class="row_heading level0 row3" rowspan="3">SOL</th>
+      <th id="T_b8dbb_level1_row3" class="row_heading level1 row3" >4</th>
+      <td id="T_b8dbb_row3_col0" class="data row3 col0" >Novo</td>
+      <td id="T_b8dbb_row3_col1" class="data row3 col1" >Novo</td>
+      <td id="T_b8dbb_row3_col2" class="data row3 col2" >Welsch</td>
     </tr>
     <tr>
-      <th id="T_8c44f_level1_row4" class="row_heading level1 row4" >8</th>
-      <td id="T_8c44f_row4_col0" class="data row4 col0" >Niet</td>
-      <td id="T_8c44f_row4_col1" class="data row4 col1" >Novo</td>
-      <td id="T_8c44f_row4_col2" class="data row4 col2" >Niet</td>
+      <th id="T_b8dbb_level1_row4" class="row_heading level1 row4" >8</th>
+      <td id="T_b8dbb_row4_col0" class="data row4 col0" >Niet</td>
+      <td id="T_b8dbb_row4_col1" class="data row4 col1" >Novo</td>
+      <td id="T_b8dbb_row4_col2" class="data row4 col2" >Niet</td>
     </tr>
     <tr>
-      <th id="T_8c44f_level1_row5" class="row_heading level1 row5" >20</th>
-      <td id="T_8c44f_row5_col0" class="data row5 col0" >Kotzur</td>
-      <td id="T_8c44f_row5_col1" class="data row5 col1" >Kotzur</td>
-      <td id="T_8c44f_row5_col2" class="data row5 col2" >Novo</td>
+      <th id="T_b8dbb_level1_row5" class="row_heading level1 row5" >20</th>
+      <td id="T_b8dbb_row5_col0" class="data row5 col0" >Kotzur</td>
+      <td id="T_b8dbb_row5_col1" class="data row5 col1" >Kotzur</td>
+      <td id="T_b8dbb_row5_col2" class="data row5 col2" >Novo</td>
     </tr>
     <tr>
-      <th id="T_8c44f_level0_row6" class="row_heading level0 row6" rowspan="3">WND</th>
-      <th id="T_8c44f_level1_row6" class="row_heading level1 row6" >4</th>
-      <td id="T_8c44f_row6_col0" class="data row6 col0" >Novo</td>
-      <td id="T_8c44f_row6_col1" class="data row6 col1" >Kotzur</td>
-      <td id="T_8c44f_row6_col2" class="data row6 col2" >Novo</td>
+      <th id="T_b8dbb_level0_row6" class="row_heading level0 row6" rowspan="3">WND</th>
+      <th id="T_b8dbb_level1_row6" class="row_heading level1 row6" >4</th>
+      <td id="T_b8dbb_row6_col0" class="data row6 col0" >Novo</td>
+      <td id="T_b8dbb_row6_col1" class="data row6 col1" >Kotzur</td>
+      <td id="T_b8dbb_row6_col2" class="data row6 col2" >Novo</td>
     </tr>
     <tr>
-      <th id="T_8c44f_level1_row7" class="row_heading level1 row7" >8</th>
-      <td id="T_8c44f_row7_col0" class="data row7 col0" >Kotzur</td>
-      <td id="T_8c44f_row7_col1" class="data row7 col1" >Kotzur</td>
-      <td id="T_8c44f_row7_col2" class="data row7 col2" >Kotzur</td>
+      <th id="T_b8dbb_level1_row7" class="row_heading level1 row7" >8</th>
+      <td id="T_b8dbb_row7_col0" class="data row7 col0" >Kotzur</td>
+      <td id="T_b8dbb_row7_col1" class="data row7 col1" >Kotzur</td>
+      <td id="T_b8dbb_row7_col2" class="data row7 col2" >Kotzur</td>
     </tr>
     <tr>
-      <th id="T_8c44f_level1_row8" class="row_heading level1 row8" >20</th>
-      <td id="T_8c44f_row8_col0" class="data row8 col0" >Novo</td>
-      <td id="T_8c44f_row8_col1" class="data row8 col1" >Kotzur</td>
-      <td id="T_8c44f_row8_col2" class="data row8 col2" >Kotzur</td>
+      <th id="T_b8dbb_level1_row8" class="row_heading level1 row8" >20</th>
+      <td id="T_b8dbb_row8_col0" class="data row8 col0" >Novo</td>
+      <td id="T_b8dbb_row8_col1" class="data row8 col1" >Kotzur</td>
+      <td id="T_b8dbb_row8_col2" class="data row8 col2" >Kotzur</td>
     </tr>
   </tbody>
 </table></div>
@@ -4077,16 +4053,16 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
 <div class="output_area rendered_html docutils container">
 <style type="text/css">
 </style>
-<table id="T_fa772">
+<table id="T_4c89c">
   <caption>Storage capacity (kW·yr) by seed</caption>
   <thead>
     <tr>
       <th class="blank" >&nbsp;</th>
       <th class="blank" >&nbsp;</th>
       <th class="index_name level0" >seed</th>
-      <th id="T_fa772_level0_col0" class="col_heading level0 col0" >0</th>
-      <th id="T_fa772_level0_col1" class="col_heading level0 col1" >1</th>
-      <th id="T_fa772_level0_col2" class="col_heading level0 col2" >2</th>
+      <th id="T_4c89c_level0_col0" class="col_heading level0 col0" >0</th>
+      <th id="T_4c89c_level0_col1" class="col_heading level0 col1" >1</th>
+      <th id="T_4c89c_level0_col2" class="col_heading level0 col2" >2</th>
     </tr>
     <tr>
       <th class="index_name level0" >resource</th>
@@ -4099,232 +4075,232 @@ values are in <code class="docutils literal notranslate"><span class="pre">data/
   </thead>
   <tbody>
     <tr>
-      <th id="T_fa772_level0_row0" class="row_heading level0 row0" rowspan="12">HYD</th>
-      <th id="T_fa772_level1_row0" class="row_heading level1 row0" rowspan="4">4</th>
-      <th id="T_fa772_level2_row0" class="row_heading level2 row0" >Kotzur</th>
-      <td id="T_fa772_row0_col0" class="data row0 col0" >2.260000</td>
-      <td id="T_fa772_row0_col1" class="data row0 col1" >3.115000</td>
-      <td id="T_fa772_row0_col2" class="data row0 col2" >2.011000</td>
+      <th id="T_4c89c_level0_row0" class="row_heading level0 row0" rowspan="12">HYD</th>
+      <th id="T_4c89c_level1_row0" class="row_heading level1 row0" rowspan="4">4</th>
+      <th id="T_4c89c_level2_row0" class="row_heading level2 row0" >Kotzur</th>
+      <td id="T_4c89c_row0_col0" class="data row0 col0" >2.260000</td>
+      <td id="T_4c89c_row0_col1" class="data row0 col1" >3.115000</td>
+      <td id="T_4c89c_row0_col2" class="data row0 col2" >2.011000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row1" class="row_heading level2 row1" >Niet</th>
-      <td id="T_fa772_row1_col0" class="data row1 col0" >2.106000</td>
-      <td id="T_fa772_row1_col1" class="data row1 col1" >3.201000</td>
-      <td id="T_fa772_row1_col2" class="data row1 col2" >2.448000</td>
+      <th id="T_4c89c_level2_row1" class="row_heading level2 row1" >Niet</th>
+      <td id="T_4c89c_row1_col0" class="data row1 col0" >2.106000</td>
+      <td id="T_4c89c_row1_col1" class="data row1 col1" >3.201000</td>
+      <td id="T_4c89c_row1_col2" class="data row1 col2" >2.448000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row2" class="row_heading level2 row2" >Novo</th>
-      <td id="T_fa772_row2_col0" class="data row2 col0" >2.260000</td>
-      <td id="T_fa772_row2_col1" class="data row2 col1" >3.115000</td>
-      <td id="T_fa772_row2_col2" class="data row2 col2" >2.012000</td>
+      <th id="T_4c89c_level2_row2" class="row_heading level2 row2" >Novo</th>
+      <td id="T_4c89c_row2_col0" class="data row2 col0" >2.260000</td>
+      <td id="T_4c89c_row2_col1" class="data row2 col1" >3.115000</td>
+      <td id="T_4c89c_row2_col2" class="data row2 col2" >2.012000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row3" class="row_heading level2 row3" >Welsch</th>
-      <td id="T_fa772_row3_col0" class="data row3 col0" >2.144000</td>
-      <td id="T_fa772_row3_col1" class="data row3 col1" >3.263000</td>
-      <td id="T_fa772_row3_col2" class="data row3 col2" >2.374000</td>
+      <th id="T_4c89c_level2_row3" class="row_heading level2 row3" >Welsch</th>
+      <td id="T_4c89c_row3_col0" class="data row3 col0" >2.144000</td>
+      <td id="T_4c89c_row3_col1" class="data row3 col1" >3.263000</td>
+      <td id="T_4c89c_row3_col2" class="data row3 col2" >2.374000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level1_row4" class="row_heading level1 row4" rowspan="4">8</th>
-      <th id="T_fa772_level2_row4" class="row_heading level2 row4" >Kotzur</th>
-      <td id="T_fa772_row4_col0" class="data row4 col0" >3.171000</td>
-      <td id="T_fa772_row4_col1" class="data row4 col1" >2.754000</td>
-      <td id="T_fa772_row4_col2" class="data row4 col2" >3.915000</td>
+      <th id="T_4c89c_level1_row4" class="row_heading level1 row4" rowspan="4">8</th>
+      <th id="T_4c89c_level2_row4" class="row_heading level2 row4" >Kotzur</th>
+      <td id="T_4c89c_row4_col0" class="data row4 col0" >3.171000</td>
+      <td id="T_4c89c_row4_col1" class="data row4 col1" >2.754000</td>
+      <td id="T_4c89c_row4_col2" class="data row4 col2" >3.915000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row5" class="row_heading level2 row5" >Niet</th>
-      <td id="T_fa772_row5_col0" class="data row5 col0" >3.238000</td>
-      <td id="T_fa772_row5_col1" class="data row5 col1" >2.889000</td>
-      <td id="T_fa772_row5_col2" class="data row5 col2" >4.184000</td>
+      <th id="T_4c89c_level2_row5" class="row_heading level2 row5" >Niet</th>
+      <td id="T_4c89c_row5_col0" class="data row5 col0" >3.238000</td>
+      <td id="T_4c89c_row5_col1" class="data row5 col1" >2.889000</td>
+      <td id="T_4c89c_row5_col2" class="data row5 col2" >4.184000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row6" class="row_heading level2 row6" >Novo</th>
-      <td id="T_fa772_row6_col0" class="data row6 col0" >3.174000</td>
-      <td id="T_fa772_row6_col1" class="data row6 col1" >2.754000</td>
-      <td id="T_fa772_row6_col2" class="data row6 col2" >3.916000</td>
+      <th id="T_4c89c_level2_row6" class="row_heading level2 row6" >Novo</th>
+      <td id="T_4c89c_row6_col0" class="data row6 col0" >3.174000</td>
+      <td id="T_4c89c_row6_col1" class="data row6 col1" >2.754000</td>
+      <td id="T_4c89c_row6_col2" class="data row6 col2" >3.916000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row7" class="row_heading level2 row7" >Welsch</th>
-      <td id="T_fa772_row7_col0" class="data row7 col0" >3.307000</td>
-      <td id="T_fa772_row7_col1" class="data row7 col1" >2.941000</td>
-      <td id="T_fa772_row7_col2" class="data row7 col2" >4.166000</td>
+      <th id="T_4c89c_level2_row7" class="row_heading level2 row7" >Welsch</th>
+      <td id="T_4c89c_row7_col0" class="data row7 col0" >3.307000</td>
+      <td id="T_4c89c_row7_col1" class="data row7 col1" >2.941000</td>
+      <td id="T_4c89c_row7_col2" class="data row7 col2" >4.166000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level1_row8" class="row_heading level1 row8" rowspan="4">20</th>
-      <th id="T_fa772_level2_row8" class="row_heading level2 row8" >Kotzur</th>
-      <td id="T_fa772_row8_col0" class="data row8 col0" >5.002000</td>
-      <td id="T_fa772_row8_col1" class="data row8 col1" >3.682000</td>
-      <td id="T_fa772_row8_col2" class="data row8 col2" >3.967000</td>
+      <th id="T_4c89c_level1_row8" class="row_heading level1 row8" rowspan="4">20</th>
+      <th id="T_4c89c_level2_row8" class="row_heading level2 row8" >Kotzur</th>
+      <td id="T_4c89c_row8_col0" class="data row8 col0" >5.002000</td>
+      <td id="T_4c89c_row8_col1" class="data row8 col1" >3.682000</td>
+      <td id="T_4c89c_row8_col2" class="data row8 col2" >3.967000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row9" class="row_heading level2 row9" >Niet</th>
-      <td id="T_fa772_row9_col0" class="data row9 col0" >5.091000</td>
-      <td id="T_fa772_row9_col1" class="data row9 col1" >3.771000</td>
-      <td id="T_fa772_row9_col2" class="data row9 col2" >3.921000</td>
+      <th id="T_4c89c_level2_row9" class="row_heading level2 row9" >Niet</th>
+      <td id="T_4c89c_row9_col0" class="data row9 col0" >5.091000</td>
+      <td id="T_4c89c_row9_col1" class="data row9 col1" >3.771000</td>
+      <td id="T_4c89c_row9_col2" class="data row9 col2" >3.921000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row10" class="row_heading level2 row10" >Novo</th>
-      <td id="T_fa772_row10_col0" class="data row10 col0" >5.002000</td>
-      <td id="T_fa772_row10_col1" class="data row10 col1" >3.682000</td>
-      <td id="T_fa772_row10_col2" class="data row10 col2" >3.967000</td>
+      <th id="T_4c89c_level2_row10" class="row_heading level2 row10" >Novo</th>
+      <td id="T_4c89c_row10_col0" class="data row10 col0" >5.002000</td>
+      <td id="T_4c89c_row10_col1" class="data row10 col1" >3.682000</td>
+      <td id="T_4c89c_row10_col2" class="data row10 col2" >3.967000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row11" class="row_heading level2 row11" >Welsch</th>
-      <td id="T_fa772_row11_col0" class="data row11 col0" >5.186000</td>
-      <td id="T_fa772_row11_col1" class="data row11 col1" >3.788000</td>
-      <td id="T_fa772_row11_col2" class="data row11 col2" >4.003000</td>
+      <th id="T_4c89c_level2_row11" class="row_heading level2 row11" >Welsch</th>
+      <td id="T_4c89c_row11_col0" class="data row11 col0" >5.186000</td>
+      <td id="T_4c89c_row11_col1" class="data row11 col1" >3.788000</td>
+      <td id="T_4c89c_row11_col2" class="data row11 col2" >4.003000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level0_row12" class="row_heading level0 row12" rowspan="12">SOL</th>
-      <th id="T_fa772_level1_row12" class="row_heading level1 row12" rowspan="4">4</th>
-      <th id="T_fa772_level2_row12" class="row_heading level2 row12" >Kotzur</th>
-      <td id="T_fa772_row12_col0" class="data row12 col0" >4.303000</td>
-      <td id="T_fa772_row12_col1" class="data row12 col1" >4.640000</td>
-      <td id="T_fa772_row12_col2" class="data row12 col2" >3.395000</td>
+      <th id="T_4c89c_level0_row12" class="row_heading level0 row12" rowspan="12">SOL</th>
+      <th id="T_4c89c_level1_row12" class="row_heading level1 row12" rowspan="4">4</th>
+      <th id="T_4c89c_level2_row12" class="row_heading level2 row12" >Kotzur</th>
+      <td id="T_4c89c_row12_col0" class="data row12 col0" >4.303000</td>
+      <td id="T_4c89c_row12_col1" class="data row12 col1" >4.640000</td>
+      <td id="T_4c89c_row12_col2" class="data row12 col2" >3.395000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row13" class="row_heading level2 row13" >Niet</th>
-      <td id="T_fa772_row13_col0" class="data row13 col0" >8.540000</td>
-      <td id="T_fa772_row13_col1" class="data row13 col1" >8.938000</td>
-      <td id="T_fa772_row13_col2" class="data row13 col2" >7.785000</td>
+      <th id="T_4c89c_level2_row13" class="row_heading level2 row13" >Niet</th>
+      <td id="T_4c89c_row13_col0" class="data row13 col0" >8.540000</td>
+      <td id="T_4c89c_row13_col1" class="data row13 col1" >8.938000</td>
+      <td id="T_4c89c_row13_col2" class="data row13 col2" >7.785000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row14" class="row_heading level2 row14" >Novo</th>
-      <td id="T_fa772_row14_col0" class="data row14 col0" >4.324000</td>
-      <td id="T_fa772_row14_col1" class="data row14 col1" >4.661000</td>
-      <td id="T_fa772_row14_col2" class="data row14 col2" >3.417000</td>
+      <th id="T_4c89c_level2_row14" class="row_heading level2 row14" >Novo</th>
+      <td id="T_4c89c_row14_col0" class="data row14 col0" >4.324000</td>
+      <td id="T_4c89c_row14_col1" class="data row14 col1" >4.661000</td>
+      <td id="T_4c89c_row14_col2" class="data row14 col2" >3.417000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row15" class="row_heading level2 row15" >Welsch</th>
-      <td id="T_fa772_row15_col0" class="data row15 col0" >6.320000</td>
-      <td id="T_fa772_row15_col1" class="data row15 col1" >6.761000</td>
-      <td id="T_fa772_row15_col2" class="data row15 col2" >5.325000</td>
+      <th id="T_4c89c_level2_row15" class="row_heading level2 row15" >Welsch</th>
+      <td id="T_4c89c_row15_col0" class="data row15 col0" >6.320000</td>
+      <td id="T_4c89c_row15_col1" class="data row15 col1" >6.761000</td>
+      <td id="T_4c89c_row15_col2" class="data row15 col2" >5.325000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level1_row16" class="row_heading level1 row16" rowspan="4">8</th>
-      <th id="T_fa772_level2_row16" class="row_heading level2 row16" >Kotzur</th>
-      <td id="T_fa772_row16_col0" class="data row16 col0" >2.830000</td>
-      <td id="T_fa772_row16_col1" class="data row16 col1" >3.146000</td>
-      <td id="T_fa772_row16_col2" class="data row16 col2" >3.915000</td>
+      <th id="T_4c89c_level1_row16" class="row_heading level1 row16" rowspan="4">8</th>
+      <th id="T_4c89c_level2_row16" class="row_heading level2 row16" >Kotzur</th>
+      <td id="T_4c89c_row16_col0" class="data row16 col0" >2.830000</td>
+      <td id="T_4c89c_row16_col1" class="data row16 col1" >3.146000</td>
+      <td id="T_4c89c_row16_col2" class="data row16 col2" >3.915000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row17" class="row_heading level2 row17" >Niet</th>
-      <td id="T_fa772_row17_col0" class="data row17 col0" >5.312000</td>
-      <td id="T_fa772_row17_col1" class="data row17 col1" >5.871000</td>
-      <td id="T_fa772_row17_col2" class="data row17 col2" >6.780000</td>
+      <th id="T_4c89c_level2_row17" class="row_heading level2 row17" >Niet</th>
+      <td id="T_4c89c_row17_col0" class="data row17 col0" >5.312000</td>
+      <td id="T_4c89c_row17_col1" class="data row17 col1" >5.871000</td>
+      <td id="T_4c89c_row17_col2" class="data row17 col2" >6.780000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row18" class="row_heading level2 row18" >Novo</th>
-      <td id="T_fa772_row18_col0" class="data row18 col0" >2.851000</td>
-      <td id="T_fa772_row18_col1" class="data row18 col1" >3.169000</td>
-      <td id="T_fa772_row18_col2" class="data row18 col2" >3.946000</td>
+      <th id="T_4c89c_level2_row18" class="row_heading level2 row18" >Novo</th>
+      <td id="T_4c89c_row18_col0" class="data row18 col0" >2.851000</td>
+      <td id="T_4c89c_row18_col1" class="data row18 col1" >3.169000</td>
+      <td id="T_4c89c_row18_col2" class="data row18 col2" >3.946000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row19" class="row_heading level2 row19" >Welsch</th>
-      <td id="T_fa772_row19_col0" class="data row19 col0" >3.878000</td>
-      <td id="T_fa772_row19_col1" class="data row19 col1" >4.402000</td>
-      <td id="T_fa772_row19_col2" class="data row19 col2" >5.550000</td>
+      <th id="T_4c89c_level2_row19" class="row_heading level2 row19" >Welsch</th>
+      <td id="T_4c89c_row19_col0" class="data row19 col0" >3.878000</td>
+      <td id="T_4c89c_row19_col1" class="data row19 col1" >4.402000</td>
+      <td id="T_4c89c_row19_col2" class="data row19 col2" >5.550000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level1_row20" class="row_heading level1 row20" rowspan="4">20</th>
-      <th id="T_fa772_level2_row20" class="row_heading level2 row20" >Kotzur</th>
-      <td id="T_fa772_row20_col0" class="data row20 col0" >4.379000</td>
-      <td id="T_fa772_row20_col1" class="data row20 col1" >4.806000</td>
-      <td id="T_fa772_row20_col2" class="data row20 col2" >3.752000</td>
+      <th id="T_4c89c_level1_row20" class="row_heading level1 row20" rowspan="4">20</th>
+      <th id="T_4c89c_level2_row20" class="row_heading level2 row20" >Kotzur</th>
+      <td id="T_4c89c_row20_col0" class="data row20 col0" >4.379000</td>
+      <td id="T_4c89c_row20_col1" class="data row20 col1" >4.806000</td>
+      <td id="T_4c89c_row20_col2" class="data row20 col2" >3.752000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row21" class="row_heading level2 row21" >Niet</th>
-      <td id="T_fa772_row21_col0" class="data row21 col0" >5.441000</td>
-      <td id="T_fa772_row21_col1" class="data row21 col1" >6.291000</td>
-      <td id="T_fa772_row21_col2" class="data row21 col2" >5.505000</td>
+      <th id="T_4c89c_level2_row21" class="row_heading level2 row21" >Niet</th>
+      <td id="T_4c89c_row21_col0" class="data row21 col0" >5.441000</td>
+      <td id="T_4c89c_row21_col1" class="data row21 col1" >6.291000</td>
+      <td id="T_4c89c_row21_col2" class="data row21 col2" >5.505000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row22" class="row_heading level2 row22" >Novo</th>
-      <td id="T_fa772_row22_col0" class="data row22 col0" >4.413000</td>
-      <td id="T_fa772_row22_col1" class="data row22 col1" >4.823000</td>
-      <td id="T_fa772_row22_col2" class="data row22 col2" >3.768000</td>
+      <th id="T_4c89c_level2_row22" class="row_heading level2 row22" >Novo</th>
+      <td id="T_4c89c_row22_col0" class="data row22 col0" >4.413000</td>
+      <td id="T_4c89c_row22_col1" class="data row22 col1" >4.823000</td>
+      <td id="T_4c89c_row22_col2" class="data row22 col2" >3.768000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row23" class="row_heading level2 row23" >Welsch</th>
-      <td id="T_fa772_row23_col0" class="data row23 col0" >5.043000</td>
-      <td id="T_fa772_row23_col1" class="data row23 col1" >5.864000</td>
-      <td id="T_fa772_row23_col2" class="data row23 col2" >5.104000</td>
+      <th id="T_4c89c_level2_row23" class="row_heading level2 row23" >Welsch</th>
+      <td id="T_4c89c_row23_col0" class="data row23 col0" >5.043000</td>
+      <td id="T_4c89c_row23_col1" class="data row23 col1" >5.864000</td>
+      <td id="T_4c89c_row23_col2" class="data row23 col2" >5.104000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level0_row24" class="row_heading level0 row24" rowspan="12">WND</th>
-      <th id="T_fa772_level1_row24" class="row_heading level1 row24" rowspan="4">4</th>
-      <th id="T_fa772_level2_row24" class="row_heading level2 row24" >Kotzur</th>
-      <td id="T_fa772_row24_col0" class="data row24 col0" >1.094000</td>
-      <td id="T_fa772_row24_col1" class="data row24 col1" >1.130000</td>
-      <td id="T_fa772_row24_col2" class="data row24 col2" >1.121000</td>
+      <th id="T_4c89c_level0_row24" class="row_heading level0 row24" rowspan="12">WND</th>
+      <th id="T_4c89c_level1_row24" class="row_heading level1 row24" rowspan="4">4</th>
+      <th id="T_4c89c_level2_row24" class="row_heading level2 row24" >Kotzur</th>
+      <td id="T_4c89c_row24_col0" class="data row24 col0" >1.094000</td>
+      <td id="T_4c89c_row24_col1" class="data row24 col1" >1.130000</td>
+      <td id="T_4c89c_row24_col2" class="data row24 col2" >1.121000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row25" class="row_heading level2 row25" >Niet</th>
-      <td id="T_fa772_row25_col0" class="data row25 col0" >6.926000</td>
-      <td id="T_fa772_row25_col1" class="data row25 col1" >6.915000</td>
-      <td id="T_fa772_row25_col2" class="data row25 col2" >7.028000</td>
+      <th id="T_4c89c_level2_row25" class="row_heading level2 row25" >Niet</th>
+      <td id="T_4c89c_row25_col0" class="data row25 col0" >6.926000</td>
+      <td id="T_4c89c_row25_col1" class="data row25 col1" >6.915000</td>
+      <td id="T_4c89c_row25_col2" class="data row25 col2" >7.028000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row26" class="row_heading level2 row26" >Novo</th>
-      <td id="T_fa772_row26_col0" class="data row26 col0" >1.094000</td>
-      <td id="T_fa772_row26_col1" class="data row26 col1" >1.130000</td>
-      <td id="T_fa772_row26_col2" class="data row26 col2" >1.121000</td>
+      <th id="T_4c89c_level2_row26" class="row_heading level2 row26" >Novo</th>
+      <td id="T_4c89c_row26_col0" class="data row26 col0" >1.094000</td>
+      <td id="T_4c89c_row26_col1" class="data row26 col1" >1.130000</td>
+      <td id="T_4c89c_row26_col2" class="data row26 col2" >1.121000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row27" class="row_heading level2 row27" >Welsch</th>
-      <td id="T_fa772_row27_col0" class="data row27 col0" >6.535000</td>
-      <td id="T_fa772_row27_col1" class="data row27 col1" >6.618000</td>
-      <td id="T_fa772_row27_col2" class="data row27 col2" >6.663000</td>
+      <th id="T_4c89c_level2_row27" class="row_heading level2 row27" >Welsch</th>
+      <td id="T_4c89c_row27_col0" class="data row27 col0" >6.535000</td>
+      <td id="T_4c89c_row27_col1" class="data row27 col1" >6.618000</td>
+      <td id="T_4c89c_row27_col2" class="data row27 col2" >6.663000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level1_row28" class="row_heading level1 row28" rowspan="4">8</th>
-      <th id="T_fa772_level2_row28" class="row_heading level2 row28" >Kotzur</th>
-      <td id="T_fa772_row28_col0" class="data row28 col0" >1.569000</td>
-      <td id="T_fa772_row28_col1" class="data row28 col1" >1.197000</td>
-      <td id="T_fa772_row28_col2" class="data row28 col2" >2.230000</td>
+      <th id="T_4c89c_level1_row28" class="row_heading level1 row28" rowspan="4">8</th>
+      <th id="T_4c89c_level2_row28" class="row_heading level2 row28" >Kotzur</th>
+      <td id="T_4c89c_row28_col0" class="data row28 col0" >1.569000</td>
+      <td id="T_4c89c_row28_col1" class="data row28 col1" >1.197000</td>
+      <td id="T_4c89c_row28_col2" class="data row28 col2" >2.230000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row29" class="row_heading level2 row29" >Niet</th>
-      <td id="T_fa772_row29_col0" class="data row29 col0" >7.454000</td>
-      <td id="T_fa772_row29_col1" class="data row29 col1" >5.223000</td>
-      <td id="T_fa772_row29_col2" class="data row29 col2" >7.233000</td>
+      <th id="T_4c89c_level2_row29" class="row_heading level2 row29" >Niet</th>
+      <td id="T_4c89c_row29_col0" class="data row29 col0" >7.454000</td>
+      <td id="T_4c89c_row29_col1" class="data row29 col1" >5.223000</td>
+      <td id="T_4c89c_row29_col2" class="data row29 col2" >7.233000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row30" class="row_heading level2 row30" >Novo</th>
-      <td id="T_fa772_row30_col0" class="data row30 col0" >1.573000</td>
-      <td id="T_fa772_row30_col1" class="data row30 col1" >1.209000</td>
-      <td id="T_fa772_row30_col2" class="data row30 col2" >2.235000</td>
+      <th id="T_4c89c_level2_row30" class="row_heading level2 row30" >Novo</th>
+      <td id="T_4c89c_row30_col0" class="data row30 col0" >1.573000</td>
+      <td id="T_4c89c_row30_col1" class="data row30 col1" >1.209000</td>
+      <td id="T_4c89c_row30_col2" class="data row30 col2" >2.235000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row31" class="row_heading level2 row31" >Welsch</th>
-      <td id="T_fa772_row31_col0" class="data row31 col0" >7.529000</td>
-      <td id="T_fa772_row31_col1" class="data row31 col1" >5.246000</td>
-      <td id="T_fa772_row31_col2" class="data row31 col2" >7.309000</td>
+      <th id="T_4c89c_level2_row31" class="row_heading level2 row31" >Welsch</th>
+      <td id="T_4c89c_row31_col0" class="data row31 col0" >7.529000</td>
+      <td id="T_4c89c_row31_col1" class="data row31 col1" >5.246000</td>
+      <td id="T_4c89c_row31_col2" class="data row31 col2" >7.309000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level1_row32" class="row_heading level1 row32" rowspan="4">20</th>
-      <th id="T_fa772_level2_row32" class="row_heading level2 row32" >Kotzur</th>
-      <td id="T_fa772_row32_col0" class="data row32 col0" >1.144000</td>
-      <td id="T_fa772_row32_col1" class="data row32 col1" >1.557000</td>
-      <td id="T_fa772_row32_col2" class="data row32 col2" >2.173000</td>
+      <th id="T_4c89c_level1_row32" class="row_heading level1 row32" rowspan="4">20</th>
+      <th id="T_4c89c_level2_row32" class="row_heading level2 row32" >Kotzur</th>
+      <td id="T_4c89c_row32_col0" class="data row32 col0" >1.144000</td>
+      <td id="T_4c89c_row32_col1" class="data row32 col1" >1.557000</td>
+      <td id="T_4c89c_row32_col2" class="data row32 col2" >2.173000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row33" class="row_heading level2 row33" >Niet</th>
-      <td id="T_fa772_row33_col0" class="data row33 col0" >4.277000</td>
-      <td id="T_fa772_row33_col1" class="data row33 col1" >4.134000</td>
-      <td id="T_fa772_row33_col2" class="data row33 col2" >6.490000</td>
+      <th id="T_4c89c_level2_row33" class="row_heading level2 row33" >Niet</th>
+      <td id="T_4c89c_row33_col0" class="data row33 col0" >4.277000</td>
+      <td id="T_4c89c_row33_col1" class="data row33 col1" >4.134000</td>
+      <td id="T_4c89c_row33_col2" class="data row33 col2" >6.490000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row34" class="row_heading level2 row34" >Novo</th>
-      <td id="T_fa772_row34_col0" class="data row34 col0" >1.153000</td>
-      <td id="T_fa772_row34_col1" class="data row34 col1" >1.564000</td>
-      <td id="T_fa772_row34_col2" class="data row34 col2" >2.181000</td>
+      <th id="T_4c89c_level2_row34" class="row_heading level2 row34" >Novo</th>
+      <td id="T_4c89c_row34_col0" class="data row34 col0" >1.153000</td>
+      <td id="T_4c89c_row34_col1" class="data row34 col1" >1.564000</td>
+      <td id="T_4c89c_row34_col2" class="data row34 col2" >2.181000</td>
     </tr>
     <tr>
-      <th id="T_fa772_level2_row35" class="row_heading level2 row35" >Welsch</th>
-      <td id="T_fa772_row35_col0" class="data row35 col0" >4.274000</td>
-      <td id="T_fa772_row35_col1" class="data row35 col1" >4.113000</td>
-      <td id="T_fa772_row35_col2" class="data row35 col2" >6.509000</td>
+      <th id="T_4c89c_level2_row35" class="row_heading level2 row35" >Welsch</th>
+      <td id="T_4c89c_row35_col0" class="data row35 col0" >4.274000</td>
+      <td id="T_4c89c_row35_col1" class="data row35 col1" >4.113000</td>
+      <td id="T_4c89c_row35_col2" class="data row35 col2" >6.509000</td>
     </tr>
   </tbody>
 </table></div>
@@ -4345,7 +4321,7 @@ reported as such.</p>
 <td><p>Step 3</p></td>
 </tr>
 <tr class="row-odd"><td><p>Section 4.1 hand-calculated SoC check</p></td>
-<td><p>Step 4 (<code class="docutils literal notranslate"><span class="pre">validation_soc/</span></code>)</p></td>
+<td><p>Step 4 (<code class="docutils literal notranslate"><span class="pre">validation/soc/</span></code>)</p></td>
 </tr>
 <tr class="row-even"><td><p>Figure 6, Table S1</p></td>
 <td><p>Step 6</p></td>
@@ -4365,7 +4341,7 @@ reported as such.</p>
 </tbody>
 </table>
 </div>
-<p>Fresh runs go to <code class="docutils literal notranslate"><span class="pre">Results/</span></code>; the archive is in <code class="docutils literal notranslate"><span class="pre">data/published_results/</span></code> (tables and key trajectories) and, in full, in the Zenodo record cited in the Data Availability Statement.</p>
+<p>Fresh runs go to <code class="docutils literal notranslate"><span class="pre">results/</span></code>; the archive is in <code class="docutils literal notranslate"><span class="pre">data/published_results/</span></code> (tables and key trajectories) and, in full, in the Zenodo record cited in the Data Availability Statement.</p>
 </section>
 </section>
 

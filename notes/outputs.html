@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -48,7 +48,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Results Analysis" href="results_analysis.html" />
+    <link rel="next" title="API" href="../api.html" />
     <link rel="prev" title="Reproducing the study step by step" href="../notebooks/reproduce_study.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -313,7 +313,6 @@
 <li class="toctree-l1"><a class="reference internal" href="reproducibility.html">Reproducibility guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/reproduce_study.html">Reproducing the study step by step</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Outputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="results_analysis.html">Results Analysis</a></li>
 </ul>
 </div>
 </nav></div>
@@ -376,7 +375,7 @@
                   
   <section id="outputs">
 <h1>Outputs<a class="headerlink" href="#outputs" title="Link to this heading">#</a></h1>
-<p>All outputs of a run are written to the folder set in <code class="docutils literal notranslate"><span class="pre">results.directory</span></code> (default <code class="docutils literal notranslate"><span class="pre">Results/</span></code>).</p>
+<p>All outputs of a run are written to the folder set in <code class="docutils literal notranslate"><span class="pre">results.directory</span></code> (default <code class="docutils literal notranslate"><span class="pre">results/</span></code>).</p>
 <section id="simulation-results-xlsx">
 <h2><code class="docutils literal notranslate"><span class="pre">Simulation_Results.xlsx</span></code><a class="headerlink" href="#simulation-results-xlsx" title="Link to this heading">#</a></h2>
 <p>One row per scenario and formulation; repeated runs append rows (the reproduction tools keep the last
@@ -471,8 +470,8 @@ row of each scenario and formulation).</p>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">logs/&lt;scenario&gt;.log</span></code></p></td>
 <td><p>Full console output of the run (batch and notebook runs)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Model_&lt;name&gt;/results/*.csv</span></code></p></td>
-<td><p>All OSeMOSYS result tables of the last run of that formulation</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">models/Model_&lt;name&gt;/results/*.csv</span></code></p></td>
+<td><p>All OSeMOSYS result tables of the last run of that formulation (not tracked)</p></td>
 </tr>
 </tbody>
 </table>
@@ -481,7 +480,7 @@ row of each scenario and formulation).</p>
 <section id="loading-results-in-python">
 <h2>Loading results in Python<a class="headerlink" href="#loading-results-in-python" title="Link to this heading">#</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">src.reproduce</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rp</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s2">"Results/Simulation_Results.xlsx"</span><span class="p">)</span>   <span class="c1"># tidy table: resource, k, h, formulation, ...</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">load_results</span><span class="p">(</span><span class="s2">"results/Simulation_Results.xlsx"</span><span class="p">)</span>   <span class="c1"># tidy table: resource, k, h, formulation, ...</span>
 <span class="n">rp</span><span class="o">.</span><span class="n">table4</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>                                              <span class="c1"># Table 4 of the paper (needs the k365h1 runs)</span>
 <span class="n">rp</span><span class="o">.</span><span class="n">add_errors</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>                                          <span class="c1"># cost and capacity error vs k365h1 Novo</span>
 </pre></div>
@@ -509,11 +508,11 @@ row of each scenario and formulation).</p>
       </div>
     </a>
     <a class="right-next"
-       href="results_analysis.html"
+       href="../api.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Results Analysis</p>
+        <p class="prev-next-title">API</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

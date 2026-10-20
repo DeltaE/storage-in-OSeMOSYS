@@ -18,11 +18,14 @@ Full details and manual setup: {doc}`notes/README_ENVIRONMENT`.
 Edit `config/config.yaml`:
 
 ```yaml
-scenario_name: "k4h1WND"   # label used for result files
-days_in_year: 365
-seasons: 4
-n_clusters: 4              # number of representative days
-hour_grouping: 1           # hours per time block
+scenario_name: k4h1WND        # label used for result files
+resource: WND                 # WND | SOL | HYD
+n_clusters: 4                 # number of representative days k
+hour_grouping: 1              # hours per intra-day block h (1, 2, 4, 6, 8 or 12)
+random_state: 0               # k-means seed used in the paper
+
+data_8760:
+  CF: CapacityFactor_Wind.csv # match the resource: _Wind, _Solar or _Hydro
 ```
 
 All parameters are described in {doc}`notes/configuration_guide`.
@@ -30,7 +33,7 @@ All parameters are described in {doc}`notes/configuration_guide`.
 ## 3. Run
 
 ```bash
-python main.py               # or: make run-main
+python workflow/main.py      # or: make run-main
 ```
 
 The pipeline clusters the hourly data into representative days, writes the inputs for each
@@ -39,5 +42,5 @@ explained in {doc}`notes/workflow_guide`.
 
 ## 4. Look at the results
 
-Results are written to `Results/`. See {doc}`notes/outputs` for the file layout, or
+Results are written to `results/`. See {doc}`notes/outputs` for the file layout, or
 {doc}`notes/reproducibility` to regenerate the published study.

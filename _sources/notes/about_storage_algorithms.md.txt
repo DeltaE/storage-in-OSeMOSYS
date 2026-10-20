@@ -36,58 +36,66 @@ Storage isn’t just an isolated battery:
 
 So modeling it well requires integrating with the rest of the energy system.
 
-## state of the art __energy storage algorithms__:
+## The four storage formulations
 
-### Niet (Direct Link) — “Continuous Diary”
-- __Analogy__: Imagine someone writes in their diary every hour without skipping, and each day picks up exactly where the last one left off. The emotional ups and downs (mood swings) are smooth and continuous over the week.
+Every formulation below works on the same representative days (k-means on daily wind/solar/hydro
+and demand profiles, see {doc}`workflow_guide`). They differ in **which sequence the state of
+charge (SoC) follows** and **where its bounds are checked**. The model files are in
+`models/Model_<name>/osemosys_fast_<name>.txt`; *Novo* is implemented in `Model_Cluster`.
 
-- __Key idea__: Full hourly resolution; perfect continuity over time.
-- __Use case__: Most accurate but data-heavy.
+A small example makes the differences concrete. Take four days A–B–A–B, where every A day charges
+the battery by 6 MWh and every B day discharges it by 6 MWh, starting at 6 MWh. The
+hand-calculated SoC of each formulation (checked against the models in `validation/soc/`) is given
+with each description.
 
-### Welsch (Fixed-Pattern) — “Photocopied Day”
-- __Analogy__: This person writes down one typical day of feelings and then photocopies that same page for each day of the week. So Monday, Tuesday, etc., look exactly the same.
+### Niet (direct link) — “Stacked diary”
+- __How it works__: the representative time slices are chained one after another, and each slice is
+  weighted by the number of days it represents. All A days are therefore applied in one go, then all
+  B days.
+- __SoC bounds__: checked at every representative time slice.
+- __Example__: 6 → 18 → 6 MWh. The two A days are stacked, so the model sees a peak of 18 MWh that
+  never occurs in the real sequence.
+- __Consequence__: simple and small, but it can overstate the storage needed when similar days are
+  far apart in the year.
 
-- __Key idea__: Same daily pattern repeated; no inter-day variation.
-- __Use case__: Fast and simple but ignores variation between days.
+### Welsch (fixed pattern) — “Photocopied day”
+- __How it works__: the standard OSeMOSYS storage equations. The year is described by seasons, day
+  types and daily time brackets; each day type is repeated as a block (A-A-B-B), with a fixed
+  intra-day pattern.
+- __SoC bounds__: checked only at a few points: the first and last instance of each day type in the
+  first and last week.
+- __Example__: 6 → 12 → 18 → 12 → 6 MWh (grouped days A-A-B-B).
+- __Consequence__: compact, but the day order is lost and limits can be violated between the checked
+  points.
 
+### Kotzur (day-boundary verified) — “Daily ledger”
+- __How it works__: the 365 chronological days are linked in calendar order. Each day adds the net
+  change of its representative day.
+- __SoC bounds__: checked at the start of each chronological day only; within a day the level is not
+  constrained.
+- __Example__: 6 → 12 → 6 → 12 → 6 MWh (chronological days A-B-A-B).
+- __Consequence__: keeps the seasonal sequence at low cost, but intra-day peaks and troughs can
+  exceed the capacity (visible in the binding-capacity stress test).
 
-### Kotzur (Unverified Cluster) — “Alternating Diaries”
-- __Analogy__: This person has two types of days — maybe “busy” and “lazy” days — and alternates between those two. They use pre-written diary templates for each. But they don’t bother connecting one day’s feelings to the next, so it can feel jumpy or inconsistent.
+### Novo (time-step verified) — “Hourly ledger”
+- __How it works__: every chronological time block of the year (365 × 24/h) is mapped to its
+  representative block, and the SoC is carried from block to block in calendar order.
+- __SoC bounds__: checked at every chronological time block.
+- __Example__: 6 → 12 → 6 → 12 → 6 MWh, with the bounds respected at every block.
+- __Consequence__: the most faithful of the four, at the cost of the largest model (it has a SoC
+  variable for every block of the year).
 
-- __Key idea__: Captures daily diversity using clusters, but no continuity.
-- __Use case__: Captures more variety than Welsch but lacks smooth transitions.
+## Summary
 
-### Novo (Hourly-Verified) — “Linked Journaling”
-- __Analogy__: This person still uses simplified mood templates for different kinds of days, but they always make sure each day starts where the previous one left off. So it feels realistic and connected, even if it's not a full diary.
+| | **Niet** | **Welsch** | **Kotzur** | **Novo** |
+|---|---|---|---|---|
+| SoC follows | Representative slices, weighted by occurrence | Grouped day types (A-A-B-B) | Chronological days | Chronological time blocks |
+| Calendar order of days | ❌ | ❌ | ✅ | ✅ |
+| Intra-day SoC | Per representative slice | Per day type | Reconstructed after the solve | Native |
+| Bounds checked at | Each representative slice | A few day-type instances | Day boundaries | Every time block |
+| SoC variables (k days, b blocks/day) | k·b | per season, day type, bracket | 365 + k·b | 365·b |
+| Code | `Model_Niet` | `Model_Welsch` | `Model_Kotzur` | `Model_Cluster` |
 
-- __Key idea__: Combines typical days with continuity between hours.
-- __Use case__: A practical middle ground between realism and simplicity.
-
-
-Quick Summary on Storage Algorithms in Modelling : 
----
-| Algorithm | Analogy                        | Continuity | Variety | Simplicity | Use Case                                               |
-|-----------|-------------------------------|:----------:|:-------:|:----------:|--------------------------------------------------------|
-| Niet      | Full continuous diary          | ✅         | ✅      | ❌         | Most accurate but data-heavy                           |
-| Welsch    | Same page copied every day     | ❌         | ❌      | ✅✅        | Fast and simple but ignores variation between days     |
-| Kotzur    | Alternating mood templates     | ❌         | ✅      | ✅         | Captures more variety than Welsch but lacks transitions|
-| Novo      | Linked mood templates          | ✅         | ✅      | ✅         | Practical middle ground between realism and simplicity |
-
-
-
-A detailed comparison:
-
-### 📊 Comparative Table of Storage Modeling Methods
-
-| Feature                              | **Niet**                          | **Welsch**                             | **Kotzur**                       | **Novo**                  |
-|--------------------------------------|--------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------|---------------------------------------------------------|
-| Period Linking                              | Direct Link                        | Enhanced Periods (Fixed Pattern)                           | Enhanced Periods (Day Cluster Mapping)                       | Enhanced Periods (Hourly-Verified Clustering)                 |
-| **Time Representation**             | Representative periods (e.g. days, weeks)       | Representative **days** (fixed mapping)                | Representative **days** (arbitrary sequence allowed)      | Full **hourly resolution** mapped to rep days          |
-| **Chronological Continuity**        | ✅ Maintained between periods                    | ❌ Not maintained (days are independent)               | ✅ Maintained via day-sequence mapping                    | ✅ Maintained at hourly level                          |
-| **SoC Linkage Between Periods**     | ✅ Explicit (stepwise linkage)                   | ❌ No linkage; each rep day repeats independently       | ✅ Daily SoC updated using mapped intra-day values        | ✅ Fully verified SoC with hourly mapping              |
-| **Intra-Day Resolution**            | Average or period-level                         | Full 24-hour profile (rep day)                         | Full 24-hour profile (rep day)                            | Full 24-hour profile (mapped to full year)            |
-| **Reset or Loop Behavior**          | None; sequential linkage                        | Yes; rep day is **repeated** N times                   | Resets daily but allows **arbitrary day ordering**        | No reset; each hour is **mapped and verified**         |
-| **Flexibility in Time Sequencing**  | Low (predefined order of rep periods)           | Very low (repeats identical rep day pattern)           | High (any chronological day can map to any rep day)       | Very high (full hourly reconstruction)                 |
-| **Computational Cost**              | Low (simple stepwise link across periods)       | Very low (repeats rep day)                             | Medium (needs intra-day dynamics + daily tracking)        | High (full hourly SoC tracking and bounds checking)    |
-| **Storage Bounds Verification**     | Implicit per period                             | Start/End of rep day only                              | Only for intra-day cycles; inter-day bounds ignored       | ✅ Enforced at each hour                              |
-| **Use Case**                        | Fast approximation with minimal memory effects  | Simple seasonal or weekday/weekend modeling            | Captures non-repetitive variation (e.g. windless days)    | High-fidelity operational modeling (e.g., reliability) |
+At full resolution (k = 365, h = 1) the four formulations give nearly the same cost; their
+differences grow as the number of representative days falls. The quantitative comparison is in
+the {doc}`reproducibility` guide and the reproduction notebook.

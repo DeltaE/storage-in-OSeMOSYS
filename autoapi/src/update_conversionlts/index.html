@@ -310,15 +310,13 @@
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../notes/api_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/api_reference.html">Module Overview</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">src</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Kotzur_intraday/index.html">src.Kotzur_intraday</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../Welsch_intraday/index.html">src.Welsch_intraday</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Welsch_intraday2/index.html">src.Welsch_intraday2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../cluster/index.html">src.cluster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../copy_rename_csv/index.html">src.copy_rename_csv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../graph_generator/index.html">src.graph_generator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../graph_generator_3graphs/index.html">src.graph_generator_3graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../read_csv/index.html">src.read_csv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reproduce/index.html">src.reproduce</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../simulation/index.html">src.simulation</a></li>
@@ -407,6 +405,9 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#src.update_conversionlts.conversionlts" title="src.update_conversionlts.conversionlts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conversionlts</span></code></a>(blocks_per_day, ...)</p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.update_conversionlts.conversionlts_sparse" title="src.update_conversionlts.conversionlts_sparse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">conversionlts_sparse</span></code></a>(blocks_per_day, ...)</p></td>
+<td><p>Write only the non-zero entries (VALUE == 1) of the Conversionlts mapping.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -417,6 +418,15 @@
 <dt class="sig sig-object py" id="src.update_conversionlts.conversionlts">
 <span class="sig-prename descclassname"><span class="pre">src.update_conversionlts.</span></span><span class="sig-name descname"><span class="pre">conversionlts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks_per_day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chronological_timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chronological_sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/update_conversionlts.html#conversionlts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.update_conversionlts.conversionlts" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.update_conversionlts.conversionlts_sparse">
+<span class="sig-prename descclassname"><span class="pre">src.update_conversionlts.</span></span><span class="sig-name descname"><span class="pre">conversionlts_sparse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks_per_day</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chronological_sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representative_days</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/update_conversionlts.html#conversionlts_sparse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.update_conversionlts.conversionlts_sparse" title="Link to this definition">#</a></dt>
+<dd><p>Write only the non-zero entries (VALUE == 1) of the Conversionlts mapping.</p>
+<p>Equivalent input for intraday_kotzur(), which keeps only VALUE == 1 rows, but avoids the
+dense (365*b) x (k*b) table (about 77 million rows at k365h1). This also removes the
+dependency of the Kotzur reconstruction on running Model_Cluster first.</p>
+</dd></dl>
 
 </section>
 </section>
@@ -471,6 +481,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-contents">Module Contents</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.update_conversionlts.conversionlts"><code class="docutils literal notranslate"><span class="pre">conversionlts()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.update_conversionlts.conversionlts_sparse"><code class="docutils literal notranslate"><span class="pre">conversionlts_sparse()</span></code></a></li>
 </ul>
 </li>
 </ul>

@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -319,12 +319,6 @@
 <li class="toctree-l1"><a class="reference internal" href="notes/workflow_guide.html">Workflow Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/configuration_guide.html">Configuration Guide</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
-</ul>
 </div>
 </nav></div>
     </div>
@@ -401,18 +395,21 @@ make<span class="w"> </span>test-env<span class="w">                    </span><
 <section id="choose-a-scenario">
 <h2>2. Choose a scenario<a class="headerlink" href="#choose-a-scenario" title="Link to this heading">#</a></h2>
 <p>Edit <code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code>:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">"k4h1WND"</span><span class="w">   </span><span class="c1"># label used for result files</span>
-<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span>
-<span class="nt">seasons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
-<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">              </span><span class="c1"># number of representative days</span>
-<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">           </span><span class="c1"># hours per time block</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k4h1WND</span><span class="w">        </span><span class="c1"># label used for result files</span>
+<span class="nt">resource</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WND</span><span class="w">                 </span><span class="c1"># WND | SOL | HYD</span>
+<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">                 </span><span class="c1"># number of representative days k</span>
+<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">              </span><span class="c1"># hours per intra-day block h (1, 2, 4, 6, 8 or 12)</span>
+<span class="nt">random_state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w">               </span><span class="c1"># k-means seed used in the paper</span>
+
+<span class="nt">data_8760</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CapacityFactor_Wind.csv</span><span class="w"> </span><span class="c1"># match the resource: _Wind, _Solar or _Hydro</span>
 </pre></div>
 </div>
 <p>All parameters are described in <a class="reference internal" href="notes/configuration_guide.html"><span class="doc">Configuration Guide</span></a>.</p>
 </section>
 <section id="run">
 <h2>3. Run<a class="headerlink" href="#run" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>main.py<span class="w">               </span><span class="c1"># or: make run-main</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>workflow/main.py<span class="w">      </span><span class="c1"># or: make run-main</span>
 </pre></div>
 </div>
 <p>The pipeline clusters the hourly data into representative days, writes the inputs for each
@@ -421,7 +418,7 @@ explained in <a class="reference internal" href="notes/workflow_guide.html"><spa
 </section>
 <section id="look-at-the-results">
 <h2>4. Look at the results<a class="headerlink" href="#look-at-the-results" title="Link to this heading">#</a></h2>
-<p>Results are written to <code class="docutils literal notranslate"><span class="pre">Results/</span></code>. See <a class="reference internal" href="notes/outputs.html"><span class="doc">Outputs</span></a> for the file layout, or
+<p>Results are written to <code class="docutils literal notranslate"><span class="pre">results/</span></code>. See <a class="reference internal" href="notes/outputs.html"><span class="doc">Outputs</span></a> for the file layout, or
 <a class="reference internal" href="notes/reproducibility.html"><span class="doc">Reproducibility guide</span></a> to regenerate the published study.</p>
 </section>
 </section>

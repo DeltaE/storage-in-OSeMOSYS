@@ -1,6 +1,6 @@
 # Outputs
 
-All outputs of a run are written to the folder set in `results.directory` (default `Results/`).
+All outputs of a run are written to the folder set in `results.directory` (default `results/`).
 
 ## `Simulation_Results.xlsx`
 
@@ -38,13 +38,13 @@ row of each scenario and formulation).
 | `<scenario>_Conversionlts_sparse.csv` | Chronological → representative timeslice mapping used for the Kotzur reconstruction |
 | `<scenario>_Figure*.png` | Daily, hourly and two-week SoC comparison (only when all four formulations ran) |
 | `logs/<scenario>.log` | Full console output of the run (batch and notebook runs) |
-| `Model_<name>/results/*.csv` | All OSeMOSYS result tables of the last run of that formulation |
+| `models/Model_<name>/results/*.csv` | All OSeMOSYS result tables of the last run of that formulation (not tracked) |
 
 ## Loading results in Python
 
 ```python
 import src.reproduce as rp
-res = rp.load_results("Results/Simulation_Results.xlsx")   # tidy table: resource, k, h, formulation, ...
+res = rp.load_results("results/Simulation_Results.xlsx")   # tidy table: resource, k, h, formulation, ...
 rp.table4(res)                                              # Table 4 of the paper (needs the k365h1 runs)
 rp.add_errors(res)                                          # cost and capacity error vs k365h1 Novo
 ```

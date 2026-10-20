@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -677,12 +677,6 @@ window.runMermaid = runMermaid;</script>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Workflow Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configuration_guide.html">Configuration Guide</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/basic_usage.html">Basic Usage Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/comparative_analysis.html">Comparative Analysis Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/advanced_configuration.html">Advanced Configuration Tutorial</a></li>
-</ul>
 </div>
 </nav></div>
     </div>
@@ -744,343 +738,167 @@ window.runMermaid = runMermaid;</script>
                   
   <section id="workflow-guide">
 <h1>Workflow Guide<a class="headerlink" href="#workflow-guide" title="Link to this heading">#</a></h1>
-<p>This guide explains the complete workflow implemented in <code class="docutils literal notranslate"><span class="pre">main.py</span></code> for running Storage-in-OSeMOSYS analysis.</p>
+<p><code class="docutils literal notranslate"><span class="pre">workflow/main.py</span></code> runs one scenario: it picks representative days, builds the inputs of each
+storage formulation, solves them with GLPK and collects the results. All settings come from
+<code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code> (<a class="reference internal" href="configuration_guide.html"><span class="doc">Configuration Guide</span></a>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>workflow/main.py<span class="w">        </span><span class="c1"># from anywhere; or: make run-main</span>
+</pre></div>
+</div>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>The Storage-in-OSeMOSYS workflow processes energy system data through four different temporal representation methods, comparing their approaches to modeling energy storage systems. The workflow is designed to be:</p>
-<ul class="simple">
-<li><p><strong>Automated</strong>: Single command execution with configuration-driven parameters</p></li>
-<li><p><strong>Modular</strong>: Each temporal method is processed independently</p></li>
-<li><p><strong>Comparative</strong>: Results from all methods are analyzed together</p></li>
-<li><p><strong>Reproducible</strong>: Consistent environment and dependency management</p></li>
-</ul>
-</section>
-<section id="workflow-architecture">
-<h2>Workflow Architecture<a class="headerlink" href="#workflow-architecture" title="Link to this heading">#</a></h2>
 <pre  class="mermaid">
         graph TD
-    A[Configuration Loading] --&gt; B[Data Preprocessing]
-    B --&gt; C[Time-Series Clustering]
-    C --&gt; D[Model-Specific Processing]
-    D --&gt; E[OSeMOSYS Simulation]
-    E --&gt; F[Results Collection]
-    F --&gt; G[Visualization &amp; Analysis]
-    
-    D --&gt; D1[Model_Cluster]
-    D --&gt; D2[Model_Kotzur] 
-    D --&gt; D3[Model_Welsch]
-    D --&gt; D4[Model_Niet]
+    A[Load config/config.yaml] --&gt; B[Cluster days: k-means on CF + demand]
+    B --&gt; C[Per formulation: generate time sets and mappings]
+    C --&gt; D[otoole: CSV to GLPK data file]
+    D --&gt; E[glpsol: solve]
+    E --&gt; F[Collect SoC, cost, capacity, runtime]
+    F --&gt; G[Reconstruct Kotzur and Welsch intra-day SoC]
+    G --&gt; H[Comparison figures]
+
+    C --&gt; C1[Model_Niet]
+    C --&gt; C2[Model_Welsch]
+    C --&gt; C3[Model_Kotzur]
+    C --&gt; C4[Model_Cluster = Novo]
     </pre></section>
-<section id="detailed-workflow-steps">
-<h2>Detailed Workflow Steps<a class="headerlink" href="#detailed-workflow-steps" title="Link to this heading">#</a></h2>
-<section id="configuration-and-initialization">
-<h3>1. Configuration and Initialization<a class="headerlink" href="#configuration-and-initialization" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load configuration</span>
-<span class="n">config_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'config/config.yaml'</span><span class="p">)</span>
-<span class="n">config</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
-
-<span class="c1"># Extract key parameters</span>
-<span class="n">scenario_name</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">'scenario_name'</span><span class="p">]</span>           <span class="c1"># e.g., "k4h1WND"</span>
-<span class="n">days_in_year</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">'days_in_year'</span><span class="p">]</span>            <span class="c1"># e.g., 365</span>
-<span class="n">n_clusters</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">'n_clusters'</span><span class="p">]</span>                <span class="c1"># e.g., 4</span>
-<span class="n">hour_grouping</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">'hour_grouping'</span><span class="p">]</span>          <span class="c1"># e.g., 1 (hourly)</span>
-</pre></div>
-</div>
-<p><strong>Key Configuration Parameters:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">scenario_name</span></code>: Identifier for the analysis run</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">days_in_year</span></code>: Total days to model (typically 365)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">n_clusters</span></code>: Number of representative days for clustering</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hour_grouping</span></code>: Time aggregation (1=hourly, 24=daily)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">seasons</span></code>: Number of seasons for temporal modeling</p></li>
-<li><p>Storage parameters: <code class="docutils literal notranslate"><span class="pre">StorageLevelStart</span></code>, <code class="docutils literal notranslate"><span class="pre">StorageMaxCapacity</span></code>, <code class="docutils literal notranslate"><span class="pre">ResidualStorageCapacity</span></code></p></li>
-</ul>
+<section id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Link to this heading">#</a></h2>
+<section id="representative-days">
+<h3>1. Representative days<a class="headerlink" href="#representative-days" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">src.cluster_data()</span></code> reads the hourly capacity-factor and demand profiles (<code class="docutils literal notranslate"><span class="pre">data_8760.CF</span></code>,
+<code class="docutils literal notranslate"><span class="pre">data_8760.SDP</span></code>), builds one 48-value vector per day (24 min–max scaled CF values and 24 demand
+values) and runs k-means with <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> clusters (k-means++, <code class="docutils literal notranslate"><span class="pre">n_init</span> <span class="pre">=</span> <span class="pre">1</span></code>, seed
+<code class="docutils literal notranslate"><span class="pre">random_state</span></code>). The day closest to each cluster centre becomes the representative day. It returns
+the representative days and, for each of the 365 days, the representative day that stands in for
+it. Both are saved to <code class="docutils literal notranslate"><span class="pre">results/&lt;scenario&gt;_clustering.json</span></code>.</p>
+<p>From <code class="docutils literal notranslate"><span class="pre">hour_grouping</span></code> = h: <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">24</span> <span class="pre">/</span> <span class="pre">h</span></code> blocks per day, <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">·</span> <span class="pre">b</span></code> representative time slices and
+<code class="docutils literal notranslate"><span class="pre">365</span> <span class="pre">·</span> <span class="pre">b</span></code> chronological blocks.</p>
 </section>
-<section id="data-preprocessing-and-clustering">
-<h3>2. Data Preprocessing and Clustering<a class="headerlink" href="#data-preprocessing-and-clustering" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load input time-series data</span>
-<span class="n">input_CF_csv_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">'data_8760'</span><span class="p">][</span><span class="s1">'directory'</span><span class="p">])</span> <span class="o">/</span> <span class="n">config</span><span class="p">[</span><span class="s1">'data_8760'</span><span class="p">][</span><span class="s1">'CF'</span><span class="p">]</span>
-<span class="n">input_SDP_csv_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">'data_8760'</span><span class="p">][</span><span class="s1">'directory'</span><span class="p">])</span> <span class="o">/</span> <span class="n">config</span><span class="p">[</span><span class="s1">'data_8760'</span><span class="p">][</span><span class="s1">'SDP'</span><span class="p">]</span>
-
-<span class="c1"># Perform time-series clustering</span>
-<span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">cluster_data</span><span class="p">(</span>
-    <span class="n">input_CF_csv_file</span><span class="p">,</span> <span class="n">input_SDP_csv_file</span><span class="p">,</span> <span class="n">n_clusters</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Data Processing:</strong></p>
-<ul class="simple">
-<li><p><strong>Capacity Factor (CF)</strong>: Hourly renewable energy generation profiles (8760 hours)</p></li>
-<li><p><strong>Specified Demand Profile (SDP)</strong>: Hourly electricity demand data (8760 hours)</p></li>
-<li><p><strong>K-means clustering</strong>: Groups similar days into <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> representative days</p></li>
-<li><p><strong>Outputs</strong>: Representative day indices and chronological sequence mapping</p></li>
-</ul>
-<p><strong>Temporal Calculations:</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">blocks_per_day</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">//</span> <span class="n">hour_grouping</span>        <span class="c1"># Time blocks per day</span>
-<span class="n">timeslices</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">representative_days</span><span class="p">)</span> <span class="o">*</span> <span class="n">blocks_per_day</span>  <span class="c1"># Total timeslices in model</span>
-<span class="n">chronological_timeslices</span> <span class="o">=</span> <span class="n">days_in_year</span> <span class="o">*</span> <span class="n">blocks_per_day</span>  <span class="c1"># Full year timeslices</span>
-</pre></div>
-</div>
-</section>
-<section id="model-specific-processing">
-<h3>3. Model-Specific Processing<a class="headerlink" href="#model-specific-processing" title="Link to this heading">#</a></h3>
-<p>Each temporal representation method requires specific data transformations:</p>
-<section id="model-cluster-time-series-clustering">
-<h4>Model_Cluster (Time-Series Clustering)<a class="headerlink" href="#model-cluster-time-series-clustering" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">'Model_Cluster'</span><span class="p">:</span>
-    <span class="c1"># Update chronological timeslice mapping</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">chronological_timeslices</span><span class="p">,</span> <span class="n">output_timeslicecro_csv_file</span><span class="p">)</span>
-    
-    <span class="c1"># Create conversion between timeslices and chronological sequence</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">conversionlts</span><span class="p">(</span><span class="n">blocks_per_day</span><span class="p">,</span> <span class="n">chronological_timeslices</span><span class="p">,</span> <span class="n">timeslices</span><span class="p">,</span> 
-                     <span class="n">chronological_sequence</span><span class="p">,</span> <span class="n">representative_days</span><span class="p">,</span> <span class="n">output_conversionlts_csv_file</span><span class="p">)</span>
-    
-    <span class="c1"># Update time splitting parameters</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">new_yaml_param</span><span class="p">(</span><span class="n">otoole_yaml_file</span><span class="p">,</span> <span class="s1">'DaySplit'</span><span class="p">,</span> <span class="n">day_split</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="model-kotzur-daily-mapping-method">
-<h4>Model_Kotzur (Daily Mapping Method)<a class="headerlink" href="#model-kotzur-daily-mapping-method" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">'Model_Kotzur'</span><span class="p">:</span>
-    <span class="c1"># Create chronological day sequence</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">days_in_year</span><span class="p">,</span> <span class="n">output_dayscro_csv_file</span><span class="p">)</span>
-    
-    <span class="c1"># Map representative days to timeslices</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">conversionld</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">representative_days</span><span class="p">),</span> <span class="n">output_conversionld_csv_file</span><span class="p">)</span>
-    
-    <span class="c1"># Create day-to-cluster mapping</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">conversionldc</span><span class="p">(</span><span class="n">chronological_sequence</span><span class="p">,</span> <span class="n">representative_days</span><span class="p">,</span> <span class="n">days_in_year</span><span class="p">,</span> 
-                     <span class="n">output_conversionldc_csv_file</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="model-welsch-fixed-pattern-method">
-<h4>Model_Welsch (Fixed Pattern Method)<a class="headerlink" href="#model-welsch-fixed-pattern-method" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">case_name</span> <span class="o">==</span> <span class="s1">'Model_Welsch'</span><span class="p">:</span>
-    <span class="c1"># Define daily time brackets</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">blocks_per_day</span><span class="p">,</span> <span class="n">output_dailytimebracket_csv_file</span><span class="p">)</span>
-    
-    <span class="c1"># Create multiple conversion mappings</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">conversionld</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">representative_days</span><span class="p">),</span> <span class="n">output_conversionld_csv_file</span><span class="p">)</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">conversionlh</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="n">blocks_per_day</span><span class="p">,</span> <span class="n">output_conversionlh_csv_file</span><span class="p">)</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">conversionld</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="n">seasons</span><span class="p">,</span> <span class="n">output_conversionls_csv_file</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'SEASON'</span><span class="p">)</span>
-    
-    <span class="c1"># Update day type mapping</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">daysindaytype</span><span class="p">(</span><span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span><span class="p">,</span> <span class="n">output_daysindaytype_csv_file</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="model-niet-direct-chronological-method">
-<h4>Model_Niet (Direct Chronological Method)<a class="headerlink" href="#model-niet-direct-chronological-method" title="Link to this heading">#</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Common processing for all models including Model_Niet</span>
-<span class="k">if</span> <span class="n">case_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'Model_Niet'</span><span class="p">,</span> <span class="s1">'Model_Cluster'</span><span class="p">,</span> <span class="s1">'Model_Kotzur'</span><span class="p">,</span> <span class="s1">'Model_Welsch'</span><span class="p">]:</span>
-    <span class="c1"># Copy base input files</span>
-    <span class="k">for</span> <span class="n">csv_file</span> <span class="ow">in</span> <span class="n">csv_files</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">stem</span> <span class="ow">in</span> <span class="n">expected_file_names</span><span class="p">:</span>
-            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">csv_file</span><span class="p">,</span> <span class="n">input_csv_dir</span> <span class="o">/</span> <span class="n">csv_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    
-    <span class="c1"># Update core timeslice structure</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="n">output_timeslice_csv_file</span><span class="p">)</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">new_list</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">representative_days</span><span class="p">),</span> <span class="n">output_daytype_csv_file</span><span class="p">)</span>
-    
-    <span class="c1"># Create year split mapping</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">yearsplit</span><span class="p">(</span><span class="n">timeslices</span><span class="p">,</span> <span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span><span class="p">,</span> 
-                 <span class="n">days_in_year</span><span class="p">,</span> <span class="n">output_yearsplit_csv_file</span><span class="p">)</span>
-    
-    <span class="c1"># Process renewable profiles (averaging for capacity factors)</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">CFandSDP</span><span class="p">(</span><span class="n">input_CF_csv_file</span><span class="p">,</span> <span class="n">representative_days</span><span class="p">,</span> <span class="n">hour_grouping</span><span class="p">,</span> 
-                <span class="n">output_CF_csv_file</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s1">'mean'</span><span class="p">)</span>
-    
-    <span class="c1"># Process demand profiles (summing for demand)</span>
-    <span class="n">src</span><span class="o">.</span><span class="n">CFandSDP</span><span class="p">(</span><span class="n">input_SDP_csv_file</span><span class="p">,</span> <span class="n">representative_days</span><span class="p">,</span> <span class="n">hour_grouping</span><span class="p">,</span> 
-                <span class="n">output_SDP_csv_file</span><span class="p">,</span> <span class="n">operation</span><span class="o">=</span><span class="s1">'sum'</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="osemosys-model-conversion-and-simulation">
-<h3>4. OSeMOSYS Model Conversion and Simulation<a class="headerlink" href="#osemosys-model-conversion-and-simulation" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert CSV files to OSeMOSYS datafile format</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">otoole</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">template_config</span><span class="p">,</span> <span class="s1">'csv'</span><span class="p">,</span> <span class="s1">'datafile'</span><span class="p">,</span> <span class="n">input_csv_dir</span><span class="p">,</span> <span class="n">output_txt_file</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">result</span><span class="p">:</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">"✔️ Otoole conversion executed successfully."</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">utils</span><span class="o">.</span><span class="n">print_update</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">"❌ Otoole conversion failed."</span><span class="p">)</span>
-
-<span class="c1"># Run OSeMOSYS simulation</span>
-<span class="n">src</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">case_info</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Simulation Process:</strong></p>
+<section id="inputs-of-each-formulation">
+<h3>2. Inputs of each formulation<a class="headerlink" href="#inputs-of-each-formulation" title="Link to this heading">#</a></h3>
+<p>For each formulation in <code class="docutils literal notranslate"><span class="pre">cases</span></code> (or in <code class="docutils literal notranslate"><span class="pre">models</span></code>, if given) the script:</p>
 <ol class="arabic simple">
-<li><p><strong>Data Conversion</strong>: CSV files → OSeMOSYS datafile format using OtoOle</p></li>
-<li><p><strong>Model Execution</strong>: GLPK solver runs OSeMOSYS optimization</p></li>
-<li><p><strong>Result Generation</strong>: Solver outputs solution files with optimal values</p></li>
+<li><p>clears the previous run’s results of that formulation and copies the shared parameters from
+<code class="docutils literal notranslate"><span class="pre">data/system/</span></code> into <code class="docutils literal notranslate"><span class="pre">models/Model_&lt;name&gt;/inputs_csv/</span></code>;</p></li>
+<li><p>copies the otoole template to <code class="docutils literal notranslate"><span class="pre">otoole_config_&lt;name&gt;.run.yaml</span></code>, where the run-specific values go;</p></li>
+<li><p>writes the time sets and mappings the formulation needs:</p></li>
 </ol>
-</section>
-<section id="results-collection-and-processing">
-<h3>5. Results Collection and Processing<a class="headerlink" href="#results-collection-and-processing" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save simulation results</span>
-<span class="n">results_case</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">case_info</span><span class="p">[</span><span class="s1">'root_directory'</span><span class="p">])</span> <span class="o">/</span> <span class="n">case_info</span><span class="p">[</span><span class="s1">'results'</span><span class="p">][</span><span class="s1">'directory'</span><span class="p">]</span> <span class="o">/</span> <span class="n">case_info</span><span class="p">[</span><span class="s1">'results'</span><span class="p">][</span><span class="s1">'storage_level'</span><span class="p">]</span>
-<span class="n">new_results_filename</span> <span class="o">=</span> <span class="s1">'_'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">scenario_name</span><span class="p">,</span> <span class="n">results_copied_filename</span><span class="p">,</span> <span class="n">case_name</span><span class="p">])</span> <span class="o">+</span> <span class="s1">'.csv'</span>
-<span class="n">src</span><span class="o">.</span><span class="n">copy_and_rename</span><span class="p">(</span><span class="n">results_case</span><span class="p">,</span> <span class="n">results_destination_folder</span><span class="p">,</span> <span class="n">new_results_filename</span><span class="p">)</span>
-
-<span class="c1"># Generate summary tables</span>
-<span class="n">src</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="n">simulation_results</span><span class="p">,</span> <span class="n">data_sol_results</span><span class="p">,</span> <span class="n">scenario_name</span><span class="p">,</span> <span class="n">case_name</span><span class="p">,</span> 
-         <span class="n">capacity_path</span><span class="p">,</span> <span class="n">storage_capacity_path</span><span class="p">,</span> <span class="s1">'WINDPOWER'</span><span class="p">,</span> <span class="s1">'BATTERY'</span><span class="p">,</span> <span class="n">results_file</span><span class="p">)</span>
-</pre></div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Formulation</p></th>
+<th class="head"><p>Generated files</p></th>
+<th class="head"><p>Functions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Novo (<code class="docutils literal notranslate"><span class="pre">Model_Cluster</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TIMESLICECRO</span></code>, <code class="docutils literal notranslate"><span class="pre">Conversionlts</span></code>, <code class="docutils literal notranslate"><span class="pre">DaySplit</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">new_list</span></code>, <code class="docutils literal notranslate"><span class="pre">conversionlts</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Kotzur</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DAYSCRO</span></code>, <code class="docutils literal notranslate"><span class="pre">Conversionld</span></code>, <code class="docutils literal notranslate"><span class="pre">Conversionldc</span></code>, <code class="docutils literal notranslate"><span class="pre">DaySplit</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">new_list</span></code>, <code class="docutils literal notranslate"><span class="pre">conversionld</span></code>, <code class="docutils literal notranslate"><span class="pre">conversionldc</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Welsch</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DAILYTIMEBRACKET</span></code>, <code class="docutils literal notranslate"><span class="pre">Conversionld</span></code>, <code class="docutils literal notranslate"><span class="pre">Conversionlh</span></code>, <code class="docutils literal notranslate"><span class="pre">Conversionls</span></code>, <code class="docutils literal notranslate"><span class="pre">DaysInDayType</span></code>, <code class="docutils literal notranslate"><span class="pre">DaySplit</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">new_list</span></code>, <code class="docutils literal notranslate"><span class="pre">conversionld</span></code>, <code class="docutils literal notranslate"><span class="pre">conversionlh</span></code>, <code class="docutils literal notranslate"><span class="pre">daysindaytype</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>All four</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TIMESLICE</span></code>, <code class="docutils literal notranslate"><span class="pre">DAYTYPE</span></code>, <code class="docutils literal notranslate"><span class="pre">YearSplit</span></code>, <code class="docutils literal notranslate"><span class="pre">CapacityFactor</span></code>, <code class="docutils literal notranslate"><span class="pre">SpecifiedDemandProfile</span></code>, storage limits</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">new_list</span></code>, <code class="docutils literal notranslate"><span class="pre">yearsplit</span></code>, <code class="docutils literal notranslate"><span class="pre">CFandSDP</span></code>, <code class="docutils literal notranslate"><span class="pre">new_yaml_param</span></code></p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<p><strong>Results Structure:</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">CFandSDP()</span></code> keeps the representative days of the hourly profiles and aggregates them into blocks
+(mean for capacity factors, sum for demand). <code class="docutils literal notranslate"><span class="pre">yearsplit()</span></code> weights each time slice by the number of
+days its representative day stands for.</p>
+</section>
+<section id="solve">
+<h3>3. Solve<a class="headerlink" href="#solve" title="Link to this heading">#</a></h3>
+<p>otoole converts the CSVs to a GLPK data file (<code class="docutils literal notranslate"><span class="pre">models/Model_&lt;name&gt;/&lt;name&gt;.txt</span></code>) and
+<code class="docutils literal notranslate"><span class="pre">src.run_simulation()</span></code> solves it with <code class="docutils literal notranslate"><span class="pre">glpsol</span></code>. If GLPK does not report an optimal solution, the
+solve is retried with <code class="docutils literal notranslate"><span class="pre">--nopresol</span></code>, <code class="docutils literal notranslate"><span class="pre">--dual</span></code> and <code class="docutils literal notranslate"><span class="pre">--exact</span></code>; if all fail, the run is recorded as
+<code class="docutils literal notranslate"><span class="pre">FAILED</span></code>.</p>
+</section>
+<section id="results">
+<h3>4. Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h3>
+<p>For each formulation, the native SoC series is copied to
+<code class="docutils literal notranslate"><span class="pre">results/&lt;scenario&gt;_Storage_Level_Model_&lt;name&gt;.csv</span></code>, and <code class="docutils literal notranslate"><span class="pre">src.table()</span></code> appends one row (LP size,
+total cost, run time, memory, new VRE and storage capacity, solver status) to
+<code class="docutils literal notranslate"><span class="pre">results/Simulation_Results.xlsx</span></code>.</p>
+</section>
+<section id="post-processing">
+<h3>5. Post-processing<a class="headerlink" href="#post-processing" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Storage levels</strong>: Time-series of battery state of charge</p></li>
-<li><p><strong>Capacity results</strong>: Optimal technology and storage capacities</p></li>
-<li><p><strong>Summary tables</strong>: Excel files with key performance indicators</p></li>
-<li><p><strong>Standardized naming</strong>: <code class="docutils literal notranslate"><span class="pre">{scenario_name}_{results_copied_filename}_{case_name}.csv</span></code></p></li>
+<li><p>Kotzur: <code class="docutils literal notranslate"><span class="pre">intraday_kotzur()</span></code> rebuilds the SoC at every chronological block by accumulating the
+net charge of the mapped representative block, starting from the year-start level
+(<code class="docutils literal notranslate"><span class="pre">..._Model_Kotzur_intraday.csv</span></code>).</p></li>
+<li><p>Welsch: <code class="docutils literal notranslate"><span class="pre">intraday_welsch2()</span></code> rebuilds the SoC in grouped day-type order
+(<code class="docutils literal notranslate"><span class="pre">..._Model_Welsch_intraday.csv</span></code>).</p></li>
+<li><p>When all four formulations ran, <code class="docutils literal notranslate"><span class="pre">graph()</span></code> writes three comparison figures:
+<code class="docutils literal notranslate"><span class="pre">&lt;scenario&gt;_Figure.png</span></code> (daily), <code class="docutils literal notranslate"><span class="pre">_Figure_Hourly.png</span></code> and <code class="docutils literal notranslate"><span class="pre">_Figure_Hourly_2Weeks.png</span></code>.</p></li>
 </ul>
+<p>The output files are described in <a class="reference internal" href="outputs.html"><span class="doc">Outputs</span></a>.</p>
 </section>
-<section id="post-processing-and-visualization">
-<h3>6. Post-Processing and Visualization<a class="headerlink" href="#post-processing-and-visualization" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate intraday profiles for comparison methods</span>
-<span class="n">src</span><span class="o">.</span><span class="n">intraday_kotzur</span><span class="p">(</span><span class="n">file_conversionlts</span><span class="p">,</span> <span class="n">file_kotzur_storage</span><span class="p">,</span> 
-                   <span class="n">StorageLevelStartKotzur</span><span class="p">,</span> <span class="n">file_kotzur_intraday</span><span class="p">)</span>
-
-<span class="n">src</span><span class="o">.</span><span class="n">intraday_welsch2</span><span class="p">(</span><span class="n">file_welsch_storage</span><span class="p">,</span> <span class="n">blocks_per_day</span><span class="p">,</span> <span class="n">timeslices</span><span class="p">,</span> 
-                    <span class="n">representative_days</span><span class="p">,</span> <span class="n">chronological_sequence</span><span class="p">,</span> 
-                    <span class="n">StorageLevelStartWelsch</span><span class="p">,</span> <span class="n">file_welsch_intraday</span><span class="p">)</span>
-
-<span class="c1"># Create comparative visualizations</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">fig2</span><span class="p">,</span> <span class="n">fig3</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">graph</span><span class="p">(</span><span class="n">file_base</span><span class="p">,</span> <span class="n">file_kotzur</span><span class="p">,</span> <span class="n">file_kotzur_intraday</span><span class="p">,</span> 
-                           <span class="n">file_cluster</span><span class="p">,</span> <span class="n">file_niet</span><span class="p">,</span> <span class="n">file_welsch</span><span class="p">,</span> <span class="n">file_welsch_intraday</span><span class="p">,</span> 
-                           <span class="n">representative_days</span><span class="p">,</span> <span class="n">blocks_per_day</span><span class="p">,</span> <span class="n">output_yearsplit_csv_file</span><span class="p">)</span>
-
-<span class="c1"># Save figures</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">results_destination_folder</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_Figure.png"</span><span class="p">)</span>
-<span class="n">fig2</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">results_destination_folder</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_Figure_Hourly.png"</span><span class="p">)</span>  
-<span class="n">fig3</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">results_destination_folder</span><span class="p">)</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">scenario_name</span><span class="si">}</span><span class="s2">_Figure_Hourly_2Weeks.png"</span><span class="p">)</span>
-</pre></div>
+</section>
+<section id="runtime-and-memory">
+<h2>Runtime and memory<a class="headerlink" href="#runtime-and-memory" title="Link to this heading">#</a></h2>
+<p>Median over all unconstrained runs of the study, almost all of them aggregated configurations
+(archived results; GLPK 5.0, Intel Core i7, 16 GB):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Niet</p></th>
+<th class="head"><p>Welsch</p></th>
+<th class="head"><p>Kotzur</p></th>
+<th class="head"><p>Novo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Model generation + solve</p></td>
+<td><p>~0.2 s</p></td>
+<td><p>~0.3 s</p></td>
+<td><p>~0.3 s</p></td>
+<td><p>~1 s</p></td>
+</tr>
+<tr class="row-odd"><td><p>Memory</p></td>
+<td><p>~3 MB</p></td>
+<td><p>~6 MB</p></td>
+<td><p>~6 MB</p></td>
+<td><p>~43 MB</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-</section>
-</section>
-<section id="execution-commands">
-<h2>Execution Commands<a class="headerlink" href="#execution-commands" title="Link to this heading">#</a></h2>
-<section id="basic-execution">
-<h3>Basic Execution<a class="headerlink" href="#basic-execution" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run complete workflow</span>
-python<span class="w"> </span>main.py
-</pre></div>
-</div>
-</section>
-<section id="environment-management">
-<h3>Environment Management<a class="headerlink" href="#environment-management" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup environment</span>
-make<span class="w"> </span>setup
-
-<span class="c1"># Test environment</span>
-make<span class="w"> </span>test-env
-
-<span class="c1"># Clean environment</span>
-make<span class="w"> </span>clean
-
-<span class="c1"># Update dependencies</span>
-make<span class="w"> </span>update-env
-</pre></div>
-</div>
-</section>
-<section id="configuration-options">
-<h3>Configuration Options<a class="headerlink" href="#configuration-options" title="Link to this heading">#</a></h3>
-<p>Edit <code class="docutils literal notranslate"><span class="pre">config/config.yaml</span></code> before running:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analysis parameters</span>
-<span class="nt">scenario_name</span><span class="p">:</span><span class="w"> </span><span class="s">"k4h1WND"</span><span class="w">      </span><span class="c1"># Scenario identifier</span>
-<span class="nt">days_in_year</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">365</span><span class="w">             </span><span class="c1"># Total days to model</span>
-<span class="nt">n_clusters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">                 </span><span class="c1"># Representative days</span>
-<span class="nt">hour_grouping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w">              </span><span class="c1"># Time resolution (1=hourly)</span>
-<span class="nt">seasons</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">                    </span><span class="c1"># Seasonal divisions</span>
-
-<span class="c1"># Storage parameters</span>
-<span class="nt">StorageLevelStart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span><span class="w">        </span><span class="c1"># Initial state of charge</span>
-<span class="nt">StorageMaxCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span><span class="w">       </span><span class="c1"># Maximum storage capacity</span>
-<span class="nt">ResidualStorageCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w">    </span><span class="c1"># Pre-existing storage</span>
-
-<span class="c1"># Data paths</span>
-<span class="nt">data_8760</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">"Data_8760"</span>
-<span class="w">  </span><span class="nt">CF</span><span class="p">:</span><span class="w"> </span><span class="s">"CapacityFactor.csv"</span><span class="w">    </span><span class="c1"># Renewable profiles</span>
-<span class="w">  </span><span class="nt">SDP</span><span class="p">:</span><span class="w"> </span><span class="s">"SpecifiedDemandProfile.csv"</span><span class="w">  </span><span class="c1"># Demand profiles</span>
-
-<span class="c1"># Results configuration</span>
-<span class="nt">results</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="s">"Results"</span>
-<span class="w">  </span><span class="nt">directory_GUI</span><span class="p">:</span><span class="w"> </span><span class="s">"Results_GUI"</span>
-<span class="w">  </span><span class="nt">results_copied_filename</span><span class="p">:</span><span class="w"> </span><span class="s">"Storage_Level"</span>
-<span class="w">  </span><span class="nt">results_excel_file</span><span class="p">:</span><span class="w"> </span><span class="s">"results.xlsx"</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="output-structure">
-<h2>Output Structure<a class="headerlink" href="#output-structure" title="Link to this heading">#</a></h2>
-<p>After execution, the workflow generates:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Results/
-├── k4h1WND_Storage_Level_Model_Cluster.csv
-├── k4h1WND_Storage_Level_Model_Kotzur.csv  
-├── k4h1WND_Storage_Level_Model_Welsch.csv
-├── k4h1WND_Storage_Level_Model_Niet.csv
-├── k4h1WND_Storage_Level_Model_Kotzur_intraday.csv
-├── k4h1WND_Storage_Level_Model_Welsch_intraday.csv
-├── k4h1WND_Figure.png                    # Overview comparison
-├── k4h1WND_Figure_Hourly.png            # Detailed hourly view  
-├── k4h1WND_Figure_Hourly_2Weeks.png     # Two-week detail
-└── results.xlsx                          # Summary tables
-</pre></div>
-</div>
-</section>
-<section id="performance-considerations">
-<h2>Performance Considerations<a class="headerlink" href="#performance-considerations" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Computational Time</strong>: Model_Niet (highest) &gt; Model_Welsch &gt; Model_Kotzur &gt; Model_Cluster (lowest)</p></li>
-<li><p><strong>Memory Usage</strong>: Proportional to <code class="docutils literal notranslate"><span class="pre">n_clusters</span></code> and <code class="docutils literal notranslate"><span class="pre">hour_grouping</span></code> resolution</p></li>
-<li><p><strong>Disk Space</strong>: Results scale with number of technologies and time resolution</p></li>
-<li><p><strong>Parallel Processing</strong>: Models run sequentially; can be parallelized for independent analysis</p></li>
-</ul>
+<p>Novo grows with the full chronological year: at k = 365, h = 1 it needs about 12 GB of memory and
+several minutes per solve. The full-year benchmarks are therefore off by default in the
+reproduction notebook.</p>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
-<section id="common-issues">
-<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">#</a></h3>
-<ol class="arabic">
-<li><p><strong>OtoOle Conversion Failure</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check file formats and paths</span>
-ls<span class="w"> </span>inputs_csv/
-<span class="c1"># Verify configuration matches file names</span>
-</pre></div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Check</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">glpsol:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code></p></td>
+<td><p>GLPK is installed in the environment: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">run</span> <span class="pre">-n</span> <span class="pre">storage_osemosys</span> <span class="pre">glpsol</span> <span class="pre">--version</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Solver</span> <span class="pre">status</span></code> is <code class="docutils literal notranslate"><span class="pre">FAILED</span></code></p></td>
+<td><p>The log in <code class="docutils literal notranslate"><span class="pre">results/logs/</span></code> (notebook and batch runs) or the console output shows GLPK’s message</p></td>
+</tr>
+<tr class="row-even"><td><p>A formulation has no SoC file</p></td>
+<td><p>It was not selected in <code class="docutils literal notranslate"><span class="pre">models</span></code>, or its solve failed</p></td>
+</tr>
+<tr class="row-odd"><td><p>Figures missing</p></td>
+<td><p>They are written only when all four formulations run</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-</li>
-<li><p><strong>GLPK Solver Issues</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test solver installation</span>
-glpsol<span class="w"> </span>--version
-<span class="c1"># Check model file syntax</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Memory Issues</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reduce time resolution or clusters</span>
-hour_grouping:<span class="w"> </span><span class="m">2</span><span class="w">  </span><span class="c1"># 12-hour blocks instead of hourly</span>
-n_clusters:<span class="w"> </span><span class="m">3</span><span class="w">     </span><span class="c1"># Fewer representative days</span>
-</pre></div>
-</div>
-</li>
-<li><p><strong>Missing Results</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check simulation status in model directories</span>
-ls<span class="w"> </span>Model_*/Results/
-<span class="c1"># Verify solver completed successfully</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<p>This workflow provides a comprehensive framework for comparing temporal representation methods in energy storage modeling, enabling researchers to understand trade-offs between computational efficiency and model accuracy.</p>
-</section>
 </section>
 </section>
 
@@ -1132,34 +950,16 @@ ls<span class="w"> </span>Model_*/Results/
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-architecture">Workflow Architecture</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-workflow-steps">Detailed Workflow Steps</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-and-initialization">1. Configuration and Initialization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing-and-clustering">2. Data Preprocessing and Clustering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-specific-processing">3. Model-Specific Processing</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-cluster-time-series-clustering">Model_Cluster (Time-Series Clustering)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-kotzur-daily-mapping-method">Model_Kotzur (Daily Mapping Method)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-welsch-fixed-pattern-method">Model_Welsch (Fixed Pattern Method)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-niet-direct-chronological-method">Model_Niet (Direct Chronological Method)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steps">Steps</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representative-days">1. Representative days</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs-of-each-formulation">2. Inputs of each formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solve">3. Solve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results">4. Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing">5. Post-processing</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#osemosys-model-conversion-and-simulation">4. OSeMOSYS Model Conversion and Simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-collection-and-processing">5. Results Collection and Processing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-and-visualization">6. Post-Processing and Visualization</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#execution-commands">Execution Commands</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-execution">Basic Execution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-management">Environment Management</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-options">Configuration Options</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-structure">Output Structure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-considerations">Performance Considerations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#runtime-and-memory">Runtime and memory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 </ul>
   </nav></div>
 

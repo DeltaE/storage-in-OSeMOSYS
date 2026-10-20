@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e28e70d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=a8539842" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -410,91 +410,71 @@ Storage isn’t just an isolated battery:</p>
 <li><p>It responds to prices, constraints, and emissions goals</p></li>
 </ul>
 <p>So modeling it well requires integrating with the rest of the energy system.</p>
-<section id="state-of-the-art-energy-storage-algorithms">
-<h2>state of the art <strong>energy storage algorithms</strong>:<a class="headerlink" href="#state-of-the-art-energy-storage-algorithms" title="Link to this heading">#</a></h2>
-<section id="niet-direct-link-continuous-diary">
-<h3>Niet (Direct Link) — “Continuous Diary”<a class="headerlink" href="#niet-direct-link-continuous-diary" title="Link to this heading">#</a></h3>
+<section id="the-four-storage-formulations">
+<h2>The four storage formulations<a class="headerlink" href="#the-four-storage-formulations" title="Link to this heading">#</a></h2>
+<p>Every formulation below works on the same representative days (k-means on daily wind/solar/hydro
+and demand profiles, see <a class="reference internal" href="workflow_guide.html"><span class="doc">Workflow Guide</span></a>). They differ in <strong>which sequence the state of
+charge (SoC) follows</strong> and <strong>where its bounds are checked</strong>. The model files are in
+<code class="docutils literal notranslate"><span class="pre">models/Model_&lt;name&gt;/osemosys_fast_&lt;name&gt;.txt</span></code>; <em>Novo</em> is implemented in <code class="docutils literal notranslate"><span class="pre">Model_Cluster</span></code>.</p>
+<p>A small example makes the differences concrete. Take four days A–B–A–B, where every A day charges
+the battery by 6 MWh and every B day discharges it by 6 MWh, starting at 6 MWh. The
+hand-calculated SoC of each formulation (checked against the models in <code class="docutils literal notranslate"><span class="pre">validation/soc/</span></code>) is given
+with each description.</p>
+<section id="niet-direct-link-stacked-diary">
+<h3>Niet (direct link) — “Stacked diary”<a class="headerlink" href="#niet-direct-link-stacked-diary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Analogy</strong>: Imagine someone writes in their diary every hour without skipping, and each day picks up exactly where the last one left off. The emotional ups and downs (mood swings) are smooth and continuous over the week.</p></li>
-<li><p><strong>Key idea</strong>: Full hourly resolution; perfect continuity over time.</p></li>
-<li><p><strong>Use case</strong>: Most accurate but data-heavy.</p></li>
+<li><p><strong>How it works</strong>: the representative time slices are chained one after another, and each slice is
+weighted by the number of days it represents. All A days are therefore applied in one go, then all
+B days.</p></li>
+<li><p><strong>SoC bounds</strong>: checked at every representative time slice.</p></li>
+<li><p><strong>Example</strong>: 6 → 18 → 6 MWh. The two A days are stacked, so the model sees a peak of 18 MWh that
+never occurs in the real sequence.</p></li>
+<li><p><strong>Consequence</strong>: simple and small, but it can overstate the storage needed when similar days are
+far apart in the year.</p></li>
 </ul>
 </section>
 <section id="welsch-fixed-pattern-photocopied-day">
-<h3>Welsch (Fixed-Pattern) — “Photocopied Day”<a class="headerlink" href="#welsch-fixed-pattern-photocopied-day" title="Link to this heading">#</a></h3>
+<h3>Welsch (fixed pattern) — “Photocopied day”<a class="headerlink" href="#welsch-fixed-pattern-photocopied-day" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Analogy</strong>: This person writes down one typical day of feelings and then photocopies that same page for each day of the week. So Monday, Tuesday, etc., look exactly the same.</p></li>
-<li><p><strong>Key idea</strong>: Same daily pattern repeated; no inter-day variation.</p></li>
-<li><p><strong>Use case</strong>: Fast and simple but ignores variation between days.</p></li>
+<li><p><strong>How it works</strong>: the standard OSeMOSYS storage equations. The year is described by seasons, day
+types and daily time brackets; each day type is repeated as a block (A-A-B-B), with a fixed
+intra-day pattern.</p></li>
+<li><p><strong>SoC bounds</strong>: checked only at a few points: the first and last instance of each day type in the
+first and last week.</p></li>
+<li><p><strong>Example</strong>: 6 → 12 → 18 → 12 → 6 MWh (grouped days A-A-B-B).</p></li>
+<li><p><strong>Consequence</strong>: compact, but the day order is lost and limits can be violated between the checked
+points.</p></li>
 </ul>
 </section>
-<section id="kotzur-unverified-cluster-alternating-diaries">
-<h3>Kotzur (Unverified Cluster) — “Alternating Diaries”<a class="headerlink" href="#kotzur-unverified-cluster-alternating-diaries" title="Link to this heading">#</a></h3>
+<section id="kotzur-day-boundary-verified-daily-ledger">
+<h3>Kotzur (day-boundary verified) — “Daily ledger”<a class="headerlink" href="#kotzur-day-boundary-verified-daily-ledger" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Analogy</strong>: This person has two types of days — maybe “busy” and “lazy” days — and alternates between those two. They use pre-written diary templates for each. But they don’t bother connecting one day’s feelings to the next, so it can feel jumpy or inconsistent.</p></li>
-<li><p><strong>Key idea</strong>: Captures daily diversity using clusters, but no continuity.</p></li>
-<li><p><strong>Use case</strong>: Captures more variety than Welsch but lacks smooth transitions.</p></li>
+<li><p><strong>How it works</strong>: the 365 chronological days are linked in calendar order. Each day adds the net
+change of its representative day.</p></li>
+<li><p><strong>SoC bounds</strong>: checked at the start of each chronological day only; within a day the level is not
+constrained.</p></li>
+<li><p><strong>Example</strong>: 6 → 12 → 6 → 12 → 6 MWh (chronological days A-B-A-B).</p></li>
+<li><p><strong>Consequence</strong>: keeps the seasonal sequence at low cost, but intra-day peaks and troughs can
+exceed the capacity (visible in the binding-capacity stress test).</p></li>
 </ul>
 </section>
-<section id="novo-hourly-verified-linked-journaling">
-<h3>Novo (Hourly-Verified) — “Linked Journaling”<a class="headerlink" href="#novo-hourly-verified-linked-journaling" title="Link to this heading">#</a></h3>
+<section id="novo-time-step-verified-hourly-ledger">
+<h3>Novo (time-step verified) — “Hourly ledger”<a class="headerlink" href="#novo-time-step-verified-hourly-ledger" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Analogy</strong>: This person still uses simplified mood templates for different kinds of days, but they always make sure each day starts where the previous one left off. So it feels realistic and connected, even if it’s not a full diary.</p></li>
-<li><p><strong>Key idea</strong>: Combines typical days with continuity between hours.</p></li>
-<li><p><strong>Use case</strong>: A practical middle ground between realism and simplicity.</p></li>
+<li><p><strong>How it works</strong>: every chronological time block of the year (365 × 24/h) is mapped to its
+representative block, and the SoC is carried from block to block in calendar order.</p></li>
+<li><p><strong>SoC bounds</strong>: checked at every chronological time block.</p></li>
+<li><p><strong>Example</strong>: 6 → 12 → 6 → 12 → 6 MWh, with the bounds respected at every block.</p></li>
+<li><p><strong>Consequence</strong>: the most faithful of the four, at the cost of the largest model (it has a SoC
+variable for every block of the year).</p></li>
 </ul>
 </section>
 </section>
-<section id="quick-summary-on-storage-algorithms-in-modelling">
-<h2>Quick Summary on Storage Algorithms in Modelling :<a class="headerlink" href="#quick-summary-on-storage-algorithms-in-modelling" title="Link to this heading">#</a></h2>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Algorithm</p></th>
-<th class="head"><p>Analogy</p></th>
-<th class="head text-center"><p>Continuity</p></th>
-<th class="head text-center"><p>Variety</p></th>
-<th class="head text-center"><p>Simplicity</p></th>
-<th class="head"><p>Use Case</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Niet</p></td>
-<td><p>Full continuous diary</p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p>❌</p></td>
-<td><p>Most accurate but data-heavy</p></td>
-</tr>
-<tr class="row-odd"><td><p>Welsch</p></td>
-<td><p>Same page copied every day</p></td>
-<td class="text-center"><p>❌</p></td>
-<td class="text-center"><p>❌</p></td>
-<td class="text-center"><p>✅✅</p></td>
-<td><p>Fast and simple but ignores variation between days</p></td>
-</tr>
-<tr class="row-even"><td><p>Kotzur</p></td>
-<td><p>Alternating mood templates</p></td>
-<td class="text-center"><p>❌</p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p>✅</p></td>
-<td><p>Captures more variety than Welsch but lacks transitions</p></td>
-</tr>
-<tr class="row-odd"><td><p>Novo</p></td>
-<td><p>Linked mood templates</p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p>✅</p></td>
-<td class="text-center"><p>✅</p></td>
-<td><p>Practical middle ground between realism and simplicity</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>A detailed comparison:</p>
-<section id="comparative-table-of-storage-modeling-methods">
-<h3>📊 Comparative Table of Storage Modeling Methods<a class="headerlink" href="#comparative-table-of-storage-modeling-methods" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<tr class="row-odd"><th class="head"><p></p></th>
 <th class="head"><p><strong>Niet</strong></p></th>
 <th class="head"><p><strong>Welsch</strong></p></th>
 <th class="head"><p><strong>Kotzur</strong></p></th>
@@ -502,70 +482,48 @@ Storage isn’t just an isolated battery:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Period Linking</p></td>
-<td><p>Direct Link</p></td>
-<td><p>Enhanced Periods (Fixed Pattern)</p></td>
-<td><p>Enhanced Periods (Day Cluster Mapping)</p></td>
-<td><p>Enhanced Periods (Hourly-Verified Clustering)</p></td>
+<tr class="row-even"><td><p>SoC follows</p></td>
+<td><p>Representative slices, weighted by occurrence</p></td>
+<td><p>Grouped day types (A-A-B-B)</p></td>
+<td><p>Chronological days</p></td>
+<td><p>Chronological time blocks</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Time Representation</strong></p></td>
-<td><p>Representative periods (e.g. days, weeks)</p></td>
-<td><p>Representative <strong>days</strong> (fixed mapping)</p></td>
-<td><p>Representative <strong>days</strong> (arbitrary sequence allowed)</p></td>
-<td><p>Full <strong>hourly resolution</strong> mapped to rep days</p></td>
+<tr class="row-odd"><td><p>Calendar order of days</p></td>
+<td><p>❌</p></td>
+<td><p>❌</p></td>
+<td><p>✅</p></td>
+<td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Chronological Continuity</strong></p></td>
-<td><p>✅ Maintained between periods</p></td>
-<td><p>❌ Not maintained (days are independent)</p></td>
-<td><p>✅ Maintained via day-sequence mapping</p></td>
-<td><p>✅ Maintained at hourly level</p></td>
+<tr class="row-even"><td><p>Intra-day SoC</p></td>
+<td><p>Per representative slice</p></td>
+<td><p>Per day type</p></td>
+<td><p>Reconstructed after the solve</p></td>
+<td><p>Native</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>SoC Linkage Between Periods</strong></p></td>
-<td><p>✅ Explicit (stepwise linkage)</p></td>
-<td><p>❌ No linkage; each rep day repeats independently</p></td>
-<td><p>✅ Daily SoC updated using mapped intra-day values</p></td>
-<td><p>✅ Fully verified SoC with hourly mapping</p></td>
+<tr class="row-odd"><td><p>Bounds checked at</p></td>
+<td><p>Each representative slice</p></td>
+<td><p>A few day-type instances</p></td>
+<td><p>Day boundaries</p></td>
+<td><p>Every time block</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Intra-Day Resolution</strong></p></td>
-<td><p>Average or period-level</p></td>
-<td><p>Full 24-hour profile (rep day)</p></td>
-<td><p>Full 24-hour profile (rep day)</p></td>
-<td><p>Full 24-hour profile (mapped to full year)</p></td>
+<tr class="row-even"><td><p>SoC variables (k days, b blocks/day)</p></td>
+<td><p>k·b</p></td>
+<td><p>per season, day type, bracket</p></td>
+<td><p>365 + k·b</p></td>
+<td><p>365·b</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Reset or Loop Behavior</strong></p></td>
-<td><p>None; sequential linkage</p></td>
-<td><p>Yes; rep day is <strong>repeated</strong> N times</p></td>
-<td><p>Resets daily but allows <strong>arbitrary day ordering</strong></p></td>
-<td><p>No reset; each hour is <strong>mapped and verified</strong></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Flexibility in Time Sequencing</strong></p></td>
-<td><p>Low (predefined order of rep periods)</p></td>
-<td><p>Very low (repeats identical rep day pattern)</p></td>
-<td><p>High (any chronological day can map to any rep day)</p></td>
-<td><p>Very high (full hourly reconstruction)</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Computational Cost</strong></p></td>
-<td><p>Low (simple stepwise link across periods)</p></td>
-<td><p>Very low (repeats rep day)</p></td>
-<td><p>Medium (needs intra-day dynamics + daily tracking)</p></td>
-<td><p>High (full hourly SoC tracking and bounds checking)</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Storage Bounds Verification</strong></p></td>
-<td><p>Implicit per period</p></td>
-<td><p>Start/End of rep day only</p></td>
-<td><p>Only for intra-day cycles; inter-day bounds ignored</p></td>
-<td><p>✅ Enforced at each hour</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Use Case</strong></p></td>
-<td><p>Fast approximation with minimal memory effects</p></td>
-<td><p>Simple seasonal or weekday/weekend modeling</p></td>
-<td><p>Captures non-repetitive variation (e.g. windless days)</p></td>
-<td><p>High-fidelity operational modeling (e.g., reliability)</p></td>
+<tr class="row-odd"><td><p>Code</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Model_Niet</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Model_Welsch</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Model_Kotzur</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Model_Cluster</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</section>
+<p>At full resolution (k = 365, h = 1) the four formulations give nearly the same cost; their
+differences grow as the number of representative days falls. The quantitative comparison is in
+the <a class="reference internal" href="reproducibility.html"><span class="doc">Reproducibility guide</span></a> guide and the reproduction notebook.</p>
 </section>
 </section>
 
@@ -616,17 +574,14 @@ Storage isn’t just an isolated battery:</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-of-the-art-energy-storage-algorithms">state of the art <strong>energy storage algorithms</strong>:</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#niet-direct-link-continuous-diary">Niet (Direct Link) — “Continuous Diary”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (Fixed-Pattern) — “Photocopied Day”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-unverified-cluster-alternating-diaries">Kotzur (Unverified Cluster) — “Alternating Diaries”</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-hourly-verified-linked-journaling">Novo (Hourly-Verified) — “Linked Journaling”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-four-storage-formulations">The four storage formulations</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#niet-direct-link-stacked-diary">Niet (direct link) — “Stacked diary”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welsch-fixed-pattern-photocopied-day">Welsch (fixed pattern) — “Photocopied day”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotzur-day-boundary-verified-daily-ledger">Kotzur (day-boundary verified) — “Daily ledger”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#novo-time-step-verified-hourly-ledger">Novo (time-step verified) — “Hourly ledger”</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-summary-on-storage-algorithms-in-modelling">Quick Summary on Storage Algorithms in Modelling :</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparative-table-of-storage-modeling-methods">📊 Comparative Table of Storage Modeling Methods</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
   </nav></div>
 
