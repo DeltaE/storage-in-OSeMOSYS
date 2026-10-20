@@ -339,3 +339,51 @@ div.highlight pre {
   margin: -1rem 0 2rem;
   color: var(--pst-color-text-muted);
 }
+
+/* "On this page" panel: hidden behind a floating button on wide screens.
+   Below 1200px the theme already puts it behind the header button. */
+.toc-toggle { display: none; }
+@media (min-width: 1200px) {
+  .toc-toggle {
+    position: fixed;
+    top: calc(var(--pst-header-height) + 0.75rem);
+    right: max(16px, env(safe-area-inset-right, 0px));
+    z-index: 1041;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--pst-color-border);
+    border-radius: 999px;
+    background: var(--pill-bg);
+    color: var(--pst-color-text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+  .toc-toggle svg { width: 1rem; height: 1rem; }
+  .toc-toggle:hover,
+  html.toc-open .toc-toggle {
+    border-color: rgba(var(--accent-rgb), 0.45);
+    color: var(--pst-color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.10), 0 0 12px rgba(var(--accent-rgb), 0.22);
+  }
+  .toc-toggle:focus-visible { outline: 2px solid var(--pst-color-primary); outline-offset: 2px; }
+
+  html.has-toc-toggle .bd-sidebar-secondary { display: none; }
+  html.has-toc-toggle.toc-open .bd-sidebar-secondary {
+    display: flex;
+    position: fixed;
+    top: calc(var(--pst-header-height) + 3.4rem);
+    right: max(16px, env(safe-area-inset-right, 0px));
+    z-index: 1040;
+    width: 18rem;
+    max-height: min(70vh, calc(100vh - var(--pst-header-height) - 5rem));
+    padding: 1rem 1rem 0.75rem;
+    border: 1px solid var(--pst-color-border);
+    border-radius: 12px;
+    background: var(--pst-color-background);
+    box-shadow: 0 14px 36px rgba(24, 33, 43, 0.18);
+  }
+}

@@ -32,7 +32,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c621e1d3" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=1b9776ad" />
   
   <!-- So that users can add custom icons -->
   <script defer src="_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
@@ -46,7 +46,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'concept';</script>
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
-    <script src="_static/header-buttons.js?v=a6abead0"></script>
+    <script src="_static/header-buttons.js?v=f96ec393"></script>
     <link rel="icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -553,7 +553,7 @@ html[data-theme="dark"] .sw{--sw-shadow:0 14px 36px rgba(0,0,0,.55)}
 </style>
 
 <div class="sw" id="sw">
-<div class="sw-key"><span><i class="k-var"></i>Varied in the study</span><span><i class="k-fix"></i>Held fixed</span><span><i class="k-lim"></i>Limitation stated in the paper</span><span>Hover a block or tap <b>i</b> for details</span></div>
+<div class="sw-key"><span><i class="k-var"></i>Varied in the study</span><span><i class="k-fix"></i>Held fixed</span><span><i class="k-lim"></i>Limitation stated in the paper</span><span>Select <b>i</b> on a block for details</span></div>
 
 <div class="sw-stage">
 <div class="sw-flow">
@@ -803,9 +803,8 @@ html[data-theme="dark"] .sw{--sw-shadow:0 14px 36px rgba(0,0,0,.55)}
   const sw=document.getElementById('sw');
   if(!sw)return;
 
-  /* morphing blocks; "wide" layout depends on the component's width, not the window */
+  /* morphing blocks, opened with the "i" button; "wide" layout depends on the component's width */
   const wide=()=>sw.clientWidth>=860;
-  const canHover=matchMedia('(hover: hover)').matches;
   const blks=[...sw.querySelectorAll('.sw-slot > .sw-blk')];
   function fit(){blks.forEach(b=>{const s=b.parentElement;
     if(!wide()){s.style.height='';b.style.width=b.style.left=b.style.top='';return;}
@@ -820,6 +819,11 @@ html[data-theme="dark"] .sw{--sw-shadow:0 14px 36px rgba(0,0,0,.55)}
     if(b.classList.contains('open'))return;
     clearTimeout(b._t);delete b.dataset.closing;
     infoOf(b).setAttribute('aria-expanded','true');
+    place(b);
+    syncFocus();
+  }
+  /* size and position an opening (or already open) card */
+  function place(b){
     if(wide()){
       const s=b.parentElement,r=s.getBoundingClientRect(),box=sw.getBoundingClientRect(),vh=innerHeight;
       const w=Math.min(parseInt(b.style.getPropertyValue('--open-w'))||560,box.width);
@@ -833,8 +837,7 @@ html[data-theme="dark"] .sw{--sw-shadow:0 14px 36px rgba(0,0,0,.55)}
       if(bottom>vh-12)top=Math.max(minTop-r.top,vh-12-bottom);
       b.classList.add('open');
       b.style.width=w+'px';b.style.left=(left-r.left)+'px';b.style.top=top+'px';
-    }else b.classList.add('open');
-    syncFocus();
+    }else{b.classList.add('open');b.style.width=b.style.left=b.style.top='';}
   }
   function closeBlk(b){
     if(!b.classList.contains('open'))return;
@@ -847,10 +850,6 @@ html[data-theme="dark"] .sw{--sw-shadow:0 14px 36px rgba(0,0,0,.55)}
   function closeAll(){blks.forEach(b=>{delete b.dataset.pinned;closeBlk(b);});}
 
   blks.forEach(b=>{
-    if(canHover){
-      b.addEventListener('mouseenter',()=>{clearTimeout(b._h);openBlk(b);});
-      b.addEventListener('mouseleave',()=>{if(b.dataset.pinned)return;clearTimeout(b._h);b._h=setTimeout(()=>closeBlk(b),90);});
-    }
     infoOf(b).addEventListener('click',e=>{
       e.stopPropagation();
       const pin=!b.dataset.pinned;
@@ -858,9 +857,14 @@ html[data-theme="dark"] .sw{--sw-shadow:0 14px 36px rgba(0,0,0,.55)}
       if(pin){b.dataset.pinned='1';openBlk(b);}else{delete b.dataset.pinned;closeBlk(b);}
     });
   });
-  let lastW=sw.clientWidth;
-  const refit=()=>{closeAll();fit();setTimeout(fit,560);};
-  new ResizeObserver(()=>{if(sw.clientWidth!==lastW){lastW=sw.clientWidth;refit();}}).observe(sw);
+  /* Small width changes (e.g. a page scrollbar appearing when a card opens) only re-place the
+     cards; a switch between the side-by-side and stacked layouts resets them. */
+  let lastW=sw.clientWidth,lastWide=wide();
+  new ResizeObserver(()=>{
+    if(sw.clientWidth===lastW)return;lastW=sw.clientWidth;
+    if(wide()!==lastWide){lastWide=wide();closeAll();fit();setTimeout(fit,560);return;}
+    fit();blks.forEach(b=>{if(b.classList.contains('open'))place(b);});
+  }).observe(sw);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
   fit();
   document.addEventListener('click',e=>{if(!e.target.closest('.sw-blk'))closeAll();});
