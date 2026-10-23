@@ -149,7 +149,7 @@ MIT, see [LICENSE](LICENSE).
 Please cite the article (see also [`CITATION.cff`](CITATION.cff)):
 
 > Borba, B., Islam, M. E., & Niet, T. *Storage in Long-Term Energy Planning Models with Temporal
-> Aggregation: Best Practices and Algorithms.* Environmental Research Communications (2026).
+> Aggregation: Best Practices and Algorithms.* Environmental Research Communications (2026). __[under review]__
 
 Code, inputs and all results of the study are archived on Zenodo: [10.5281/zenodo.23598757](https://doi.org/10.5281/zenodo.23598757) (v1.2.0).
 
