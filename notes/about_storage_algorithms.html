@@ -382,7 +382,7 @@
   <section id="about-storage-modelling">
 <h1>About Storage Modelling<a class="headerlink" href="#about-storage-modelling" title="Link to this heading">#</a></h1>
 <p>Storage modeling is complex because storage systems behave differently than generation or demand. <strong>Storages move energy across time, not just produce or consume it</strong>. This means:</p>
-<p><strong>🔁 1. Storage shifts energy in time</strong></p>
+<p><strong>1. Storage shifts energy in time</strong></p>
 <p>Unlike solar panels (generate) or homes (consume), storage stores energy when it’s abundant and releases it when needed. That means:</p>
 <ul>
 <li><p>One hour cannot be looked at in isolation — what happened before matters.</p></li>
@@ -392,7 +392,7 @@
 </div></blockquote>
 </li>
 </ul>
-<p><strong>⏳ 2. Time resolution matters</strong></p>
+<p><strong>2. Time resolution matters</strong></p>
 <p>Should a model cover every single hour? Every day? A few representative days? Each choice impacts:</p>
 <ul>
 <li><p>Accuracy (high resolution = realistic, but slow to compute)</p></li>
@@ -402,14 +402,14 @@
 </div></blockquote>
 </li>
 </ul>
-<p><strong>🔗 3. Storage needs continuity</strong></p>
+<p><strong>3. Storage needs continuity</strong></p>
 <p>Many simplification techniques (e.g. clustering days) break the continuity of storage:</p>
 <ul class="simple">
 <li><p>The model might forget how full the battery was yesterday.</p></li>
 <li><p>Artificial resets can distort when charging/discharging actually happens.</p></li>
 </ul>
 <p>This makes it tricky to model seasonal storage or multi-day balancing.</p>
-<p><strong>⚡ 4. Storage interacts with everything</strong>
+<p><strong>4. Storage interacts with everything</strong>
 Storage isn’t just an isolated battery:</p>
 <ul class="simple">
 <li><p>It interacts with renewables (absorbing variability)</p></li>
@@ -430,14 +430,18 @@ with each description.</p>
 <section id="niet-direct-link-stacked-diary">
 <h3>Niet (direct link) — “Stacked diary”<a class="headerlink" href="#niet-direct-link-stacked-diary" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>How it works</strong>: the representative time slices are chained one after another, and each slice is
-weighted by the number of days it represents. All A days are therefore applied in one go, then all
-B days.</p></li>
+<li><p><strong>How it works</strong>: the representative days are chained in date order (the order of the medoid
+days), and the net flow of each time slice is multiplied by <code class="docutils literal notranslate"><span class="pre">YearSplit</span></code> (constraint
+<code class="docutils literal notranslate"><span class="pre">S2_StorageLevelTSStart</span></code>). One hour of a representative day therefore lasts N hours, N being
+the number of days in its cluster; the slice is stretched, not repeated as N whole days. The
+actual order of the 365 days is lost.</p></li>
 <li><p><strong>SoC bounds</strong>: checked at every representative time slice.</p></li>
-<li><p><strong>Example</strong>: 6 → 18 → 6 MWh. The two A days are stacked, so the model sees a peak of 18 MWh that
-never occurs in the real sequence.</p></li>
-<li><p><strong>Consequence</strong>: simple and small, but it can overstate the storage needed when similar days are
-far apart in the year.</p></li>
+<li><p><strong>Example</strong>: 6 → 18 → 6 MWh. The two A days’ charge is applied in one stretch before any B
+discharge, so the model sees a peak of 18 MWh that never occurs in the real sequence.</p></li>
+<li><p><strong>Consequence</strong>: simple and small, but a cluster’s net imbalance builds up without the reversals
+of the real day sequence, so it can overstate the storage needed. The effect shrinks as k grows
+(clusters cover ≈ 365/k days). Stretching single hours also breaks the day/night cycle, which
+matters for solar more than for wind.</p></li>
 </ul>
 </section>
 <section id="welsch-fixed-pattern-photocopied-day">
@@ -490,12 +494,12 @@ variable for every block of the year).</p></li>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>SoC follows</p></td>
-<td><p>Representative slices, weighted by occurrence</p></td>
+<td><p>Representative slices in date order, each stretched by its cluster size</p></td>
 <td><p>Grouped day types (A-A-B-B)</p></td>
 <td><p>Chronological days</p></td>
 <td><p>Chronological time blocks</p></td>
 </tr>
-<tr class="row-odd"><td><p>Calendar order of days</p></td>
+<tr class="row-odd"><td><p>Actual order of the 365 days</p></td>
 <td><p>❌</p></td>
 <td><p>❌</p></td>
 <td><p>✅</p></td>

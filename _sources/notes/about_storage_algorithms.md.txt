@@ -1,7 +1,7 @@
 # About Storage Modelling
 Storage modeling is complex because storage systems behave differently than generation or demand. __Storages move energy across time, not just produce or consume it__. This means:
 
-__🔁 1. Storage shifts energy in time__
+__1. Storage shifts energy in time__
 
 Unlike solar panels (generate) or homes (consume), storage stores energy when it’s abundant and releases it when needed. That means:
   - One hour cannot be looked at in isolation — what happened before matters.
@@ -9,7 +9,7 @@ Unlike solar panels (generate) or homes (consume), storage stores energy when it
 
     > Analogy: It's like a savings account — what can be spent today depends on how much was saved earlier.
 
-__⏳ 2. Time resolution matters__
+__2. Time resolution matters__
 
 Should a model cover every single hour? Every day? A few representative days? Each choice impacts:
 
@@ -18,7 +18,7 @@ Should a model cover every single hour? Every day? A few representative days? Ea
 
     > Modelling storage with only a few sample days risks missing important patterns, like a long wind lull or weekend charging habits.
 
-__🔗 3. Storage needs continuity__
+__3. Storage needs continuity__
 
 Many simplification techniques (e.g. clustering days) break the continuity of storage:
 
@@ -27,7 +27,7 @@ Many simplification techniques (e.g. clustering days) break the continuity of st
 
 This makes it tricky to model seasonal storage or multi-day balancing.
 
-__⚡ 4. Storage interacts with everything__
+__4. Storage interacts with everything__
 Storage isn’t just an isolated battery:
 
  - It interacts with renewables (absorbing variability)
@@ -49,14 +49,18 @@ hand-calculated SoC of each formulation (checked against the models in `validati
 with each description.
 
 ### Niet (direct link) — “Stacked diary”
-- __How it works__: the representative time slices are chained one after another, and each slice is
-  weighted by the number of days it represents. All A days are therefore applied in one go, then all
-  B days.
+- __How it works__: the representative days are chained in date order (the order of the medoid
+  days), and the net flow of each time slice is multiplied by `YearSplit` (constraint
+  `S2_StorageLevelTSStart`). One hour of a representative day therefore lasts N hours, N being
+  the number of days in its cluster; the slice is stretched, not repeated as N whole days. The
+  actual order of the 365 days is lost.
 - __SoC bounds__: checked at every representative time slice.
-- __Example__: 6 → 18 → 6 MWh. The two A days are stacked, so the model sees a peak of 18 MWh that
-  never occurs in the real sequence.
-- __Consequence__: simple and small, but it can overstate the storage needed when similar days are
-  far apart in the year.
+- __Example__: 6 → 18 → 6 MWh. The two A days' charge is applied in one stretch before any B
+  discharge, so the model sees a peak of 18 MWh that never occurs in the real sequence.
+- __Consequence__: simple and small, but a cluster's net imbalance builds up without the reversals
+  of the real day sequence, so it can overstate the storage needed. The effect shrinks as k grows
+  (clusters cover ≈ 365/k days). Stretching single hours also breaks the day/night cycle, which
+  matters for solar more than for wind.
 
 ### Welsch (fixed pattern) — “Photocopied day”
 - __How it works__: the standard OSeMOSYS storage equations. The year is described by seasons, day
@@ -89,8 +93,8 @@ with each description.
 
 | | **Niet** | **Welsch** | **Kotzur** | **Novo** |
 |---|---|---|---|---|
-| SoC follows | Representative slices, weighted by occurrence | Grouped day types (A-A-B-B) | Chronological days | Chronological time blocks |
-| Calendar order of days | ❌ | ❌ | ✅ | ✅ |
+| SoC follows | Representative slices in date order, each stretched by its cluster size | Grouped day types (A-A-B-B) | Chronological days | Chronological time blocks |
+| Actual order of the 365 days | ❌ | ❌ | ✅ | ✅ |
 | Intra-day SoC | Per representative slice | Per day type | Reconstructed after the solve | Native |
 | Bounds checked at | Each representative slice | A few day-type instances | Day boundaries | Every time block |
 | SoC variables (k days, b blocks/day) | k·b | per season, day type, bracket | 365 + k·b | 365·b |

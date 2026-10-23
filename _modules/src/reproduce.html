@@ -936,7 +936,7 @@ window.runMermaid = runMermaid;</script>
 <span class="k">def</span><span class="w"> </span><span class="nf">add_errors</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""Cost and storage-capacity error (%) against the k365h1 Novo benchmark of the same resource.</span>
 
-<span class="sd">    Errors use unrounded values. (Table 4 in the R2 draft divides by the benchmark rounded to two</span>
+<span class="sd">    Errors use unrounded values. (Table 4 in the paper divides by the benchmark rounded to two</span>
 <span class="sd">    decimals, which shifts some capacity errors by up to ~3 percentage points.)</span>
 <span class="sd">    """</span>
     <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
@@ -996,7 +996,7 @@ window.runMermaid = runMermaid;</script>
 
 
 <span class="c1"># ---------------------------------------------------------------------------------------------</span>
-<span class="c1"># Clustering and seed robustness (reviewer comment C2)</span>
+<span class="c1"># Clustering and seed robustness</span>
 <span class="c1"># ---------------------------------------------------------------------------------------------</span>
 <div class="viewcode-block" id="clustering">
 <a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.clustering">[docs]</a>
@@ -1034,8 +1034,39 @@ window.runMermaid = runMermaid;</script>
 
 
 
+<div class="viewcode-block" id="phantom_swing">
+<a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.phantom_swing">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">phantom_swing</span><span class="p">(</span><span class="n">resource</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Storage swing that Niet's chaining of representative days adds over the actual day order.</span>
+
+<span class="sd">    Solver-free diagnostic. In Niet (constraint S2) the representative days are chained in date</span>
+<span class="sd">    order of the medoid days, and each representative hour's net flow is multiplied by YearSplit,</span>
+<span class="sd">    so one hour lasts N_c hours, N_c being the number of days in its cluster. Kotzur and Novo follow</span>
+<span class="sd">    the actual sequence of the 365 days. ``phantom_swing_day_blocks`` repeats each representative</span>
+<span class="sd">    day N_c times instead, which is how Welsch (one season) orders day types; for wind both</span>
+<span class="sd">    readings give almost the same swing, for solar they do not (stretching hours breaks the</span>
+<span class="sd">    day/night cycle). The VRE profile is scaled so that the represented year is energy-neutral;</span>
+<span class="sd">    curtailment and optimised capacities are ignored.</span>
+<span class="sd">    """</span>
+    <span class="n">demand</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">TIMESERIES</span> <span class="o">/</span> <span class="n">DEMAND_PROFILE</span><span class="p">)</span><span class="o">.</span><span class="n">VALUE</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[:</span><span class="mi">8760</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">365</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+    <span class="n">cf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">TIMESERIES</span> <span class="o">/</span> <span class="n">RESOURCES</span><span class="p">[</span><span class="n">resource</span><span class="p">])</span><span class="o">.</span><span class="n">VALUE</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[:</span><span class="mi">8760</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">365</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+    <span class="n">rep</span><span class="p">,</span> <span class="n">seq</span> <span class="o">=</span> <span class="n">clustering</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="p">{</span><span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">((</span><span class="n">seq</span> <span class="o">==</span> <span class="n">r</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">}</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">*</span> <span class="n">demand</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">)</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">*</span> <span class="n">cf</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">)</span>
+    <span class="n">net</span> <span class="o">=</span> <span class="p">{</span><span class="n">r</span><span class="p">:</span> <span class="n">a</span> <span class="o">*</span> <span class="n">cf</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">demand</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">}</span>
+    <span class="n">swing</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">stretched</span> <span class="o">=</span> <span class="n">swing</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">n</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">*</span> <span class="n">net</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]))</span>      <span class="c1"># Niet S2: hour x N_c</span>
+    <span class="n">blocks</span> <span class="o">=</span> <span class="n">swing</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">net</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">n</span><span class="p">[</span><span class="n">r</span><span class="p">])</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rep</span><span class="p">]))</span>  <span class="c1"># Welsch: N_c days in a row</span>
+    <span class="n">chrono</span> <span class="o">=</span> <span class="n">swing</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">net</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">]))</span>                <span class="c1"># Kotzur/Novo: actual order</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">"resource"</span><span class="p">:</span> <span class="n">resource</span><span class="p">,</span> <span class="s2">"k"</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s2">"seed"</span><span class="p">:</span> <span class="n">random_state</span><span class="p">,</span> <span class="s2">"swing_niet"</span><span class="p">:</span> <span class="n">stretched</span><span class="p">,</span>
+            <span class="s2">"swing_day_blocks"</span><span class="p">:</span> <span class="n">blocks</span><span class="p">,</span> <span class="s2">"swing_chronological"</span><span class="p">:</span> <span class="n">chrono</span><span class="p">,</span>
+            <span class="s2">"phantom_swing"</span><span class="p">:</span> <span class="n">stretched</span> <span class="o">-</span> <span class="n">chrono</span><span class="p">,</span> <span class="s2">"phantom_swing_day_blocks"</span><span class="p">:</span> <span class="n">blocks</span> <span class="o">-</span> <span class="n">chrono</span><span class="p">}</span></div>
+
+
+
 <span class="c1"># ---------------------------------------------------------------------------------------------</span>
-<span class="c1"># Independent SoC verification (reviewer comment C4)</span>
+<span class="c1"># Independent SoC verification</span>
 <span class="c1"># ---------------------------------------------------------------------------------------------</span>
 <div class="viewcode-block" id="run_soc_validation">
 <a class="viewcode-back" href="../../autoapi/src/reproduce/index.html#src.reproduce.run_soc_validation">[docs]</a>
@@ -1074,7 +1105,7 @@ window.runMermaid = runMermaid;</script>
 
 <span class="sd">    strict: SoC &gt; upper + tol or SoC &lt; lower - tol (physically infeasible states).</span>
 <span class="sd">    at_or_beyond: SoC &gt;= upper - tol or SoC &lt;= lower + tol (includes states exactly on a bound,</span>
-<span class="sd">    which are feasible). The R2 draft's '183 h above' for wind equals the at_or_beyond count.</span>
+<span class="sd">    which are feasible). The paper's '183 h above' for wind equals the at_or_beyond count.</span>
 <span class="sd">    """</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">soc</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">above</span><span class="p">,</span> <span class="n">below</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">v</span> <span class="o">&gt;</span> <span class="n">upper</span> <span class="o">+</span> <span class="n">tol</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="nb">int</span><span class="p">((</span><span class="n">v</span> <span class="o">&lt;</span> <span class="n">lower</span> <span class="o">-</span> <span class="n">tol</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>

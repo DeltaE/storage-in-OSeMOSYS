@@ -38,8 +38,8 @@ All of these are installed by `env/environment-crossplatform.yml` ({doc}`README_
 | `notebooks/reproduce_study.ipynb` | Step-by-step reproduction |
 | `archive/` | Superseded scripts and data, not used by the workflow |
 
-The complete set of result files (all trajectories and figures, about 185 MB) is archived on Zenodo
-(DOI in the Data Availability Statement). Unpack it as `data/full_archive/`
+The complete set of result files (all trajectories and figures, about 290 MB) is archived on Zenodo
+([10.5281/zenodo.23598757](https://doi.org/10.5281/zenodo.23598757)). Unpack it as `data/full_archive/`
 (containing `Results_Demand_Variation/` and `Results_Limited/`); the notebook detects it automatically and otherwise uses `data/published_results/`.
 
 ## 3. Step by step

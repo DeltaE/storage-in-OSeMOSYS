@@ -477,22 +477,25 @@ produced the published numbers.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.seed_robustness" title="src.reproduce.seed_robustness"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seed_robustness</span></code></a>([ks, seeds])</p></td>
 <td><p>Compare clusterings for alternative seeds against seed 0.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.run_soc_validation" title="src.reproduce.run_soc_validation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_soc_validation</span></code></a>(→ pandas.DataFrame)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.phantom_swing" title="src.reproduce.phantom_swing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phantom_swing</span></code></a>(→ dict)</p></td>
+<td><p>Storage swing that Niet's chaining of representative days adds over the actual day order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.run_soc_validation" title="src.reproduce.run_soc_validation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_soc_validation</span></code></a>(→ pandas.DataFrame)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.read_storage" title="src.reproduce.read_storage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_storage</span></code></a>(→ pandas.Series)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.read_storage" title="src.reproduce.read_storage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_storage</span></code></a>(→ pandas.Series)</p></td>
 <td><p>Native or reconstructed storage level written by main.py.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.soc_violations" title="src.reproduce.soc_violations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">soc_violations</span></code></a>(→ dict)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.soc_violations" title="src.reproduce.soc_violations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">soc_violations</span></code></a>(→ dict)</p></td>
 <td><p>Count bound violations of a storage trajectory.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.hourly_trajectory" title="src.reproduce.hourly_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hourly_trajectory</span></code></a>(→ numpy.ndarray)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.hourly_trajectory" title="src.reproduce.hourly_trajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hourly_trajectory</span></code></a>(→ numpy.ndarray)</p></td>
 <td><p>8760-h storage trajectory used for the fidelity metrics.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.rainflow_cycles" title="src.reproduce.rainflow_cycles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rainflow_cycles</span></code></a>(→ float)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.rainflow_cycles" title="src.reproduce.rainflow_cycles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rainflow_cycles</span></code></a>(→ float)</p></td>
 <td><p>Equivalent full cycles by rainflow counting (ASTM E1049-85 three-point method).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#src.reproduce.fidelity_metrics" title="src.reproduce.fidelity_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fidelity_metrics</span></code></a>(→ dict)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#src.reproduce.fidelity_metrics" title="src.reproduce.fidelity_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fidelity_metrics</span></code></a>(→ dict)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -605,7 +608,7 @@ produced the published numbers.</p>
 <dt class="sig sig-object py" id="src.reproduce.add_errors">
 <span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">add_errors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#add_errors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.add_errors" title="Link to this definition">#</a></dt>
 <dd><p>Cost and storage-capacity error (%) against the k365h1 Novo benchmark of the same resource.</p>
-<p>Errors use unrounded values. (Table 4 in the R2 draft divides by the benchmark rounded to two
+<p>Errors use unrounded values. (Table 4 in the paper divides by the benchmark rounded to two
 decimals, which shifts some capacity errors by up to ~3 percentage points.)</p>
 </dd></dl>
 
@@ -642,6 +645,20 @@ same_rep_days: whether the set of representative days is identical.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="src.reproduce.phantom_swing">
+<span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">phantom_swing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#phantom_swing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.phantom_swing" title="Link to this definition">#</a></dt>
+<dd><p>Storage swing that Niet’s chaining of representative days adds over the actual day order.</p>
+<p>Solver-free diagnostic. In Niet (constraint S2) the representative days are chained in date
+order of the medoid days, and each representative hour’s net flow is multiplied by YearSplit,
+so one hour lasts N_c hours, N_c being the number of days in its cluster. Kotzur and Novo follow
+the actual sequence of the 365 days. <code class="docutils literal notranslate"><span class="pre">phantom_swing_day_blocks</span></code> repeats each representative
+day N_c times instead, which is how Welsch (one season) orders day types; for wind both
+readings give almost the same swing, for solar they do not (stretching hours breaks the
+day/night cycle). The VRE profile is scaled so that the represented year is energy-neutral;
+curtailment and optimised capacities are ignored.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="src.reproduce.run_soc_validation">
 <span class="sig-prename descclassname"><span class="pre">src.reproduce.</span></span><span class="sig-name descname"><span class="pre">run_soc_validation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.DataFrame</span></span></span><a class="reference internal" href="../../../_modules/src/reproduce.html#run_soc_validation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.reproduce.run_soc_validation" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
@@ -660,7 +677,7 @@ starts) or ‘Welsch_intraday’.</p>
 <dd><p>Count bound violations of a storage trajectory.</p>
 <p>strict: SoC &gt; upper + tol or SoC &lt; lower - tol (physically infeasible states).
 at_or_beyond: SoC &gt;= upper - tol or SoC &lt;= lower + tol (includes states exactly on a bound,
-which are feasible). The R2 draft’s ‘183 h above’ for wind equals the at_or_beyond count.</p>
+which are feasible). The paper’s ‘183 h above’ for wind equals the at_or_beyond count.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -762,6 +779,7 @@ graph_generator.py. Niet: representative blocks held for their year-split durati
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.compare_to_archive"><code class="docutils literal notranslate"><span class="pre">compare_to_archive()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.clustering"><code class="docutils literal notranslate"><span class="pre">clustering()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.seed_robustness"><code class="docutils literal notranslate"><span class="pre">seed_robustness()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.phantom_swing"><code class="docutils literal notranslate"><span class="pre">phantom_swing()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.run_soc_validation"><code class="docutils literal notranslate"><span class="pre">run_soc_validation()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.read_storage"><code class="docutils literal notranslate"><span class="pre">read_storage()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.reproduce.soc_violations"><code class="docutils literal notranslate"><span class="pre">soc_violations()</span></code></a></li>
