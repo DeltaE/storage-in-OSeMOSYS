@@ -387,3 +387,28 @@ div.highlight pre {
     box-shadow: 0 14px 36px rgba(24, 33, 43, 0.18);
   }
 }
+
+/* Corner "Zenodo archive" button */
+.zenodo-corner {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: 16px;
+  z-index: 1030;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  background: var(--pst-color-primary);
+  color: #fff !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18), 0 6px 18px rgba(24, 33, 43, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.zenodo-corner svg { width: 1rem; height: 1rem; }
+.zenodo-corner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.3), 0 8px 22px rgba(24, 33, 43, 0.3);
+}
