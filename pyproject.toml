@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "storage-in-osemosys"
+version = "1.2.0"
+description = "Storage formulations (Niet, Welsch, Kotzur, Novo) under temporal aggregation in OSeMOSYS. Delta E+ Research Lab, Simon Fraser University."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Bruno Borba" },
+  { name = "Md Eliasinul Islam", email = "eliasinul@gmail.com" },
+  { name = "Taco Niet" }
+]
+
+dependencies = [
+  "numpy==2.3.1", "pandas==2.2.3", "scikit-learn==1.7.1", "scipy==1.16.0", "matplotlib==3.10.0",
+  "openpyxl==3.1.5", "pyyaml==6.0.2", "colorama==0.4.6", "otoole==1.1.5",
+]  # GLPK 5.0 (glpsol) is a system dependency
+classifiers = [
+  "Programming Language :: Python :: 3.11",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/DeltaE/storage-in-OSeMOSYS"
+Documentation = "https://deltae.github.io/storage-in-OSeMOSYS/"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[project.optional-dependencies]
+
+docs = [  # same as docs/requirements.txt
+  "sphinx>=7.2",
+  "pydata-sphinx-theme>=0.16",
+  "myst-parser>=2.0",
+  "nbsphinx>=0.9",
+  "sphinx-autoapi>=3.0",
+  "sphinxcontrib-mermaid",
+  "ipykernel",
+  "ghp-import",
+]

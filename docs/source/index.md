@@ -1,0 +1,83 @@
+# Storage in OSeMOSYS
+
+<p class="lead">
+Long-term energy models often simulate only a handful of "representative days" instead of every
+hour of the year, which keeps them fast but makes energy storage hard to capture. This site
+accompanies a study that compares four ways of modelling storage in
+<a href="https://osemosys.github.io/">OSeMOSYS</a> under that simplification, and shares the code
+to rerun it. The four cards below follow the natural reading order: the idea, how the models
+are run, what the study found, and the code behind it.
+</p>
+
+<div class="section-cards section-cards--four">
+  <a class="section-card section-card--concept" href="concept.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">01</span>
+    </span>
+    <span class="section-card__title">Concept</span>
+    <span class="section-card__text">Why storage is hard to model with representative days, how the study is put together, and the four formulations.</span>
+  </a>
+  <a class="section-card section-card--workflow" href="workflow.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">02</span>
+    </span>
+    <span class="section-card__title">Modelling workflow</span>
+    <span class="section-card__text">Installation, running the pipeline and setting up new scenarios.</span>
+  </a>
+  <a class="section-card section-card--results" href="results.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">03</span>
+    </span>
+    <span class="section-card__title">Results</span>
+    <span class="section-card__text">Reproduce the published study, read the output files and analyse them.</span>
+  </a>
+  <a class="section-card section-card--api" href="api.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">04</span>
+    </span>
+    <span class="section-card__title">API</span>
+    <span class="section-card__text">What each module in <code>src</code> does and how it can be reused in other work.</span>
+  </a>
+</div>
+
+<p class="landing-pointer">New to the study? Start with
+<a href="concept.html#how-the-study-is-put-together">how the study is put together</a>: an
+interactive map of the test system, model, solve and recommendations.</p>
+
+## At a glance
+
+```bash
+git clone https://github.com/DeltaE/storage-in-OSeMOSYS.git
+cd storage-in-OSeMOSYS
+make setup && conda activate storage_osemosys
+python workflow/main.py
+```
+
+See {doc}`quickstart` for what this does and where the results go.
+
+## Citation
+
+<div class="citation-box">
+  <span class="status-badge">Under review</span>
+  <p>
+    Borba, B., <a href="https://eliasinul.com">Md Eliasinul Islam</a>, &amp; Niet, T.
+    <em>Storage in Long-Term Energy Planning Models with Temporal Aggregation: Best Practices and
+    Algorithms.</em> Environmental Research Communications (2026).
+  </p>
+</div>
+
+Developed at the Delta E+ Research Lab, Simon Fraser University · MIT License
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+
+concept
+workflow
+results
+api
+```

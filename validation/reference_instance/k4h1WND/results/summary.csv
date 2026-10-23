@@ -1,0 +1,5 @@
+Scenario,Model,Number of constraints,Number of variables,Non-zero elements in the matrix,Total cost,Power Capacity,Storage Capacity,Solver status
+k4h1WND,Model_Cluster,26687,9060,63743,50762.6431,40.80845433263,1.094464878662,optimal
+k4h1WND,Model_Kotzur,1506,669,4622,50762.6431,40.80845433263,1.09446487866202,optimal
+k4h1WND,Model_Niet,695,396,3095,56593.84319,40.808413319361,6.92571473419512,optimal
+k4h1WND,Model_Welsch,1185,310,19199,56203.53786,40.808413319361,6.53540940433583,optimal

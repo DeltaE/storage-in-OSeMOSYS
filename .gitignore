@@ -1,0 +1,41 @@
+# generated model inputs/outputs (written by workflow/main.py into each model folder)
+models/*/inputs_csv/
+models/*/results/
+models/*/*.run.yaml
+models/*/*.glp
+models/*/*.sol
+models/*/simulation_results.txt
+models/Model_Cluster/Cluster.txt
+models/Model_Kotzur/Kotzur.txt
+models/Model_Niet/Niet.txt
+models/Model_Welsch/Welsch.txt
+
+# fresh results (the published results live in data/published_results and on Zenodo)
+results/
+validation/soc/results/
+!validation/reference_instance/*/results/
+
+# full results archive of the study (~300 MB, deposited on Zenodo, do not commit)
+data/full_archive/
+*.zip
+*.rar
+
+# python / editors
+__pycache__/
+*.egg-info/
+.ipynb_checkpoints/
+docs/build
+
+# Zenodo deposit built by workflow/build_zenodo_bundle.py
+dist/
+
+# local workspace (not needed to reproduce the study)
+.vscode/
+.idea/
+.venv/
+.conda/
+.claude/
+CLAUDE.md
+vis/
+from Bruno/
+*.pyc

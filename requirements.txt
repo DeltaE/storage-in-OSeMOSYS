@@ -1,0 +1,12 @@
+# Python packages (GLPK 5.0 must be installed separately and `glpsol` must be on PATH).
+numpy==2.3.1
+pandas==2.2.3
+scikit-learn==1.7.1
+scipy==1.16.0
+matplotlib==3.10.0
+openpyxl==3.1.5
+pyyaml==6.0.2
+colorama==0.4.6
+otoole==1.1.5
+jupyterlab
+ipykernel

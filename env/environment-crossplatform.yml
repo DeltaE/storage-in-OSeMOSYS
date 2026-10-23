@@ -1,0 +1,23 @@
+# Cross-platform environment (Windows / macOS / Linux) matching the versions stated in the paper.
+# env/environment.yml is the exact Linux export (with build strings) and is kept for provenance.
+#   conda env create -f env/environment-crossplatform.yml
+#   conda activate storage_osemosys
+name: storage_osemosys
+channels:
+  - conda-forge
+dependencies:
+  - python=3.13.5
+  - glpk=5.0
+  - numpy=2.3.1
+  - pandas=2.2.3
+  - scikit-learn=1.7.1
+  - scipy=1.16.0
+  - matplotlib=3.10.0
+  - openpyxl=3.1.5
+  - pyyaml=6.0.2
+  - colorama=0.4.6
+  - jupyterlab
+  - ipykernel
+  - pip
+  - pip:
+      - otoole==1.1.5

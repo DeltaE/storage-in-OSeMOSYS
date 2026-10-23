@@ -1,0 +1,17 @@
+{
+  "title": "Storage-in-OSeMOSYS: code, inputs and results for \"Storage in Long-Term Energy Planning Models with Temporal Aggregation: Best Practices and Algorithms\"",
+  "upload_type": "software",
+  "description": "<p>Complete, frozen instance of the study published in Environmental Research Communications (ERC-105849): source code, OSeMOSYS model files for the four storage formulations (Niet, Welsch, Kotzur, Novo), system inputs and hourly time series, the full archive of results reported in the manuscript (327 scenarios, stress tests, seed-robustness runs, corrected Welsch re-solves), the independent state-of-charge verification and a saved reference instance with a reproducibility proof.</p><p>See REPRODUCIBILITY.md for how to regenerate every number in the paper. SHA256SUMS lists a checksum for every file in the deposit.</p>",
+  "creators": [
+    {"name": "Borba, Bruno", "affiliation": "Delta E+ Research Lab, Simon Fraser University"},
+    {"name": "Islam, Md Eliasinul", "affiliation": "Delta E+ Research Lab, Simon Fraser University"},
+    {"name": "Niet, Taco", "affiliation": "Delta E+ Research Lab, Simon Fraser University"}
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "version": "1.2.0",
+  "keywords": ["energy storage", "OSeMOSYS", "temporal aggregation", "representative days", "capacity expansion", "reproducibility"],
+  "related_identifiers": [
+    {"identifier": "https://github.com/DeltaE/storage-in-OSeMOSYS", "relation": "isSupplementTo", "scheme": "url"}
+  ]
+}

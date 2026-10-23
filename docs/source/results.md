@@ -1,0 +1,46 @@
+# Results
+
+<p class="page-intro">
+Every number in the paper can be regenerated from this repository. This section shows how to
+rerun the study, either with a quick check or in full, and what files the runs produce. Pick a
+card to open the detailed steps.
+</p>
+
+<div class="section-cards section-cards--three">
+  <a class="section-card section-card--steps" href="notes/reproducibility.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Guide</span>
+    </span>
+    <span class="section-card__title">Reproducibility guide</span>
+    <span class="section-card__text">Requirements, a 2-minute check, the full regeneration, and which run produced each published number.</span>
+    <span class="section-card__more">Open the steps →</span>
+  </a>
+  <a class="section-card section-card--notebook" href="notebooks/reproduce_study.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Notebook</span>
+    </span>
+    <span class="section-card__title">Reproduce the study</span>
+    <span class="section-card__text">Twelve executed steps, from inputs and representative days to Table 4, the stress test and seed sensitivity.</span>
+    <span class="section-card__more">Open the notebook →</span>
+  </a>
+  <a class="section-card section-card--outputs" href="notes/outputs.html">
+    <span class="section-card__head">
+      <span class="section-card__icon" aria-hidden="true"></span>
+      <span class="section-card__step">Files</span>
+    </span>
+    <span class="section-card__title">Outputs</span>
+    <span class="section-card__text">What is in <code>Simulation_Results.xlsx</code> and the state-of-charge files, and how to load them in Python.</span>
+    <span class="section-card__more">See the files →</span>
+  </a>
+</div>
+
+```{toctree}
+:hidden:
+:maxdepth: 2
+
+notes/reproducibility
+notebooks/reproduce_study
+notes/outputs
+```

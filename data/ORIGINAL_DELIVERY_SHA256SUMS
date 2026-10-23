@@ -1,0 +1,6 @@
+# SHA-256 of the files delivered by B. Borba for the manuscript (received 2026-10-22).
+# Every file they contain is present byte-for-byte in this repository (data/full_archive/,
+# data/published_results/, archive/Storage_Article/, validation/soc/); see REPRODUCIBILITY.md.
+8b73157d7c827e820656641c64f6dd687b904d1d24ce85c27cf42203c93d1210  Results_Demand_Variation.zip
+650ca7870fdeb52c4aef2545deca5b37b831cf66312f46a89010183e9ba09bfd  Storage_Article.rar
+8b326dc055d0ec8e68d771f1f39d87e4a905082a5ada612867b5842e3f6f269f  validation_soc.zip

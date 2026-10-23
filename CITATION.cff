@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the article listed under preferred-citation."
+title: "Storage-in-OSeMOSYS: storage formulations for temporally aggregated OSeMOSYS models"
+type: software
+version: 1.2.0
+date-released: "2026-10-23"
+doi: "10.5281/zenodo.23598757"
+license: MIT
+repository-code: "https://github.com/DeltaE/storage-in-OSeMOSYS"
+url: "https://deltae.github.io/storage-in-OSeMOSYS/"
+authors:
+  - family-names: Borba
+    given-names: Bruno
+    affiliation: "Delta E+ Research Lab, Simon Fraser University"
+  - family-names: Islam
+    given-names: Md Eliasinul
+    affiliation: "Delta E+ Research Lab, Simon Fraser University"
+  - family-names: Niet
+    given-names: Taco
+    affiliation: "Delta E+ Research Lab, Simon Fraser University"
+keywords:
+  - energy storage
+  - OSeMOSYS
+  - temporal aggregation
+  - representative days
+  - capacity expansion
+preferred-citation:
+  type: article
+  title: "Storage in Long-Term Energy Planning Models with Temporal Aggregation: Best Practices and Algorithms"
+  authors:
+    - family-names: Borba
+      given-names: Bruno
+    - family-names: Islam
+      given-names: Md Eliasinul
+    - family-names: Niet
+      given-names: Taco
+  journal: "Environmental Research Communications"
+  year: 2026

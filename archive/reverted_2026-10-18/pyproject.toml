@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "RES"
+version = "1.0"
+description = "This tool standardizes the resource assessment framework for Renewable Energy resources. Currently support Solar and On-shore Wind resource assessments. Developed by Delta E+ Research Lab, Simon Fraser University, BC, CA"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Md Eliasinul Islam", email = "eliasinul@gmail.com" }
+]
+
+dependencies = [
+    # Add your main project dependencies here
+]
+classifiers = [
+  "Programming Language :: Python :: 3.11",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/RES"  # Optional, update with your actual project URL
+
+[project.scripts]
+RES = "RES.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[project.optional-dependencies]
+
+docs = [
+  "sphinx>=7.0", # Sphinx for documentation generation
+  "myst-parser", # For Markdown support in Sphinx
+  "furo", # Furo is a modern, responsive theme for Sphinx
+  "sphinx-book-theme", # Sphinx Book Theme - clean, modern theme
+  "nbsphinx", # For Jupyter Notebook support in Sphinx
+  "sphinx-autobuild", # For auto-rebuilding docs during development
+  "ipykernel", # Required for notebook execution
+  "jupyter", # Jupyter dependencies for notebooks
+  "ghp-import", # For deploying to GitHub Pages
+]

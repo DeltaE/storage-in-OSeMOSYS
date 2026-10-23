@@ -1,0 +1,105 @@
+# About Storage Modelling
+Storage modeling is complex because storage systems behave differently than generation or demand. __Storages move energy across time, not just produce or consume it__. This means:
+
+__1. Storage shifts energy in time__
+
+Unlike solar panels (generate) or homes (consume), storage stores energy when it’s abundant and releases it when needed. That means:
+  - One hour cannot be looked at in isolation — what happened before matters.
+  - The state of charge (SOC) today depends on all previous hours.
+
+    > Analogy: It's like a savings account — what can be spent today depends on how much was saved earlier.
+
+__2. Time resolution matters__
+
+Should a model cover every single hour? Every day? A few representative days? Each choice impacts:
+
+ - Accuracy (high resolution = realistic, but slow to compute)
+ - Computational effort (simplified models lose detail)
+
+    > Modelling storage with only a few sample days risks missing important patterns, like a long wind lull or weekend charging habits.
+
+__3. Storage needs continuity__
+
+Many simplification techniques (e.g. clustering days) break the continuity of storage:
+
+ - The model might forget how full the battery was yesterday.
+ - Artificial resets can distort when charging/discharging actually happens.
+
+This makes it tricky to model seasonal storage or multi-day balancing.
+
+__4. Storage interacts with everything__
+Storage isn’t just an isolated battery:
+
+ - It interacts with renewables (absorbing variability)
+ - It supports grid reliability (fast response)
+ - It responds to prices, constraints, and emissions goals
+
+So modeling it well requires integrating with the rest of the energy system.
+
+## The four storage formulations
+
+Every formulation below works on the same representative days (k-means on daily wind/solar/hydro
+and demand profiles, see {doc}`workflow_guide`). They differ in **which sequence the state of
+charge (SoC) follows** and **where its bounds are checked**. The model files are in
+`models/Model_<name>/osemosys_fast_<name>.txt`; *Novo* is implemented in `Model_Cluster`.
+
+A small example makes the differences concrete. Take four days A–B–A–B, where every A day charges
+the battery by 6 MWh and every B day discharges it by 6 MWh, starting at 6 MWh. The
+hand-calculated SoC of each formulation (checked against the models in `validation/soc/`) is given
+with each description.
+
+### Niet (direct link) — “Stacked diary”
+- __How it works__: the representative days are chained in date order (the order of the medoid
+  days), and the net flow of each time slice is multiplied by `YearSplit` (constraint
+  `S2_StorageLevelTSStart`). One hour of a representative day therefore lasts N hours, N being
+  the number of days in its cluster; the slice is stretched, not repeated as N whole days. The
+  actual order of the 365 days is lost.
+- __SoC bounds__: checked at every representative time slice.
+- __Example__: 6 → 18 → 6 MWh. The two A days' charge is applied in one stretch before any B
+  discharge, so the model sees a peak of 18 MWh that never occurs in the real sequence.
+- __Consequence__: simple and small, but a cluster's net imbalance builds up without the reversals
+  of the real day sequence, so it can overstate the storage needed. The effect shrinks as k grows
+  (clusters cover ≈ 365/k days). Stretching single hours also breaks the day/night cycle, which
+  matters for solar more than for wind.
+
+### Welsch (fixed pattern) — “Photocopied day”
+- __How it works__: the standard OSeMOSYS storage equations. The year is described by seasons, day
+  types and daily time brackets; each day type is repeated as a block (A-A-B-B), with a fixed
+  intra-day pattern.
+- __SoC bounds__: checked only at a few points: the first and last instance of each day type in the
+  first and last week.
+- __Example__: 6 → 12 → 18 → 12 → 6 MWh (grouped days A-A-B-B).
+- __Consequence__: compact, but the day order is lost and limits can be violated between the checked
+  points.
+
+### Kotzur (day-boundary verified) — “Daily ledger”
+- __How it works__: the 365 chronological days are linked in calendar order. Each day adds the net
+  change of its representative day.
+- __SoC bounds__: checked at the start of each chronological day only; within a day the level is not
+  constrained.
+- __Example__: 6 → 12 → 6 → 12 → 6 MWh (chronological days A-B-A-B).
+- __Consequence__: keeps the seasonal sequence at low cost, but intra-day peaks and troughs can
+  exceed the capacity (visible in the binding-capacity stress test).
+
+### Novo (time-step verified) — “Hourly ledger”
+- __How it works__: every chronological time block of the year (365 × 24/h) is mapped to its
+  representative block, and the SoC is carried from block to block in calendar order.
+- __SoC bounds__: checked at every chronological time block.
+- __Example__: 6 → 12 → 6 → 12 → 6 MWh, with the bounds respected at every block.
+- __Consequence__: the most faithful of the four, at the cost of the largest model (it has a SoC
+  variable for every block of the year).
+
+## Summary
+
+| | **Niet** | **Welsch** | **Kotzur** | **Novo** |
+|---|---|---|---|---|
+| SoC follows | Representative slices in date order, each stretched by its cluster size | Grouped day types (A-A-B-B) | Chronological days | Chronological time blocks |
+| Actual order of the 365 days | ❌ | ❌ | ✅ | ✅ |
+| Intra-day SoC | Per representative slice | Per day type | Reconstructed after the solve | Native |
+| Bounds checked at | Each representative slice | A few day-type instances | Day boundaries | Every time block |
+| SoC variables (k days, b blocks/day) | k·b | per season, day type, bracket | 365 + k·b | 365·b |
+| Code | `Model_Niet` | `Model_Welsch` | `Model_Kotzur` | `Model_Cluster` |
+
+At full resolution (k = 365, h = 1) the four formulations give nearly the same cost; their
+differences grow as the number of representative days falls. The quantitative comparison is in
+the {doc}`reproducibility` guide and the reproduction notebook.

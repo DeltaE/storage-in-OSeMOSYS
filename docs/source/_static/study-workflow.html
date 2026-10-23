@@ -1,0 +1,496 @@
+<!-- Study workflow diagram, included in concept.md via {raw} html :file:.
+     Styled with the docs' own tokens (custom.css), so it follows the site's light/dark switch.
+     Layout: a four-stage pipeline. Each block is compact at rest and grows in place into a larger
+     card (details + limitations) on hover or "i". -->
+<style>
+.sw{
+  container:sw / inline-size;
+  --sw-surface:var(--pst-color-background); --sw-panel:var(--card-bg); --sw-ink:var(--pst-color-text-base);
+  --sw-muted:var(--pst-color-text-muted); --sw-line:var(--pst-color-border); --sw-soft:var(--pill-bg);
+  --sw-accent:var(--pst-color-primary); --sw-accent-soft:rgba(var(--accent-rgb),.12);
+  --sw-lim:var(--badge-fg); --sw-lim-line:#d9822b; --sw-lim-soft:var(--cite-bg);
+  --cA:var(--pst-color-primary); --cB:rgba(var(--accent-rgb),.38); --check:#d9822b;
+  --sw-shadow:0 14px 36px rgba(24,33,43,.18);
+  --sw-mono:var(--pst-font-family-monospace);
+  --ease:cubic-bezier(.22,.9,.28,1); --dur:.46s;
+  display:grid;gap:16px;margin:1rem 0 1.5rem;font-size:14px;line-height:1.45;color:var(--sw-ink)
+}
+html[data-theme="dark"] .sw{--sw-shadow:0 14px 36px rgba(0,0,0,.55)}
+/* the open card may extend past the flow; don't let the article container clip it */
+.bd-article-container:has(.sw){overflow:visible}
+
+.sw p,.sw ul,.sw dl,.sw dd{margin:0}
+.sw h2,.sw h3,.sw h4{margin:0;padding:0;font-weight:700;letter-spacing:0;color:var(--sw-ink);text-wrap:balance}
+.sw button{font:inherit}
+
+.sw-key{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--sw-muted)}
+.sw-key i{display:inline-block;width:13px;height:9px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+.sw-key .k-var{background:var(--sw-accent-soft);border:1.5px solid var(--sw-accent)}
+.sw-key .k-fix{background:var(--sw-surface);border:1.2px solid var(--sw-line)}
+.sw-key .k-lim{background:var(--sw-lim-soft);border:1.2px solid var(--sw-lim-line)}
+
+/* pipeline */
+.sw-stage{border:1px solid var(--sw-line);border-radius:12px;background:var(--sw-panel);padding:22px 16px;display:grid;place-items:center}
+.sw-flow{display:grid;grid-template-columns:minmax(0,250px) 36px minmax(0,215px) 36px minmax(0,200px) 36px minmax(0,235px);align-items:center;justify-content:center;width:100%}
+.sw-arrow{display:flex;align-items:center;justify-content:center;color:var(--sw-muted)}
+.sw-arrow svg{width:26px;height:26px}
+.sw-col{display:grid;gap:12px;min-width:0}
+
+.sw-slot{position:relative;min-width:0}
+.sw-blk{background:var(--sw-surface);border:1px solid var(--sw-line);border-radius:10px;padding:12px 14px;display:grid;gap:8px;align-content:start;min-width:0;box-sizing:border-box}
+.sw-blk.open{border-color:var(--sw-accent);box-shadow:var(--sw-shadow)}
+.sw-hd{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sw-lbl{font-family:var(--sw-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--sw-accent)}
+.sw h2.sw-t{font-size:15px}
+.sw-blk>p{font-size:12.5px;color:var(--sw-muted)}
+
+.sw-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur) var(--ease)}
+.sw-more>.in{overflow:hidden;min-height:0;display:grid;gap:8px;opacity:0;transform:translateY(-4px);transition:opacity .25s ease,transform var(--dur) var(--ease)}
+.sw-blk.open .sw-more{grid-template-rows:1fr}
+.sw-blk.open .sw-more>.in{opacity:1;transform:none;transition:opacity .3s ease .12s,transform var(--dur) var(--ease)}
+.sw-blk.measure,.sw-blk.measure *{transition:none!important}
+.sw-blk.measure .sw-more{grid-template-rows:1fr}
+
+/* focus effect: soften everything but the open card */
+.sw-blk,.sw-arrow,.sw-key,.sw-foot,.sw-mhead,.sw-pair{transition:filter .35s ease,opacity .35s ease}
+.sw.focus .sw-blk:not(.open),.sw.focus .sw-arrow,.sw.focus .sw-key,.sw.focus .sw-foot,.sw.focus .sw-mhead,.sw.focus .sw-pair{filter:blur(1.6px);opacity:.55}
+.sw-more ul{padding-left:16px;display:grid;gap:4px}
+.sw-more li,.sw-more p{font-size:12.5px;color:var(--sw-ink);margin:0}
+.sw-more .rule{border-top:1px solid var(--sw-line);margin-top:2px}
+.sw-lim{background:var(--sw-lim-soft);border-left:3px solid var(--sw-lim-line);border-radius:0 6px 6px 0;padding:8px 10px;display:grid;gap:4px}
+.sw-lim .t{font-family:var(--sw-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--sw-lim);font-weight:600}
+.sw-lim li{font-size:12px}
+.sw-src{font-size:11px;color:var(--sw-muted)}
+
+@container sw (min-width:860px){
+  .sw-slot>.sw-blk{position:absolute;top:0;left:0;width:100%;z-index:1;
+    transition:width var(--dur) var(--ease),left var(--dur) var(--ease),top var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color .3s ease,filter .35s ease,opacity .35s ease;
+    will-change:width,left,top}
+  .sw-slot>.sw-blk.open{z-index:30}
+  .sw-blk.wide>.sw-more>.in{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);column-gap:16px;align-items:start}
+  .sw-blk.wide>.sw-more>.in>.rule,.sw-blk.wide>.sw-more>.in>.sw-src{grid-column:1/-1}
+  .sw-desc{display:grid;gap:6px}
+}
+@media (prefers-reduced-motion:reduce){.sw-slot>.sw-blk,.sw-more,.sw-more>.in{transition:none!important}}
+
+.sw-info{all:unset;box-sizing:border-box;cursor:pointer;width:20px;height:20px;border-radius:50%;border:1.2px solid var(--sw-muted);color:var(--sw-muted);display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:700;font-size:11.5px;flex:none;line-height:1}
+.sw-info:hover,.sw-info[aria-expanded="true"]{border-color:var(--sw-accent);color:var(--sw-accent);background:var(--sw-accent-soft)}
+.sw-info:focus-visible{outline:2px solid var(--sw-accent);outline-offset:2px}
+
+/* test reference system */
+.sw-res{width:100%;max-width:250px;height:auto;display:block}
+.sw-res .box{fill:var(--sw-surface);stroke:var(--sw-line);stroke-width:1.2}
+.sw-res .box.var{fill:var(--sw-accent-soft);stroke:var(--sw-accent);stroke-width:1.8}
+.sw-res .bus{stroke:var(--sw-ink);stroke-width:2.4}
+.sw-res .ln{stroke:var(--sw-muted);stroke-width:1.4;fill:none}
+.sw-res .tipm{fill:var(--sw-muted)}
+.sw-res text{font-size:11px;font-weight:600;fill:var(--sw-ink)}
+.sw-res text.s{font-size:9px;font-weight:400;fill:var(--sw-muted)}
+.sw-chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.sw-chip{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:600;padding:2px 9px 2px 7px;border-radius:999px;border:1.5px solid var(--sw-accent);background:var(--sw-accent-soft);color:var(--sw-accent)}
+.sw-chip svg{width:14px;height:14px}
+.sw-chip.plain{padding:2px 9px}
+.sw-mini{display:block;font-size:12px;color:var(--sw-muted);padding:6px 8px;border:1px dashed var(--sw-line);border-radius:6px;background:var(--sw-soft)}
+.sw-mini b{color:var(--sw-ink);font-weight:600}
+
+/* model + solve */
+.sw-storage-btn{all:unset;box-sizing:border-box;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;border:1.5px solid var(--sw-accent);background:var(--sw-accent-soft);border-radius:8px;padding:9px 11px;font-size:13px;font-weight:600;color:var(--sw-ink);transition:box-shadow .2s ease}
+.sw-storage-btn:hover{box-shadow:0 0 0 3px rgba(var(--accent-rgb),.10),0 0 12px rgba(var(--accent-rgb),.22)}
+.sw-storage-btn small{display:block;font-weight:400;font-size:11.5px;color:var(--sw-accent)}
+.sw-storage-btn:focus-visible{outline:2px solid var(--sw-accent);outline-offset:3px}
+.sw-chev{transition:transform .2s ease;flex:none}
+.sw-storage-btn[aria-expanded="true"] .sw-chev{transform:rotate(180deg)}
+.sw-sub{border:1px dashed var(--sw-line);border-radius:8px;padding:9px 11px;background:var(--sw-soft);display:grid;gap:6px}
+.sw-sub b{font-size:13px}
+.sw-icons{display:flex;gap:14px;color:var(--sw-muted);font-size:11.5px;align-items:center}
+.sw-icons span{display:flex;align-items:center;gap:5px}
+.sw-icons svg{width:18px;height:18px;color:var(--sw-ink)}
+
+.sw-rec{display:grid;gap:6px}
+.sw-rec div{display:grid;gap:1px;padding-left:9px;border-left:2px solid var(--sw-line)}
+.sw-rec dt{font-size:11.5px;color:var(--sw-muted);font-weight:400}
+.sw dl.sw-rec dd{margin:0;font-size:13px;font-weight:600}
+.sw-rec dd small{font-weight:400;color:var(--sw-muted);font-size:11.5px}
+
+/* methods drawer */
+.sw-methods{background:var(--sw-panel);border:1.5px solid var(--sw-accent);border-radius:12px;padding:16px;display:grid;gap:12px}
+.sw-mhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.sw h3.sw-mh{font-size:16px}
+.sw-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--sw-muted);align-items:center}
+.sw-legend i{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-2px;margin-right:5px}
+.sw-legend .dot{border-radius:50%;width:7px;height:7px;background:var(--check);vertical-align:0}
+.sw-mgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding-bottom:4px}
+.sw h4.sw-m4{font-size:15px}
+.sw-m .tag{font-family:var(--sw-mono);font-size:10.5px;color:var(--sw-accent)}
+.sw-m .chk{font-size:12px;color:var(--sw-muted)}
+.sw-m .chk b{color:var(--sw-ink);font-weight:600}
+.sw-strip{width:100%;height:auto;display:block}
+.sw-strip text{font-family:var(--sw-mono);font-size:8px;fill:var(--sw-muted)}
+.sw-pair{font-size:12.5px;color:var(--sw-muted)}
+.sw-pair b{color:var(--sw-ink)}
+.sw-foot{font-size:12px;color:var(--sw-muted)}
+
+@container sw (max-width:859px){
+  .sw-flow{grid-template-columns:minmax(0,460px)}
+  .sw-arrow{padding-block:4px}
+  .sw-arrow svg{transform:rotate(90deg)}
+  .sw-mgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@container sw (max-width:520px){.sw-mgrid{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<div class="sw" id="sw">
+<div class="sw-key"><span><i class="k-var"></i>Varied in the study</span><span><i class="k-fix"></i>Held fixed</span><span><i class="k-lim"></i>Limitation stated in the paper</span><span>Select <b>i</b> on a block for details</span></div>
+
+<div class="sw-stage">
+<div class="sw-flow">
+
+  <!-- Inputs -->
+  <div class="sw-col">
+    <div class="sw-slot">
+      <article class="sw-blk wide" aria-labelledby="sw-h-sys" style="--open-w:780px">
+        <div class="sw-hd"><span class="sw-lbl">Input</span><button class="sw-info" type="button" aria-expanded="false" aria-label="Details: Test Reference System">i</button></div>
+        <h2 class="sw-t" id="sw-h-sys">Test Reference System</h2>
+        <svg class="sw-res" viewBox="0 0 220 112" role="img" aria-label="A VRE generator and a storage unit connect to one electricity node that serves demand">
+          <defs><marker id="sw-ah-res" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L6 3L0 6z" class="tipm"/></marker></defs>
+          <rect class="box var" x="4" y="8" width="72" height="34" rx="5"/>
+          <text x="40" y="29" text-anchor="middle">VRE</text>
+          <line class="bus" x1="110" y1="4" x2="110" y2="98"/>
+          <text class="s" x="110" y="110" text-anchor="middle">node</text>
+          <rect class="box" x="144" y="8" width="72" height="34" rx="5"/>
+          <text x="180" y="29" text-anchor="middle">Demand</text>
+          <line class="ln" x1="76" y1="25" x2="107" y2="25" marker-end="url(#sw-ah-res)"/>
+          <line class="ln" x1="113" y1="25" x2="143" y2="25" marker-end="url(#sw-ah-res)"/>
+          <rect class="box" x="144" y="58" width="72" height="38" rx="5"/>
+          <text x="180" y="81" text-anchor="middle">Storage</text>
+          <line class="ln" x1="113" y1="68" x2="143" y2="68" marker-end="url(#sw-ah-res)"/>
+          <line class="ln" x1="143" y1="86" x2="113" y2="86" marker-end="url(#sw-ah-res)"/>
+        </svg>
+        <div class="sw-chips" aria-label="Generation profiles">
+          <span class="sw-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10v12"/><path d="M12 10 12.6 2.5"/><path d="M12 10l6.6 3.6"/><path d="M12 10 5.4 13.6"/><circle cx="12" cy="10" r="1.3" fill="currentColor"/><path d="M9 22h6"/></svg>Wind</span>
+          <span class="sw-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>Solar</span>
+          <span class="sw-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4.4 6 7.8 6 11a6 6 0 0 1-12 0c0-3.2 3-6.6 6-11z"/><path d="M9.5 15a2.5 2.5 0 0 0 2.5 2.5"/></svg>Hydro</span>
+        </div>
+        <div class="sw-more"><div class="in">
+          <div class="rule"></div>
+          <ul>
+            <li>One VRE generator and one storage unit on a <b>single electricity node</b> that serves demand, over one year.</li>
+            <li>The three scenarios share the same structure, costs, demand and storage parameters. Only the generator's <b>hourly capacity-factor profile</b> changes.</li>
+            <li>Profiles are <b>stylized archetypes</b> built from British Columbia hourly data, not a specific year or plant portfolio.</li>
+          </ul>
+          <div class="sw-lim"><span class="t">Limitations</span><ul>
+            <li><b>One generator at a time.</b> Each run has a single generator with one profile. Wind, solar and hydro are tested separately, never together in one system, so mixed portfolios are untested.</li>
+            <li><b>No network constraints</b>, congestion or spatial diversity, as in real multi-node systems.</li>
+            <li>Storage is <b>one generic technology</b>. Technologies with different duration, cycling or degradation may respond differently to aggregation.</li>
+            <li>Charge and discharge rates are unconstrained, so capacity errors are <b>upper bounds</b> relative to a duration-limited technology.</li>
+            <li>Where storage competes with transmission, demand response or dispatchable generation, state-of-charge errors also shift the choice between these options.</li>
+          </ul></div>
+          <span class="sw-src">Paper: Sections 3.3 and 5</span>
+        </div></div>
+      </article>
+    </div>
+
+    <div class="sw-slot">
+      <article class="sw-blk wide" aria-labelledby="sw-h-rep" style="--open-w:680px">
+        <div class="sw-hd"><span class="sw-lbl">Input</span><button class="sw-info" type="button" aria-expanded="false" aria-label="Details: representative days">i</button></div>
+        <h2 class="sw-t" id="sw-h-rep">Representative days</h2>
+        <div class="sw-mini"><b>k-means</b> picks the days</div>
+        <div class="sw-chips"><span class="sw-chip plain">k · days</span><span class="sw-chip plain">h · hours per block</span></div>
+        <div class="sw-more"><div class="in">
+          <div class="rule"></div>
+          <ul>
+            <li>k-means groups the 365 days by their scaled daily <b>capacity-factor and demand profiles</b>.</li>
+            <li>The day <b>closest to each cluster centre</b> becomes the representative day, and every day of the year is mapped to one.</li>
+            <li>Clustering uses a fixed random state, so for a given k and h all four methods get <b>identical days and mapping</b>.</li>
+          </ul>
+          <div class="sw-lim"><span class="t">Limitations</span><ul>
+            <li>k-means can <b>smooth rare extremes</b> and does not preserve <b>multi-day scarcity sequences</b>, both of which can matter for storage sizing.</li>
+            <li>k is treated as an <b>exogenous choice</b>. The study does not determine an optimal number of days.</li>
+            <li>Other day–hour pairings could add nuance to the accuracy–efficiency picture.</li>
+            <li>Optimisation-based selection, which may better preserve extremes, was not tested.</li>
+          </ul></div>
+          <span class="sw-src">Paper: Sections 3.2 and 5</span>
+        </div></div>
+      </article>
+    </div>
+  </div>
+
+  <div class="sw-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></div>
+
+  <!-- Model -->
+  <div class="sw-slot">
+    <article class="sw-blk wide" aria-labelledby="sw-h-model" style="--open-w:660px">
+      <div class="sw-hd"><span class="sw-lbl">Model</span><button class="sw-info" type="button" aria-expanded="false" aria-label="Details: planning model">i</button></div>
+      <h2 class="sw-t" id="sw-h-model">OSeMOSYS</h2>
+      <p>Long-term planning model</p>
+      <button class="sw-storage-btn" id="sw-storage-toggle" type="button" aria-expanded="false" aria-controls="sw-methods">
+        <span>Storage method<small>4 options · click to open</small></span>
+        <svg class="sw-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="sw-more"><div class="in">
+        <div class="rule"></div>
+        <ul>
+          <li>A capacity-expansion model that chooses what to build and how to run it at the <b>lowest total system cost</b>.</li>
+          <li><b>Only the storage component</b> is swapped between runs. Everything else stays the same.</li>
+          <li>The starting storage level is optimised, and storage must <b>return to it by the end of the year</b>.</li>
+          <li>A separate stress test <b>caps storage energy capacity</b> so the limit binds.</li>
+        </ul>
+        <div class="sw-lim"><span class="t">Limitations</span><ul>
+          <li><b>Single-year horizon.</b> Long-term evolution of storage portfolios is not assessed.</li>
+          <li>The binding-cap stress test covers the <b>wind and solar scenarios only</b>.</li>
+        </ul></div>
+        <span class="sw-src">Paper: Sections 3.3, 4.4 and 5</span>
+      </div></div>
+    </article>
+  </div>
+
+  <div class="sw-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></div>
+
+  <!-- Solve -->
+  <div class="sw-slot">
+    <article class="sw-blk wide" aria-labelledby="sw-h-solve" style="--open-w:620px">
+      <div class="sw-hd"><span class="sw-lbl">Solve</span><button class="sw-info" type="button" aria-expanded="false" aria-label="Details: solve">i</button></div>
+      <h2 class="sw-t" id="sw-h-solve">Solve</h2>
+      <div class="sw-sub">
+        <b>Solve effort</b>
+        <div class="sw-icons">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M10 2h4"/></svg>time</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5" rx=".5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>memory</span>
+        </div>
+        <div class="sw-more"><div class="in">
+          <p>Time and memory change with <b>the number of representative days, the block length and the storage method</b>, even when everything else stays the same.</p>
+        </div></div>
+      </div>
+      <div class="sw-more"><div class="in">
+        <div class="rule"></div>
+        <ul>
+          <li>Each case is a linear program, solved with <b>GLPK 5.0</b> on an Intel Core i7 machine with 16 GB of memory.</li>
+          <li>Reference case: the <b>full year at hourly resolution</b>.</li>
+        </ul>
+        <div class="sw-lim"><span class="t">Limitations</span><ul>
+          <li>Runtime and memory figures <b>hold for that environment</b>.</li>
+          <li>GLPK is comparatively slow, so runtime ratios between methods <b>may not transfer to commercial solvers</b>. Memory ratios reflect problem size and are expected to be more robust.</li>
+        </ul></div>
+        <span class="sw-src">Paper: Section 3.4</span>
+      </div></div>
+    </article>
+  </div>
+
+  <div class="sw-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></div>
+
+  <!-- Results -->
+  <div class="sw-slot">
+    <article class="sw-blk wide" aria-labelledby="sw-h-res" style="--open-w:760px">
+      <div class="sw-hd"><span class="sw-lbl">Output</span><button class="sw-info" type="button" aria-expanded="false" aria-label="Details: results and recommendations">i</button></div>
+      <h2 class="sw-t" id="sw-h-res">Results &amp; recommendations</h2>
+      <dl class="sw-rec">
+        <div><dt>Seasonal storage</dt><dd>Niet <small>· moderate k</small></dd></div>
+        <div><dt>Short-duration storage</dt><dd>Kotzur <small>· Novo if intraday feasibility matters</small></dd></div>
+        <div><dt>Welsch</dt><dd>Use with caution</dd></div>
+      </dl>
+      <div class="sw-more"><div class="in">
+        <div class="rule"></div>
+        <div class="sw-desc">
+        <p>Each run is compared with the full-year hourly benchmark on total cost, storage capacity, state-of-charge trajectory and solve effort. Cost can look acceptable while storage capacity is far off, so <b>check more than cost</b>.</p>
+        <ul>
+          <li><b>Seasonal storage, little intraday variation:</b> Niet with a moderate number of representative days.</li>
+          <li><b>Short-duration storage, strong intraday variation:</b> Kotzur for routine studies. Novo when intraday feasibility matters and resources allow.</li>
+          <li><b>Welsch:</b> use with caution under high intraday variation or tight capacity limits.</li>
+        </ul>
+        </div>
+        <div class="sw-lim"><span class="t">Limitations</span><ul>
+          <li>Guidance is derived in a stylized class: one node, one storage technology, one year. It is <b>not claimed to hold</b> for multi-node, multi-technology or network-constrained systems.</li>
+          <li>Read it as guidance for matching a formulation to the dominant temporal dynamics, <b>not as universal rules</b>.</li>
+          <li>Formulation choice matters most when <b>storage-energy limits bind</b>.</li>
+        </ul></div>
+        <span class="sw-src">Paper: Abstract, Sections 5 and 6</span>
+      </div></div>
+    </article>
+  </div>
+</div>
+</div>
+
+<!-- Methods drawer -->
+<section class="sw-methods" id="sw-methods" hidden aria-labelledby="sw-mh">
+  <div class="sw-mhead">
+    <h3 class="sw-mh" id="sw-mh">The four storage methods</h3>
+    <div class="sw-legend" aria-hidden="true">
+      <span><i style="background:var(--cA)"></i>rep. day A</span>
+      <span><i style="background:var(--cB)"></i>rep. day B</span>
+      <span><i class="dot"></i>limits checked</span>
+      <span>schematic</span>
+    </div>
+  </div>
+  <div class="sw-mgrid">
+    <div class="sw-slot"><article class="sw-blk sw-m wide" style="--open-w:540px">
+      <div class="sw-hd"><h4 class="sw-m4">Niet</h4><button class="sw-info" type="button" aria-expanded="false" aria-label="Details: Niet">i</button></div>
+      <span class="tag">direct link</span>
+      <svg class="sw-strip" data-kind="niet" viewBox="0 0 240 56" role="img" aria-label="Two representative days linked in sequence, limits checked at every timeslice"></svg>
+      <span class="chk">Checked at <b>every representative timeslice</b></span>
+      <div class="sw-more"><div class="in">
+        <div class="rule"></div>
+        <p><b>Mapping:</b> none. Representative timeslices are linked in sequence and scaled by their weights.</p>
+        <div class="sw-lim"><span class="t">Trade-off</span><ul>
+          <li>Fewest equations and variables, so more timeslices fit for the same effort.</li>
+          <li>With few timeslices it misses variation within and between periods and tends to <b>overestimate storage capacity</b>.</li>
+        </ul></div>
+      </div></div>
+    </article></div>
+    <div class="sw-slot"><article class="sw-blk sw-m wide" style="--open-w:540px">
+      <div class="sw-hd"><h4 class="sw-m4">Welsch</h4><button class="sw-info" type="button" aria-expanded="false" aria-label="Details: Welsch">i</button></div>
+      <span class="tag">fixed pattern · OSeMOSYS standard</span>
+      <svg class="sw-strip" data-kind="welsch" viewBox="0 0 240 56" role="img" aria-label="Seasons of repeated typical days, limits checked on the first and last day of each season"></svg>
+      <span class="chk">Checked at <b>pattern and season transitions</b></span>
+      <div class="sw-more"><div class="in">
+        <div class="rule"></div>
+        <p><b>Mapping:</b> user-defined seasons and day types. A typical day repeats within a season.</p>
+        <div class="sw-lim"><span class="t">Trade-off</span><ul>
+          <li>Built into OSeMOSYS and well documented.</li>
+          <li>Can <b>oversize storage</b> with few timeslices. Its equations are complex, which can hinder interpretability.</li>
+        </ul></div>
+      </div></div>
+    </article></div>
+    <div class="sw-slot"><article class="sw-blk sw-m wide" style="--open-w:540px">
+      <div class="sw-hd"><h4 class="sw-m4">Kotzur</h4><button class="sw-info" type="button" aria-expanded="false" aria-label="Details: Kotzur">i</button></div>
+      <span class="tag">day-cluster</span>
+      <svg class="sw-strip" data-kind="kotzur" viewBox="0 0 240 56" role="img" aria-label="Real days in calendar order, limits checked at day boundaries"></svg>
+      <span class="chk">Checked at <b>day boundaries only</b></span>
+      <div class="sw-more"><div class="in">
+        <div class="rule"></div>
+        <p><b>Mapping:</b> each real day points to its cluster's representative day, in calendar order.</p>
+        <div class="sw-lim"><span class="t">Trade-off</span><ul>
+          <li>Captures storage across days and seasons, with fast solves and modest memory.</li>
+          <li><b>Hours within a day are not checked.</b> In the wind and solar stress tests the hourly state of charge left its limits, even at full-year resolution.</li>
+        </ul></div>
+      </div></div>
+    </article></div>
+    <div class="sw-slot"><article class="sw-blk sw-m wide" style="--open-w:540px">
+      <div class="sw-hd"><h4 class="sw-m4">Novo</h4><button class="sw-info" type="button" aria-expanded="false" aria-label="Details: Novo">i</button></div>
+      <span class="tag">day-cluster · hourly check</span>
+      <svg class="sw-strip" data-kind="novo" viewBox="0 0 240 56" role="img" aria-label="Real days in calendar order, limits checked at every timeslice"></svg>
+      <span class="chk">Checked at <b>every real timeslice</b></span>
+      <div class="sw-more"><div class="in">
+        <div class="rule"></div>
+        <p><b>Mapping:</b> same as Kotzur.</p>
+        <div class="sw-lim"><span class="t">Trade-off</span><ul>
+          <li>Highest fidelity of the four.</li>
+          <li><b>Substantially higher memory use and solve time</b>, especially in matrix generation.</li>
+        </ul></div>
+      </div></div>
+    </article></div>
+  </div>
+  <p class="sw-pair"><b>Kotzur and Novo</b> share the same mapping and differ only in where limits are checked, so comparing them isolates the effect of verification.</p>
+</section>
+
+<p class="sw-foot">Based on Borba, Islam and Niet, <i>Storage in Long-Term Energy Planning Models with Temporal Aggregation: Best Practices and Algorithms</i>, Environmental Research Communications.</p>
+</div>
+
+<script>
+(function(){
+  const sw=document.getElementById('sw');
+  if(!sw)return;
+
+  /* morphing blocks, opened with the "i" button; "wide" layout depends on the component's width */
+  const wide=()=>sw.clientWidth>=860;
+  const blks=[...sw.querySelectorAll('.sw-slot > .sw-blk')];
+  function fit(){blks.forEach(b=>{const s=b.parentElement;
+    if(!wide()){s.style.height='';b.style.width=b.style.left=b.style.top='';return;}
+    if(b.classList.contains('open')||b.dataset.closing)return;
+    b.style.width=s.clientWidth+'px';b.style.left='0px';b.style.top='0px';
+    s.style.height=b.offsetHeight+'px';});}
+  function syncFocus(){sw.classList.toggle('focus',blks.some(b=>b.classList.contains('open')));}
+  const infoOf=b=>b.querySelector(':scope > .sw-hd .sw-info');
+  const headerBottom=()=>{const h=document.querySelector('.bd-header');return h?Math.max(0,h.getBoundingClientRect().bottom):0;};
+
+  function openBlk(b){
+    if(b.classList.contains('open'))return;
+    clearTimeout(b._t);delete b.dataset.closing;
+    infoOf(b).setAttribute('aria-expanded','true');
+    place(b);
+    syncFocus();
+  }
+  /* size and position an opening (or already open) card */
+  function place(b){
+    if(wide()){
+      const s=b.parentElement,r=s.getBoundingClientRect(),box=sw.getBoundingClientRect(),vh=innerHeight;
+      const w=Math.min(parseInt(b.style.getPropertyValue('--open-w'))||560,box.width);
+      /* centre on the block, kept inside the component so the page never scrolls sideways */
+      let left=r.left+r.width/2-w/2;left=Math.max(box.left,Math.min(left,box.right-w));
+      /* measure the final height at the final width, invisibly */
+      const pw=b.style.width;b.classList.add('measure');b.style.width=w+'px';
+      const h=b.offsetHeight;b.style.width=pw;void b.offsetWidth;b.classList.remove('measure');void b.offsetWidth;
+      /* keep the grown card inside the viewport, below the sticky site header */
+      const minTop=headerBottom()+12;let top=0;const bottom=r.top+h;
+      if(bottom>vh-12)top=Math.max(minTop-r.top,vh-12-bottom);
+      b.classList.add('open');
+      b.style.width=w+'px';b.style.left=(left-r.left)+'px';b.style.top=top+'px';
+    }else{b.classList.add('open');b.style.width=b.style.left=b.style.top='';}
+  }
+  function closeBlk(b){
+    if(!b.classList.contains('open'))return;
+    b.classList.remove('open');infoOf(b).setAttribute('aria-expanded','false');
+    if(wide()){const s=b.parentElement;b.dataset.closing='1';
+      b.style.width=s.clientWidth+'px';b.style.left='0px';b.style.top='0px';
+      clearTimeout(b._t);b._t=setTimeout(()=>{delete b.dataset.closing;},520);}
+    syncFocus();
+  }
+  function closeAll(){blks.forEach(b=>{delete b.dataset.pinned;closeBlk(b);});}
+
+  blks.forEach(b=>{
+    infoOf(b).addEventListener('click',e=>{
+      e.stopPropagation();
+      const pin=!b.dataset.pinned;
+      blks.forEach(o=>{if(o!==b){delete o.dataset.pinned;closeBlk(o);}});
+      if(pin){b.dataset.pinned='1';openBlk(b);}else{delete b.dataset.pinned;closeBlk(b);}
+    });
+  });
+  /* Small width changes (e.g. a page scrollbar appearing when a card opens) only re-place the
+     cards; a switch between the side-by-side and stacked layouts resets them. */
+  let lastW=sw.clientWidth,lastWide=wide();
+  new ResizeObserver(()=>{
+    if(sw.clientWidth===lastW)return;lastW=sw.clientWidth;
+    if(wide()!==lastWide){lastWide=wide();closeAll();fit();setTimeout(fit,560);return;}
+    fit();blks.forEach(b=>{if(b.classList.contains('open'))place(b);});
+  }).observe(sw);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+  fit();
+  document.addEventListener('click',e=>{if(!e.target.closest('.sw-blk'))closeAll();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll();});
+
+  /* storage drawer */
+  const sbtn=document.getElementById('sw-storage-toggle'),panel=document.getElementById('sw-methods');
+  sbtn.addEventListener('click',e=>{
+    e.stopPropagation();
+    const open=sbtn.getAttribute('aria-expanded')==='true';
+    sbtn.setAttribute('aria-expanded',String(!open));panel.hidden=open;
+    if(!open){requestAnimationFrame(fit);panel.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'nearest'});}
+  });
+
+  /* method strips */
+  const NS='http://www.w3.org/2000/svg';
+  const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  const H=4;
+  const day=(s,x,y,w,c)=>{const cw=w/H;for(let i=0;i<H;i++)s.appendChild(el('rect',{x:x+i*cw+.5,y,width:cw-1,height:16,rx:1.5,fill:`var(--c${c})`}));};
+  const dot=(s,x,y)=>s.appendChild(el('circle',{cx:x,cy:y,r:2.6,fill:'var(--check)'}));
+  const label=(s,x,y,t,a)=>{const e=el('text',{x,y,'text-anchor':a||'middle'});e.textContent=t;s.appendChild(e);};
+  const seq=['A','A','B','A','B','B'],dw=36,gap=3,x0=10,y=18,dx=i=>x0+i*(dw+gap);
+  const draw={
+    niet(s){const w=60,xa=40,xb=140;day(s,xa,y,w,'A');day(s,xb,y,w,'B');
+      s.appendChild(el('path',{d:`M${xa+w+4} ${y+8} H${xb-4}`,stroke:'var(--sw-muted)','stroke-width':1.2,fill:'none','marker-end':'url(#sw-ah-niet)'}));
+      for(let i=0;i<=H;i++){dot(s,xa+i*w/H,y-5);dot(s,xb+i*w/H,y-5);}
+      label(s,xa+w/2,y+28,'day A × weight');label(s,xb+w/2,y+28,'day B × weight');},
+    welsch(s){['A','A','A','B','B','B'].forEach((c,i)=>day(s,dx(i),y,dw,c));
+      [0,2,3,5].forEach(i=>{for(let h=0;h<=H;h++)dot(s,dx(i)+h*dw/H,y-5);});
+      label(s,dx(1)+dw/2,y+28,'season 1');label(s,dx(4)+dw/2,y+28,'season 2');},
+    kotzur(s){seq.forEach((c,i)=>day(s,dx(i),y,dw,c));
+      for(let i=0;i<=seq.length;i++)dot(s,i<seq.length?dx(i)-gap/2+.5:dx(i-1)+dw+gap/2-.5,y-5);
+      label(s,x0,y+28,'day 1','start');label(s,dx(5)+dw,y+28,'day 6','end');},
+    novo(s){seq.forEach((c,i)=>day(s,dx(i),y,dw,c));
+      seq.forEach((c,i)=>{for(let h=0;h<H;h++)dot(s,dx(i)+h*dw/H+dw/H/2,y-5);});
+      label(s,x0,y+28,'day 1','start');label(s,dx(5)+dw,y+28,'day 6','end');}
+  };
+  sw.querySelectorAll('svg.sw-strip').forEach(s=>{const k=s.dataset.kind;
+    const d=el('defs',{}),m=el('marker',{id:'sw-ah-'+k,viewBox:'0 0 6 6',refX:5,refY:3,markerWidth:6,markerHeight:6,orient:'auto'});
+    m.appendChild(el('path',{d:'M0 0L6 3L0 6z',fill:'var(--sw-muted)'}));d.appendChild(m);s.appendChild(d);draw[k](s);});
+})();
+</script>

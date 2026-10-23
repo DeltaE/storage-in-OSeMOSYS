@@ -1,0 +1,115 @@
+ResidualStorageCapacity: 0.05
+StorageLevelStart: 0.10
+StorageMaxCapacity: 0.5
+cases:
+  Model_Cluster:
+    data_glp: Cluster.glp
+    data_sol: Cluster.sol
+    input_otoole_csv:
+      capacity_factor: CapacityFactor.csv
+      conversionlts: Conversionlts.csv
+      daytype: DAYTYPE.csv
+      directory: inputs_csv
+      specified_demand_profile: SpecifiedDemandProfile.csv
+      timeslice: TIMESLICE.csv
+      timeslicecro: TIMESLICECRO.csv
+      yearsplit: YearSplit.csv
+    model_file: osemosys_fast_Cluster.txt
+    otoole_config: otoole_config_Cluster.yaml
+    output_otoole_txt: Cluster.txt
+    results:
+      directory: results
+      power_capacity: NewCapacity.csv
+      storage_capacity: NewStorageCapacity.csv
+      storage_level: StorageLevelTSStart.csv
+    root_directory: Model_Cluster
+    simulation_results: simulation_results.txt
+  Model_Kotzur:
+    data_glp: Kotzur.glp
+    data_sol: Kotzur.sol
+    input_otoole_csv:
+      capacity_factor: CapacityFactor.csv
+      conversionld: Conversionld.csv
+      conversionldc: Conversionldc.csv
+      dayscro: DAYSCRO.csv
+      daytype: DAYTYPE.csv
+      directory: inputs_csv
+      specified_demand_profile: SpecifiedDemandProfile.csv
+      timeslice: TIMESLICE.csv
+      yearsplit: YearSplit.csv
+    model_file: osemosys_fast_Kotzur.txt
+    otoole_config: otoole_config_Kotzur.yaml
+    output_otoole_txt: Kotzur.txt
+    results:
+      directory: results
+      power_capacity: NewCapacity.csv
+      storage_capacity: NewStorageCapacity.csv
+      storage_level: StorageLevelChronoDayStart.csv
+      storage_levelTS: StorageLevelTSResults.csv
+      storage_level_Start: StorageLevelStartResults.csv
+    root_directory: Model_Kotzur
+    simulation_results: simulation_results.txt
+  Model_Niet:
+    data_glp: Niet.glp
+    data_sol: Niet.sol
+    input_otoole_csv:
+      capacity_factor: CapacityFactor.csv
+      daytype: DAYTYPE.csv
+      directory: inputs_csv
+      specified_demand_profile: SpecifiedDemandProfile.csv
+      timeslice: TIMESLICE.csv
+      yearsplit: YearSplit.csv
+    model_file: osemosys_fast_Niet.txt
+    otoole_config: otoole_config_Niet.yaml
+    output_otoole_txt: Niet.txt
+    results:
+      directory: results
+      power_capacity: NewCapacity.csv
+      storage_capacity: NewStorageCapacity.csv
+      storage_level: StorageLevelTSStart.csv
+    root_directory: Model_Niet
+    simulation_results: simulation_results.txt
+  Model_Welsch:
+    data_glp: Welsch.glp
+    data_sol: Welsch.sol
+    input_otoole_csv:
+      capacity_factor: CapacityFactor.csv
+      conversionld: Conversionld.csv
+      conversionlh: Conversionlh.csv
+      conversionls: Conversionls.csv
+      dailytimebracket: DAILYTIMEBRACKET.csv
+      daysindaytype: DaysInDayType.csv
+      daytype: DAYTYPE.csv
+      directory: inputs_csv
+      specified_demand_profile: SpecifiedDemandProfile.csv
+      timeslice: TIMESLICE.csv
+      yearsplit: YearSplit.csv
+    model_file: osemosys_fast_Welsch.txt
+    otoole_config: otoole_config_Welsch.yaml
+    output_otoole_txt: Welsch.txt
+    results:
+      directory: results
+      power_capacity: NewCapacity.csv
+      storage_capacity: NewStorageCapacity.csv
+      storage_level: StorageLevelDayTypeStart.csv
+      storage_levelTS: StorageLevelTSResults.csv
+      storage_level_Start: StorageLevelStartResults.csv
+    root_directory: Model_Welsch
+    simulation_results: simulation_results.txt
+data_8760:
+  CF: CapacityFactor_Wind.csv
+  SDP: SpecifiedDemandProfile.csv
+  directory: Data_8760
+days_in_year: 365
+hour_grouping: 1
+n_clusters: 4
+results:
+  directory: Results_Limited
+  directory_GUI: Results_Limited\GUI_WND_Limited
+  results_copied_filename: Storage_Level
+  results_excel_file: Simulation_Results.xlsx
+  
+scenario_name: k4h1WND_limited
+# k365h1WND
+# k4h1WND_limited
+seasons: 1
