@@ -26,6 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
     html.classList.toggle("is-fullscreen", !!document.fullscreenElement)
   );
 
+  // Corner button linking to the Zenodo archive.
+  const zen = document.createElement("a");
+  zen.className = "zenodo-corner";
+  zen.href = "https://doi.org/10.5281/zenodo.23598757";
+  zen.target = "_blank";
+  zen.rel = "noopener";
+  zen.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><path d="M10 12h4"/></svg>Zenodo archive';
+  document.body.appendChild(zen);
+
   // "On this page": on wide screens the panel stays hidden until this button opens it.
   const toc = document.getElementById("pst-secondary-sidebar");
   if (!toc || !toc.querySelector(".page-toc li")) return;
