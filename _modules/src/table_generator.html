@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 
@@ -26,22 +25,22 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=75c7c72ae941e8b558d8" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=3b895eaf" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=75c7c72ae941e8b558d8"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8" />
 
     <script src="../../_static/documentation_options.js?v=6c6ff0de"></script>
-    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
 
@@ -408,6 +407,7 @@ window.runMermaid = runMermaid;</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
   
@@ -457,7 +457,7 @@ window.runMermaid = runMermaid;</script>
   
     <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" aria-expanded="false" aria-controls="pst-primary-sidebar-modal">
     <span class="fa-solid fa-bars"></span>
   </button>
   
@@ -539,7 +539,7 @@ window.runMermaid = runMermaid;</script>
       
         <div class="navbar-item">
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button></div>
       
@@ -588,7 +588,7 @@ window.runMermaid = runMermaid;</script>
       
         
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <dialog id="pst-primary-sidebar-modal" tabindex="-1"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
@@ -643,7 +643,7 @@ window.runMermaid = runMermaid;</script>
         
           <div class="navbar-item">
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button type="button" class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button></div>
         
@@ -709,7 +709,7 @@ window.runMermaid = runMermaid;</script>
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="../../index.html" class="nav-link" aria-label="Home">
-        <i class="fa-solid fa-home"></i>
+        <i class="fa-solid fa-house"></i>
       </a>
     </li>
     
@@ -740,24 +740,24 @@ window.runMermaid = runMermaid;</script>
 <div class="viewcode-block" id="read_simulation_results">
 <a class="viewcode-back" href="../../autoapi/src/table_generator/index.html#src.read_simulation_results">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">read_simulation_results</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-    <span class="n">memory_used</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">": "</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="n">running_time</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">": "</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="n">matrix_running_time</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">": "</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="n">status</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">": "</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="s2">"unknown"</span>
+    <span class="n">memory_used</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;: &quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">running_time</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;: &quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">matrix_running_time</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;: &quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;: &quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="s2">&quot;unknown&quot;</span>
     <span class="k">return</span> <span class="n">matrix_running_time</span><span class="p">,</span> <span class="n">running_time</span><span class="p">,</span> <span class="n">memory_used</span><span class="p">,</span> <span class="n">status</span></div>
 
 
 <div class="viewcode-block" id="read_sol_file">
 <a class="viewcode-back" href="../../autoapi/src/table_generator/index.html#src.read_sol_file">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">read_sol_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-    <span class="n">num_constraints</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-    <span class="n">num_variables</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-    <span class="n">non_zeros</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-    <span class="n">total_cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"="</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">num_constraints</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">num_variables</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">non_zeros</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">total_cost</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">num_constraints</span><span class="p">,</span> <span class="n">num_variables</span><span class="p">,</span> <span class="n">non_zeros</span><span class="p">,</span> <span class="n">total_cost</span></div>
 
 
@@ -765,7 +765,7 @@ window.runMermaid = runMermaid;</script>
 <a class="viewcode-back" href="../../autoapi/src/table_generator/index.html#src.read_excel_value">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">read_excel_value</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">filter_col</span><span class="p">,</span> <span class="n">filter_val</span><span class="p">):</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
-    <span class="n">filtered_value</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">filter_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">filter_val</span><span class="p">][</span><span class="s1">'VALUE'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">filter_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">filter_val</span><span class="p">]</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">filtered_value</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">filter_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">filter_val</span><span class="p">][</span><span class="s1">&#39;VALUE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">filter_col</span><span class="p">]</span> <span class="o">==</span> <span class="n">filter_val</span><span class="p">]</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">filtered_value</span></div>
 
 
@@ -773,10 +773,10 @@ window.runMermaid = runMermaid;</script>
 <a class="viewcode-back" href="../../autoapi/src/table_generator/index.html#src.append_to_excel">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">append_to_excel</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">excel_path</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="n">excel_path</span><span class="p">):</span>
-        <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'a'</span><span class="p">,</span> <span class="n">if_sheet_exists</span><span class="o">=</span><span class="s1">'overlay'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'openpyxl'</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
-            <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">startrow</span><span class="o">=</span><span class="n">writer</span><span class="o">.</span><span class="n">sheets</span><span class="p">[</span><span class="s1">'Sheet1'</span><span class="p">]</span><span class="o">.</span><span class="n">max_row</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">if_sheet_exists</span><span class="o">=</span><span class="s1">&#39;overlay&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;openpyxl&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">startrow</span><span class="o">=</span><span class="n">writer</span><span class="o">.</span><span class="n">sheets</span><span class="p">[</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max_row</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">'openpyxl'</span><span class="p">)</span></div>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">excel_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;openpyxl&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="table">
@@ -794,24 +794,24 @@ window.runMermaid = runMermaid;</script>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">matrix_running_time</span><span class="p">,</span> <span class="n">running_time</span><span class="p">,</span> <span class="n">memory_used</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="n">read_simulation_results</span><span class="p">(</span><span class="n">sim_results_path</span><span class="p">)</span>
     <span class="n">num_constraints</span><span class="p">,</span> <span class="n">num_variables</span><span class="p">,</span> <span class="n">non_zeros</span><span class="p">,</span> <span class="n">total_cost</span> <span class="o">=</span> <span class="n">read_sol_file</span><span class="p">(</span><span class="n">sol_path</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">"optimal"</span><span class="p">:</span>
-        <span class="n">new_capacity_value</span> <span class="o">=</span> <span class="n">read_excel_value</span><span class="p">(</span><span class="n">new_capacity_path</span><span class="p">,</span> <span class="s1">'TECHNOLOGY'</span><span class="p">,</span> <span class="n">filter_val1</span><span class="p">)</span>
-        <span class="n">new_storage_capacity_value</span> <span class="o">=</span> <span class="n">read_excel_value</span><span class="p">(</span><span class="n">new_storage_capacity_path</span><span class="p">,</span> <span class="s1">'STORAGE'</span><span class="p">,</span> <span class="n">filter_val2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;optimal&quot;</span><span class="p">:</span>
+        <span class="n">new_capacity_value</span> <span class="o">=</span> <span class="n">read_excel_value</span><span class="p">(</span><span class="n">new_capacity_path</span><span class="p">,</span> <span class="s1">&#39;TECHNOLOGY&#39;</span><span class="p">,</span> <span class="n">filter_val1</span><span class="p">)</span>
+        <span class="n">new_storage_capacity_value</span> <span class="o">=</span> <span class="n">read_excel_value</span><span class="p">(</span><span class="n">new_storage_capacity_path</span><span class="p">,</span> <span class="s1">&#39;STORAGE&#39;</span><span class="p">,</span> <span class="n">filter_val2</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># never report capacities from a failed solve (result CSVs could be stale)</span>
-        <span class="n">total_cost</span> <span class="o">=</span> <span class="n">new_capacity_value</span> <span class="o">=</span> <span class="n">new_storage_capacity_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"nan"</span><span class="p">)</span>
+        <span class="n">total_cost</span> <span class="o">=</span> <span class="n">new_capacity_value</span> <span class="o">=</span> <span class="n">new_storage_capacity_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;nan&quot;</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"Scenario"</span><span class="p">:</span> <span class="p">[</span><span class="n">scenario_name</span><span class="p">],</span>
-        <span class="s2">"Model"</span><span class="p">:</span> <span class="p">[</span><span class="n">model</span><span class="p">],</span>
-        <span class="s2">"Number of constraints"</span><span class="p">:</span> <span class="p">[</span><span class="n">num_constraints</span><span class="p">],</span>
-        <span class="s2">"Number of variables"</span><span class="p">:</span> <span class="p">[</span><span class="n">num_variables</span><span class="p">],</span>
-        <span class="s2">"Non-zero elements in the matrix"</span><span class="p">:</span> <span class="p">[</span><span class="n">non_zeros</span><span class="p">],</span>
-        <span class="s2">"Total cost"</span><span class="p">:</span> <span class="p">[</span><span class="n">total_cost</span><span class="p">],</span>
-        <span class="s2">"Matrix and Running Time"</span><span class="p">:</span> <span class="p">[</span><span class="n">matrix_running_time</span><span class="p">],</span>
-        <span class="s2">"Running time"</span><span class="p">:</span> <span class="p">[</span><span class="n">running_time</span><span class="p">],</span>
-        <span class="s2">"Memory used"</span><span class="p">:</span> <span class="p">[</span><span class="n">memory_used</span><span class="p">],</span>
-        <span class="s2">"Power Capacity"</span><span class="p">:</span> <span class="p">[</span><span class="n">new_capacity_value</span><span class="p">],</span>
-        <span class="s2">"Storage Capacity"</span><span class="p">:</span> <span class="p">[</span><span class="n">new_storage_capacity_value</span><span class="p">],</span>
-        <span class="s2">"Solver status"</span><span class="p">:</span> <span class="p">[</span><span class="n">status</span><span class="p">]</span>
+        <span class="s2">&quot;Scenario&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">scenario_name</span><span class="p">],</span>
+        <span class="s2">&quot;Model&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">model</span><span class="p">],</span>
+        <span class="s2">&quot;Number of constraints&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">num_constraints</span><span class="p">],</span>
+        <span class="s2">&quot;Number of variables&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">num_variables</span><span class="p">],</span>
+        <span class="s2">&quot;Non-zero elements in the matrix&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">non_zeros</span><span class="p">],</span>
+        <span class="s2">&quot;Total cost&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">total_cost</span><span class="p">],</span>
+        <span class="s2">&quot;Matrix and Running Time&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">matrix_running_time</span><span class="p">],</span>
+        <span class="s2">&quot;Running time&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">running_time</span><span class="p">],</span>
+        <span class="s2">&quot;Memory used&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">memory_used</span><span class="p">],</span>
+        <span class="s2">&quot;Power Capacity&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">new_capacity_value</span><span class="p">],</span>
+        <span class="s2">&quot;Storage Capacity&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">new_storage_capacity_value</span><span class="p">],</span>
+        <span class="s2">&quot;Solver status&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">status</span><span class="p">]</span>
     <span class="p">}</span>
     <span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">append_to_excel</span><span class="p">(</span><span class="n">results_df</span><span class="p">,</span> <span class="n">excel_path</span><span class="p">)</span></div>
@@ -846,8 +846,8 @@ window.runMermaid = runMermaid;</script>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=75c7c72ae941e8b558d8"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=75c7c72ae941e8b558d8"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
