@@ -47,6 +47,7 @@ help:
 	@echo "  $(YELLOW)make docs-deploy$(NC)    - Deploy documentation to GitHub Pages"
 	@echo "  $(YELLOW)make docs-setup$(NC)     - Setup documentation dependencies"
 	@echo "  $(YELLOW)make docs-check$(NC)     - Check documentation for errors"
+	@echo "  $(YELLOW)make docs-verify$(NC)    - Check the built site has the page style and all card pages"
 	@echo "  $(YELLOW)make docs-live$(NC)      - Live development server with auto-reload"
 	@echo ""
 	@echo "$(GREEN)Example workflow:$(NC)"
@@ -347,33 +348,49 @@ docs-check:
 		exit 1; \
 	fi
 
-# Deploy documentation to GitHub Pages
+# Check that a finished build carries the site style (pydata theme, custom.css,
+# header buttons) and every page the landing/section cards link to.
+DOCS_REQUIRED_PAGES = index.html concept.html workflow.html results.html api.html quickstart.html \
+	notes/outputs.html notes/reproducibility.html notes/api_reference.html \
+	notebooks/reproduce_study.html autoapi/src/index.html
+.PHONY: docs-verify
+docs-verify:
+	@echo "$(GREEN)Verifying built site style and card links...$(NC)"
+	@if ! grep -q "html_theme = 'pydata_sphinx_theme'" $(DOCS_SOURCE_DIR)/conf.py; then \
+		echo "$(RED)conf.py does not use pydata_sphinx_theme: this is not the current site style.$(NC)"; exit 1; \
+	fi
+	@for f in $(DOCS_REQUIRED_PAGES) _static/custom.css _static/header-buttons.js; do \
+		if [ ! -f "$(DOCS_HTML_DIR)/$$f" ]; then \
+			echo "$(RED)Missing $(DOCS_HTML_DIR)/$$f (a card or the site style would break).$(NC)"; exit 1; \
+		fi; \
+	done
+	@grep -q "custom.css" $(DOCS_HTML_DIR)/index.html || { echo "$(RED)index.html does not load custom.css.$(NC)"; exit 1; }
+	@echo "$(GREEN)✓ Site style and card targets OK$(NC)"
+
+# Deploy documentation to GitHub Pages.
+# Refuses to publish from a checkout that is behind or diverged from origin/main,
+# verifies the style first, adds the new build on top of the live gh-pages history and
+# pushes WITHOUT --force, so a stale local gh-pages can no longer overwrite the site.
 .PHONY: docs-deploy
 docs-deploy:
 	@echo "$(GREEN)Deploying documentation to GitHub Pages...$(NC)"
-	@if conda env list | grep -q "^$(ENV_NAME) "; then \
-		if ! command -v git >/dev/null 2>&1; then \
-			echo "$(RED)Git is not installed or not in PATH.$(NC)"; \
-			exit 1; \
-		fi; \
-		if ! git status >/dev/null 2>&1; then \
-			echo "$(RED)Not in a git repository.$(NC)"; \
-			exit 1; \
-		fi; \
-		echo "$(YELLOW)Building documentation from scratch...$(NC)"; \
-		$(MAKE) docs-clean && $(MAKE) docs-build || exit $$?; \
-		if ! conda run -n $(ENV_NAME) python -c "import ghp_import" >/dev/null 2>&1; then \
-			echo "$(RED)ghp-import is missing. Run 'make docs-setup' first.$(NC)"; \
-			exit 1; \
-		fi; \
-		echo "$(YELLOW)Deploying to GitHub Pages...$(NC)"; \
-		conda run -n $(ENV_NAME) ghp-import -n -p -f $(DOCS_HTML_DIR) || exit $$?; \
-		echo "$(GREEN)✓ Documentation deployed to GitHub Pages!$(NC)"; \
-		echo "$(YELLOW)Documentation will be available at: https://$(shell git config --get remote.origin.url | sed 's/.*github.com[:/]\([^/]*\)\/\([^/.]*\).*/\1.github.io\/\2/')$(NC)"; \
-	else \
-		echo "$(RED)Environment '$(ENV_NAME)' does not exist.$(NC)"; \
-		exit 1; \
-	fi
+	@conda env list | grep -q "^$(ENV_NAME) " || { echo "$(RED)Environment '$(ENV_NAME)' does not exist.$(NC)"; exit 1; }
+	@git rev-parse --git-dir >/dev/null 2>&1 || { echo "$(RED)Not in a git repository.$(NC)"; exit 1; }
+	@git fetch origin main $(GH_PAGES_BRANCH)
+	@git merge-base --is-ancestor origin/main HEAD || { \
+		echo "$(RED)This checkout does not contain origin/main (behind, or a different history).$(NC)"; \
+		echo "$(RED)Deploying from it would publish an old version of the site. Pull first.$(NC)"; \
+		exit 1; }
+	@conda run -n $(ENV_NAME) python -c "import ghp_import" >/dev/null 2>&1 || { echo "$(RED)ghp-import is missing. Run 'make docs-setup' first.$(NC)"; exit 1; }
+	@echo "$(YELLOW)Building documentation from scratch...$(NC)"
+	@$(MAKE) docs-clean
+	@$(MAKE) docs-build
+	@$(MAKE) docs-verify
+	@echo "$(YELLOW)Syncing local $(GH_PAGES_BRANCH) with origin/$(GH_PAGES_BRANCH)...$(NC)"
+	@git branch -f $(GH_PAGES_BRANCH) origin/$(GH_PAGES_BRANCH)
+	@echo "$(YELLOW)Publishing (no force push)...$(NC)"
+	@conda run -n $(ENV_NAME) ghp-import -n -p -b $(GH_PAGES_BRANCH) -m "Update documentation" $(DOCS_HTML_DIR)
+	@echo "$(GREEN)✓ Documentation deployed: https://deltae.github.io/storage-in-OSeMOSYS/$(NC)"
 
 # Live documentation development
 .PHONY: docs-live

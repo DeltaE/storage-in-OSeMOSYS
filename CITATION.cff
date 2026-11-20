@@ -26,13 +26,20 @@ keywords:
   - capacity expansion
 preferred-citation:
   type: article
-  title: "Storage in Long-Term Energy Planning Models with Temporal Aggregation: Best Practices and Algorithms"
+  title: "Storage in long-term energy planning models with temporal aggregation: best practices and algorithms"
   authors:
     - family-names: Borba
       given-names: Bruno
     - family-names: Islam
       given-names: Md Eliasinul
+    - family-names: McWhannel
+      given-names: Pierre
     - family-names: Niet
       given-names: Taco
   journal: "Environmental Research Communications"
   year: 2026
+  volume: 8
+  issue: 11
+  start: 115023
+  doi: "10.1088/2515-7620/aebfeb"
+  url: "https://doi.org/10.1088/2515-7620/aebfeb"

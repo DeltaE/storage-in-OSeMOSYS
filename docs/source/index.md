@@ -62,11 +62,12 @@ See {doc}`quickstart` for what this does and where the results go.
 ## Citation
 
 <div class="citation-box">
-  <span class="status-badge">Under review</span>
+  <span class="status-badge">Published</span>
   <p>
-    Borba, B., <a href="https://eliasinul.com">Md Eliasinul Islam</a>, &amp; Niet, T.
-    <em>Storage in Long-Term Energy Planning Models with Temporal Aggregation: Best Practices and
-    Algorithms.</em> Environmental Research Communications (2026).
+    Borba, B., <a href="https://eliasinul.com">Md Eliasinul Islam</a>, McWhannel, P., &amp; Niet, T.
+    (2026). <em>Storage in long-term energy planning models with temporal aggregation: best
+    practices and algorithms.</em> Environmental Research Communications, 8(11), 115023.
+    <a href="https://doi.org/10.1088/2515-7620/aebfeb">https://doi.org/10.1088/2515-7620/aebfeb</a>
   </p>
 </div>
 

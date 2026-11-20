@@ -8,7 +8,7 @@ This project implements four storage state-of-charge (SoC) formulations for temp
 
 ### Method names used in the paper and in the code
 
-| Paper (Borba, Islam & Niet, *Environ. Res. Commun.*) | Linkage / verification | Code directory |
+| Paper (Borba et al., *Environ. Res. Commun.*) | Linkage / verification | Code directory |
 |---|---|---|
 | **Niet** | direct link between representative time slices | `models/Model_Niet` |
 | **Welsch** | fixed intra-day pattern per day type | `models/Model_Welsch` |
@@ -148,8 +148,9 @@ MIT, see [LICENSE](LICENSE).
 
 Please cite the article (see also [`CITATION.cff`](CITATION.cff)):
 
-> Borba, B., Islam, M. E., & Niet, T. *Storage in Long-Term Energy Planning Models with Temporal
-> Aggregation: Best Practices and Algorithms.* Environmental Research Communications (2026). __[under review]__
+> Borba, B., Islam, M. E., McWhannel, P., & Niet, T. (2026). *Storage in long-term energy planning
+> models with temporal aggregation: best practices and algorithms.* Environmental Research
+> Communications, 8(11), 115023. [https://doi.org/10.1088/2515-7620/aebfeb](https://doi.org/10.1088/2515-7620/aebfeb)
 
 Code, inputs and all results of the study are archived on Zenodo: [10.5281/zenodo.23598757](https://doi.org/10.5281/zenodo.23598757) (v1.2.0).
 
